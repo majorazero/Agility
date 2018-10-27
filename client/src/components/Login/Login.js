@@ -38,7 +38,8 @@ class Login extends Component {
             <button>Submit</button>
           </div>
         </form>
-        <Link to="/">Back to landing page.</Link>
+        <div><Link to="/register">New user? Register!</Link></div>
+        <div><Link to="/">Back to landing page.</Link></div>
       </div>
     );
   }
