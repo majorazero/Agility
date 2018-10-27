@@ -15,9 +15,9 @@ class Login extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    axios.post("/api/login",this.state,(response) => {
-      console.log(response.data);
-    })
+    axios.post("/api/login",this.state).then((res) => {
+      console.log(res.data);
+    });
   }
 
   render(){
