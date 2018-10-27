@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import {Link} from "react-router-dom";
 import axios from "axios";
 
 class Login extends Component {
@@ -20,6 +21,7 @@ class Login extends Component {
       sessionStorage.setItem("id", res.data.id);
       localStorage.setItem("token", res.data.token);
       console.log(sessionStorage.getItem("id"),localStorage.getItem("token"));
+      window.location.assign("/homepage");
     });
   }
 
@@ -36,6 +38,7 @@ class Login extends Component {
             <button>Submit</button>
           </div>
         </form>
+        <Link to="/">Back to landing page.</Link>
       </div>
     );
   }
