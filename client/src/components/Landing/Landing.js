@@ -24,6 +24,7 @@ class Landing extends Component {
       <div>
         <h1>This is a landing page.</h1>
         <Link to="/login">Login</Link>
+        <Link to="/project">Project</Link>
       </div>
     );
   }
