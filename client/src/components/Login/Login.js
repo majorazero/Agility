@@ -17,6 +17,9 @@ class Login extends Component {
     event.preventDefault();
     axios.post("/api/login",this.state).then((res) => {
       console.log(res.data);
+      sessionStorage.setItem("id", res.data.id);
+      localStorage.setItem("token", res.data.token);
+      console.log(sessionStorage.getItem("id"),localStorage.getItem("token"));
     });
   }
 
