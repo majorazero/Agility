@@ -1,19 +1,29 @@
 const express = require("express");
 const path = require("path");
+<<<<<<< HEAD
 const PORT = process.env.PORT || 8080;
+=======
+const bodyParser = require("body-parser");
+const PORT = process.env.PORT || 3001;
+>>>>>>> master
 const app = express();
 
 // Define middleware here
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
+<<<<<<< HEAD
 const db = require('./models')
 
 require("./routes/api-routes.js")(app);
+=======
+require("./controllers/index.js")(app);
+>>>>>>> master
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
