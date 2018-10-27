@@ -1,11 +1,7 @@
 const express = require("express");
 const path = require("path");
-<<<<<<< HEAD
-const PORT = process.env.PORT || 8080;
-=======
 const bodyParser = require("body-parser");
-const PORT = process.env.PORT || 3001;
->>>>>>> master
+const PORT = process.env.PORT || 8080;
 const app = express();
 
 // Define middleware here
@@ -17,13 +13,9 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-<<<<<<< HEAD
 const db = require('./models')
 
 require("./routes/api-routes.js")(app);
-=======
-require("./controllers/index.js")(app);
->>>>>>> master
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));

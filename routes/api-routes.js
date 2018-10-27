@@ -1,5 +1,5 @@
 var db = require('../models');
-const encrypt = require("../helper/encrypt.js");
+const encrpyt = require("../helper/encrpyt.js");
 
 module.exports = function(app) {
     app.post("/api/user", function(req, res) {
