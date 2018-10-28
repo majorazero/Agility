@@ -6,7 +6,9 @@ import Pool from "./Pool.js";
 class Project extends React.Component {
 
     state = {
-        tasks: []
+        tasks: [],
+        projects: [],
+        sprints: []
     }
 
     componentDidMount() {
@@ -14,6 +16,9 @@ class Project extends React.Component {
       }
 
     getTasks = () => {
+
+        // let number = this.state.projects
+        // below we'll just place the variable in where we grab the dynamically updated 'project' that we're on depending on user choice
         axios.get("/api/task/2").then((res) => {
 
             this.setState({
