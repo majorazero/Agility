@@ -4,8 +4,11 @@ import axios from "axios";
 
 class Register extends Component {
   state = {
-    username: "",
-    password: ""
+    fName: "",
+    lName: "",
+    email: "",
+    password: "",
+    message: ""
   }
 
   handleChange = (event) => {
@@ -17,16 +20,27 @@ class Register extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     axios.post("/api/register",this.state).then((res)=>{
-      console.log(res.data);
+      if(res.data === "User already exists!"){
+        this.setState({message:res.data});
+      }
+      else{
+        sessionStorage.setItem("id", res.data.id);
+        localStorage.setItem("token", res.data.token);
+      }
     });
   }
 
   render(){
     return(<div>
       <h1>Register!</h1>
+        <small>{this.state.message}</small>
         <form type="submit" onSubmit={this.handleSubmit}>
-          <h2>Username:</h2>
-          <input type="text" name="username" onChange={this.handleChange}/>
+          <h2>First Name:</h2>
+          <input type="text" name="fName" onChange={this.handleChange}/>
+          <h2>Last Name:</h2>
+          <input type="text" name="lName" onChange={this.handleChange}/>
+          <h2>Email:</h2>
+          <input type="email" name="email" onChange={this.handleChange}/>
           <h2>Password:</h2>
           <input type="password" name="password" onChange={this.handleChange}/>
           <div>
