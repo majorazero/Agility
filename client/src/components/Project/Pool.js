@@ -4,10 +4,10 @@ import SimpleExpansionPanel from "../utils/TaskPool.js"
 const Pool = (props) => {
 
     return (
-                <SimpleExpansionPanel 
+                <SimpleExpansionPanel
                 name={props.tasks.name}
                 description={props.tasks.description}
-                due={props.tasks.due_date} 
+                due={props.tasks.due_date}
                 />
     );
 };

@@ -18,7 +18,6 @@ class Homepage extends Component {
         <h1>This is a homepage.</h1>
         <Link onClick={this.logOut} to="/">Logout.</Link>
       </div>
-
     );
   }
 }
