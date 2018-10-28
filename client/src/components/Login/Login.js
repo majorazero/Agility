@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
 import axios from "axios";
-
+import SignIn from "./login2"
 class Login extends Component {
   state = {
     username: "",
@@ -41,6 +41,7 @@ class Login extends Component {
         <div><Link to="/register">New user? Register!</Link></div>
         <div><Link to="/">Back to landing page.</Link></div>
       </div>
+
     );
   }
 }
