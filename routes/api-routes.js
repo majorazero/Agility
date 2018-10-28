@@ -132,29 +132,30 @@ module.exports = function(app) {
     });
 
     app.post("/api/register",(req,res) => {
-        console.log(req.body);
-        db.User.findOne({where:{email:req.body.email}}).then((userRes) => {
-          if(userRes === null){
-            db.User.create({
-              first_name: req.body.fName,
-              last_name: req.body.lName,
-              email: req.body.email,
-              password: req.body.password,
-              token: encrypt.encrypt(req.body.email,req.body.password)
-            }).then((data) => {
-              let sessionId = encrypt.encrypt(data.token,data.id.toString());
-              res.json({
-                id: sessionId,
-                token: data.token
-              });
+      console.log(req.body);
+      db.User.findOne({where:{email:req.body.email}}).then((userRes) => {
+        if(userRes === null){
+          db.User.create({
+            first_name: req.body.fName,
+            last_name: req.body.lName,
+            email: req.body.email,
+            password: req.body.password,
+            token: encrypt.encrypt(req.body.email,req.body.password)
+          }).then((data) => {
+            let sessionId = encrypt.encrypt(data.token,data.id.toString());
+            res.json({
+              id: sessionId,
+              token: data.token
             });
-          }
-          else {
-            res.json("User already exists!");
-          }
-        })
-        //register would check if user exists, an if they do, they'll res.json back with a already exist, otherwise we create the user, probably make a token for them along the way... actually if that's the case we probably don't need the token failsafe in the login post but we'll keep it there for now.s
+          });
+        }
+        else {
+          res.json("User already exists!");
+        }
+      });
     });
 
-
+    app.post("/api/decrypt",(req,res) => {
+      res.json(encrypt.decrypt(req.body.token,req.body.id));
+    });
 };
