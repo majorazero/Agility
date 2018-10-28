@@ -99,24 +99,36 @@ module.exports = function(app) {
     app.post("/api/login",(req,res) => {
         //find if user exists by mail
         db.User.findOne({where: {email:req.body.email}}).then((userRes) => {
-          console.log(userRes);
           //if user does not exist
           if(userRes === null){
             res.json("User does not exist.");
           }
           else{
             //we password check.
-
-
-            let token = encrpyt.encrpyt(req.body.email,req.body.password);
-            //the token will also get saved to the user database
-            //if login checks out we'll return a token to the client as well as an encrypted userId for now i'm setting it to 1
-            res.json({
-                token: token,
-                id: encrpyt.encrpyt(token,"1")
-            });
+            if(userRes.password !== req.body.password){
+              res.json("Wrong password!");
+            }
+            else{
+              res.json({
+                token: userRes.token,
+                id: encrpyt.encrpyt(userRes.token,userRes.id.toString())
+              });
+            }
           }
         })
+    });
+
+    app.post("/api/tokenLogin",(req,res) => {
+      db.User.findOne({where: {token:req.body.token}}).then((userRes) => {
+        if(userRes === null){
+          res.json("No matching token found.");
+        }
+        else{
+          res.json({
+            id: encrpyt.encrpyt(userRes.token,userRes.id.toString())
+          });
+        }
+      });
     });
 
     app.post("/api/register",(req,res) => {

@@ -6,7 +6,8 @@ import axios from "axios";
 class Login extends Component {
   state = {
     email: "",
-    password: ""
+    password: "",
+    message: ""
   }
 
   handleChange = (event) => {
@@ -18,11 +19,19 @@ class Login extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     axios.post("/api/login",this.state).then((res) => {
-      console.log(res.data);
-      sessionStorage.setItem("id", res.data.id);
-      localStorage.setItem("token", res.data.token);
-      console.log(sessionStorage.getItem("id"),localStorage.getItem("token"));
-      //window.location.assign("/homepage");
+      if(res.data === "User does not exist."){
+        this.setState({message: res.data});
+      }
+      else if (res.data === "Wrong password!"){
+        this.setState({message: res.data});
+      }
+      else{
+        console.log(res.data);
+        sessionStorage.setItem("id", res.data.id);
+        localStorage.setItem("token", res.data.token);
+        console.log(sessionStorage.getItem("id"),localStorage.getItem("token"));
+        window.location.assign("/homepage");
+      }
     });
   }
 
@@ -30,6 +39,7 @@ class Login extends Component {
     return(
       <div>
         <h1>This is a login page.</h1>
+        <small>{this.state.message}</small>
         <form type="submit" onSubmit={this.handleSubmit}>
           <h2>Email:</h2>
           <input type="email" name="email" onChange={this.handleChange}/>
