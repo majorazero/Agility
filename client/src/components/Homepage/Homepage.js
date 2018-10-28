@@ -26,7 +26,6 @@ class Homepage extends Component {
         <button onClick={this.decrypt}>What's my id? This is for testing duh.</button>
         <Link onClick={this.logOut} to="/">Logout.</Link>
       </div>
-
     );
   }
 }

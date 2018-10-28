@@ -7,6 +7,8 @@ import Homepage from "./components/Homepage/Homepage.js";
 import Register from "./components/Register/Register.js";
 import Project from "./components/Project/Project.js";
 import ButtonAppBar from "./components/utils/Navbar/Navbar.js";
+import ActiveTasks from "./components/ActiveTasks/activetasks"
+
 import './App.css';
 
 class App extends Component {
