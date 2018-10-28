@@ -40,7 +40,7 @@ function SimpleExpansionPanel(props) {
           <ContainedButtons
             to="/signup"
             name="Add"
-            color="Primary"
+            color="primary"
           />
         </ExpansionPanelDetails>
       </ExpansionPanel>
