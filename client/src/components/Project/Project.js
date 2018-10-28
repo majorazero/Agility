@@ -1,16 +1,41 @@
-import React, { Component } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-// import Pool from "./Pool.js";
+import Pool from "./Pool.js";
 
-class Project extends Component {
+class Project extends React.Component {
+
+    state = {
+        tasks: []
+    }
+
+    componentDidMount() {
+        this.getTasks();
+      }
+
+    getTasks = () => {
+        axios.get("/api/task/2").then((res) => {
+
+            this.setState({
+                tasks: res.data
+            });
+        });
+    };
+
     render() {
         return (
             <div>
                 <h1>This is the project page.</h1>
 
                 <h2>This is pool.</h2>
-                {/* <Pool /> */}
+                {this.state.tasks.map((t) => {
+                    return (
+                        <Pool
+                            key={t.id}
+                            tasks={t}
+                        />
+                    );
+                })}
                 <div><Link to="/register">New user? Register!</Link></div>
                 <div><Link to="/">Back to landing page.</Link></div>
             </div>

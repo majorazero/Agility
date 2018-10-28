@@ -1,13 +1,15 @@
-import React, { Component } from "react";
+import React from "react";
+import SimpleExpansionPanel from "../utils/TaskPool.js"
 
-class Pool extends Component {
-  render(){
-    return(
-      <div>
-        This is a pool.
-      </div>
+const Pool = (props) => {
+
+    return (
+                <SimpleExpansionPanel
+                name={props.tasks.name}
+                description={props.tasks.description}
+                due={props.tasks.due_date}
+                />
     );
-  }
-}
+};
 
 export default Pool;
