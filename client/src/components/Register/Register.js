@@ -26,6 +26,7 @@ class Register extends Component {
       else{
         sessionStorage.setItem("id", res.data.id);
         localStorage.setItem("token", res.data.token);
+        window.location.assign("/homepage");
       }
     });
   }

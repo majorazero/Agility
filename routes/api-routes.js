@@ -1,5 +1,5 @@
 var db = require('../models');
-const encrpyt = require("../helper/encrpyt.js");
+const encrypt = require("../helper/encrypt.js");
 var Sequelize = require('sequelize');
 var sequelize = new Sequelize('database', 'username', 'password', {
     dialect: 'mysql'
@@ -111,7 +111,7 @@ module.exports = function(app) {
             else{
               res.json({
                 token: userRes.token,
-                id: encrpyt.encrpyt(userRes.token,userRes.id.toString())
+                id: encrypt.encrypt(userRes.token,userRes.id.toString())
               });
             }
           }
@@ -125,7 +125,7 @@ module.exports = function(app) {
         }
         else{
           res.json({
-            id: encrpyt.encrpyt(userRes.token,userRes.id.toString())
+            id: encrypt.encrypt(userRes.token,userRes.id.toString())
           });
         }
       });
@@ -140,9 +140,9 @@ module.exports = function(app) {
               last_name: req.body.lName,
               email: req.body.email,
               password: req.body.password,
-              token: encrpyt.encrpyt(req.body.email,req.body.password)
+              token: encrypt.encrypt(req.body.email,req.body.password)
             }).then((data) => {
-              let sessionId = encrpyt.encrpyt(data.token,data.id.toString());
+              let sessionId = encrypt.encrypt(data.token,data.id.toString());
               res.json({
                 id: sessionId,
                 token: data.token
