@@ -1,10 +1,11 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
 import axios from "axios";
-import SignIn from "./login2"
+//import SignIn from "./login2"
+
 class Login extends Component {
   state = {
-    username: "",
+    email: "",
     password: ""
   }
 
@@ -21,7 +22,7 @@ class Login extends Component {
       sessionStorage.setItem("id", res.data.id);
       localStorage.setItem("token", res.data.token);
       console.log(sessionStorage.getItem("id"),localStorage.getItem("token"));
-      window.location.assign("/homepage");
+      //window.location.assign("/homepage");
     });
   }
 
@@ -30,8 +31,8 @@ class Login extends Component {
       <div>
         <h1>This is a login page.</h1>
         <form type="submit" onSubmit={this.handleSubmit}>
-          <h2>Username:</h2>
-          <input type="text" name="username" onChange={this.handleChange}/>
+          <h2>Email:</h2>
+          <input type="email" name="email" onChange={this.handleChange}/>
           <h2>Password:</h2>
           <input type="password" name="password" onChange={this.handleChange}/>
           <div>

@@ -62,8 +62,8 @@ module.exports = function(app) {
         })
     });
 
-    
-    
+
+
     app.post("/api/task", function(req, res) {
         db.Task.create(req.body)
             .then(function(dbTask) {
@@ -95,22 +95,54 @@ module.exports = function(app) {
             res.json(dbSprintUser)
         })
     });
-    
+
     app.post("/api/login",(req,res) => {
-        let token = encrpyt.encrpyt(req.body.username,req.body.password);
-        //the token will also get saved to the user database
-        //if login checks out we'll return a token to the client as well as an encrypted userId for now i'm setting it to 1
-        res.json({
-            token: token,
-            id: encrpyt.encrpyt(req.body.username,"1")
-        });
-    });
-    
-    app.post("/api/register",(req,res) => {
-        console.log(req.body);
-        //register would check if user exists, an if they do, they'll res.json back with a already exist, otherwise we create the user, probably make a token for them along the way... actually if that's the case we probably don't need the token failsafe in the login post but we'll keep it there for now.s
-        res.json("GOT IT");
+        //find if user exists by mail
+        db.User.findOne({where: {email:req.body.email}}).then((userRes) => {
+          console.log(userRes);
+          //if user does not exist
+          if(userRes === null){
+            res.json("User does not exist.");
+          }
+          else{
+            //we password check.
+
+
+            let token = encrpyt.encrpyt(req.body.email,req.body.password);
+            //the token will also get saved to the user database
+            //if login checks out we'll return a token to the client as well as an encrypted userId for now i'm setting it to 1
+            res.json({
+                token: token,
+                id: encrpyt.encrpyt(token,"1")
+            });
+          }
+        })
     });
 
-    
+    app.post("/api/register",(req,res) => {
+        console.log(req.body);
+        db.User.findOne({where:{email:req.body.email}}).then((userRes) => {
+          if(userRes === null){
+            db.User.create({
+              first_name: req.body.fName,
+              last_name: req.body.lName,
+              email: req.body.email,
+              password: req.body.password,
+              token: encrpyt.encrpyt(req.body.email,req.body.password)
+            }).then((data) => {
+              let sessionId = encrpyt.encrpyt(data.token,data.id.toString());
+              res.json({
+                id: sessionId,
+                token: data.token
+              });
+            });
+          }
+          else {
+            res.json("User already exists!");
+          }
+        })
+        //register would check if user exists, an if they do, they'll res.json back with a already exist, otherwise we create the user, probably make a token for them along the way... actually if that's the case we probably don't need the token failsafe in the login post but we'll keep it there for now.s
+    });
+
+
 };
