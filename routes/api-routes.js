@@ -61,6 +61,8 @@ module.exports = function(app) {
             res.json(dbSprint);
         })
     });
+
+    
     
     app.post("/api/task", function(req, res) {
         db.Task.create(req.body)
@@ -69,7 +71,8 @@ module.exports = function(app) {
         });
     });
 
-    app.get("/api/users/:userId", (req, res) => {
+    //all tasks for a given user
+    app.get("/api/tasks/users/:userId", (req, res) => {
         db.Task.findAll({
             where: {
                 assigned_id: req.params.userId
@@ -79,9 +82,17 @@ module.exports = function(app) {
         })
     });
 
-    app.get('/api/test/join', (req, res)=> {
-        db.sequelize.query("SELECT users.email as user_email, projects.name as project, sprints.name FROM users INNER JOIN tasks ON tasks.assigned_id = users.id INNER JOIN sprints ON sprints.id = tasks.sprint_id INNER JOIN projects on projects.id = sprints.project_id AND projects.id=1", { type: sequelize.QueryTypes.SELECT}).then(dbStuff => {
-            res.json(dbStuff)
+    // returns all users for a given project
+    app.get('/api/users/project/:projectId', (req, res)=> {
+        db.sequelize.query(`SELECT users.email as user_email, projects.name as project, sprints.name FROM users INNER JOIN tasks ON tasks.assigned_id = users.id INNER JOIN sprints ON sprints.id = tasks.sprint_id INNER JOIN projects on projects.id = sprints.project_id AND projects.id=${req.params.projectId}`, { type: sequelize.QueryTypes.SELECT}).then(dbProjectUsers => {
+            res.json(dbProjectUsers)
+        })
+    });
+
+    //returns all users for a given sprint
+    app.get('/api/users/sprint/:sprintId', (req, res)=> {
+        db.sequelize.query(`SELECT users.email as user_email, sprints.name FROM users INNER JOIN tasks ON tasks.assigned_id = users.id INNER JOIN sprints ON sprints.id = tasks.sprint_id AND sprints.id=${req.params.sprintId}`, { type: sequelize.QueryTypes.SELECT}).then(dbSprintUser => {
+            res.json(dbSprintUser)
         })
     });
     

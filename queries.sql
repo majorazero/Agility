@@ -34,3 +34,7 @@ FROM projects
 INNER JOIN sprints ON sprints.project_id = projects.id
 INNER JOIN tasks ON tasks.sprint_id = sprints.id
 INNER JOIN users ON users.id = tasks.assigned_id and users.id=3;
+
+#returns all users for a given sprint
+SELECT users.email as user_email, sprints.name FROM users INNER JOIN tasks ON tasks.assigned_id = users.id INNER JOIN sprints ON sprints.id = tasks.sprint_id AND sprints.id=1
+
