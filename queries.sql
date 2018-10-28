@@ -16,17 +16,11 @@ LEFT JOIN sprints ON sprints.id = tasks.sprint_id
 LEFT JOIN projects on projects.id = sprints.project_id;
 
 #returns all sprints for a given project
-SELECT projects.name AS project, sprints.name AS sprint
-FROM sprints
-INNER JOIN projects ON projects.id = sprints.project_id and projects.id=1;
+SELECT projects.name AS project, sprints.name AS sprint FROM sprints INNER JOIN projects ON projects.id = sprints.project_id and projects.id=1;
 
 
 #returns all users on a given project
-SELECT users.email as user_email, projects.name as project, sprints.name
-FROM users
-INNER JOIN tasks ON tasks.assigned_id = users.id
-INNER JOIN sprints ON sprints.id = tasks.sprint_id
-INNER JOIN projects on projects.id = sprints.project_id AND projects.id=1;
+SELECT users.email as user_email, projects.name as project, sprints.name FROM users INNER JOIN tasks ON tasks.assigned_id = users.id INNER JOIN sprints ON sprints.id = tasks.sprint_id INNER JOIN projects on projects.id = sprints.project_id AND projects.id=1;
 
 #returns all tasks for a given project
 SELECT tasks.name AS task, tasks.due_date, tasks.assigned_id, sprints.name, projects.name
@@ -40,3 +34,7 @@ FROM projects
 INNER JOIN sprints ON sprints.project_id = projects.id
 INNER JOIN tasks ON tasks.sprint_id = sprints.id
 INNER JOIN users ON users.id = tasks.assigned_id and users.id=3;
+
+#returns all users for a given sprint
+SELECT users.email as user_email, sprints.name FROM users INNER JOIN tasks ON tasks.assigned_id = users.id INNER JOIN sprints ON sprints.id = tasks.sprint_id AND sprints.id=1
+
