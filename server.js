@@ -15,7 +15,7 @@ if (process.env.NODE_ENV === "production") {
 
 const db = require('./models')
 
-require("./routes/api-routes.js")(app);
+require("./controllers/index.js")(app);
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));

@@ -23,7 +23,7 @@ class Project extends React.Component {
 
         // let number = this.state.projects
         // below we'll just place the variable in where we grab the dynamically updated 'project' that we're on depending on user choice
-        axios.get("/api/task/2").then((res) => {
+        axios.get("/api/task/1").then((res) => {
 
             this.setState({
                 tasks: res.data

@@ -6,7 +6,7 @@ import Homepage from "./components/Homepage/Homepage.js";
 import Register from "./components/Register/Register.js";
 import Project from "./components/Project/Project.js";
 import ButtonAppBar from "./components/utils/Navbar/Navbar.js";
-// import ActiveTasks from "./components/ActiveTasks/activetasks"
+import ActiveTasks from "./components/ActiveTasks/activetasks"
 
 import './App.css';
 
@@ -21,6 +21,7 @@ class App extends Component {
           <Route exact path="/login" component={Login}/>
           <Route exact path="/register" component={Register}/>
           <Route exact path="/project" component={Project}/>
+          <Route exact path='/tasks' component = {ActiveTasks} />
         </div>
       </Router>
     );
