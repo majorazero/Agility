@@ -1,6 +1,7 @@
 import React,{Component} from "react";
 import {Link} from "react-router-dom";
 import axios from "axios";
+import RegisterLayout from "../utils/RegisterLayout.js"
 
 class Register extends Component {
   state = {
@@ -11,14 +12,15 @@ class Register extends Component {
     message: ""
   }
 
-  handleChange = (event) => {
+  handleChange = name => event => {
     this.setState({
-      [event.target.name] : event.target.value
+      [name]: event.target.value,
     });
-  }
+  };
 
   handleSubmit = (event) => {
     event.preventDefault();
+
     axios.post("/api/register",this.state).then((res)=>{
       if(res.data === "User already exists!"){
         this.setState({message:res.data});
@@ -35,7 +37,12 @@ class Register extends Component {
     return(<div>
       <h1>Register!</h1>
         <small>{this.state.message}</small>
-        <form type="submit" onSubmit={this.handleSubmit}>
+
+        <RegisterLayout
+          onChange={this.handleChange}
+          onSubmit={this.handleSubmit}
+        />
+        {/* <form type="submit" onSubmit={this.handleSubmit}>
           <h2>First Name:</h2>
           <input type="text" name="fName" onChange={this.handleChange}/>
           <h2>Last Name:</h2>
@@ -47,7 +54,7 @@ class Register extends Component {
           <div>
             <button>Submit</button>
           </div>
-        </form>
+        </form> */}
       <Link to="/login">Back to login.</Link>
     </div>);
   }
