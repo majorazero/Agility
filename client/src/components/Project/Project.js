@@ -31,6 +31,11 @@ class Project extends React.Component {
         });
     };
 
+    deleteTask = (task) => {
+
+            axios.delete("/api/task/by/" + task.id);
+    }
+
     render() {
         const { direction, justify, alignItems } = this.state;
         return (
@@ -40,15 +45,18 @@ class Project extends React.Component {
                 <h2>This is pool.</h2>
                 <Grid container spacing={16}>
                     <Grid
+                        container
                         alignItems={alignItems}
                         direction={direction}
                         justify={justify}
                     >
-                        {this.state.tasks.map((t) => {
+                        {this.state.tasks.map((task) => {
                             return (
                                 <Pool
-                                    key={t.id}
-                                    tasks={t}
+                                    key={task.id}
+                                    id={this.key}
+                                    tasks={task}
+                                    onClick={this.deleteTask.bind(this, task)}
                                 />
                             );
                         })}

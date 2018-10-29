@@ -25,7 +25,7 @@ const styles = theme => ({
 function SimpleExpansionPanel(props) {
   const { classes } = props;
   return (
-      <ExpansionPanel>
+      <ExpansionPanel key={props.id}>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
           <Typography className={classes.heading}>{props.name}</Typography>
         </ExpansionPanelSummary>
@@ -38,9 +38,9 @@ function SimpleExpansionPanel(props) {
               {props.due}
           </Typography>
           <ContainedButtons
-            to="/signup"
-            name="Add"
-            color="primary"
+            name="Delete"
+            color="secondary"
+            onClick={props.onClick}
           />
         </ExpansionPanelDetails>
       </ExpansionPanel>

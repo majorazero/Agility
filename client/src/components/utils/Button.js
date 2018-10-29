@@ -16,10 +16,17 @@ function ContainedButtons(props) {
   const classes = props.classes;
   return (
     <div>
-      
-      <Button variant="contained" color={props.color} className={classes.button} to={props.to} component={props.component}>
+
+      <Button
+        variant="contained"
+        color={props.color}
+        className={classes.button}
+        to={props.to}
+        component={props.component}
+        onClick={props.onClick}
+      >
         {props.name}
-        
+
       </Button>
     </div>
   );
