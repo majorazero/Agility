@@ -78,6 +78,7 @@ module.exports = function(app) {
       }).then((data) => {
         res.json(data);
       })
+    });
 
     app.post("/api/getuser/", (req, res) => {
         db.User.findAll({

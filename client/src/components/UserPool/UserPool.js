@@ -24,11 +24,11 @@ class UserPool extends Component {
     }
 
     componentDidMount(){
-        this.getUsers();
+        this.getUsers(1);
     }
 
-    getUsers = () => {
-        axios.get('/api/users/sprint/1')
+    getUsers = (sprintId) => {
+        axios.post('/api/allMemberInSprint', {sprintId: sprintId})
         .then(res => {
             console.log(res.data)
             this.setState({users: res.data}, () => this.getTasks(1))
@@ -48,7 +48,7 @@ class UserPool extends Component {
             <Grid container spacing={24}>
                 {this.state.users.map((user, i) => (
                     <Grid item key={i}>
-                      <p>{user.user_email}</p>
+                      <p>{user.User.first_name}</p>
                       {this.state.tasks.filter(task => task.assigned_id === i+1).map(fTask => (
                           <TaskCard title={fTask.name}></TaskCard>
                       ))}
