@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {Link} from "react-router-dom";
 import axios from "axios";
 
-//has to be
+//doesn't has to be
 
 class Homepage extends Component {
 
