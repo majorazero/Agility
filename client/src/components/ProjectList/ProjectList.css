@@ -1,0 +1,10 @@
+textarea {
+  resize: none;
+  height: 150px;
+  width: 250px;
+}
+
+.projList {
+  background-color: lemonchiffon;
+  margin: 5px;
+}
