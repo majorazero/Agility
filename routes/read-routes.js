@@ -18,6 +18,12 @@ module.exports = function(app) {
         })
     });
 
+    app.post("/api/projectOfUser",(req,res)=>{
+      let simpleId = encrypt.decrypt(req.body.token,req.body.id);
+        //db.Project.findAll({where: {}})
+      res.json("WHAT");
+    });
+
     app.get("/api/sprint/:projectId", (req, res) => {
         db.Sprint.findAll({
             where: {

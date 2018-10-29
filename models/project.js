@@ -1,16 +1,17 @@
 module.exports = function(sequelize, DataTypes) {
     var Project = sequelize.define("Project", {
         name: {
-            type: DataTypes.STRING, 
+            type: DataTypes.STRING,
             allowNull: false
         },
+        //year-month-day
         due_date: {
-            type: DataTypes.DATEONLY, 
-        }, 
+            type: DataTypes.DATEONLY,
+        },
         complete: {
-            type: DataTypes.BOOLEAN, 
+            type: DataTypes.BOOLEAN,
             defaultValue: false
-        }, 
+        },
         completed_date: {
             type: DataTypes.DATEONLY
         },

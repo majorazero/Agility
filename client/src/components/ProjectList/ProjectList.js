@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import Modal from '@material-ui/core/Modal';
 import axios from "axios";
 require("./ProjectList.css");
 
@@ -11,7 +10,18 @@ class ProjectList extends Component{
     projects: ""
   }
 
+  componentDidMount = () => {
+    this.fetch();
+  }
 
+  fetch = () => {
+    axios.post("/api/projectOfUser",{
+      id: sessionStorage.getItem("id"),
+      token: localStorage.getItem("token")
+    }).then((response) => {
+      console.log(response.data);
+    });
+  }
 
   handleChange = (event) => {
     this.setState({[event.target.name]:event.target.value});
@@ -24,7 +34,7 @@ class ProjectList extends Component{
     axios.post("/api/project",{
       name: this.state.projectName,
       summary: this.state.summary,
-      dueDate: this.state.dueDate
+      due_date: this.state.dueDate
     }).then((response) => {
       console.log(response.data);
     });
