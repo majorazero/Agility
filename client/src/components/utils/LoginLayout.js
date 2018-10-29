@@ -47,7 +47,6 @@ const styles = theme => ({
 
 function SignIn(props) {
   const { classes } = props;
-
   return (
     <React.Fragment>
       <CssBaseline />
@@ -59,10 +58,12 @@ function SignIn(props) {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <form className={classes.form}>
+          <form onSubmit={props.onSubmit} className={classes.form}>
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="email">Email Address</InputLabel>
-              <Input id="email" name="email" autoComplete="email" autoFocus />
+              <Input id="email" name="email" autoComplete="email" autoFocus 
+              onChange={props.onChange("email")} 
+              />
             </FormControl>
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="password">Password</InputLabel>
@@ -71,6 +72,7 @@ function SignIn(props) {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                onChange={props.onChange("password")}
               />
             </FormControl>
             <FormControlLabel
