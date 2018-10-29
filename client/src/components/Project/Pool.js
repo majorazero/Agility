@@ -12,7 +12,6 @@ const Pool = (props) => {
             summary={props.tasks.description}
             difficulty={props.tasks.difficulty}
             onClick={props.onClick}
-
         />
     );
 };

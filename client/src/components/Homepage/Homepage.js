@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 import axios from "axios";
 import ProfileCard from "../ProfileCard/profilecard.js";
 
-//has to be
+//doesn't has to be
 
 class Homepage extends Component {
 

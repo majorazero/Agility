@@ -43,16 +43,16 @@ class Landing extends Component {
   render() {
 
     return (
-      <div>
+      <div style={{paddingTop: "50px"}}>
         <Grid container>
-          <Grid item xs={10}>
+          <Grid item xs={12}  style={{ padding: "10px" }}>
             <Grid
               container
               direction="column"
               justify="center"
               alignItems="stretch"
-              spacing={16}
-              style={{ backgroundImage: `url("/assets/images/background.jpg")`, resizeMode: 'cover', height: "660px" }}
+              spacing={24}
+              style={{ backgroundImage: `url("/assets/images/background.jpg")`, resizeMode: 'cover', height: "660px", padding: "10px" }}
             >
 
               <h1>This is a landing page.</h1>
@@ -87,13 +87,14 @@ class Landing extends Component {
               />
             </Grid>
           </Grid>
-          <Grid item alignItems="center" xs={10}>
+          <Grid item alignItems="center" xs={12}  style={{ padding: "10px" }}>
             <Grid
               container
               direction="column"
               justify="center"
               alignItems="stretch"
-              spacing={16}
+              style={{ padding: "10px" }}
+              spacing={24}
             >
               <p>
                 lorem ipsum dolor sit amet, quo molestie reprimique te. Ea per tota erant consequuntur, quodsi oportere ut mea. At vero convenire vel, ei est laoreet singulis, nominati abhorreant delicatissimi eos an. Officiis adipisci sed ei. In utamur intellegam est, purto assueverit eu nam, no quas etiam disputationi duo.
