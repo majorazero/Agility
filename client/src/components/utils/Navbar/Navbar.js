@@ -34,7 +34,7 @@ function ButtonAppBar(props) {
           <Typography variant="h6" color="inherit" className={classes.grow}>
             Trello 2.0
           </Typography>
-          <Button href = "/login" color="inherit">Login</Button>
+          {sessionStorage.getItem("id") ? null : <Button href = "/login" color="inherit">Login</Button>}
         </Toolbar>
       </AppBar>
     </div>
