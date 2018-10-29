@@ -45,7 +45,7 @@ const styles = theme => ({
   },
 });
 
-function LoginLayout(props) {
+function RegisterLayout(props) {
   const { classes } = props;
   return (
     <React.Fragment>
@@ -56,9 +56,21 @@ function LoginLayout(props) {
             <LockIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Register
           </Typography>
           <form onSubmit={props.onSubmit} className={classes.form}>
+            <FormControl margin="normal" required fullWidth>
+              <InputLabel htmlFor="fname">First Name</InputLabel>
+              <Input id="fname" name="fName" autoComplete="fname" autoFocus 
+              onChange={props.onChange("fName")} 
+              />
+            </FormControl>
+            <FormControl margin="normal" required fullWidth>
+              <InputLabel htmlFor="lname">Last Name</InputLabel>
+              <Input id="lname" name="lName" autoComplete="lname" autoFocus 
+              onChange={props.onChange("lName")} 
+              />
+            </FormControl>
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="email">Email Address</InputLabel>
               <Input id="email" name="email" autoComplete="email" autoFocus 
@@ -95,8 +107,8 @@ function LoginLayout(props) {
   );
 }
 
-LoginLayout.propTypes = {
+RegisterLayout.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(LoginLayout);
+export default withStyles(styles)(RegisterLayout);

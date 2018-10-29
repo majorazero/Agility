@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import SignIn from "../utils/LoginLayout.js"
+import LoginLayout from "../utils/LoginLayout.js"
 
 class Login extends Component {
   state = {
@@ -42,7 +42,7 @@ class Login extends Component {
         <h1>This is a login page.</h1>
         <small>{this.state.message}</small>
 
-        <SignIn
+        <LoginLayout
           onSubmit={this.handleSubmit}
           onChange={this.handleChange}
         />
