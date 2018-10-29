@@ -53,4 +53,28 @@ module.exports = function(app) {
             res.json(dbTasks);
         })
     });
+
+    app.post("/api/allMemberInSprint", (req,res) => {
+      db.SprintMembership.findAll({
+        where: {sprintId: req.body.sprintId},
+        include: [{
+          model: db.User,
+          as: "User"
+        }]
+      }).then((data) => {
+        res.json(data);
+      })
+    });
+
+    app.post("/api/allSprintsForMember", (req,res) => {
+      db.SprintMembership.findAll({
+        where: {userId: req.body.userId},
+        include:[{
+          model: db.Sprint,
+          as: "Sprint"
+        }]
+      }).then((data) => {
+        res.json(data);
+      })
+    });
 }
