@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography';
 
 const styles = {
     card: {
-      minWidth: 275,
+      marginTop: 5,
     },
     bullet: {
       display: 'inline-block',
@@ -29,7 +29,7 @@ function TaskCard(props){
     // const { classes } = props;
     const bull = <span className={styles.bullet}>•</span>;
         return(
-            <Card className={styles.card}>
+            <Card style={styles.card}>
                 <CardContent>
                     <Typography variant="h6">
                         {props.title}
