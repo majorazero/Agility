@@ -5,6 +5,8 @@ var sequelize = new Sequelize('database', 'username', 'password', {
     dialect: 'mysql'
 });
 
+
+
 module.exports = function(app) {
     app.get("/api/user", (req, res) => {
         db.User.findAll({}).then(dbSprint => {
@@ -51,6 +53,17 @@ module.exports = function(app) {
             }
         }).then(dbTasks => {
             res.json(dbTasks);
+        })
+    });
+
+
+    app.post("/api/getuser/", (req, res) => {
+        db.User.findAll({
+         where: {
+             id: encrypt.decrypt(req.body.token,req.body.id)
+         }
+        }).then(response => {
+            res.json(response);
         })
     });
 }
