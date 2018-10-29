@@ -11,7 +11,7 @@ module.exports = function(app){
           .then(function(dbUser) {
             res.json(dbUser);
           });
-      });  
+      });
 
     app.post("/api/project", function(req, res) {
     db.Project.create(req.body)
@@ -26,6 +26,14 @@ module.exports = function(app){
             res.json(dbSprint);
         });
     });
+
+    app.post("/api/sprintMembership", (req,res) => {
+      db.SprintMembership.create(req.body)
+        .then((membership) => {
+          res.json(membership);
+        });
+    });
+
 
     app.post("/api/task", function(req, res) {
         db.Task.create(req.body)
