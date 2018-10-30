@@ -70,7 +70,6 @@ class Project extends React.Component {
             for (let i = 0; i < task.length; i++) {
                 if (task[i].assigned_id === null) {
                     tasky.push(task[i])
-                    break;
                 }
             }
 
@@ -83,16 +82,15 @@ class Project extends React.Component {
     addTask = (event) => {
         event.preventDefault();
 
-        console.log(this.state.name)
-        console.log(this.state.due_date)
-        console.log(this.state.description)
         // would put sprintId state in as basis for task addition
-        // axios.post("/api/task", event.target, {
-        //     sprint_id : this.state.sprintId
-        //  }).then(() => {
-        //     this.getTasks();
-        // });
-        this.getTasks();
+        axios.post("/api/task", {
+            name: this.state.name,
+            due_date: this.state.due_date,
+            description: this.state.description,
+            sprint_id: this.state.sprintId
+        }).then(() => {
+            this.getTasks();
+        });
     }
 
     handleOpen = () => {
@@ -131,16 +129,9 @@ class Project extends React.Component {
     getSprints = projectId => {
       let sprintData = [];
       axios.get(`/api/sprint/${projectId}`)
-
       .then(res => {
           let today = new Date();
-          let pastSprints = res.data.filter(sprint => {
-              let endDate = new Date(sprint.end_date + "T23:59:59");
-              return(
-                  today > endDate
-              )
-          })
-          .map((pSprint, i) => {
+          res.data.map((pSprint, i) => {
               sprintData.push({
                   key: i,
                   label: pSprint.name,
@@ -161,6 +152,8 @@ class Project extends React.Component {
           this.setState({inviteCode: response.data});
         });
       }
+
+
 
 
     render() {

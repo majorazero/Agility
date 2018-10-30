@@ -45,7 +45,7 @@ const styles = theme => ({
     alignItems: 'center',
     padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
     width: 'auto', // Fix IE 11 issue.
-    marginTop: theme.spacing.unit,
+    // marginTop: theme.spacing.unit,
   },
   submit: {
     marginTop: theme.spacing.unit * 3,
@@ -67,6 +67,7 @@ function AddTaskLayout(props) {
           </FormControl>
           <FormControl margin="normal" required fullWidth>
             <DatePickers
+              label="Due Date"
               id="due_date"
               name="due_date"
               autoComplete="due_date"
