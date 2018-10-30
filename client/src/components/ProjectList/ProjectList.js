@@ -36,6 +36,7 @@ class ProjectList extends Component {
   }
 
   populate = () => {
+    console.log(this.state);
     if (this.state.projects.length === 0) {
       //maybe ill replace this with something if no projects appeared yet.
       return <h1>Oops no projects yet.</h1>;
@@ -46,7 +47,7 @@ class ProjectList extends Component {
           key={item.id}
           name={item.name}
           summary={item.summary}
-          due_date={item.due_date}
+          duedate={item.due_date}
           onProjectPress={() => { this.onProjectPress(item.id) }} />;
       });
     }
@@ -95,6 +96,14 @@ class ProjectList extends Component {
     this.setState({ open: false });
   };
 
+  handleInviteSubmit = (event) => {
+    event.preventDefault();
+    axios.post("/api/sprintMembershipWithCode",{sId: this.state.inviteCode, uId: sessionStorage.getItem("id"), token: localStorage.getItem("token")}).then((response) => {
+      console.log(response.data);
+    });
+    console.log(this.state.inviteCode);
+  }
+
   render() {
     const { direction, justify, alignItems } = this.state;
     return (
@@ -122,6 +131,7 @@ class ProjectList extends Component {
           <h1>This is a project List.</h1>
           <div>
             {this.populate()}
+
           </div>
         </Grid>
       </div>

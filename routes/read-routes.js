@@ -5,8 +5,6 @@ var sequelize = new Sequelize('database', 'username', 'password', {
     dialect: 'mysql'
 });
 
-
-
 module.exports = function(app) {
     app.get("/api/user", (req, res) => {
         db.User.findAll({}).then(dbSprint => {

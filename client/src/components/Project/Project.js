@@ -16,6 +16,7 @@ class Project extends React.Component {
         projName: "",
         summary: "",
         projDueDate: "",
+        projectId: "",
 
         inviteCode: "",
 
@@ -45,10 +46,12 @@ class Project extends React.Component {
             this.setState({
                 projName: response.data[0].name,
                 summary: response.data[0].summary,
-                projDueDate: response.data[0].due_date
+                projDueDate: response.data[0].due_date,
+                projectId: response.data[0].id
             });
             this.getTasks();
-            this.getSprints(1);
+            //pass project id here
+            this.getSprints(this.state.projectId);
         });
     }
 
@@ -166,7 +169,7 @@ class Project extends React.Component {
     render() {
         const { direction, justify, alignItems } = this.state;
         return (
-            <div style={{ paddingTop: "50px" }}>
+            <div style={{ paddingTop: "100px" }}>
                 <SprintSelect pastSprints={this.state.chipData} onClick={this.updateActiveSprint} />
                 <Grid container>
                     <h1>{this.state.projName}</h1>
