@@ -55,6 +55,8 @@ class Project extends React.Component {
     handleChange = name => event => {
         this.setState({
             [name]: event.target.value,
+        }, () => {
+            console.log(this.state.due_date)
         });
     };
 
@@ -125,6 +127,14 @@ class Project extends React.Component {
             this.getTasks();
         });
     }
+
+    defaultVal = () => {
+        let today = new Date().split("T");
+
+        this.setState({
+            due_date: today
+        });
+    };
 
     getSprints = projectId => {
       let sprintData = [];
