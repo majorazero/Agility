@@ -21,20 +21,25 @@ class ProjectList extends Component{
       id: sessionStorage.getItem("id"),
       token: localStorage.getItem("token")
     }).then((response) => {
-      console.log(response.data);
       this.setState({projects: response.data});
     });
   }
 
   populate = () => {
-    return this.state.projects.map((item) => {
-      return <ProjectListTab
-        key={item.id}
-        name={item.name}
-        summary={item.summary}
-        duedate={item.due_date}
-        onProjectPress = {() => {this.onProjectPress(item.id)}} />;
-    });
+    if(this.state.projects.length === 0){
+      //maybe ill replace this with something if no projects appeared yet.
+      return <h1>Oops no projects yet.</h1>;
+    }
+    else{
+      return this.state.projects.map((item) => {
+        return <ProjectListTab
+          key={item.id}
+          name={item.name}
+          summary={item.summary}
+          duedate={item.due_date}
+          onProjectPress = {() => {this.onProjectPress(item.id)}} />;
+      });
+    }
   }
 
   //we'll pass project id into this and link it to a specific project page
