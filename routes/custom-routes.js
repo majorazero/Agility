@@ -18,6 +18,12 @@ module.exports = function(app){
         })
     });
 
+    app.get('/api/projects/user/:userId', (req, res)=> {
+      db.sequelize.query(`SELECT DISTINCT projects.name as project, projects.id, projects.due_date, projects.complete, projects.completed_date, projects.summary, projects.userId FROM users INNER JOIN sprintmemberships ON sprintmemberships.userId = users.id AND users.id = ${req.params.userId}INNER JOIN sprints ON sprints.id = sprintmemberships.sprintId INNER JOIN projects ON sprints.project_id = projects.id`, { type: sequelize.QueryTypes.SELECT}).then(dbSprintUser => {
+          res.json(dbSprintUser)
+      })
+  });
+
       app.post("/api/login",(req,res) => {
         //find if user exists by mail
         db.User.findOne({where: {email:req.body.email}}).then((userRes) => {
