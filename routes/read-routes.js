@@ -34,6 +34,14 @@ module.exports = function(app) {
       });
     });
 
+    app.post("/api/projectById",(req,res) => {
+      db.Project.findAll({
+        where: {id: encrypt.decrypt(req.body.token,req.body.id)}
+      }).then((data) => {
+        res.json(data);
+      });
+    });
+
     app.get("/api/sprint/:projectId", (req, res) => {
         db.Sprint.findAll({
             where: {

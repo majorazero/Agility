@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import {Link} from "react-router-dom";
 import axios from "axios";
 import ProjectListTab from "./ProjectListTab/ProjectListTab.js";
 require("./ProjectList.css");
@@ -20,18 +21,34 @@ class ProjectList extends Component{
       id: sessionStorage.getItem("id"),
       token: localStorage.getItem("token")
     }).then((response) => {
-      console.log(response.data);
       this.setState({projects: response.data});
     });
   }
 
   populate = () => {
-    return this.state.projects.map((item) => {
-      return <ProjectListTab
-        key={item.id}
-        name={item.name}
-        summary={item.summary}
-        duedate={item.due_date} />;
+    if(this.state.projects.length === 0){
+      //maybe ill replace this with something if no projects appeared yet.
+      return <h1>Oops no projects yet.</h1>;
+    }
+    else{
+      return this.state.projects.map((item) => {
+        return <ProjectListTab
+          key={item.id}
+          name={item.name}
+          summary={item.summary}
+          duedate={item.due_date}
+          onProjectPress = {() => {this.onProjectPress(item.id)}} />;
+      });
+    }
+  }
+
+  //we'll pass project id into this and link it to a specific project page
+  onProjectPress = (id) => {
+    axios.post("/api/encrypt",{
+      token: localStorage.getItem("token"),
+      id: id.toString()
+    }).then((data) => {
+      window.location.assign(`/project/${data.data}`);
     });
   }
 
@@ -48,7 +65,6 @@ class ProjectList extends Component{
       id: sessionStorage.getItem("id"),
       token: localStorage.getItem("token")
     }).then((response) => {
-      console.log(response.data);
       this.fetch();
     });
   }

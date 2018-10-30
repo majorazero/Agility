@@ -12,6 +12,11 @@ import UserPool from './UserPool';
 class Project extends React.Component {
 
     state = {
+        //this is the project's personal info
+        projName: "",
+        summary: "",
+        projDueDate: "",
+
         tasks: [],
         projects: [],
         sprints: [],
@@ -28,8 +33,23 @@ class Project extends React.Component {
     }
 
     componentDidMount() {
+      const {id} = this.props.match.params;
+      axios.post("/api/projectById",{
+        token: localStorage.getItem("token"),
+        id: id
+      }).then((response) => {
+        console.log(response.data);
+        this.setState({
+          projName: response.data[0].name,
+          summary: response.data[0].summary,
+          projDueDate: response.data[0].due_date
+        });
         this.getTasks();
+<<<<<<< HEAD
         this.getSprints(1);
+=======
+      });
+>>>>>>> master
     }
 
     handleChange = name => event => {
@@ -54,15 +74,19 @@ class Project extends React.Component {
         });
     };
 
-    addTask = () => {
+    addTask = (event) => {
+        event.preventDefault();
 
         console.log(this.state.name)
         console.log(this.state.due_date)
         console.log(this.state.description)
         // would put sprintId state in as basis for task addition
-        // axios.post("/api/task", event.target, { sprint_id : this.state.sprintId }
-
-        // })
+        // axios.post("/api/task", event.target, { 
+        //     sprint_id : this.state.sprintId
+        //  }).then(() => {
+        //     this.getTasks();
+        // });
+        this.getTasks();
     }
 
     handleOpen = () => {
@@ -128,6 +152,9 @@ class Project extends React.Component {
             <div style={{ paddingTop: "50px" }}>
                 <SprintSelect pastSprints={this.state.chipData} onClick={this.updateActiveSprint}/>
                 <Grid container>
+                    <h1>{this.state.projName}</h1>
+                    <h2>{this.state.summary}</h2>
+                    <h3>{this.state.projDueDate}</h3>
                     <Grid item xs={6} style={{ padding: "10px" }}>
                         <h2>This is pool.</h2>
 
@@ -168,7 +195,7 @@ class Project extends React.Component {
                         <UserPool sprintId={this.state.sprintId}></UserPool>
                     </Grid>
                     <br />
-                    <div><Link to="/">Back to landing page.</Link></div>
+                    <div><Link to="/homepage">Back to home page.</Link></div>
                 </Grid>
             </div>
         );

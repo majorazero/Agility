@@ -23,7 +23,7 @@ class App extends Component {
           <Route exact path ="/homepage" component={Homepage}/>
           <Route exact path="/login" component={Login}/>
           <Route exact path="/register" component={Register}/>
-          <Route exact path="/project" component={Project}/>
+          <Route exact path="/project/:id" component={Project}/>
           <Route exact path='/tasks' component = {ActiveTasks} />
           <Route exact path='/userpool' component={UserPool} />
           <Route exact path='/sprintselect' component={SprintSelect} />

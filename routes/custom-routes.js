@@ -52,7 +52,7 @@ module.exports = function(app){
         }
       });
     });
-  
+
       app.post("/api/register",(req,res) => {
         console.log(req.body);
         db.User.findOne({where:{email:req.body.email}}).then((userRes) => {
@@ -76,7 +76,11 @@ module.exports = function(app){
           }
         });
       });
-  
+
+      app.post("/api/encrypt",(req,res) => {
+        res.json(encrypt.encrypt(req.body.token,req.body.id));
+      })
+
       app.post("/api/decrypt",(req,res) => {
         res.json(encrypt.decrypt(req.body.token,req.body.id));
       });

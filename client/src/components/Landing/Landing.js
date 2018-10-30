@@ -81,7 +81,7 @@ class Landing extends Component {
               />
               <ContainedButtons
                 component={Link}
-                to="/signup"
+                to="/register"
                 name="Sign Up"
                 color="secondary"
               />
