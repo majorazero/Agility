@@ -8,6 +8,13 @@ import ProfileCard from "./ProfileCard/profilecard.js";
 
 class Homepage extends Component {
 
+  componentDidMount = () => {
+    if(sessionStorage.getItem("id") === null){
+      console.log("You're not logged in!");
+      //we might want to change this to a 404
+      window.location.assign("/");
+    }
+  }
 
   logOut = () => {
     //logging out means clearing out session storage and localstorage
