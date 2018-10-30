@@ -40,6 +40,25 @@ module.exports = function(app){
         });
     });
 
+    app.post("/api/sprintMembershipWithCode",(req,res)=>{
+      let sprintId = encrypt.decrypt("invite",req.body.sId);
+      console.log(sprintId);
+      db.SprintMembership.find({where:{
+        sprintId: sprintId
+      }}).then((data) => {
+        if(data === null){
+          db.SprintMembership.create({
+            sprintId: sprintId,
+            userId: encrypt.decrypt(req.body.token,req.body.uId)
+          }).then((data) => {
+            res.json("Created!");
+          })
+        }
+        else{
+          res.json("Already a member!");
+        }
+      });
+    })
 
     app.post("/api/task", function(req, res) {
         db.Task.create(req.body)

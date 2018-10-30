@@ -52,6 +52,7 @@ class App extends Component {
       //return true;
       this.setState({loaded:true, loggedIn: true});
     }
+    this.setState({loaded: true});
   }
 
   render() {
