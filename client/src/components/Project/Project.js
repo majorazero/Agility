@@ -153,9 +153,6 @@ class Project extends React.Component {
         });
       }
 
-
-
-
     render() {
         const { direction, justify, alignItems } = this.state;
         return (
