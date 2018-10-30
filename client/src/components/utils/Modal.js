@@ -6,13 +6,9 @@ import Modal from '@material-ui/core/Modal';
 // import Button from '@material-ui/core/Button';
 import AddTaskLayout from './AddTaskLayout.js';
 
-function rand() {
-    return Math.round(Math.random() * 20) - 10;
-}
-
 function getModalStyle() {
-    const top = 50 + rand();
-    const left = 50 + rand();
+    const top = 50;
+    const left = 50;
 
     return {
         top: `${top}%`,
