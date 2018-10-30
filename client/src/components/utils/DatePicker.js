@@ -24,7 +24,7 @@ function DatePickers(props) {
         label={props.label}
         name={props.name} 
         type="date"
-        defaultValue="2018-11-06"
+        defaultValue={(new Date().getFullYear()) + "-" + (new Date().getMonth() + 1) + "-" + (new Date().getDate())}
         className={classes.textField}
         onChange={props.onChange}
         // InputLabelProps={{
