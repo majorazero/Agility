@@ -38,7 +38,7 @@ class Project extends React.Component {
 
         // let number = this.state.projects
         // below we'll just place the variable in where we grab the dynamically updated 'project' that we're on depending on user choice
-        axios.get("/api/task/?assigned_id=0" + this.state.sprintId, {
+        axios.get("/api/task/" + this.state.sprintId, {
             params: {
               assigned_id: null
             }
