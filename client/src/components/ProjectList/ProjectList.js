@@ -128,22 +128,10 @@ class ProjectList extends Component {
             <AddProjectLayout
             />
           </SimpleModalProjectWrapped>
-          <div className="projList">
-            <h1>This is a project List.</h1>
+          <h1>This is a project List.</h1>
+          <div>
+            {this.populate()}
 
-            <h2>Join Sprint with Invite Code</h2>
-
-            <div className="invCodeDiv">
-              <form onSubmit={this.handleInviteSubmit}>
-                <h3>Invite Code:</h3>
-                <input type="text" name="inviteCode" onChange={this.handleChange} />
-                <button>Submit</button>
-              </form>
-            </div>
-
-            <div>
-              {this.populate()}
-            </div>
           </div>
         </Grid>
       </div>
