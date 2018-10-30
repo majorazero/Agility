@@ -21,9 +21,17 @@ module.exports = function(app) {
     });
 
     app.post("/api/projectOfUser",(req,res)=>{
-      let simpleId = encrypt.decrypt(req.body.token,req.body.id);
-        //db.Project.findAll({where: {}})
-      res.json("WHAT");
+      db.Project.findAll(
+        {where: {userId: encrypt.decrypt(req.body.token,req.body.id)}}
+      ).then((data) => {
+        // db.SprintMembership.findAll({
+        //   where: {userId:encrypt.decrypt(req.body.token,req.body.id)},
+        //   include:[{model: db.Sprint, as:"Sprint"}]}).then((data2) =>{
+        //   console.log(data2[0].Sprint);
+        //   res.json(data);
+        // });
+        res.json(data);
+      });
     });
 
     app.get("/api/sprint/:projectId", (req, res) => {

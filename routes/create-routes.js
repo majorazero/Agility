@@ -14,10 +14,16 @@ module.exports = function(app){
       });
 
     app.post("/api/project", function(req, res) {
-    db.Project.create(req.body)
-        .then(function(dbProject) {
-        res.json(dbProject);
-        });
+      console.log(req.body);
+      db.Project.create({
+        name: req.body.name,
+        summary: req.body.summary,
+        due_date: req.body.due_date,
+        userId: encrypt.decrypt(req.body.token,req.body.id)
+      })
+          .then(function(dbProject) {
+          res.json(dbProject);
+          });
     });
 
     app.post("/api/sprint", function(req, res) {
