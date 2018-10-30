@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 // import Modal from '@material-ui/core/Modal';
-import TaskCard from "../utils/TaskCard/TaskCard"
+import TaskCard from "../../utils/TaskCard/TaskCard"
 
 
 class ActiveTasks extends Component {

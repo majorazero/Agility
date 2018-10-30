@@ -3,6 +3,8 @@ import {Link} from "react-router-dom";
  import ProjectList from "../ProjectList/ProjectList.js";
 import axios from "axios";
 import ProfileCard from "./ProfileCard/profilecard.js";
+import ActiveTasks from "./ActiveTasks/activetasks";
+import Grid from '@material-ui/core/Grid';
 
 //doesn't has to be
 
@@ -30,13 +32,16 @@ class Homepage extends Component {
 
   render(){
     return (
-      <div>
-        <h1>This is a homepage.</h1>
-        <ProfileCard />
-        <ProjectList />
-        <button onClick={this.decrypt}>What's my id? This is for testing duh.</button>
+      <Grid container spacing = {8} style={{marginTop: 100}}>
+        <Grid item>
+          <ProfileCard />
+        </Grid>
+        <Grid item>
+          <ProjectList />
+        </Grid>
         <Link onClick={this.logOut} to="/">Logout.</Link>
-      </div>
+      </Grid>
+        
     );
   }
 }

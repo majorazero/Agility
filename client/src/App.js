@@ -6,7 +6,7 @@ import Homepage from "./components/Homepage/Homepage.js";
 import Register from "./components/Register/Register.js";
 import Project from "./components/Project/Project.js";
 import ButtonAppBar from "./components/utils/Navbar/Navbar.js";
-import ActiveTasks from "./components/ActiveTasks/activetasks";
+// import ActiveTasks from "./components/ActiveTasks/activetasks";
 import UserPool from "./components/Project/UserPool";
 import SprintSelect from "./components/Project/SprintSelect";
 import axios from "axios";
@@ -73,7 +73,7 @@ class App extends Component {
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/project/:id" component={Project} />
-          <Route exact path='/tasks' component={ActiveTasks} />
+          {/* <Route exact path='/tasks' component={ActiveTasks} /> */}
           <Route exact path='/userpool' component={UserPool} />
           <Route exact path='/sprintselect' component={SprintSelect} />
           <Route exact path='/404' component={notFound} />

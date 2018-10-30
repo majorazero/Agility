@@ -78,7 +78,7 @@ class Project extends React.Component {
 
     addTask = (event) => {
         event.preventDefault();
-
+        console.log(this.state.name, this.state.due_date, this.state.description, this.state.sprintId)
         // would put sprintId state in as basis for task addition
         axios.post("/api/task", {
             name: this.state.name,
