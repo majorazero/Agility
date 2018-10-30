@@ -45,11 +45,8 @@ class Project extends React.Component {
           projDueDate: response.data[0].due_date
         });
         this.getTasks();
-<<<<<<< HEAD
         this.getSprints(1);
-=======
       });
->>>>>>> master
     }
 
     handleChange = name => event => {
