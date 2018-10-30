@@ -7,7 +7,8 @@ import Register from "./components/Register/Register.js";
 import Project from "./components/Project/Project.js";
 import ButtonAppBar from "./components/utils/Navbar/Navbar.js";
 import ActiveTasks from "./components/ActiveTasks/activetasks";
-import UserPool from "./components/UserPool/UserPool";
+import UserPool from "./components/Project/UserPool";
+import SprintSelect from "./components/Project/SprintSelect";
 
 
 import './App.css';
@@ -25,6 +26,7 @@ class App extends Component {
           <Route exact path="/project" component={Project}/>
           <Route exact path='/tasks' component = {ActiveTasks} />
           <Route exact path='/userpool' component={UserPool} />
+          <Route exact path='/sprintselect' component={SprintSelect} />
         </div>
       </Router>
     );
