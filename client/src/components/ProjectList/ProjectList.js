@@ -18,6 +18,8 @@ class ProjectList extends Component {
     direction: 'column',
     justify: 'flex-start',
     alignItems: 'flex-start',
+    projects: [],
+    inviteCode: ""
   }
 
   componentDidMount = () => {
@@ -52,8 +54,9 @@ class ProjectList extends Component {
 
   //we'll pass project id into this and link it to a specific project page
   onProjectPress = (id) => {
-    axios.post("/api/encrypt", {
-      token: localStorage.getItem("token"),
+
+    axios.post("/api/encrypt",{
+      token: "project",
       id: id.toString()
     }).then((data) => {
       window.location.assign(`/project/${data.data}`);

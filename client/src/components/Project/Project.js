@@ -17,12 +17,15 @@ class Project extends React.Component {
         summary: "",
         projDueDate: "",
 
+        inviteCode: "",
+
         tasks: [],
         projects: [],
         sprints: [],
         direction: 'column',
         justify: 'flex-start',
         alignItems: 'flex-start',
+
         // temp id set
         sprintId: 2,
         open: false,
@@ -35,7 +38,7 @@ class Project extends React.Component {
     componentDidMount() {
         const { id } = this.props.match.params;
         axios.post("/api/projectById", {
-            token: localStorage.getItem("token"),
+            token: "project",
             id: id
         }).then((response) => {
             console.log(response.data);
@@ -71,7 +74,7 @@ class Project extends React.Component {
                     tasky.push(task[i])
                 }
             }
-            
+
             this.setState({
                 tasks: tasky
             })
@@ -134,29 +137,31 @@ class Project extends React.Component {
     };
 
     getSprints = projectId => {
-        let sprintData = [];
-        axios.get(`/api/sprint/${projectId}`)
+      let sprintData = [];
+      axios.get(`/api/sprint/${projectId}`)
+      .then(res => {
+          let today = new Date();
+          res.data.map((pSprint, i) => {
+              sprintData.push({
+                  key: i,
+                  label: pSprint.name,
+                  id: pSprint.id
+              })
+          this.setState({ chipData: sprintData })
+          })
+        })
+      };
 
-        .then(res => {
-            let today = new Date();
-            let pastSprints = res.data.filter(sprint => {
-                let endDate = new Date(sprint.end_date + "T23:59:59");
-                return(
-                    today > endDate
-                )
-            })
-            .map((pSprint, i) => {
-                sprintData.push({
-                    key: i, 
-                    label: pSprint.name,
-                    id: pSprint.id
-                })
-            this.setState({ chipData: sprintData })
-            })
-    })
-};
-
-
+      inviteMember = () => {
+        //we'll pass the sprint id as an encrypted id
+        axios.post("/api/encrypt",{
+          id: this.state.sprintId.toString(),
+          token: "invite"
+        }).then((response)=>{
+          console.log(response.data);
+          this.setState({inviteCode: response.data});
+        });
+      }
 
     render() {
         const { direction, justify, alignItems } = this.state;
@@ -169,6 +174,11 @@ class Project extends React.Component {
                     <h3>{this.state.projDueDate}</h3>
                     <Grid item xs={6} style={{ padding: "10px" }}>
                         <h2>This is pool.</h2>
+
+                        <div>
+                          {this.state.inviteCode}
+                        </div>
+                        <button onClick = {this.inviteMember}>Invite Code</button>
 
                         <Grid
                             container
