@@ -124,8 +124,8 @@ class Project extends React.Component {
         axios.get(`/api/sprint/${projectId}`)
         .then(res => {
             let today = new Date();
-            let pastSprints = res.data.filter(sprint => {
-                let endDate = new Date(sprint.end_date + "T00:00:00");
+            res.data.filter(sprint => {
+                let endDate = new Date(sprint.end_date + "T23:59:59");
                 return(
                     today > endDate
                 )

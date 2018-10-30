@@ -27,11 +27,6 @@ class UserPool extends Component {
         };
       }
 
-    // state={
-    //     users: [],
-    //     tasks: []
-    // }
-
     componentDidMount(){
         console.log(this.props.sprintId);
         this.getUsers(this.props.sprintId);
@@ -66,7 +61,7 @@ class UserPool extends Component {
                     <Grid key={i} item>
                       <p>{user.User.first_name}</p>
                       {this.state.tasks.filter(task => task.assigned_id === i+1).map(fTask => (
-                          <TaskCard title={fTask.name}></TaskCard>
+                          <TaskCard title={fTask.name} titleSize="subtitle2" subtitleSize='caption'></TaskCard>
                       ))}
                     </Grid>
                 ))}

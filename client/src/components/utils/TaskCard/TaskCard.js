@@ -31,10 +31,10 @@ function TaskCard(props){
         return(
             <Card style={styles.card}>
                 <CardContent>
-                    <Typography variant="h6">
+                    <Typography variant={props.titleSize}>
                         {props.title}
                     </Typography>
-                    <Typography variant='body2'>
+                    <Typography variant={props.subtitleSize}>
                         Complexity: {props.difficulty} {bull} Due: {props.dueDate} 
                     </Typography>
                     <Typography variant='subtitle1'>
