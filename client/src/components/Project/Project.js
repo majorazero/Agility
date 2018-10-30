@@ -17,7 +17,7 @@ class Project extends React.Component {
         justify: 'flex-start',
         alignItems: 'flex-start',
         // temp id set
-        sprintId: "2",
+        sprintId: "1",
         open: false,
         name: "",
         due_date: "",
@@ -81,8 +81,8 @@ class Project extends React.Component {
         axios.post("/api/decrypt", { token: localStorage.getItem("token"), id: sessionStorage.getItem("id") }).then((response) => {
             let user = response.data;
 
-            // console.log(user)
-            axios.post("/api/task/" + task.id + "/" + user).then(() => {
+            console.log(user)
+            axios.put("/api/task/by/" + task.id + "/" + user).then(() => {
                 this.getTasks();
             })
         });
@@ -125,7 +125,7 @@ class Project extends React.Component {
                                         id={this.key}
                                         tasks={task}
                                         onClickDelete={this.deleteTask.bind(this, task)}
-                                        onClickAdd={this.assignTask}
+                                        onClickAdd={this.assignTask.bind(this, task)}
                                     />
                                 );
                             })}
