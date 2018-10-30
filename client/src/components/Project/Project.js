@@ -143,16 +143,10 @@ class Project extends React.Component {
                     label: pSprint.name,
                     id: pSprint.id
                 })
-                    .map((pSprint, i) => {
-                        sprintData.push({
-                            key: i,
-                            label: pSprint.name,
-                            id: pSprint.id
-                        })
-                    })
-                this.setState({ chipData: sprintData })
+            this.setState({ chipData: sprintData })
             })
-    }
+    })
+};
 
 
 
