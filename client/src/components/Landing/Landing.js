@@ -7,12 +7,6 @@ import ContainedButtons from "../utils/Button.js";
 //import Image from "/assets/images/profileimg.png";
 
 class Landing extends Component {
-  state = {
-    loading: true
-  }
-  componentDidMount = () => {
-    this.setState({loading: false});
-  }
   render() {
     return (
       <div style={{paddingTop: "50px"}}>
