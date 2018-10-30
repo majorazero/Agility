@@ -19,5 +19,13 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.TEXT
         }
     });
+    Project.associate = (models) => {
+      Project.belongsTo(models.User, {
+        foreignKey: {
+          name: "userId",
+          allowNull: false
+        }
+      });
+    }
     return Project;
 }

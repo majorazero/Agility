@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import axios from "axios";
+import ProjectListTab from "./ProjectListTab/ProjectListTab.js";
 require("./ProjectList.css");
 
 class ProjectList extends Component{
@@ -7,7 +8,7 @@ class ProjectList extends Component{
     projectName: "",
     summary: "",
     dueDate: "",
-    projects: ""
+    projects: []
   }
 
   componentDidMount = () => {
@@ -20,6 +21,17 @@ class ProjectList extends Component{
       token: localStorage.getItem("token")
     }).then((response) => {
       console.log(response.data);
+      this.setState({projects: response.data});
+    });
+  }
+
+  populate = () => {
+    return this.state.projects.map((item) => {
+      return <ProjectListTab
+        key={item.id}
+        name={item.name}
+        summary={item.summary}
+        duedate={item.due_date} />;
     });
   }
 
@@ -29,14 +41,15 @@ class ProjectList extends Component{
   handleSubmit= (event) => {
     event.preventDefault();
     //we'll create a project now.
-    let dateFormat = this.state.dueDate;
-    console.log(dateFormat);
     axios.post("/api/project",{
       name: this.state.projectName,
       summary: this.state.summary,
-      due_date: this.state.dueDate
+      due_date: this.state.dueDate,
+      id: sessionStorage.getItem("id"),
+      token: localStorage.getItem("token")
     }).then((response) => {
       console.log(response.data);
+      this.fetch();
     });
   }
 
@@ -45,7 +58,7 @@ class ProjectList extends Component{
       <div className="projList">
         <h1>This is a project List.</h1>
         <div>
-          Imagine a scroll bar here.
+          {this.populate()}
         </div>
         <form onSubmit={this.handleSubmit}>
           <h2>Someone(Mike) might have to material-ui this into a modal/drawer for me.</h2>
