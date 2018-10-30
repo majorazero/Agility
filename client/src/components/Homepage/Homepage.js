@@ -33,12 +33,19 @@ class Homepage extends Component {
   render(){
     return (
       <Grid container spacing = {8} style={{marginTop: 100}}>
-        <Grid item>
-          <ProfileCard />
+        <Grid container item xs={12} style={{marginLeft: 100}}>
+            <Grid item xs={6} style={{maxHeight: 375, overflow: "auto", marginLeft: 35, marginRight: 140}}>
+              <ActiveTasks />
+            </Grid>
+            <Grid item xs={4} style={{justifyContent: "left"}}>
+              <ProfileCard />
+            </Grid>
         </Grid>
-        <Grid item>
-          <ProjectList />
-        </Grid>
+        <Grid container style={{justifyContent: 'center'}}>
+            <Grid item xs={10} >
+              <ProjectList />
+            </Grid>
+          </Grid>
         <Link onClick={this.logOut} to="/">Logout.</Link>
       </Grid>
         
