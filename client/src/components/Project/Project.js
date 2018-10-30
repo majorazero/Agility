@@ -10,6 +10,11 @@ import AddTaskLayout from "../utils/AddTaskLayout.js";
 class Project extends React.Component {
 
     state = {
+        //this is the project's personal info
+        projName: "",
+        summary: "",
+        projDueDate: "",
+
         tasks: [],
         projects: [],
         sprints: [],
@@ -25,7 +30,19 @@ class Project extends React.Component {
     }
 
     componentDidMount() {
+      const {id} = this.props.match.params;
+      axios.post("/api/projectById",{
+        token: localStorage.getItem("token"),
+        id: id
+      }).then((response) => {
+        console.log(response.data);
+        this.setState({
+          projName: response.data[0].name,
+          summary: response.data[0].summary,
+          projDueDate: response.data[0].due_date
+        });
         this.getTasks();
+      });
     }
 
     handleChange = name => event => {
@@ -95,7 +112,9 @@ class Project extends React.Component {
         return (
             <div style={{ paddingTop: "50px" }}>
                 <Grid container>
-                    <h1>This is the project page.</h1>
+                    <h1>{this.state.projName}</h1>
+                    <h2>{this.state.summary}</h2>
+                    <h3>{this.state.projDueDate}</h3>
                     <Grid item xs={12} style={{ padding: "10px" }}>
                         <h2>This is pool.</h2>
 
@@ -133,7 +152,7 @@ class Project extends React.Component {
                         </Grid>
                     </Grid>
                     <br />
-                    <div><Link to="/">Back to landing page.</Link></div>
+                    <div><Link to="/homepage">Back to home page.</Link></div>
                 </Grid>
             </div>
         );
