@@ -18,6 +18,8 @@ class ProjectList extends Component {
     direction: 'column',
     justify: 'flex-start',
     alignItems: 'flex-start',
+    projects: [],
+    inviteCode: ""
   }
 
   componentDidMount = () => {
@@ -52,8 +54,9 @@ class ProjectList extends Component {
 
   //we'll pass project id into this and link it to a specific project page
   onProjectPress = (id) => {
-    axios.post("/api/encrypt", {
-      token: localStorage.getItem("token"),
+
+    axios.post("/api/encrypt",{
+      token: "project",
       id: id.toString()
     }).then((data) => {
       window.location.assign(`/project/${data.data}`);
@@ -117,6 +120,29 @@ class ProjectList extends Component {
             />
           </SimpleModalProjectWrapped>
           {/* <h1>This is a project List.</h1>
+  handleInviteSubmit = (event) => {
+    event.preventDefault();
+    axios.post("/api/sprintMembershipWithCode",{sId: this.state.inviteCode, uId: sessionStorage.getItem("id"), token: localStorage.getItem("token")}).then((response) => {
+      console.log(response.data);
+    });
+    console.log(this.state.inviteCode);
+  }
+
+  render(){
+    return(
+      <div className="projList">
+        <h1>This is a project List.</h1>
+
+        <h2>Join Sprint with Invite Code</h2>
+
+        <div className="invCodeDiv">
+          <form onSubmit={this.handleInviteSubmit}>
+            <h3>Invite Code:</h3>
+            <input type="text" name="inviteCode" onChange={this.handleChange} />
+            <button>Submit</button>
+          </form>
+        </div>
+
         <div>
           {this.populate()}
         </div>

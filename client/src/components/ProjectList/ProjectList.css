@@ -8,3 +8,13 @@ textarea {
   background-color: lemonchiffon;
   margin: 5px;
 }
+
+.invCodeDiv {
+  background-color: lightgreen;
+  padding: 5px;
+  margin: 5px;
+}
+
+input{
+  width: 300px;
+}

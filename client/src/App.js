@@ -10,6 +10,8 @@ import ActiveTasks from "./components/ActiveTasks/activetasks";
 import UserPool from "./components/Project/UserPool";
 import SprintSelect from "./components/Project/SprintSelect";
 import axios from "axios";
+import notFound from "./components/utils/404/404.js";
+// import ProgressBar from "./components/utils/ProgressBar/ProgressBar";
 import './App.css';
 
 class App extends Component {
@@ -41,6 +43,7 @@ class App extends Component {
         //if it does we'll log the user in.
       }
       //if no token exists, they have to login.
+      this.setState({loaded: true});
     }
     else {
       //you have a session you're logged in
@@ -50,6 +53,7 @@ class App extends Component {
       //return true;
       this.setState({loaded:true, loggedIn: true});
     }
+    this.setState({loaded: true});
   }
 
   render() {
@@ -57,20 +61,25 @@ class App extends Component {
       return null;
     }
 
+
+
     return (
+      // style={{padding: "100px 50px 0 50px"}}
       <Router>
-        <div style={{padding: "100px 50px 0 50px"}}>
-          <ButtonAppBar/>
+        <div>
+        {window.location.href.includes("404")? null:<ButtonAppBar />}
           <Route exact path ="/" render={() => (
               (this.state.loggedIn !== true) ? (<Landing />) : (<Redirect to="/homepage" />)
             )} />
-          <Route exact path ="/homepage" component={Homepage}/>
-          <Route exact path="/login" component={Login}/>
-          <Route exact path="/register" component={Register}/>
-          <Route exact path="/project/:id" component={Project}/>
-          <Route exact path='/tasks' component = {ActiveTasks} />
+          <Route exact path="/homepage" component={Homepage} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/register" component={Register} />
+          <Route exact path="/project/:id" component={Project} />
+          <Route exact path='/tasks' component={ActiveTasks} />
           <Route exact path='/userpool' component={UserPool} />
           <Route exact path='/sprintselect' component={SprintSelect} />
+          <Route exact path='/404' component={notFound} />
+
         </div>
       </Router>
     );
