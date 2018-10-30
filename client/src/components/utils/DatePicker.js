@@ -19,19 +19,18 @@ function DatePickers(props) {
   const { classes } = props;
 
   return (
-    <form className={classes.container} noValidate>
       <TextField
         id={props.id}
+        label={props.label}
         name={props.name} 
         type="date"
-        label="Due Date"
-        defaultValue="2017-05-24"
+        defaultValue="2018-11-06"
         className={classes.textField}
-        InputLabelProps={{
-          shrink: false,
-        }}
+        onChange={props.onChange}
+        // InputLabelProps={{
+        //   shrink: false,
+        // }}
       />
-    </form>
   );
 }
 

@@ -67,6 +67,7 @@ function AddTaskLayout(props) {
           </FormControl>
           <FormControl margin="normal" required fullWidth>
             <DatePickers
+              label="Due Date"
               id="due_date"
               name="due_date"
               autoComplete="due_date"
