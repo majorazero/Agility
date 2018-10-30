@@ -28,25 +28,25 @@ class Project extends React.Component {
         open: false,
         name: "",
         due_date: "",
-        description: "", 
+        description: "",
         chipData: []
     }
 
     componentDidMount() {
-      const {id} = this.props.match.params;
-      axios.post("/api/projectById",{
-        token: localStorage.getItem("token"),
-        id: id
-      }).then((response) => {
-        console.log(response.data);
-        this.setState({
-          projName: response.data[0].name,
-          summary: response.data[0].summary,
-          projDueDate: response.data[0].due_date
+        const { id } = this.props.match.params;
+        axios.post("/api/projectById", {
+            token: localStorage.getItem("token"),
+            id: id
+        }).then((response) => {
+            console.log(response.data);
+            this.setState({
+                projName: response.data[0].name,
+                summary: response.data[0].summary,
+                projDueDate: response.data[0].due_date
+            });
+            this.getTasks();
+            this.getSprints(1);
         });
-        this.getTasks();
-        this.getSprints(1);
-      });
     }
 
     handleChange = name => event => {
@@ -59,31 +59,35 @@ class Project extends React.Component {
 
         // let number = this.state.projects
         // below we'll just place the variable in where we grab the dynamically updated 'project' that we're on depending on user choice
-        axios.get("/api/task/" + this.state.sprintId, {
-            params: {
-                assigned_id: null
-            }
-        }).then((res) => {
+        axios.get("/api/task/" + this.state.sprintId).then((res) => {
 
+            let task = res.data;
+            let tasky = [];
+
+            for (let i = 0; i < task.length; i++) {
+                if (task[i].assigned_id === null) {
+                    tasky.push(task[i])
+                }
+            }
+            
             this.setState({
-                tasks: res.data
-            });
+                tasks: tasky
+            })
         });
     };
 
     addTask = (event) => {
         event.preventDefault();
 
-        console.log(this.state.name)
-        console.log(this.state.due_date)
-        console.log(this.state.description)
         // would put sprintId state in as basis for task addition
-        // axios.post("/api/task", event.target, { 
-        //     sprint_id : this.state.sprintId
-        //  }).then(() => {
-        //     this.getTasks();
-        // });
-        this.getTasks();
+        axios.post("/api/task", {
+            name: this.state.name,
+            // due_date: this.state.due_date,
+            description: this.state.description,
+            sprint_id: this.state.sprintId
+        }).then(() => {
+            this.getTasks();
+        });
     }
 
     handleOpen = () => {
@@ -97,7 +101,7 @@ class Project extends React.Component {
     };
 
     deleteTask = (task) => {
-        axios.delete("/api/task/by/" + task.id).then(()=>{
+        axios.delete("/api/task/by/" + task.id).then(() => {
             this.getTasks();
         });
     }
@@ -114,14 +118,15 @@ class Project extends React.Component {
     }
 
     updateActiveSprint = (sprintId) => {
-       this.setState({sprintId: sprintId}, () => {
-           this.getTasks();
-       });
+        this.setState({ sprintId: sprintId }, () => {
+            this.getTasks();
+        });
     }
 
     getSprints = projectId => {
         let sprintData = [];
         axios.get(`/api/sprint/${projectId}`)
+
         .then(res => {
             let today = new Date();
             res.data.map((pSprint, i) => {
@@ -130,18 +135,18 @@ class Project extends React.Component {
                     label: pSprint.name,
                     id: pSprint.id
                 })
+            this.setState({ chipData: sprintData })
             })
-        this.setState({chipData: sprintData})
-        })
-    }
+    })
+};
 
-    
+
 
     render() {
         const { direction, justify, alignItems } = this.state;
         return (
             <div style={{ paddingTop: "50px" }}>
-                <SprintSelect pastSprints={this.state.chipData} onClick={this.updateActiveSprint}/>
+                <SprintSelect pastSprints={this.state.chipData} onClick={this.updateActiveSprint} />
                 <Grid container>
                     <h1>{this.state.projName}</h1>
                     <h2>{this.state.summary}</h2>
