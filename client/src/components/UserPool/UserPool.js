@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
+// import PropTypes from 'prop-types';
+// import { withStyles } from '@material-ui/core/styles';
+// import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import TaskCard from '../utils/TaskCard/TaskCard';
 
 
-const style = {
-    gridItem: {
-        padding: 10
-    },
-    taskCard: {
-        marginTop: 5
-    }
-}
+// const style = {
+//     gridItem: {
+//         padding: 10
+//     },
+//     taskCard: {
+//         marginTop: 5
+//     }
+// }
 
 class UserPool extends Component {
     

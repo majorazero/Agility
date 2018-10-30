@@ -11,7 +11,8 @@ const Pool = (props) => {
             due={props.tasks.due_date}
             summary={props.tasks.description}
             difficulty={props.tasks.difficulty}
-            onClick={props.onClick}
+            onClickDelete={props.onClickDelete}
+            onClickAdd={props.onClickAdd}
         />
     );
 };
