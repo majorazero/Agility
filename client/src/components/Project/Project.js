@@ -82,7 +82,7 @@ class Project extends React.Component {
         // would put sprintId state in as basis for task addition
         axios.post("/api/task", {
             name: this.state.name,
-            // due_date: this.state.due_date,
+            due_date: this.state.due_date,
             description: this.state.description,
             sprint_id: this.state.sprintId
         }).then(() => {
