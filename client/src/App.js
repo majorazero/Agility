@@ -13,7 +13,7 @@ import axios from "axios";
 import notFound from "./components/utils/404/404.js";
 // import ProgressBar from "./components/utils/ProgressBar/ProgressBar";
 import './App.css';
-
+import parallax from "./components/parallax/parallax.js"
 class App extends Component {
 
   state = {
@@ -79,6 +79,7 @@ class App extends Component {
           <Route exact path='/userpool' component={UserPool} />
           <Route exact path='/sprintselect' component={SprintSelect} />
           <Route exact path='/404' component={notFound} />
+          <Route exact path='/parallax' component={parallax} />
 
         </div>
       </Router>
