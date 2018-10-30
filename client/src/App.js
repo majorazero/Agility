@@ -15,7 +15,8 @@ import './App.css';
 class App extends Component {
 
   state = {
-    loggedIn: false
+    loggedIn: false,
+    loaded: false
   }
 
   componentWillMount = () => {
@@ -35,7 +36,7 @@ class App extends Component {
           //window.location.assign("/homepage");
           //this.props.history.push("/homepage");
           //return true;
-          this.setState({loggedIn: true});
+          this.setState({loaded:true, loggedIn: true});
         });
         //if it does we'll log the user in.
       }
@@ -47,11 +48,15 @@ class App extends Component {
       //window.location.assign("/homepage");
       //this.props.history.push("/homepage");
       //return true;
-      this.setState({loggedIn: true});
+      this.setState({loaded:true, loggedIn: true});
     }
   }
 
   render() {
+    if(!this.state.loaded){
+      return null;
+    }
+
     return (
       <Router>
         <div style={{padding: "100px 50px 0 50px"}}>
