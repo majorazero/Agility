@@ -95,6 +95,14 @@ class ProjectList extends Component {
     this.setState({ open: false });
   };
 
+  handleInviteSubmit = (event) => {
+    event.preventDefault();
+    axios.post("/api/sprintMembershipWithCode",{sId: this.state.inviteCode, uId: sessionStorage.getItem("id"), token: localStorage.getItem("token")}).then((response) => {
+      console.log(response.data);
+    });
+    console.log(this.state.inviteCode);
+  }
+
   render() {
     const { direction, justify, alignItems } = this.state;
     return (
@@ -119,17 +127,7 @@ class ProjectList extends Component {
             <AddProjectLayout
             />
           </SimpleModalProjectWrapped>
-          {/* <h1>This is a project List.</h1>
-  handleInviteSubmit = (event) => {
-    event.preventDefault();
-    axios.post("/api/sprintMembershipWithCode",{sId: this.state.inviteCode, uId: sessionStorage.getItem("id"), token: localStorage.getItem("token")}).then((response) => {
-      console.log(response.data);
-    });
-    console.log(this.state.inviteCode);
-  }
-
-  render(){
-    return(
+          <h1>This is a project List.</h1>
       <div className="projList">
         <h1>This is a project List.</h1>
 
@@ -142,22 +140,11 @@ class ProjectList extends Component {
             <button>Submit</button>
           </form>
         </div>
+        </div>
 
         <div>
           {this.populate()}
         </div>
-        <form onSubmit={this.handleSubmit}>
-          <h2>Someone(Mike) might have to material-ui this into a modal/drawer for me.</h2>
-          <h2>Project Name</h2>
-          <input type="text" name="name" onChange={this.handleChange}/>
-          <h2>summary Name</h2>
-          <textarea name="summary" onChange={this.handleChange}/>
-          <h2>Due Date</h2>
-          <input type="date" name="due_date" onChange={this.handleChange}/>
-          <div>
-            <button type="Submit">Submit</button>
-          </div>
-        </form> */}
         </Grid>
       </div>
     );
