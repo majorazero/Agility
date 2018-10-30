@@ -6,42 +6,14 @@ import Grid from '@material-ui/core/Grid';
 import ContainedButtons from "../utils/Button.js";
 //import Image from "/assets/images/profileimg.png";
 
-
-
-
-
 class Landing extends Component {
-
-  componentWillMount() {
-    //obviously we'll have to be updated once i get the database going.
-    console.log(sessionStorage.getItem("id"), localStorage.getItem("token"));
-    //if sessionStorage doesn't exist
-    if (sessionStorage.getItem("id") === null) {
-      console.log("no session storage!");
-      //we check if token exist, it does
-      if (localStorage.getItem("token") !== null) {
-        console.log("checking database if token exists");
-        axios.post("/api/tokenLogin", {
-          token: localStorage.getItem("token")
-        }).then((response) => {
-          console.log(response);
-          sessionStorage.setItem("id", response.data.id);
-          window.location.assign("/homepage");
-        });
-        //if it does we'll log the user in.
-        //window.location.assign("/homepage");
-      }
-      //if no token exists, they have to login.
-    }
-    else {
-      //you have a session you're logged in
-      console.log("Welcome back!");
-      window.location.assign("/homepage");
-    }
+  state = {
+    loading: true
   }
-
+  componentDidMount = () => {
+    this.setState({loading: false});
+  }
   render() {
-
     return (
       <div style={{paddingTop: "50px"}}>
         <Grid container>
