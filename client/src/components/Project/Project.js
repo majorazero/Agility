@@ -6,6 +6,8 @@ import { Grid } from "@material-ui/core";
 import ButtonSizes from "../utils/FAB.js";
 import SimpleModalWrapped from "../utils/Modal";
 import AddTaskLayout from "../utils/AddTaskLayout.js";
+import SprintSelect from './SprintSelect';
+import UserPool from './UserPool';
 
 class Project extends React.Component {
 
@@ -17,15 +19,17 @@ class Project extends React.Component {
         justify: 'flex-start',
         alignItems: 'flex-start',
         // temp id set
-        sprintId: "1",
+        sprintId: 2,
         open: false,
         name: "",
         due_date: "",
-        description: ""
+        description: "", 
+        chipData: []
     }
 
     componentDidMount() {
         this.getTasks();
+        this.getSprints(1);
     }
 
     handleChange = name => event => {
@@ -86,17 +90,45 @@ class Project extends React.Component {
                 this.getTasks();
             })
         });
-
-
     }
+
+    updateActiveSprint = (sprintId) => {
+       this.setState({sprintId: sprintId}, () => {
+           this.getTasks();
+       });
+    }
+
+    getSprints = projectId => {
+        let sprintData = [];
+        axios.get(`/api/sprint/${projectId}`)
+        .then(res => {
+            let today = new Date();
+            let pastSprints = res.data.filter(sprint => {
+                let endDate = new Date(sprint.end_date + "T00:00:00");
+                return(
+                    today > endDate
+                )
+            })
+            .map((pSprint, i) => {
+                sprintData.push({
+                    key: i, 
+                    label: pSprint.name,
+                    id: pSprint.id
+                })
+            })
+        this.setState({chipData: sprintData})
+        })
+    }
+
+    
 
     render() {
         const { direction, justify, alignItems } = this.state;
         return (
             <div style={{ paddingTop: "50px" }}>
+                <SprintSelect pastSprints={this.state.chipData} onClick={this.updateActiveSprint}/>
                 <Grid container>
-                    <h1>This is the project page.</h1>
-                    <Grid item xs={12} style={{ padding: "10px" }}>
+                    <Grid item xs={6} style={{ padding: "10px" }}>
                         <h2>This is pool.</h2>
 
                         <Grid
@@ -131,6 +163,9 @@ class Project extends React.Component {
                             })}
 
                         </Grid>
+                    </Grid>
+                    <Grid item xs={6} style={{ padding: "10px" }}>
+                        <UserPool sprintId={this.state.sprintId}></UserPool>
                     </Grid>
                     <br />
                     <div><Link to="/">Back to landing page.</Link></div>

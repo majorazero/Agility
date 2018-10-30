@@ -18,20 +18,30 @@ import TaskCard from '../utils/TaskCard/TaskCard';
 
 class UserPool extends Component {
     
-    state={
-        users: [],
-        tasks: []
-    }
+    constructor(props) {
+        super(props);
+    
+        this.state = {
+            users: [],
+            tasks: []
+        };
+      }
+
+    // state={
+    //     users: [],
+    //     tasks: []
+    // }
 
     componentDidMount(){
-        this.getUsers(1);
+        console.log(this.props.sprintId);
+        this.getUsers(this.props.sprintId);
     }
 
     getUsers = (sprintId) => {
         axios.post('/api/allMemberInSprint', {sprintId: sprintId})
         .then(res => {
             console.log(res.data)
-            this.setState({users: res.data}, () => this.getTasks(1))
+            this.setState({users: res.data}, () => this.getTasks(sprintId))
         })
     }
 
@@ -47,7 +57,7 @@ class UserPool extends Component {
         return(
             <Grid container spacing={24}>
                 {this.state.users.map((user, i) => (
-                    <Grid item key={i}>
+                    <Grid key={i} item>
                       <p>{user.User.first_name}</p>
                       {this.state.tasks.filter(task => task.assigned_id === i+1).map(fTask => (
                           <TaskCard title={fTask.name}></TaskCard>
