@@ -38,7 +38,7 @@ function SimpleExpansionPanel(props) {
               {props.due}
           </Typography>
           <ContainedButtons
-            name="Add to Your Pool"
+            name="Select"
             color="primary"
             onClick={props.onClickAdd}
           />

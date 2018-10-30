@@ -50,15 +50,19 @@ class Project extends React.Component {
         });
     };
 
-    addTask = () => {
+    addTask = (event) => {
+        event.preventDefault();
 
         console.log(this.state.name)
         console.log(this.state.due_date)
         console.log(this.state.description)
         // would put sprintId state in as basis for task addition
-        // axios.post("/api/task", event.target, { sprint_id : this.state.sprintId }
-
-        // })
+        // axios.post("/api/task", event.target, { 
+        //     sprint_id : this.state.sprintId
+        //  }).then(() => {
+        //     this.getTasks();
+        // });
+        this.getTasks();
     }
 
     handleOpen = () => {
