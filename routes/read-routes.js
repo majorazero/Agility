@@ -62,6 +62,16 @@ module.exports = function(app) {
         })
     });
 
+    app.get("/api/task/assigned/:assignedId", (req, res) => {
+        db.Task.findAll({
+            where: {
+                assigned_id: req.params.assignedId
+            }
+        }).then(dbSprint => {
+            res.json(dbSprint);
+        })
+    })
+
     app.get("/api/tasks/users/:userId", (req, res) => {
         db.Task.findAll({
             where: {
