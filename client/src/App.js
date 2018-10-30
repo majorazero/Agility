@@ -43,6 +43,7 @@ class App extends Component {
         //if it does we'll log the user in.
       }
       //if no token exists, they have to login.
+      this.setState({loaded: true});
     }
     else {
       //you have a session you're logged in
