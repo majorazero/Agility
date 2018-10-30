@@ -116,22 +116,10 @@ class ProjectList extends Component {
             <AddProjectLayout
             />
           </SimpleModalProjectWrapped>
-          {/* <h1>This is a project List.</h1>
-        <div>
-          {this.populate()}
-        </div>
-        <form onSubmit={this.handleSubmit}>
-          <h2>Someone(Mike) might have to material-ui this into a modal/drawer for me.</h2>
-          <h2>Project Name</h2>
-          <input type="text" name="name" onChange={this.handleChange}/>
-          <h2>summary Name</h2>
-          <textarea name="summary" onChange={this.handleChange}/>
-          <h2>Due Date</h2>
-          <input type="date" name="due_date" onChange={this.handleChange}/>
+          <h1>This is a project List.</h1>
           <div>
-            <button type="Submit">Submit</button>
+            {this.populate()}
           </div>
-        </form> */}
         </Grid>
       </div>
     );
