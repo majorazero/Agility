@@ -37,6 +37,12 @@ class UserPool extends Component {
         this.getUsers(this.props.sprintId);
     }
 
+    componentDidUpdate(prevProps){
+        if(prevProps.sprintId !== this.props.sprintId){
+            this.getUsers(this.props.sprintId);
+        }
+    }
+
     getUsers = (sprintId) => {
         axios.post('/api/allMemberInSprint', {sprintId: sprintId})
         .then(res => {
