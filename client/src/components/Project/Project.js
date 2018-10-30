@@ -30,9 +30,9 @@ class Project extends React.Component {
 
     handleChange = name => event => {
         this.setState({
-          [name]: event.target.value,
+            [name]: event.target.value,
         });
-      };
+    };
 
     getTasks = () => {
 
@@ -40,9 +40,9 @@ class Project extends React.Component {
         // below we'll just place the variable in where we grab the dynamically updated 'project' that we're on depending on user choice
         axios.get("/api/task/" + this.state.sprintId, {
             params: {
-              assigned_id: null
+                assigned_id: null
             }
-          }).then((res) => {
+        }).then((res) => {
 
             this.setState({
                 tasks: res.data
@@ -50,9 +50,11 @@ class Project extends React.Component {
         });
     };
 
-    addTask = (event) => {
-        
-        console.log("poop")
+    addTask = () => {
+
+        console.log(this.state.name)
+        console.log(this.state.due_date)
+        console.log(this.state.description)
         // would put sprintId state in as basis for task addition
         // axios.post("/api/task", event.target, { sprint_id : this.state.sprintId }
 
@@ -67,11 +69,25 @@ class Project extends React.Component {
 
     handleClose = () => {
         this.setState({ open: false });
-      };
+    };
 
     deleteTask = (task) => {
+        axios.delete("/api/task/by/" + task.id).then(()=>{
+            this.getTasks();
+        });
+    }
 
-        axios.delete("/api/task/by/" + task.id);
+    assignTask = (task) => {
+        axios.post("/api/decrypt", { token: localStorage.getItem("token"), id: sessionStorage.getItem("id") }).then((response) => {
+            let user = response.data;
+
+            // console.log(user)
+            axios.post("/api/task/" + task.id + "/" + user).then(() => {
+                this.getTasks();
+            })
+        });
+
+
     }
 
     render() {
@@ -90,25 +106,26 @@ class Project extends React.Component {
                             justify={justify}
                         >
                             <ButtonSizes
-                            onClick={this.handleOpen}
+                                onClick={this.handleOpen}
                             />
                             <SimpleModalWrapped
-                            open={this.state.open}
-                            onClose={this.handleClose}
-                            name="Add a New Task ..."
-                            onSubmit={this.addTask}
-                            onChange={this.handleChange}
+                                open={this.state.open}
+                                onClose={this.handleClose}
+                                name="Add a New Task ..."
+                                onSubmit={this.addTask}
+                                onChange={this.handleChange}
                             >
-                            <AddTaskLayout 
-                            />
-                        </SimpleModalWrapped>
+                                <AddTaskLayout
+                                />
+                            </SimpleModalWrapped>
                             {this.state.tasks.map((task) => {
                                 return (
                                     <Pool
                                         key={task.id}
                                         id={this.key}
                                         tasks={task}
-                                        onClick={this.deleteTask.bind(this, task)}
+                                        onClickDelete={this.deleteTask.bind(this, task)}
+                                        onClickAdd={this.assignTask}
                                     />
                                 );
                             })}

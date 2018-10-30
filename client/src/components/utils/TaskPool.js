@@ -38,9 +38,14 @@ function SimpleExpansionPanel(props) {
               {props.due}
           </Typography>
           <ContainedButtons
+            name="Add to Your Pool"
+            color="primary"
+            onClick={props.onClickAdd}
+          />
+          <ContainedButtons
             name="Delete"
             color="secondary"
-            onClick={props.onClick}
+            onClick={props.onClickDelete}
           />
         </ExpansionPanelDetails>
       </ExpansionPanel>
