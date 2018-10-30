@@ -54,13 +54,13 @@ class UserPool extends Component {
     }
 
     render(){
-        console.log(this.state.users, this.state.tasks)
+        console.log(this.state.users)
         return(
             <Grid container spacing={24}>
                 {this.state.users.map((user, i) => (
                     <Grid key={i} item>
                       <p>{user.User.first_name}</p>
-                      {this.state.tasks.filter(task => task.assigned_id === i+1).map(fTask => (
+                      {this.state.tasks.filter(task => task.assigned_id === user.User.id).map(fTask => (
                           <TaskCard title={fTask.name} titleSize="subtitle2" subtitleSize='caption'></TaskCard>
                       ))}
                     </Grid>

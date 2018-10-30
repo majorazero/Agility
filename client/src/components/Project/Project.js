@@ -124,13 +124,7 @@ class Project extends React.Component {
         axios.get(`/api/sprint/${projectId}`)
         .then(res => {
             let today = new Date();
-            res.data.filter(sprint => {
-                let endDate = new Date(sprint.end_date + "T23:59:59");
-                return(
-                    today > endDate
-                )
-            })
-            .map((pSprint, i) => {
+            res.data.map((pSprint, i) => {
                 sprintData.push({
                     key: i, 
                     label: pSprint.name,
