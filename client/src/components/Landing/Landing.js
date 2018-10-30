@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import Grid from '@material-ui/core/Grid';
 // import Button from '@material-ui/core/Button';
-import ContainedButtons from "../utils/Button.js"
-import Image from '../../assets/images/background.jpg';
+import ContainedButtons from "../utils/Button.js";
+//import Image from "/assets/images/profileimg.png";
 
 
 
@@ -52,7 +52,7 @@ class Landing extends Component {
               justify="center"
               alignItems="stretch"
               spacing={24}
-              style={{ backgroundImage: `url(${Image})`, resizeMode: 'cover', height: "660px", padding: "10px" }}
+              style={{ backgroundImage: `url("/assets/images/background.jpg")`, resizeMode: 'cover', height: "660px", padding: "10px" }}
             >
 
               <h1>This is a landing page.</h1>

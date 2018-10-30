@@ -7,13 +7,13 @@ var sequelize = new Sequelize('database', 'username', 'password', {
 
 module.exports = function(app){
     app.get('/api/users/project/:projectId', (req, res)=> {
-        db.sequelize.query(`SELECT users.email as user_email, projects.name as project, sprints.name FROM users INNER JOIN tasks ON tasks.assigned_id = users.id INNER JOIN sprints ON sprints.id = tasks.sprint_id INNER JOIN projects on projects.id = sprints.project_id AND projects.id=${req.params.projectId}`, { type: sequelize.QueryTypes.SELECT}).then(dbProjectUsers => {
+        db.sequelize.query(`SELECT DISTINCT users.email as user_email, users.id AS user_id, projects.name as project, sprints.name AS sprint FROM users INNER JOIN tasks ON tasks.assigned_id = users.id INNER JOIN sprints ON sprints.id = tasks.sprint_id INNER JOIN projects on projects.id = sprints.project_id AND projects.id=${req.params.projectId}`, { type: sequelize.QueryTypes.SELECT}).then(dbProjectUsers => {
             res.json(dbProjectUsers)
         })
     });
 
     app.get('/api/users/sprint/:sprintId', (req, res)=> {
-        db.sequelize.query(`SELECT users.email as user_email, sprints.name FROM users INNER JOIN tasks ON tasks.assigned_id = users.id INNER JOIN sprints ON sprints.id = tasks.sprint_id AND sprints.id=${req.params.sprintId}`, { type: sequelize.QueryTypes.SELECT}).then(dbSprintUser => {
+        db.sequelize.query(`SELECT DISTINCT users.email as user_email, users.id AS user_id, sprints.name AS sprint FROM users INNER JOIN tasks ON tasks.assigned_id = users.id INNER JOIN sprints ON sprints.id = tasks.sprint_id AND sprints.id=${req.params.sprintId}`, { type: sequelize.QueryTypes.SELECT}).then(dbSprintUser => {
             res.json(dbSprintUser)
         })
     });
