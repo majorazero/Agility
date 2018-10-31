@@ -16,21 +16,21 @@ class ActiveTasks extends Component {
     };
 
     componentDidMount(){
-        this.getTasks(1);    
-        this.getSprints(1);    
+        this.getTasks(1);     
     }
 
     getTasks = (userId) => {
         axios.get(`/api/tasks/users/${userId}`)
         .then(res => {
             console.log(res.data)
-            this.setState({tasks: res.data})
+            this.setState({tasks: res.data}, () => this.getSprints(userId))
         })
     };
 
     getSprints = (userId) => {
         axios.post('/api/allSprintsForMember', {userId})
         .then(res => {
+            console.log(res.data)
             this.setState({sprints: res.data})
         })
     }
