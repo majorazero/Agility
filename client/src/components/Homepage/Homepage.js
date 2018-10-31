@@ -18,12 +18,6 @@ class Homepage extends Component {
     }
   }
 
-  logOut = () => {
-    //logging out means clearing out session storage and localstorage
-    localStorage.clear();
-    sessionStorage.clear();
-  }
-
   decrypt = () => {
     axios.post("/api/decrypt",{token: localStorage.getItem("token"), id: sessionStorage.getItem("id")}).then((response)=>{
       console.log(response.data);
@@ -46,9 +40,8 @@ class Homepage extends Component {
               <ProjectList />
             </Grid>
           </Grid>
-        <Link onClick={this.logOut} to="/">Logout.</Link>
       </Grid>
-        
+
     );
   }
 }

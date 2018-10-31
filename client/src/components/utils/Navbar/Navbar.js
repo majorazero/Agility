@@ -22,7 +22,6 @@ const styles = {
 };
 
 
-
 function ButtonAppBar(props) {
   const { classes } = props;
   return (
@@ -36,7 +35,11 @@ function ButtonAppBar(props) {
             Trello 2.0
           </Typography>
           {sessionStorage.getItem("id") ? null : <Button href = "/register" color="inherit">Sign Up</Button>}
-          {sessionStorage.getItem("id") ? null : <Button href = "/login" color="inherit">Login</Button>}
+          {sessionStorage.getItem("id") ? <Button onClick={()=>{
+            sessionStorage.clear();
+            localStorage.clear();
+            window.location.assign("/");
+          }}  color="inherit">Logout</Button> : <Button href = "/login" color="inherit">Login</Button>}
         </Toolbar>
       </AppBar>
     </div>

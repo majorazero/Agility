@@ -13,7 +13,7 @@ import axios from "axios";
 import notFound from "./components/utils/404/404.js";
 // import ProgressBar from "./components/utils/ProgressBar/ProgressBar";
 import './App.css';
-import parallax from "./components/parallax/parallax.js"
+//import parallax from "./components/parallax/parallax.js"
 class App extends Component {
 
   state = {
