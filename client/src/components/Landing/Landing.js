@@ -33,15 +33,15 @@ const theme = createMuiTheme({
 class Landing extends Component {
   render() {
     return (
-      <div 
-       className="parallax"
-      style={{
-        paddingTop: "50px",
-        overflowX: "hidden",
-        backgroundImage: `url("/assets/images/background.png")`,
-        resizeMode: 'cover',
-        height: "2500px"
-      }} >
+      <div
+        className="parallax"
+        style={{
+          paddingTop: "50px",
+          overflowX: "hidden",
+          backgroundImage: `url("/assets/images/background.png")`,
+          resizeMode: 'cover',
+          height: "2500px"
+        }} >
         <Grid container>
           <Grid item xs={12} style={{ padding: "10px" }}>
             <Grid
@@ -94,19 +94,19 @@ class Landing extends Component {
               justify="center"
               alignItems="stretch"
               style={{
-                padding: "10px",
-                height: "450px",
+                padding: "25px 50px 25px 50px",
+                height: "500px",
                 background: "whitesmoke",
-                fontSize: "25px",
                 position: "relative"
               }}
               spacing={24}
             >
-              <p>
-                lorem ipsum dolor sit amet, quo molestie reprimique te. Ea per tota erant consequuntur, quodsi oportere ut mea. At vero convenire vel, ei est laoreet singulis, nominati abhorreant delicatissimi eos an. Officiis adipisci sed ei. In utamur intellegam est, purto assueverit eu nam, no quas etiam disputationi duo.
-          <br />
-                <br />
-              </p>
+              <Typography variant="h6" gutterBottom color="textSecondary" align="center">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Morbi tristique senectus et netus et malesuada. Dictumst vestibulum rhoncus est pellentesque elit. Risus ultricies tristique nulla aliquet enim. Urna cursus eget nunc scelerisque viverra mauris in. Aliquam malesuada bibendum arcu vitae elementum. Mattis vulputate enim nulla aliquet porttitor lacus luctus accumsan. Fringilla phasellus faucibus scelerisque eleifend donec pretium. A iaculis at erat pellentesque. Pharetra magna ac placerat vestibulum. Mi quis hendrerit dolor magna eget est.
+<br />
+<br />
+                Quisque id diam vel quam elementum pulvinar etiam non quam. Euismod in pellentesque massa placerat duis ultricies lacus sed. Ante metus dictum at tempor commodo. Nulla facilisi nullam vehicula ipsum a arcu cursus vitae. Fermentum leo vel orci porta non pulvinar. At erat pellentesque adipiscing commodo. Diam maecenas ultricies mi eget. Elit at imperdiet dui accumsan sit amet. Suscipit tellus mauris a diam maecenas. At tempor commodo ullamcorper a lacus. Duis at tellus at urna condimentum. Arcu non sodales neque sodales ut. Pellentesque nec nam aliquam sem et. Vitae justo eget magna fermentum. Vitae turpis massa sed elementum tempus.
+              </Typography>
             </Grid>
           </Grid>
         </Grid>
