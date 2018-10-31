@@ -134,7 +134,7 @@ class ProjectList extends Component {
                 maxWidth: 1200,
                 overflow: 'hidden'}}>
             <GridList style={{
-              flexWrap: 'nowrap', 
+              flexWrap: 'nowrap',
               transform: 'translateZ(0)'}}>
               {this.populate()}
             </GridList>
@@ -152,7 +152,7 @@ class ProjectList extends Component {
             <button>Submit</button>
           </form>
         </div>
-        </div>          
+        </div>
         </Grid>
       </div>
     );
