@@ -15,12 +15,17 @@ const ProjectListTab = (props) => {
         <GridListTileBar
           title={props.name}
           style={{background:'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)'}}
+          actionIcon={
+            <IconButton onClick={props.onProjectPress}>
+              Go
+            </IconButton>}
         />
       </GridListTile>
     //   <h1>{props.name}</h1>
     //   <h2>{props.summary}</h2>
+    // <button onClick={props.onProjectPress}>Go to project.</button>
+
     //   <h2>Due Date: {props.duedate}</h2>
-      // <button onClick={props.onProjectPress}>Go to project.</button>
     // </div>
   );
 }
