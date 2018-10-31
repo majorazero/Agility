@@ -7,6 +7,8 @@ import SimpleModalProjectWrapped from "../utils/ModalProject.js";
 import AddProjectLayout from "../utils/AddProjectLayout.js";
 import ButtonSizes from "../utils/FAB.js";
 import GridList from '@material-ui/core/GridList';
+import MouseOverPopover from '../utils/popover.js';
+
 
 
 class ProjectList extends Component {
@@ -155,9 +157,11 @@ class ProjectList extends Component {
                 </GridList>
               </div>
             </Grid>
+            <MouseOverPopover>
             <ButtonSizes
               onClick={this.handleOpen}
             />
+            </MouseOverPopover>
             <h2>Join Sprint with Invite Code</h2>
 
             <div className="invCodeDiv">

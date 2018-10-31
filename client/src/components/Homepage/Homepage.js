@@ -6,6 +6,8 @@ import ProfileCard from "./ProfileCard/profilecard.js";
 import ActiveTasks from "./ActiveTasks/activetasks";
 import Grid from '@material-ui/core/Grid';
 import ButtonAppBar from "../utils/Navbar/Navbar.js";
+import SimpleBottomNavigation from "../utils/Footer/Footer.js";
+
 
 //doesn't has to be
 
@@ -42,7 +44,7 @@ class Homepage extends Component {
               height: 300,
               overflow: "auto" , 
               marginRight: 140, 
-              border: "5px solid lightgrey", 
+              border: "0.5px solid rgb(23, 23, 23, 0.2) ", 
               borderRadius: 7,
               boxShadow: "4px 4px 5px 1px rgb(23, 23, 23, 0.5)",
               }}>
@@ -56,6 +58,7 @@ class Homepage extends Component {
           </Grid>
         </Grid>
         </Grid>
+        <SimpleBottomNavigation/>
       </div>
 
     );

@@ -27,6 +27,7 @@ const styles = theme => ({
 function ButtonSizes(props) {
   const { classes } = props;
   return (
+    
         <Button
         style={getFabStyle()}
         variant="fab" 
