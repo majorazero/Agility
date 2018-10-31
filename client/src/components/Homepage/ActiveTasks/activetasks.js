@@ -12,7 +12,8 @@ class ActiveTasks extends Component {
 
     state = {
         sprints: [],
-        tasks: []
+        tasks: [], 
+        data: []
     };
 
     componentDidMount(){
@@ -31,23 +32,44 @@ class ActiveTasks extends Component {
         axios.post('/api/allSprintsForMember', {userId})
         .then(res => {
             console.log(res.data)
-            this.setState({sprints: res.data})
+            this.setState({sprints: res.data}, () => this.groupSprintsTasks())
         })
+    }
+
+    groupSprintsTasks = () => {
+        let joinedData = [];
+        this.state.sprints.forEach(sprint => {
+            let obj = {
+                name: sprint.Sprint.name,
+                id: sprint.Sprint.id, 
+                tasks: []
+            }
+            joinedData.push(obj)
+        })
+        this.state.tasks.forEach(task => {
+            for(let i=0; i<joinedData.length; i++){
+                if(task.sprint_id === joinedData[i].id){
+                    joinedData[i].tasks.push(task);
+                    break;
+                }
+            }
+        })
+        let filteredData = joinedData.filter(object => object.tasks.length > 0)
+        this.setState({data: filteredData})
     }
 
     render(){
         return(
             <div>
                 <List subheader={<li />}>
-                    {this.state.sprints.map((sprint, i) => (
+                    {this.state.data.map((sprint, i) => (
                         <li key={i}>
                             
-                                <ListSubheader style={{backgroundColor: 'white'}}>{sprint.Sprint.name}</ListSubheader>
-                                {this.state.tasks.filter(task => task.sprint_id === sprint.Sprint.id)
-                                .map((ftask, findex) => (
-                                    <ListItem key={findex}>
+                                <ListSubheader style={{backgroundColor: 'white'}}>{sprint.name}</ListSubheader>
+                                {sprint.tasks.map((task, index) => (
+                                    <ListItem key={index}>
                                         <Pool
-                                            tasks={ftask}
+                                            tasks={task}
                                         />
                                     </ListItem>
                                 ))
