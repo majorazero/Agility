@@ -52,7 +52,8 @@ module.exports = function(app) {
         db.Sprint.findAll({
             where: {
                 project_id:req.params.projectId
-            }
+            },
+            order: [["end_date","DESC"]]
         }).then(dbSprint => {
             res.json(dbSprint);
         })
@@ -72,7 +73,7 @@ module.exports = function(app) {
         db.Task.findAll({
             where: {
                 assigned_id: req.params.userId
-            }, 
+            },
             order: [ ['sprint_id', 'DESC' ] ]
         }).then(dbTasks => {
             res.json(dbTasks);

@@ -17,7 +17,12 @@ class ActiveTasks extends Component {
     };
 
     componentDidMount(){
-        this.getTasks(1);     
+      axios.post("/api/decrypt",{
+        id: sessionStorage.getItem("id"),
+        token: localStorage.getItem("token")
+      }).then((response) => {
+        this.getTasks(response.data);
+      });
     }
 
     getTasks = (userId) => {
@@ -74,8 +79,8 @@ class ActiveTasks extends Component {
                                     </ListItem>
                                 ))
                                 }
-                            
-                        </li>    
+
+                        </li>
                     ))}
                 </List>
                 {/* <h3>Active Tasks Pane</h3>
