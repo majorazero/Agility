@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {BrowserRouter as Router, Route, Redirect} from "react-router-dom";
+import {BrowserRouter as Router, Route, Redirect, Switch} from "react-router-dom";
 import Login from "./components/Login/Login.js";
 import Landing from "./components/Landing/Landing.js";
 import Homepage from "./components/Homepage/Homepage.js";
@@ -50,7 +50,7 @@ class App extends Component {
       this.setState({loaded:true, loggedIn: true});
     }
   }
-
+//  {(this.location.pathname === "/404")? null:<ButtonAppBar />}
   render() {
     if(!this.state.loaded){
       return null;
@@ -58,18 +58,21 @@ class App extends Component {
     return (
       <Router>
         <div>
-        {(window.location.href.indexOf("404") > -1)? null:<ButtonAppBar />}
-          <Route exact path ="/" render={() => (
-              (this.state.loggedIn !== true) ? (<Landing />) : (<Redirect to="/homepage" />)
-            )} />
-          <Route exact path="/homepage" component={Homepage} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/register" component={Register} />
-          <Route exact path="/project/:id" component={Project} />
-          {/* <Route exact path='/tasks' component={ActiveTasks} /> */}
-          <Route exact path='/userpool' component={UserPool} />
-          <Route exact path='/sprintselect' component={SprintSelect} />
-          <Route exact path='/404' component={notFound} />
+          <ButtonAppBar />
+          <Switch>
+            <Route exact path ="/" render={() => (
+                (this.state.loggedIn !== true) ? (<Landing />) : (<Redirect to="/homepage" />)
+              )} />
+            <Route exact path="/homepage" component={Homepage} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/project/:id" component={Project} />
+            {/* <Route exact path='/tasks' component={ActiveTasks} /> */}
+            <Route exact path='/userpool' component={UserPool} />
+            <Route exact path='/sprintselect' component={SprintSelect} />
+            <Route exact path='/404' component={notFound} />
+            <Route component={notFound} />
+          </Switch>
           {/* <Route exact path='/parallax' component={parallax} /> */}
 
         </div>
