@@ -5,7 +5,6 @@ import Landing from "./components/Landing/Landing.js";
 import Homepage from "./components/Homepage/Homepage.js";
 import Register from "./components/Register/Register.js";
 import Project from "./components/Project/Project.js";
-import ButtonAppBar from "./components/utils/Navbar/Navbar.js";
 // import ActiveTasks from "./components/ActiveTasks/activetasks";
 import UserPool from "./components/Project/UserPool";
 import SprintSelect from "./components/Project/SprintSelect";
@@ -58,7 +57,6 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <ButtonAppBar />
           <Switch>
             <Route exact path ="/" render={() => (
                 (this.state.loggedIn !== true) ? (<Landing />) : (<Redirect to="/homepage" />)

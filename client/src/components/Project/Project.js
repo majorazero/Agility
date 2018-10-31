@@ -8,6 +8,7 @@ import SimpleModalWrapped from "../utils/Modal";
 import AddTaskLayout from "../utils/AddTaskLayout.js";
 import SprintSelect from './SprintSelect';
 import UserPool from './UserPool';
+import ButtonAppBar from "../utils/Navbar/Navbar.js";
 
 class Project extends React.Component {
 
@@ -53,7 +54,7 @@ class Project extends React.Component {
             this.getSprints(this.state.projectId);
             console.log(this.state);
         }).catch((err) => {
-          window.location.assign("/404");
+            window.location.assign("/404");
         });
     }
 
@@ -146,6 +147,7 @@ class Project extends React.Component {
     };
 
     getSprints = projectId => {
+
       let sprintData = [];
       axios.get(`/api/sprint/${projectId}`)
       .then(res => {
@@ -174,73 +176,77 @@ class Project extends React.Component {
       });
     };
 
-      inviteMember = () => {
+    inviteMember = () => {
         //we'll pass the sprint id as an encrypted id
-        axios.post("/api/encrypt",{
-          id: this.state.sprintId.toString(),
-          token: "invite"
-        }).then((response)=>{
-          console.log(response.data);
-          this.setState({inviteCode: response.data});
+        axios.post("/api/encrypt", {
+            id: this.state.sprintId.toString(),
+            token: "invite"
+        }).then((response) => {
+            console.log(response.data);
+            this.setState({ inviteCode: response.data });
         });
-      }
+    }
 
     render() {
         const { direction, justify, alignItems } = this.state;
         return (
-            <div style={{ paddingTop: "100px" }}>
-                <SprintSelect pastSprints={this.state.chipData} onClick={this.updateActiveSprint} />
-                <Grid container>
-                    <h1>{this.state.projName}</h1>
-                    <h2>{this.state.summary}</h2>
-                    <h3>{this.state.projDueDate}</h3>
-                    <Grid item xs={6} style={{ padding: "10px" }}>
-                        <h2>This is pool.</h2>
+            <div>
+                <ButtonAppBar />
+                <div style={{ paddingTop: "100px" }}>
+                    <SprintSelect pastSprints={this.state.chipData} onClick={this.updateActiveSprint} />
+                    <Grid container>
+                        <h1>{this.state.projName}</h1>
+                        <h2>{this.state.summary}</h2>
+                        <h3>{this.state.projDueDate}</h3>
+                        <Grid item xs={6} style={{ padding: "10px" }}>
+                            <h2>This is pool.</h2>
 
-                        <div>
-                          {this.state.inviteCode}
-                        </div>
-                        <button onClick = {this.inviteMember}>Invite Code</button>
+                            <div>
+                                {this.state.inviteCode}
+                            </div>
+                            <button onClick={this.inviteMember}>Invite Code</button>
 
-                        <Grid
-                            container
-                            alignItems={alignItems}
-                            direction={direction}
-                            justify={justify}
-                        >
-                            <ButtonSizes
-                                onClick={this.handleOpen}
-                            />
-                            <SimpleModalWrapped
-                                open={this.state.open}
-                                onClose={this.handleClose}
-                                name="Add a New Task ..."
-                                onSubmit={this.addTask}
-                                onChange={this.handleChange}
+                            <Grid
+                                container
+                                alignItems={alignItems}
+                                direction={direction}
+                                justify={justify}
                             >
-                                <AddTaskLayout
+                                <ButtonSizes
+                                    onClick={this.handleOpen}
                                 />
-                            </SimpleModalWrapped>
-                            {this.state.tasks.map((task) => {
-                              return (
-                                  <Pool
-                                    key={task.id}
-                                    id={this.key}
-                                    tasks={task}
-                                    onClickDelete={this.deleteTask.bind(this, task)}
-                                    onClickAdd={this.assignTask.bind(this, task)}
-                                  />
-                                );
-                            })}
+                                <SimpleModalWrapped
+                                    open={this.state.open}
+                                    onClose={this.handleClose}
+                                    name="Add a New Task ..."
+                                    onSubmit={this.addTask}
+                                    onChange={this.handleChange}
+                                >
+                                    <AddTaskLayout
+                                    />
+                                </SimpleModalWrapped>
+                                {this.state.tasks.map((task) => {
+                                    return (
+                                        <Pool
+                                            key={task.id}
+                                            id={this.key}
+                                            tasks={task}
+                                            onClickDelete={this.deleteTask.bind(this, task)}
+                                            onClickAdd={this.assignTask.bind(this, task)}
+                                        />
+                                    );
+                                })}
+
+                            </Grid>
 
                         </Grid>
+                        <Grid item xs={6} style={{ padding: "10px" }}>
+                            <UserPool sprintId={this.state.sprintId}></UserPool>
+                        </Grid>
+                        <br />
+                        <div><Link to="/homepage">Back to home page.</Link></div>
                     </Grid>
-                    <Grid item xs={6} style={{ padding: "10px" }}>
-                        <UserPool sprintId={this.state.sprintId}></UserPool>
-                    </Grid>
-                    <br />
-                    <div><Link to="/homepage">Back to home page.</Link></div>
-                </Grid>
+                </div>
             </div>
         );
     }
