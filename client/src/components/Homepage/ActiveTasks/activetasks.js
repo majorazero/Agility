@@ -16,7 +16,12 @@ class ActiveTasks extends Component {
     };
 
     componentDidMount(){
-        this.getTasks(1);     
+      axios.post("/api/decrypt",{
+        id: sessionStorage.getItem("id"),
+        token: localStorage.getItem("token")
+      }).then((response) => {
+        this.getTasks(response.data);
+      });
     }
 
     getTasks = (userId) => {
@@ -41,7 +46,7 @@ class ActiveTasks extends Component {
                 <List subheader={<li />}>
                     {this.state.sprints.map((sprint, i) => (
                         <li key={i}>
-                            
+
                                 <ListSubheader style={{backgroundColor: 'white'}}>{sprint.Sprint.name}</ListSubheader>
                                 {this.state.tasks.filter(task => task.sprint_id === sprint.Sprint.id)
                                 .map((ftask, findex) => (
@@ -52,8 +57,8 @@ class ActiveTasks extends Component {
                                     </ListItem>
                                 ))
                                 }
-                            
-                        </li>    
+
+                        </li>
                     ))}
                 </List>
                 {/* <h3>Active Tasks Pane</h3>
