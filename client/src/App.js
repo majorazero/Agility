@@ -35,39 +35,30 @@ class App extends Component {
         }).then((response) => {
           console.log(response);
           sessionStorage.setItem("id", response.data.id);
-          //window.location.assign("/homepage");
-          //this.props.history.push("/homepage");
-          //return true;
           this.setState({loaded:true, loggedIn: true});
         });
         //if it does we'll log the user in.
       }
       //if no token exists, they have to login.
-      this.setState({loaded: true});
+      else{
+        this.setState({loaded: true});
+      }
     }
     else {
       //you have a session you're logged in
       console.log("Welcome back!");
-      //window.location.assign("/homepage");
-      //this.props.history.push("/homepage");
-      //return true;
       this.setState({loaded:true, loggedIn: true});
     }
-    this.setState({loaded: true});
   }
 
   render() {
     if(!this.state.loaded){
       return null;
     }
-
-
-
     return (
-      // style={{padding: "100px 50px 0 50px"}}
       <Router>
         <div>
-        {window.location.href.includes("404")? null:<ButtonAppBar />}
+        {(window.location.href.indexOf("404") > -1)? null:<ButtonAppBar />}
           <Route exact path ="/" render={() => (
               (this.state.loggedIn !== true) ? (<Landing />) : (<Redirect to="/homepage" />)
             )} />

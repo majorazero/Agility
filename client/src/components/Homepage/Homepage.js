@@ -18,12 +18,6 @@ class Homepage extends Component {
     }
   }
 
-  decrypt = () => {
-    axios.post("/api/decrypt",{token: localStorage.getItem("token"), id: sessionStorage.getItem("id")}).then((response)=>{
-      console.log(response.data);
-    });
-  }
-
   render(){
     return (
       <Grid container spacing = {8} style={{marginTop: 100}}>

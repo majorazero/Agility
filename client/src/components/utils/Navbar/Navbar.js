@@ -32,7 +32,7 @@ function ButtonAppBar(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" color="inherit" className={classes.grow}>
-            Trello 2.0
+            Agility
           </Typography>
           {sessionStorage.getItem("id") ? null : <Button href = "/register" color="inherit">Sign Up</Button>}
           {sessionStorage.getItem("id") ? <Button onClick={()=>{
