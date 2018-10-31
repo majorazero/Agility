@@ -36,6 +36,7 @@ class ProjectList extends Component {
   }
 
   populate = () => {
+    console.log(this.state);
     if (this.state.projects.length === 0) {
       //maybe ill replace this with something if no projects appeared yet.
       return <h1>Oops no projects yet.</h1>;
@@ -46,7 +47,7 @@ class ProjectList extends Component {
           key={item.id}
           name={item.name}
           summary={item.summary}
-          due_date={item.due_date}
+          duedate={item.due_date}
           onProjectPress={() => { this.onProjectPress(item.id) }} />;
       });
     }
