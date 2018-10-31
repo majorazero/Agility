@@ -49,9 +49,9 @@ class Project extends React.Component {
                 projDueDate: response.data[0].due_date,
                 projectId: response.data[0].id
             });
-            this.getTasks();
             //pass project id here
             this.getSprints(this.state.projectId);
+            console.log(this.state);
         }).catch((err) => {
           window.location.assign("/404");
         });
@@ -79,7 +79,7 @@ class Project extends React.Component {
                     tasky.push(task[i])
                 }
             }
-
+            console.log(this.state);
             this.setState({
                 tasks: tasky
             })
@@ -96,6 +96,9 @@ class Project extends React.Component {
             description: this.state.description,
             sprint_id: this.state.sprintId
         }).then(() => {
+            this.setState({
+              open: false
+            });
             this.getTasks();
         });
     }
@@ -119,10 +122,11 @@ class Project extends React.Component {
     assignTask = (task) => {
         axios.post("/api/decrypt", { token: localStorage.getItem("token"), id: sessionStorage.getItem("id") }).then((response) => {
             let user = response.data;
+            axios.put("/api/task/by/" + task.id + "/" + user).then((res) => {
+              // console.log(res.data);
+              this.getTasks();
+              //window.location.reload();
 
-            console.log(user)
-            axios.put("/api/task/by/" + task.id + "/" + user).then(() => {
-                this.getTasks();
             })
         });
     }
@@ -145,17 +149,30 @@ class Project extends React.Component {
       let sprintData = [];
       axios.get(`/api/sprint/${projectId}`)
       .then(res => {
+        console.log(res.data);
           let today = new Date();
+          //default to latest sprint
+          let currentSprint = res.data[0].id;
           res.data.map((pSprint, i) => {
-              sprintData.push({
-                  key: i,
-                  label: pSprint.name,
-                  id: pSprint.id
-              })
-          this.setState({ chipData: sprintData })
-          })
-        })
-      };
+            sprintData.push({
+                key: i,
+                label: pSprint.name,
+                id: pSprint.id
+            });
+            //if a sprint is not complete, it'll be set to that instead.
+            if(!pSprint.isComplete){
+              currentSprint = pSprint.id;
+            }
+        });
+        console.log(currentSprint);
+        this.setState({
+          chipData: sprintData,
+          sprintId: currentSprint
+         });
+      }).then(() => {
+        this.getTasks();
+      });
+    };
 
       inviteMember = () => {
         //we'll pass the sprint id as an encrypted id
@@ -205,14 +222,14 @@ class Project extends React.Component {
                                 />
                             </SimpleModalWrapped>
                             {this.state.tasks.map((task) => {
-                                return (
-                                    <Pool
-                                        key={task.id}
-                                        id={this.key}
-                                        tasks={task}
-                                        onClickDelete={this.deleteTask.bind(this, task)}
-                                        onClickAdd={this.assignTask.bind(this, task)}
-                                    />
+                              return (
+                                  <Pool
+                                    key={task.id}
+                                    id={this.key}
+                                    tasks={task}
+                                    onClickDelete={this.deleteTask.bind(this, task)}
+                                    onClickAdd={this.assignTask.bind(this, task)}
+                                  />
                                 );
                             })}
 
