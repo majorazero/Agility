@@ -9,7 +9,7 @@ import AddIcon from '@material-ui/icons/Add';
 
 function getFabStyle() {
   const top = 0;
-  const left = 75;
+  const left = 50;
 
   return {
       top: `${top}%`,
