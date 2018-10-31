@@ -34,7 +34,6 @@ function ButtonAppBar(props) {
           </IconButton>
           <Typography to="/" variant="h4" color="inherit" className={classes.grow}>
             agility.
-
           </Typography>
           {sessionStorage.getItem("id") ? null : <Button href = "/register" color="inherit">Sign Up</Button>}
           {sessionStorage.getItem("id") ? <Button onClick={()=>{
