@@ -154,7 +154,7 @@ class Landing extends Component {
               }}
             >
 
-              <Typography variant="h4" gutterBottom>How does it work?</Typography>
+              <Typography variant="h3" gutterBottom>How does it work?</Typography>
 
               <MuiThemeProvider theme={theme}>
                 <ContainedButtons
@@ -211,19 +211,21 @@ class Landing extends Component {
               }}
             >
 
-              <Typography variant="h4" gutterBottom>The Team</Typography>
+              <Typography variant="h3" gutterBottom>The Team</Typography>
 
               <Grid container spacing={40}>
                 <Grid item xs={12}>
                   <Grid container justify="center">
                     {this.state.creator.map((maker) => {
                       return (
-                        <MediaCard
-                          key={maker.id}
-                          id={this.key}
-                          maker={maker}
-                        // onClick=?
-                        />
+                        <Grid item style={{ padding: "20px" }}>
+                          <MediaCard
+                            key={maker.id}
+                            id={this.key}
+                            maker={maker}
+                          // onClick=?
+                          />
+                        </Grid>
                       );
                     })}
                   </Grid>
