@@ -1,7 +1,7 @@
 import React from 'react';
 import { Parallax, Background } from 'react-parallax';
  
-const MyComponent = () => (
+const Parallaxing = () => (
     <div>
         {/* -----basic config-----*/}
         <Parallax
@@ -55,4 +55,4 @@ const MyComponent = () => (
         </Parallax>
     </div>
 );
-export default MyComponent;
+export default Parallaxing;
