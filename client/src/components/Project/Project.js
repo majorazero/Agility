@@ -52,6 +52,8 @@ class Project extends React.Component {
             this.getTasks();
             //pass project id here
             this.getSprints(this.state.projectId);
+        }).catch((err) => {
+          window.location.assign("/404");
         });
     }
 
