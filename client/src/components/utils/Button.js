@@ -18,6 +18,7 @@ function ContainedButtons(props) {
     <div>
 
       <Button
+        size="medium"
         variant="contained"
         color={props.color}
         className={classes.button}
