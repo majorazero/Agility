@@ -61,20 +61,20 @@ function RegisterLayout(props) {
           <form onSubmit={props.onSubmit} className={classes.form}>
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="fname">First Name</InputLabel>
-              <Input id="fname" name="fName" autoComplete="fname" autoFocus 
-              onChange={props.onChange("fName")} 
+              <Input id="fname" name="fName" autoComplete="fname" autoFocus
+              onChange={props.onChange("fName")}
               />
             </FormControl>
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="lname">Last Name</InputLabel>
-              <Input id="lname" name="lName" autoComplete="lname" autoFocus 
-              onChange={props.onChange("lName")} 
+              <Input id="lname" name="lName" autoComplete="lname" autoFocus
+              onChange={props.onChange("lName")}
               />
             </FormControl>
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="email">Email Address</InputLabel>
-              <Input id="email" name="email" autoComplete="email" autoFocus 
-              onChange={props.onChange("email")} 
+              <Input id="email" name="email" autoComplete="email" autoFocus
+              onChange={props.onChange("email")}
               />
             </FormControl>
             <FormControl margin="normal" required fullWidth>
@@ -87,10 +87,6 @@ function RegisterLayout(props) {
                 onChange={props.onChange("password")}
               />
             </FormControl>
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
             <Button
               type="submit"
               fullWidth

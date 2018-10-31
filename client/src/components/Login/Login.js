@@ -46,19 +46,9 @@ class Login extends Component {
           onSubmit={this.handleSubmit}
           onChange={this.handleChange}
         />
-        {/* <form type="submit" onSubmit={this.handleSubmit}>
-          <h2>Email:</h2>
-          <input type="email" name="email" onChange={this.handleChange} />
-          <h2>Password:</h2>
-          <input type="password" name="password" onChange={this.handleChange} />
-          <div>
-            <button>Submit</button>
-          </div>
-        </form> */}
         <div><Link to="/register">New user? Register!</Link></div>
         <div><Link to="/">Back to landing page.</Link></div>
       </div>
-
     );
   }
 }
