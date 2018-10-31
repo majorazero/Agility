@@ -13,6 +13,7 @@ const SprintSelect = (props) => (
             label={data.label}
             id={data.id}
             onClick={props.onClick.bind(this, data.id)}
+            color={props.activeSprint === data.id ? 'primary' : ""}
         />
         ))}
     </div>

@@ -189,7 +189,7 @@ class Project extends React.Component {
         const { direction, justify, alignItems } = this.state;
         return (
             <div style={{ paddingTop: "100px" }}>
-                <SprintSelect pastSprints={this.state.chipData} onClick={this.updateActiveSprint} />
+                <SprintSelect pastSprints={this.state.chipData} onClick={this.updateActiveSprint} activeSprint={this.state.sprintId}/>
                 <Grid container>
                     <h1>{this.state.projName}</h1>
                     <h2>{this.state.summary}</h2>
