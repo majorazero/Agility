@@ -44,7 +44,9 @@ class MouseOverPopover extends React.Component {
           onMouseEnter={this.handlePopoverOpen}
           onMouseLeave={this.handlePopoverClose}
         >
-          <ButtonSizes></ButtonSizes>
+          <ButtonSizes
+            onClick={this.handleOpen}
+          />
         </Typography>
         <Popover
           id="mouse-over-popover"
