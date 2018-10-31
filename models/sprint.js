@@ -9,6 +9,10 @@ module.exports = function(sequelize, DataTypes) {
         },
         end_date: {
             type: DataTypes.DATEONLY
+        },
+        isComplete: {
+          type: DataTypes.BOOLEAN,
+          defaultValue: false
         }
     });
     Sprint.associate = (models) => {
