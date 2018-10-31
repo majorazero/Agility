@@ -79,7 +79,7 @@ class App extends Component {
           <Route exact path='/userpool' component={UserPool} />
           <Route exact path='/sprintselect' component={SprintSelect} />
           <Route exact path='/404' component={notFound} />
-          <Route exact path='/parallax' component={parallax} />
+          {/* <Route exact path='/parallax' component={parallax} /> */}
 
         </div>
       </Router>
