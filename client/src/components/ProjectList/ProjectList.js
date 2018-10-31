@@ -6,7 +6,8 @@ import ProjectListTab from "./ProjectListTab/ProjectListTab.js";
 import SimpleModalProjectWrapped from "../utils/ModalProject.js";
 import AddProjectLayout from "../utils/AddProjectLayout.js";
 import ButtonSizes from "../utils/FAB.js";
-require("./ProjectList.css");
+import GridList from '@material-ui/core/GridList';
+
 
 class ProjectList extends Component {
   state = {
@@ -114,9 +115,6 @@ class ProjectList extends Component {
           direction={direction}
           justify={justify}
         >
-          <ButtonSizes
-            onClick={this.handleOpen}
-          />
           <SimpleModalProjectWrapped
             open={this.state.open}
             onClose={this.handleClose}
@@ -128,9 +126,22 @@ class ProjectList extends Component {
             <AddProjectLayout
             />
           </SimpleModalProjectWrapped>
-          <h1>This is a project List.</h1>
       <div className="projList">
-        <h1>This is a project List.</h1>
+      <div style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                justifyContent: 'space-around',
+                maxWidth: 1200,
+                overflow: 'hidden'}}>
+            <GridList style={{
+              flexWrap: 'nowrap', 
+              transform: 'translateZ(0)'}}>
+              {this.populate()}
+            </GridList>
+        </div>
+        <ButtonSizes
+            onClick={this.handleOpen}
+          />
 
         <h2>Join Sprint with Invite Code</h2>
 
@@ -141,11 +152,7 @@ class ProjectList extends Component {
             <button>Submit</button>
           </form>
         </div>
-        </div>
-
-        <div>
-          {this.populate()}
-        </div>
+        </div>          
         </Grid>
       </div>
     );
