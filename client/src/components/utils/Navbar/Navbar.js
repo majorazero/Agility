@@ -8,6 +8,7 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 
+
 const styles = {
   root: {
     flexGrow: 1,
@@ -32,8 +33,8 @@ function ButtonAppBar(props) {
           <IconButton className={classes.menuButton} color="inherit" aria-label="Menu" >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" color="inherit" className={classes.grow}>
-            Trello 2.0
+          <Typography to="/" variant="h4" color="inherit" className={classes.grow}>
+            agility.
           </Typography>
           {sessionStorage.getItem("id") ? null : <Button href = "/register" color="inherit">Sign Up</Button>}
           {sessionStorage.getItem("id") ? null : <Button href = "/login" color="inherit">Login</Button>}

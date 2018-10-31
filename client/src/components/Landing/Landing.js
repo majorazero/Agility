@@ -42,6 +42,8 @@ class Landing extends Component {
           resizeMode: 'cover',
           height: "2500px"
         }} >
+
+
         <Grid container>
           <Grid item xs={12} style={{ padding: "10px" }}>
             <Grid
@@ -65,23 +67,20 @@ class Landing extends Component {
 
               <Typography component="h2" variant="h1" gutterBottom>agility.</Typography>
 
-              <MuiThemeProvider theme={theme}>
+              {/* <MuiThemeProvider theme={theme}>
                 <ContainedButtons
                   component={Link}
                   to="/register"
                   name="Sign Up"
                   color="secondary"
                 />
-              </MuiThemeProvider>
-
-              <MuiThemeProvider theme={theme}>
                 <ContainedButtons
                   component={Link}
                   to="/login"
                   name="Login"
                   color="primary"
                 />
-              </MuiThemeProvider>
+              </MuiThemeProvider> */}
 
               {/* <div style={{backgroundImage: `url("/assets/images/down-arrow.png")`}} ></div> */}
             </Grid>
