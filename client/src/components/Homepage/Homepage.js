@@ -22,6 +22,7 @@ class Homepage extends Component {
   render() {
     return (
       <div>
+        <ButtonAppBar/>
       <Grid container spacing={8} style={{ marginTop: 100 }}>
         <Grid container item xs={12} style={{  }}>
          
@@ -38,6 +39,7 @@ class Homepage extends Component {
             </Grid>
             <Grid item xs={12} style={{ 
               maxHeight: 300, 
+              height: 300,
               overflow: "auto" , 
               marginRight: 140, 
               border: "5px solid lightgrey", 

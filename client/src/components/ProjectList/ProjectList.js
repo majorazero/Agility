@@ -140,7 +140,7 @@ class ProjectList extends Component {
                 display: 'flex',
                 flexWrap: 'wrap',
                 justifyContent: 'space-around',
-                // maxWidth: 700,
+                maxWidth: 900,
                 overflow: 'hidden',
                 // width: "1200px"
                 marginTop: 20,
