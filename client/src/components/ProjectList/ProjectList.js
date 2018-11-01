@@ -214,6 +214,19 @@ class ProjectList extends Component {
               onClick={this.handleOpen}
             />
             <h2>Join Sprint with Invite Code</h2> */}
+
+        <SimpleModalProjectWrapped
+          open={this.state.open}
+          onClose={this.handleClose}
+          name="Add a New Project ..."
+          onSubmit={this.handleSubmit}
+          onChange={this.handleChange}
+        >
+
+          <AddProjectLayout
+          />
+        </SimpleModalProjectWrapped>
+
         <ButtonSizes
           onClick={this.handleOpen}
           title="Add a Project"
