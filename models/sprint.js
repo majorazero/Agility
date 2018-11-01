@@ -13,6 +13,10 @@ module.exports = function(sequelize, DataTypes) {
         isComplete: {
           type: DataTypes.BOOLEAN,
           defaultValue: false
+        },
+        isActive: {
+          type: DataTypes.BOOLEAN,
+          defaultValue: false
         }
     });
     Sprint.associate = (models) => {
