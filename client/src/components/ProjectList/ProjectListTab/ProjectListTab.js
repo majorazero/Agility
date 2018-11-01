@@ -89,7 +89,7 @@ function SingleLineGridList(props) {
     <div className={classes.root}>
       <GridList className={classes.gridList} cols={2.5}>
           <GridListTile>
-            <img src="../../../../../../public/assets/images/background.jpg" alt={props.name} />
+            <img src="./assets/images/background.jpg" alt={props.name} />
             <GridListTileBar
               title={props.name}
               onClick={props.onProjectPress}
