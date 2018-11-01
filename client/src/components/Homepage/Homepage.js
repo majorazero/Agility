@@ -6,6 +6,7 @@ import ProfileCard from "./ProfileCard/profilecard.js";
 import ActiveTasks from "./ActiveTasks/activetasks";
 import Grid from '@material-ui/core/Grid';
 import ButtonAppBar from "../utils/Navbar/Navbar.js";
+import Paper from '@material-ui/core/Paper';
 
 //doesn't has to be
 
@@ -23,7 +24,36 @@ class Homepage extends Component {
     return (
       <div>
         <ButtonAppBar />
-        <Grid container spacing={8} style={{ marginTop: 100 }}>
+        <div
+          className="parallax"
+          style={{
+            paddingTop: "50px",
+            overflowX: "hidden",
+
+            // possible?
+            backgroundImage: `url("/assets/images/background.png")`,
+            resizeMode: 'cover',
+            // height: "3050px"
+          }} >
+          <Grid
+            container
+            spacing={8}
+            style={{ padding: "50px" }}
+          >
+            <Grid item xs={8}>
+              <Paper
+              style={{ height: "100%" }}
+              >
+                <ActiveTasks />
+              </Paper>
+            </Grid>
+            <Grid item xs={1} />
+            <Grid item xs>
+              <ProfileCard />
+            </Grid>
+          </Grid>
+
+          {/* <Grid container spacing={8} style={{ marginTop: 100 }}>
           <Grid container item xs={12} style={{ marginLeft: 100 }}>
             <Grid item xs={4} style={{ maxHeight: 375, overflow: "auto", marginLeft: 35, marginRight: 140 }}>
               <ActiveTasks />
@@ -37,7 +67,8 @@ class Homepage extends Component {
               <ProjectList />
             </Grid>
           </Grid>
-        </Grid>
+        </Grid> */}
+        </div>
       </div>
     );
   }

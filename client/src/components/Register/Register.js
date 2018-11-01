@@ -2,6 +2,8 @@ import React,{Component} from "react";
 import {Link} from "react-router-dom";
 import axios from "axios";
 import RegisterLayout from "../utils/RegisterLayout.js"
+import SimpleBottomNavigation from "../utils/Footer/Footer.js";
+
 
 class Register extends Component {
   state = {
@@ -35,7 +37,7 @@ class Register extends Component {
 
   render(){
     return(<div>
-      <h1>Register!</h1>
+      <h1 style={{textAlign:"center"}}>Register!</h1>
         <small>{this.state.message}</small>
 
         <RegisterLayout
@@ -55,8 +57,12 @@ class Register extends Component {
             <button>Submit</button>
           </div>
         </form> */}
-      <Link to="/login">Back to login.</Link>
-    </div>);
+        <div style={{textAlign:"center", marginTop: "5px"}}>
+      <Link  to="/login">Back to login.</Link>
+      </div>
+      <SimpleBottomNavigation/>
+    </div>
+    );
   }
 }
 
