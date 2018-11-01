@@ -7,8 +7,8 @@ import ActiveTasks from "./ActiveTasks/activetasks";
 import Grid from '@material-ui/core/Grid';
 import ButtonAppBar from "../utils/Navbar/Navbar.js";
 import Paper from '@material-ui/core/Paper';
+import ButtonSizes from "../utils/FAB.js";
 import SimpleBottomNavigation from "../utils/Footer/Footer.js";
-
 
 //doesn't has to be
 
@@ -30,12 +30,11 @@ class Homepage extends Component {
           className="parallax"
           style={{
             paddingTop: "50px",
-            overflowX: "hidden",
 
             // possible?
             backgroundImage: `url("/assets/images/background.png")`,
             resizeMode: 'cover',
-            // height: "3050px"
+            height: "1050px"
           }} >
           <Grid
             container
@@ -50,7 +49,7 @@ class Homepage extends Component {
               </Paper>
             </Grid>
             <Grid item xs={1} />
-            <Grid item xs>
+            <Grid item xs={3}>
               <ProfileCard />
             </Grid>
           </Grid>
@@ -62,7 +61,7 @@ class Homepage extends Component {
           >
             <Grid item xs={12}>
               <Paper
-                // style={{ height: 100 }}
+              // style={{ height: 100 }}
               >
                 <ProjectList />
               </Paper>

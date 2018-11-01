@@ -17,16 +17,18 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 // import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Axios from 'axios';
+import TextMobileStepper from "../../utils/Stepper.js";
 
 const styles = theme => ({
     card: {
-        maxWidth: 300,
+        width: 300,
     },
     media: {
-        height: 75,
-        paddingBottom: "60%",
+        height: 40,
+        paddingBottom: "40%",
         backgroundSize: 'cover',
-        backgroundPosition: "center center"
+        backgroundPosition: "center center",
+        margin: 5
     },
     actions: {
         display: 'flex',
@@ -82,7 +84,7 @@ class RecipeReviewCard extends React.Component {
         const { classes } = this.props;
 
         return (
-            <Card className={classes.card}>
+            <Card className={classes.card} style={{width: "100%"}}>
                 <CardMedia
                     className={classes.media}
                     image="/assets/images/profileimg.jpg"
@@ -96,17 +98,12 @@ class RecipeReviewCard extends React.Component {
                     <Typography component="p">
                         {this.state.userEmail}
                     </Typography>
-                    <Typography component="p">
+                    <br />
+                    {/* <Typography component="p">
                         Progress
           </Typography>
                 </CardContent>
                 <CardActions className={classes.actions} disableActionSpacing>
-                    <IconButton aria-label="Add to favorites">
-                        <FavoriteIcon />
-                    </IconButton>
-                    <IconButton aria-label="Share">
-                        <ShareIcon />
-                    </IconButton>
                     <IconButton
                         className={classnames(classes.expand, {
                             [classes.expandOpen]: this.state.expanded,
@@ -119,13 +116,10 @@ class RecipeReviewCard extends React.Component {
                     </IconButton>
                 </CardActions>
                 <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
-                    <CardContent>
-                        <Typography paragraph>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </Typography>
-
+                    <CardContent> */}
+                        <TextMobileStepper />
                     </CardContent>
-                </Collapse>
+                {/* </Collapse> */}
             </Card>
         );
     }
