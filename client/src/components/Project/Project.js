@@ -161,7 +161,7 @@ class Project extends React.Component {
 
     updateActiveSprint = (sprintId) => {
       this.setState({ sprintId: sprintId }, () => {
-        this.getTask();
+        this.getTasks();
       });
     }
 
