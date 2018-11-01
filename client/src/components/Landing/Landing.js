@@ -38,22 +38,22 @@ class Landing extends Component {
       {
         name: "Daniel Hsu",
         // image: ,
-        summary: "He's brown."
+        summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
       },
       {
         name: "Matt Purpura",
         // image: ,
-        summary: "He's brown."
+        summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
       },
       {
         name: "Michael Reza Sanaiha",
         image: "/assets/images/itsmeinasuit.jpeg",
-        summary: "He's brown."
+        summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
       },
       {
         name: "Yair Joseph",
-        // image: ,
-        summary: "He's brown."
+        image: "/assets/images/eximage.png",
+        summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
       }
     ]
   }
@@ -66,7 +66,7 @@ class Landing extends Component {
           overflowX: "hidden",
           backgroundImage: `url("/assets/images/background.png")`,
           resizeMode: 'cover',
-          height: "2950px"
+          height: "3050px"
         }} >
 
 
@@ -201,8 +201,8 @@ class Landing extends Component {
               style={{
                 // backgroundImage: `url("/assets/images/background.png")`,
                 // resizeMode: 'cover',
-                height: "650px",
-                padding: "10px",
+                height: "750px",
+                paddingTop: "50px",
                 backgroundPosition: "center",
                 color: "whitesmoke",
                 display: "flex",
@@ -213,7 +213,7 @@ class Landing extends Component {
 
               <Typography variant="h3" gutterBottom>The Team</Typography>
 
-              <Grid container spacing={40}>
+              <Grid container spacing={32}>
                 <Grid item xs={12}>
                   <Grid container justify="center">
                     {this.state.creator.map((maker) => {
