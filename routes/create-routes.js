@@ -14,7 +14,6 @@ module.exports = function(app){
       });
 
     app.post("/api/project", function(req, res) {
-      console.log(req.body);
       db.Project.create({
         name: req.body.name,
         summary: req.body.summary,
@@ -41,16 +40,12 @@ module.exports = function(app){
     });
 
     app.post("/api/sprintMembershipWithCode", (req,res) => {
-      console.log(req.body);
-      console.log(encrypt.decrypt(req.body.token,req.body.uId),encrypt.decrypt("invite",req.body.sId));
-      //res.json("Hit it!");
       db.SprintMembership.findAll({
         where:{
           userId: encrypt.decrypt(req.body.token,req.body.uId),
           sprintId: encrypt.decrypt("invite",req.body.sId)
         }
       }).then((data) => {
-        console.log(data.length);
         if(data.length === 0){
           db.SprintMembership.create({
             userId: encrypt.decrypt(req.body.token,req.body.uId),

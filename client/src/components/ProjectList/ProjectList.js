@@ -20,7 +20,8 @@ class ProjectList extends Component {
     justify: "center",
     alignItems: "center",
     projects: [],
-    inviteCode: ""
+    inviteCode: "",
+    message: ""
   }
 
   componentDidMount = () => {
@@ -32,7 +33,6 @@ class ProjectList extends Component {
       id: sessionStorage.getItem("id"),
       token: localStorage.getItem("token")
     }).then((response) => {
-      console.log(response.data);
       this.setState({ projects: response.data });
     });
   }
@@ -62,7 +62,6 @@ class ProjectList extends Component {
 
   //we'll pass project id into this and link it to a specific project page
   onProjectPress = (id) => {
-
     axios.post("/api/encrypt", {
       token: "project",
       id: id.toString()
@@ -114,7 +113,14 @@ class ProjectList extends Component {
     axios.post("/api/sprintMembershipWithCode", { sId: this.state.inviteCode, uId: sessionStorage.getItem("id"), token: localStorage.getItem("token") }).then((response) => {
       if (response.data === "Already part of sprint!") {
         console.log(response.data);
+        this.setState({message: response.data});
       }
+      else {
+        this.setState({message: "You succesfully joined!"});
+        this.fetch();
+      }
+    }).catch(err => {
+      this.setState({message: "Invalid invite code!"});
     });
   }
 
@@ -205,6 +211,7 @@ class ProjectList extends Component {
 
         {/* <div className="invCodeDiv">
               <form onSubmit={this.handleInviteSubmit}>
+                <small>{this.state.message}</small>
                 <h3>Invite Code:</h3>
                 <input type="text" name="inviteCode" onChange={this.handleInviteChange} />
                 <button>Submit</button>
