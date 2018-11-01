@@ -31,7 +31,7 @@ module.exports = function(app){
             res.json(dbSprint);
         });
     });
-
+  
     app.post("/api/sprintMembership", (req,res) => {
       db.SprintMembership.create(req.body)
         .then((membership) => {

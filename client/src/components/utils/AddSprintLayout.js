@@ -45,14 +45,14 @@ const styles = theme => ({
     alignItems: 'center',
     padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
     width: 'auto', // Fix IE 11 issue.
-    // marginTop: theme.spacing.unit,
+    marginTop: theme.spacing.unit,
   },
   submit: {
     marginTop: theme.spacing.unit * 3,
   },
 });
 
-function AddTaskLayout(props) {
+function AddSprintLayout(props) {
   const { classes } = props;
   return (
     <div>
@@ -60,25 +60,33 @@ function AddTaskLayout(props) {
       <main className={classes.layout}>
         <form onSubmit={props.onSubmit} className={classes.form}>
           <FormControl margin="normal" required fullWidth>
-            <InputLabel htmlFor="name">Task Name</InputLabel>
-            <Input id="name" name="name" autoComplete="name" autoFocus
-              onChange={props.onChange("taskName")}
+            <InputLabel htmlFor="name">Sprint Name</InputLabel>
+            <Input
+            id="name"
+            name="name"
+            autoComplete="name"
+            autoFocus
+            onChange={props.onChange("sprintName")}
             />
           </FormControl>
           <FormControl margin="normal" required fullWidth>
             <DatePickers
-              label="Due Date"
-              id="due_date"
-              name="due_date"
-              autoComplete="due_date"
+              label="Start Date"
+              id="start_date"
+              name="start_date"
+              autoComplete="start_date"
               autoFocus
-              onChange={props.onChange("taskDue_date")}
+              onChange={props.onChange("sprintStart_date")}
             />
           </FormControl>
           <FormControl margin="normal" required fullWidth>
-            <InputLabel htmlFor="description">Description</InputLabel>
-            <Input id="description" name="description" autoComplete="description" autoFocus
-              onChange={props.onChange("taskDescription")}
+            <DatePickers
+              label="End Date"
+              id="end_date"
+              name="end_date"
+              autoComplete="end_date"
+              autoFocus
+              onChange={props.onChange("sprintEnd_date")}
             />
           </FormControl>
           <Button
@@ -96,8 +104,8 @@ function AddTaskLayout(props) {
   );
 }
 
-AddTaskLayout.propTypes = {
+AddSprintLayout.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(AddTaskLayout);
+export default withStyles(styles)(AddSprintLayout);
