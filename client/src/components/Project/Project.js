@@ -9,6 +9,9 @@ import AddTaskLayout from "../utils/AddTaskLayout.js";
 import SprintSelect from './SprintSelect';
 import UserPool from './UserPool';
 import ButtonAppBar from "../utils/Navbar/Navbar.js";
+import AddSprintLayout from "../utils/AddSprintLayout.js";
+import SimpleModalSprintWrapped from '../utils/ModalSprint';
+
 
 class Project extends React.Component {
 
@@ -21,20 +24,28 @@ class Project extends React.Component {
 
         inviteCode: "",
 
-        tasks: [],
+        unassignedTasks: [],
+        assignedTasks: [],
         projects: [],
         sprints: [],
+        members: [],
         direction: 'column',
         justify: 'flex-start',
         alignItems: 'flex-start',
 
         // temp id set
-        sprintId: 2,
-        open: false,
-        name: "",
-        due_date: "",
-        description: "",
-        chipData: []
+        sprintId: 4,
+    
+        taskOpen: false,
+        taskName: "",
+        taskDue_date: "",
+        taskDescription: "",
+        chipData: [],
+
+        sprintOpen: false, 
+        sprintName: "",
+        sprintStart_date: "",
+        sprintEnd_date: ""
     }
 
     componentDidMount() {
@@ -52,6 +63,7 @@ class Project extends React.Component {
             });
             //pass project id here
             this.getSprints(this.state.projectId);
+            this.getMembers(this.state.sprintId)
             console.log(this.state);
         }).catch((err) => {
             window.location.assign("/404");
@@ -61,8 +73,6 @@ class Project extends React.Component {
     handleChange = name => event => {
         this.setState({
             [name]: event.target.value,
-        }, () => {
-            console.log(this.state.due_date)
         });
     };
 
@@ -73,16 +83,21 @@ class Project extends React.Component {
         axios.get("/api/task/" + this.state.sprintId).then((res) => {
 
             let task = res.data;
-            let tasky = [];
+            let unassigned = [];
+            let assigned = [];
 
             for (let i = 0; i < task.length; i++) {
                 if (task[i].assigned_id === null) {
-                    tasky.push(task[i])
+                    unassigned.push(task[i])
+                }
+                else{
+                    assigned.push(task[i]);
                 }
             }
             console.log(this.state);
             this.setState({
-                tasks: tasky
+                unassignedTasks: unassigned, 
+                assignedTasks: assigned
             })
         });
     };
@@ -92,26 +107,28 @@ class Project extends React.Component {
         console.log(this.state.name, this.state.due_date, this.state.description, this.state.sprintId)
         // would put sprintId state in as basis for task addition
         axios.post("/api/task", {
-            name: this.state.name,
-            due_date: this.state.due_date,
-            description: this.state.description,
+            name: this.state.taskName,
+            due_date: this.state.taskDue_date,
+            description: this.state.taskDescription,
             sprint_id: this.state.sprintId
         }).then(() => {
             this.setState({
-              open: false
+              taskOpen: false
             });
             this.getTasks();
         });
     }
 
-    handleOpen = () => {
+    handleOpen = (name) => {
+        console.log(name)
         this.setState({
-            open: true
-        })
+            [name]: true
+        }, () => {
+            console.log(this.state.taskOpen)})
     }
 
-    handleClose = () => {
-        this.setState({ open: false });
+    handleClose = (name) => {
+        this.setState({ [name]: false });
     };
 
     deleteTask = (task) => {
@@ -176,6 +193,38 @@ class Project extends React.Component {
       });
     };
 
+    addSprint = (event) => {
+        event.preventDefault();
+        let obj = {
+            name: this.state.sprintName, 
+            start_date: this.state.sprintStart_date,
+            end_date: this.state.sprintEnd_date, 
+            project_id: this.state.projectId
+        }
+        axios.post('/api/sprint', {
+            name: this.state.sprintName, 
+            start_date: this.state.sprintStart_date,
+            end_date: this.state.sprintEnd_date, 
+            project_id: this.state.projectId
+        })
+        .then(() => {
+            this.setState({
+                sprintOpen: false
+            }, () => {
+                console.log(this.state.sprintOpen)
+                this.getSprints(this.state.projectId)
+            })
+        })
+    }
+
+    getMembers = (sprintId) => {
+        axios.post('/api/allMemberInSprint', {sprintId: sprintId})
+        .then(res => {
+            console.log("Members:", res.data)
+            this.setState({members: res.data})
+        })
+    }
+
     inviteMember = () => {
         //we'll pass the sprint id as an encrypted id
         axios.post("/api/encrypt", {
@@ -194,6 +243,19 @@ class Project extends React.Component {
                 <ButtonAppBar />
                 <div style={{ paddingTop: "100px" }}>
                     <SprintSelect pastSprints={this.state.chipData} onClick={this.updateActiveSprint} activeSprint={this.state.sprintId} />
+                    <ButtonSizes
+                        onClick={() => this.handleOpen('sprintOpen')}
+                    />
+                    <SimpleModalSprintWrapped
+                        open={this.state.sprintOpen}
+                        onClose={() => this.handleClose('sprintOpen')}
+                        name="Add a New Sprint ..."
+                        onSubmit={this.addSprint}
+                        onChange={this.handleChange}
+                    >
+                        {/* <AddSprintLayout
+                        /> */}
+                    </SimpleModalSprintWrapped>
                     <Grid container>
                         <h1>{this.state.projName}</h1>
                         <h2>{this.state.summary}</h2>
@@ -213,11 +275,11 @@ class Project extends React.Component {
                                 justify={justify}
                             >
                                 <ButtonSizes
-                                    onClick={this.handleOpen}
+                                    onClick={() => this.handleOpen('taskOpen')}
                                 />
                                 <SimpleModalWrapped
-                                    open={this.state.open}
-                                    onClose={this.handleClose}
+                                    open={this.state.taskOpen}
+                                    onClose={() => this.handleClose('taskOpen')}
                                     name="Add a New Task ..."
                                     onSubmit={this.addTask}
                                     onChange={this.handleChange}
@@ -225,7 +287,7 @@ class Project extends React.Component {
                                     <AddTaskLayout
                                     />
                                 </SimpleModalWrapped>
-                                {this.state.tasks.map((task) => {
+                                {this.state.unassignedTasks.map((task) => {
                                     return (
                                         <Pool
                                             key={task.id}
@@ -241,7 +303,7 @@ class Project extends React.Component {
 
                         </Grid>
                         <Grid item xs={6} style={{ padding: "10px" }}>
-                            <UserPool sprintId={this.state.sprintId}></UserPool>
+                            <UserPool sprintId={this.state.sprintId} members={this.state.members} tasks={this.state.assignedTasks}></UserPool>
                         </Grid>
                         <br />
                         <div><Link to="/homepage">Back to home page.</Link></div>

@@ -86,6 +86,7 @@ db.Sprint.create({
   start_date: "2018-10-29",
   end_date: "2018-11-09",
   isComplete: false,
+  isActive: true,
   project_id: 1
 });
 //5
@@ -116,6 +117,7 @@ db.Sprint.create({
   start_date: "2018-10-22",
   end_date: "2018-11-09",
   isComplete: false,
+  isActive: true,
   project_id: 3
 });
 //9
@@ -124,6 +126,7 @@ db.Sprint.create({
   start_date: "2018-10-22",
   end_date: "2018-11-09",
   isComplete: false,
+  isActive: true,
   project_id: 4
 });
 db.Sprint.create({
@@ -131,6 +134,7 @@ db.Sprint.create({
   start_date: "2018-10-22",
   end_date: "2018-11-09",
   isComplete: false,
+  isActive: true,
   project_id: 5
 });
 //11
@@ -366,3 +370,95 @@ db.SprintMembership.create({
 //////////////////
 /// Task
 /////////////////
+db.Task.create({
+  name: "Hunt new dummies",
+  due_date: "2018-11-02",
+  sprint_id: 4,
+  description: "Hunt new dummies to eat. What's wrong with us."
+});
+db.Task.create({
+  name: "Get some Tums",
+  due_date: "2018-11-06",
+  sprint_id: 4,
+  description: "Eating dummies can irritate the belly."
+});
+db.Task.create({
+  name: "Reconsider the life choice of being a cannibal.",
+  due_date: "2018-11-7",
+  sprint_id: 4,
+  description: "This is kinda' not good."
+});
+db.Task.create({
+  name: "Hunt babies instead.",
+  due_date: "2018-11-08",
+  sprint_id: 4,
+  description: "Anyone ever read 'A Modest Proposal'?"
+});
+db.Task.create({
+  name: "Read up on what React is.",
+  due_date: "2018-11-02",
+  sprint_id: 8,
+  description: "Maybe we shouldn't have thrown our old framework in the trash."
+});
+db.Task.create({
+  name: "Decide if crying in the corner is better than using Polymer again.",
+  due_date: "2018-11-04",
+  sprint_id: 8,
+  description: "It's real bad you guys."
+});
+db.Task.create({
+  name: "Listen to Michael talk about how Polymer 3 is way better you guys.",
+  due_date: "2018-11-07",
+  sprint_id: 8,
+  description: "Let's just use React."
+});
+db.Task.create({
+  name: "Actually install React now.",
+  due_date: "2018-11-08",
+  sprint_id: 8,
+  description: "This probably didn't need a week with a team of people."
+});
+db.Task.create({
+  name: "Start digging in your own nose for boogers.",
+  due_date: "2018-11-02",
+  sprint_id: 9,
+  description: "But do it with javascript."
+});
+
+db.Task.create({
+  name: "Consider the possiblilty of constructing a webpage with boogers.",
+  due_date: "2018-11-03",
+  sprint_id: 9,
+  description: "Ask Unkindman why we do this."
+});
+
+db.Task.create({
+  name: "Consider trashing this project.",
+  due_date: "2018-11-05",
+  sprint_id: 9,
+  description: "42."
+});
+db.Task.create({
+  name: "Is the answer 42?",
+  due_date: "2018-11-02",
+  sprint_id: 10,
+  description: "Of course it is. But we should get someone on it to confirm."
+});
+db.Task.create({
+  name: "Wonder why you set a sprint for this.",
+  due_date: "2018-11-02",
+  sprint_id: 10,
+  description: "Job creation though."
+});
+db.Task.create({
+  name: "Send someone to get the coffee.",
+  due_date: "2018-11-02",
+  sprint_id: 10,
+  description: "Because being busy is more important than what we're actually doing."
+});
+db.Task.create({
+  name: "Code your existential crisis away with javascript.",
+  due_date: "2018-11-02",
+  sprint_id: 10,
+  description: "We might need a new sprint for this."
+});
