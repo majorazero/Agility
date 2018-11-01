@@ -1,15 +1,13 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Grid } from "@material-ui/core";
+import { Grid, Paper } from "@material-ui/core";
 import axios from "axios";
-import ProjectListTab from "./ProjectListTab/ProjectListTab.js";
+import SingleLineGridList from "./ProjectListTab/ProjectListTab.js";
 import SimpleModalProjectWrapped from "../utils/ModalProject.js";
 import AddProjectLayout from "../utils/AddProjectLayout.js";
 import ButtonSizes from "../utils/FAB.js";
 import GridList from '@material-ui/core/GridList';
 import MouseOverPopover from '../utils/popover.js';
-
-
 
 class ProjectList extends Component {
   state = {
@@ -18,11 +16,12 @@ class ProjectList extends Component {
     due_date: "",
     projects: [],
     open: false,
-    direction: 'column',
-    justify: 'flex-start',
-    alignItems: 'flex-start',
+    direction: "row",
+    justify: "center",
+    alignItems: "center",
     projects: [],
-    inviteCode: ""
+    inviteCode: "",
+    message: ""
   }
 
   componentDidMount = () => {
@@ -34,7 +33,6 @@ class ProjectList extends Component {
       id: sessionStorage.getItem("id"),
       token: localStorage.getItem("token")
     }).then((response) => {
-      console.log(response.data);
       this.setState({ projects: response.data });
     });
   }
@@ -46,19 +44,24 @@ class ProjectList extends Component {
     }
     else {
       return this.state.projects.map((item) => {
-        return <ProjectListTab
-          key={item.id}
-          name={item.name}
-          summary={item.summary}
-          duedate={item.due_date}
-          onProjectPress={() => { this.onProjectPress(item.id) }} />;
+        return (
+          // <Grid item xs
+          //   style={{ padding: 5, width: 150 }}
+          // >
+          <SingleLineGridList
+            key={item.id}
+            name={item.name}
+            summary={item.summary}
+            duedate={item.due_date}
+            onProjectPress={() => { this.onProjectPress(item.id) }} />
+        )
+
       });
     }
   }
 
   //we'll pass project id into this and link it to a specific project page
   onProjectPress = (id) => {
-
     axios.post("/api/encrypt", {
       token: "project",
       id: id.toString()
@@ -107,10 +110,17 @@ class ProjectList extends Component {
 
   handleInviteSubmit = (event) => {
     event.preventDefault();
-    axios.post("/api/sprintMembershipWithCode",{sId: this.state.inviteCode, uId: sessionStorage.getItem("id"), token: localStorage.getItem("token")}).then((response) => {
-      if(response.data === "Already part of sprint!"){
+    axios.post("/api/sprintMembershipWithCode", { sId: this.state.inviteCode, uId: sessionStorage.getItem("id"), token: localStorage.getItem("token") }).then((response) => {
+      if (response.data === "Already part of sprint!") {
         console.log(response.data);
+        this.setState({message: response.data});
       }
+      else {
+        this.setState({message: "You succesfully joined!"});
+        this.fetch();
+      }
+    }).catch(err => {
+      this.setState({message: "Invalid invite code!"});
     });
   }
 
@@ -118,11 +128,41 @@ class ProjectList extends Component {
     const { direction, justify, alignItems } = this.state;
     return (
       <div>
-        <Grid xs={12}
-          container
+
+        {/* <Grid container
+          spacing={16}
           alignItems={alignItems}
           direction={direction}
           justify={justify}
+        >
+          <Paper> */}
+          <div
+            style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              justifyContent: 'space-around',
+              overflow: 'hidden',
+              padding: 10,
+              height: "100%"
+            }}
+          >
+            <GridList
+              cols={2.5}
+              style={{
+                flexWrap: 'nowrap',
+                transform: 'translateZ(0)'
+              }}
+            >
+        {this.populate()}
+        </GridList>
+        </div>
+        {/* </Paper>
+        </Grid> */}
+
+
+        {/* <Grid xs={12}
+          container
+          
           style={{ marginBottom: 20 }}
         >
           <SimpleModalProjectWrapped
@@ -164,22 +204,19 @@ class ProjectList extends Component {
                 </GridList>
               </div>
             </Grid>
-            {/* <MouseOverPopover> */}
             <ButtonSizes
               onClick={this.handleOpen}
             />
-            {/* </MouseOverPopover> */}
-            <h2>Join Sprint with Invite Code</h2>
+            <h2>Join Sprint with Invite Code</h2> */}
 
-            <div className="invCodeDiv">
+        {/* <div className="invCodeDiv">
               <form onSubmit={this.handleInviteSubmit}>
+                <small>{this.state.message}</small>
                 <h3>Invite Code:</h3>
                 <input type="text" name="inviteCode" onChange={this.handleInviteChange} />
                 <button>Submit</button>
               </form>
-            </div>
-          </div>
-        </Grid>
+            </div> */}
       </div>
     );
   }

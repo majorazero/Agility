@@ -167,7 +167,6 @@ class Project extends React.Component {
     };
 
     getSprints = projectId => {
-
       let sprintData = [];
       axios.get(`/api/sprint/${projectId}`)
       .then(res => {
