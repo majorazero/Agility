@@ -45,7 +45,9 @@ class Project extends React.Component {
         sprintOpen: false, 
         sprintName: "",
         sprintStart_date: "",
-        sprintEnd_date: ""
+        sprintEnd_date: "", 
+        
+        currentUser: ''
     }
 
     componentDidMount() {
@@ -63,7 +65,8 @@ class Project extends React.Component {
             });
             //pass project id here
             this.getSprints(this.state.projectId);
-            this.getMembers(this.state.sprintId)
+            this.getMembers(this.state.sprintId);
+            this.getCurrentUserId();
             console.log(this.state);
         }).catch((err) => {
             window.location.assign("/404");
@@ -225,6 +228,16 @@ class Project extends React.Component {
         })
     }
 
+    getCurrentUserId = () => {
+        axios.post("/api/decrypt", {
+            id: sessionStorage.getItem("id"),
+            token: localStorage.getItem("token")
+        }).then(res => {
+            console.log(res.data)
+            this.setState({currentUser: res.data})
+        })
+    }
+
     inviteMember = () => {
         //we'll pass the sprint id as an encrypted id
         axios.post("/api/encrypt", {
@@ -242,7 +255,7 @@ class Project extends React.Component {
             <div>
                 <ButtonAppBar />
                 <div style={{ paddingTop: "100px" }}>
-                    <SprintSelect pastSprints={this.state.chipData} onClick={this.updateActiveSprint} activeSprint={this.state.sprintId} />
+                    <SprintSelect pastSprints={this.state.chipData} onClick={this.updateActiveSprint} activeSprint={this.state.sprintId} currentUser={this.state.currentUser} />
                     <ButtonSizes
                         onClick={() => this.handleOpen('sprintOpen')}
                     />
