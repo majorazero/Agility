@@ -8,6 +8,8 @@ import AddProjectLayout from "../utils/AddProjectLayout.js";
 import ButtonSizes from "../utils/FAB.js";
 import GridList from '@material-ui/core/GridList';
 import MouseOverPopover from '../utils/popover.js';
+import InputTextField from "../utils/InputTextField.js";
+import Typography from '@material-ui/core/Typography';
 
 class ProjectList extends Component {
   state = {
@@ -113,21 +115,25 @@ class ProjectList extends Component {
     axios.post("/api/sprintMembershipWithCode", { sId: this.state.inviteCode, uId: sessionStorage.getItem("id"), token: localStorage.getItem("token") }).then((response) => {
       if (response.data === "Already part of sprint!") {
         console.log(response.data);
-        this.setState({message: response.data});
+        this.setState({ message: response.data });
       }
       else {
-        this.setState({message: "You succesfully joined!"});
+        this.setState({ message: "You succesfully joined!" });
         this.fetch();
       }
     }).catch(err => {
-      this.setState({message: "Invalid invite code!"});
+      this.setState({ message: "Invalid invite code!" });
     });
   }
 
   render() {
     const { direction, justify, alignItems } = this.state;
     return (
-      <div>
+      <div
+        style={{
+          position: "relative"
+        }}
+      >
 
         {/* <Grid container
           spacing={16}
@@ -136,25 +142,25 @@ class ProjectList extends Component {
           justify={justify}
         >
           <Paper> */}
-          <div
+        <div
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'space-around',
+            overflow: 'hidden',
+            padding: 10,
+            height: "100%"
+          }}
+        >
+          <GridList
+            cols={2.5}
             style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              justifyContent: 'space-around',
-              overflow: 'hidden',
-              padding: 10,
-              height: "100%"
+              flexWrap: 'nowrap',
+              transform: 'translateZ(0)'
             }}
           >
-            <GridList
-              cols={2.5}
-              style={{
-                flexWrap: 'nowrap',
-                transform: 'translateZ(0)'
-              }}
-            >
-        {this.populate()}
-        </GridList>
+            {this.populate()}
+          </GridList>
         </div>
         {/* </Paper>
         </Grid> */}
@@ -208,15 +214,39 @@ class ProjectList extends Component {
               onClick={this.handleOpen}
             />
             <h2>Join Sprint with Invite Code</h2> */}
+        <ButtonSizes
+          onClick={this.handleOpen}
+          title="Add a Project"
+          color="primary"
+        // style={{
+        //   position: "absolute"
+        // }}
+        />
+        <Grid
+          container
+          spacing={8}
+        >
+          <Grid item xs={9} />
+          <Grid item xs>
+            <Typography variant="h3" gutterBottom>{this.state.message}</Typography>
+
+            <InputTextField
+              onSubmit={this.handleInviteSubmit}
+              label="Project Invite Code:"
+              name="inviteCode"
+              onChange={this.handleInviteChange}
+            />
+          </Grid>
+        </Grid>
 
         {/* <div className="invCodeDiv">
-              <form onSubmit={this.handleInviteSubmit}>
-                <small>{this.state.message}</small>
-                <h3>Invite Code:</h3>
-                <input type="text" name="inviteCode" onChange={this.handleInviteChange} />
-                <button>Submit</button>
-              </form>
-            </div> */}
+          <form onSubmit={this.handleInviteSubmit}>
+            <small>{this.state.message}</small>
+            <h3>Invite Code:</h3>
+            <input type="text" name="inviteCode" onChange={this.handleInviteChange} />
+            <button>Submit</button>
+          </form>
+        </div> */}
       </div>
     );
   }
