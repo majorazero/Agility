@@ -46,7 +46,9 @@ class UserPool extends Component {
               <Grid key={i} item>
                 <p>{member.User.first_name} {member.User.last_name}</p>
                 {this.props.tasks.filter(task => task.assigned_id === member.User.id).map(fTask => (
-                    <TaskCard title={fTask.name} summary={fTask.description} dueDate={fTask.due_date} unAssign={()=>{console.log(3)}} titleSize="subtitle2" subtitleSize='caption'></TaskCard>
+                    <TaskCard title={fTask.name} summary={fTask.description} dueDate={fTask.due_date} unAssign={()=>{
+                      this.props.unassign(fTask.id)
+                    }} titleSize="subtitle2" subtitleSize='caption'></TaskCard>
                 ))}
               </Grid>)
             })}

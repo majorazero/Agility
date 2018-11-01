@@ -152,22 +152,16 @@ class Project extends React.Component {
       });
     }
 
-    unassignTask = (task) => {
-      axios.post("/api/decrypt", { token: localStorage.getItem("token"), id: sessionStorage.getItem("id") }).then((response) => {
-          let user = response.data;
-          axios.put("/api/task/by/" + task.id + "/" + user).then((res) => {
-            // console.log(res.data);
-            this.getTasks();
-            //window.location.reload();
-
-          })
+    unassignTask = (id) => {
+      axios.put("/api/task/unassign",{id: id}).then((response) => {
+        this.getTasks();
       });
     }
 
     updateActiveSprint = (sprintId) => {
-        this.setState({ sprintId: sprintId }, () => {
-            this.getTasks();
-        });
+      this.setState({ sprintId: sprintId }, () => {
+        this.getTask();
+      });
     }
 
     defaultVal = () => {
@@ -327,7 +321,8 @@ class Project extends React.Component {
 
                         </Grid>
                         <Grid item xs={6} style={{ padding: "10px" }}>
-                            <UserPool sprintId={this.state.sprintId} members={this.state.members} tasks={this.state.assignedTasks}></UserPool>
+                            <UserPool sprintId={this.state.sprintId} members={this.state.members} tasks={this.state.assignedTasks}
+                            unassign={this.unassignTask}></UserPool>
                         </Grid>
                         <br />
                         <div><Link to="/homepage">Back to home page.</Link></div>
