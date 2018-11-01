@@ -28,40 +28,28 @@ class UserPool extends Component {
       }
 
     componentDidMount(){
-        this.getUsers(this.props.sprintId);
+        // this.getUsers(this.props.sprintId);
     }
 
     componentDidUpdate(prevProps){
-        if(prevProps.sprintId !== this.props.sprintId){
-            this.getUsers(this.props.sprintId);
+        if((prevProps.sprintId !== this.props.sprintId) || (prevProps.tasks !== this.props.tasks) || (prevProps.members !== this.props.members)){
+           this.render();
         }
     }
 
-    getUsers = (sprintId) => {
-        axios.post('/api/allMemberInSprint', {sprintId: sprintId})
-        .then(res => {
-            this.setState({users: res.data}, () => this.getTasks(sprintId))
-        })
-    }
-
-    getTasks = (sprintId) => {
-        axios.get(`/api/task/${sprintId}`)
-        .then(res => {
-            this.setState({tasks: res.data})
-        })
-    }
-
     render(){
+        console.log(this.props)
         return(
             <Grid container spacing={24}>
-                {this.state.users.map((user, i) => (
+                {this.props.members.map((member, i) => {
+                    return(
                     <Grid key={i} item>
-                      <p>{user.User.first_name}</p>
-                      {this.state.tasks.filter(task => task.assigned_id === user.User.id).map(fTask => (
+                      <p>{member.User.first_name}</p>
+                      {this.props.tasks.filter(task => task.assigned_id === member.User.id).map(fTask => (
                           <TaskCard title={fTask.name} titleSize="subtitle2" subtitleSize='caption'></TaskCard>
                       ))}
-                    </Grid>
-                ))}
+                    </Grid>)
+                })}
             </Grid> 
         )
     }

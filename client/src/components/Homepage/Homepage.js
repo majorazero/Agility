@@ -53,7 +53,7 @@ class Homepage extends Component {
             </Grid>
           </Grid>
 
-          {/* <Grid container spacing={8} style={{ marginTop: 100 }}>
+          <Grid container spacing={8} style={{ marginTop: 100 }}>
           <Grid container item xs={12} style={{ marginLeft: 100 }}>
             <Grid item xs={4} style={{ maxHeight: 375, overflow: "auto", marginLeft: 35, marginRight: 140 }}>
               <ActiveTasks />
@@ -67,7 +67,7 @@ class Homepage extends Component {
               <ProjectList />
             </Grid>
           </Grid>
-        </Grid> */}
+        </Grid>
         </div>
       </div>
     );
