@@ -8,19 +8,23 @@ import AddIcon from '@material-ui/icons/Add';
 
 
 function getFabStyle() {
-  const top = 0;
-  const left = 50;
+  const top = -10;
+  const left = 85;
 
   return {
       top: `${top}%`,
-      left: `${left}%`,
-      // transform: `translate(${top}%, -${left}%)`,
+      left: `${left}%`
   };
 }
 
 const styles = theme => ({
   button: {
     margin: theme.spacing.unit,
+    zIndex: 100,
+    position: "absolute"
+  },
+  extendedIcon: {
+    marginRight: theme.spacing.unit,
   },
 });
 
@@ -30,14 +34,14 @@ function ButtonSizes(props) {
     
         <Button
         style={getFabStyle()}
-        variant="fab" 
-        mini 
-        color="secondary" 
+        variant="extendedFab" 
+        color={props.color} 
         aria-label="Add" 
         className={classes.button}
         onClick={props.onClick}
         >
           <AddIcon />
+               {props.title}
         </Button>
   );
 }
