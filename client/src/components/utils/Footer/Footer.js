@@ -14,8 +14,9 @@ import LocationOnIcon from '@material-ui/icons/LocationOn';
 const styles = {
   root: {
     width: "100%",
-    backgroundColor: "lightgrey"
-  },
+    backgroundColor: "lightgrey",
+    bottom:"0"
+    },
 };
 
 class SimpleBottomNavigation extends React.Component {

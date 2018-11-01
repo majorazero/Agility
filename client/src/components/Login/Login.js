@@ -55,7 +55,7 @@ render() {
         <div><Link to="/">Back to landing page.</Link></div>
         </div>
 
-        <div style={{ marginTop: "96px" }}> <SimpleBottomNavigation /> </div>       
+        <div style={{position:"fixed", width:"100%", bottom:"0"}}> <SimpleBottomNavigation /> </div>       
       </div>
       );
     }

@@ -11,6 +11,8 @@ import UserPool from './UserPool';
 import ButtonAppBar from "../utils/Navbar/Navbar.js";
 import AddSprintLayout from "../utils/AddSprintLayout.js";
 import SimpleModalSprintWrapped from '../utils/ModalSprint';
+import SimpleBottomNavigation from "../utils/Footer/Footer.js";
+
 
 
 class Project extends React.Component {
@@ -329,6 +331,9 @@ class Project extends React.Component {
                         <br />
                         <div><Link to="/homepage">Back to home page.</Link></div>
                     </Grid>
+                </div>
+                <div style={{position:"fixed", width:"100%", bottom:"0"}}>
+                <SimpleBottomNavigation /> 
                 </div>
             </div>
         );
