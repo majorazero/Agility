@@ -8,6 +8,7 @@ import Grid from '@material-ui/core/Grid';
 import ButtonAppBar from "../utils/Navbar/Navbar.js";
 import Paper from '@material-ui/core/Paper';
 import ButtonSizes from "../utils/FAB.js";
+import SimpleBottomNavigation from "../utils/Footer/Footer.js";
 
 //doesn't has to be
 
@@ -82,6 +83,9 @@ class Homepage extends Component {
             </Grid>
           </Grid>
         </Grid> */}
+        </div >
+        <div style={{position:"relative"}}>
+        <SimpleBottomNavigation /> 
         </div>
       </div>
     );

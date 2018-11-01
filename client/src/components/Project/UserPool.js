@@ -17,10 +17,10 @@ import TaskCard from '../utils/TaskCard/TaskCard';
 // }
 
 class UserPool extends Component {
-    
+
     constructor(props) {
         super(props);
-    
+
         this.state = {
             users: [],
             tasks: []
@@ -32,26 +32,28 @@ class UserPool extends Component {
     }
 
     componentDidUpdate(prevProps){
-        if((prevProps.sprintId !== this.props.sprintId) || (prevProps.tasks !== this.props.tasks) || (prevProps.members !== this.props.members)){
-           this.render();
-        }
+      if((prevProps.sprintId !== this.props.sprintId) || (prevProps.tasks !== this.props.tasks) || (prevProps.members !== this.props.members)){
+         this.render();
+      }
     }
 
     render(){
-        console.log(this.props)
-        return(
-            <Grid container spacing={24}>
-                {this.props.members.map((member, i) => {
-                    return(
-                    <Grid key={i} item>
-                      <p>{member.User.first_name}</p>
-                      {this.props.tasks.filter(task => task.assigned_id === member.User.id).map(fTask => (
-                          <TaskCard title={fTask.name} titleSize="subtitle2" subtitleSize='caption'></TaskCard>
-                      ))}
-                    </Grid>)
-                })}
-            </Grid> 
-        )
+      console.log(this.props);
+      return(
+        <Grid container spacing={24}>
+            {this.props.members.map((member, i) => {
+              return(
+              <Grid key={i} item>
+                <p>{member.User.first_name} {member.User.last_name}</p>
+                {this.props.tasks.filter(task => task.assigned_id === member.User.id).map(fTask => (
+                    <TaskCard key={fTask.id} title={fTask.name} summary={fTask.description} dueDate={fTask.due_date} unAssign={()=>{
+                      this.props.unassign(fTask.id)
+                    }} titleSize="subtitle2" subtitleSize='caption'></TaskCard>
+                ))}
+              </Grid>)
+            })}
+        </Grid>
+      );
     }
 };
 

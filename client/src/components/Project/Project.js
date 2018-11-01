@@ -11,6 +11,8 @@ import UserPool from './UserPool';
 import ButtonAppBar from "../utils/Navbar/Navbar.js";
 import AddSprintLayout from "../utils/AddSprintLayout.js";
 import SimpleModalSprintWrapped from '../utils/ModalSprint';
+import SimpleBottomNavigation from "../utils/Footer/Footer.js";
+
 
 
 class Project extends React.Component {
@@ -35,17 +37,19 @@ class Project extends React.Component {
 
         // temp id set
         sprintId: 4,
-    
+
         taskOpen: false,
         taskName: "",
         taskDue_date: "",
         taskDescription: "",
         chipData: [],
 
-        sprintOpen: false, 
+        sprintOpen: false,
         sprintName: "",
         sprintStart_date: "",
-        sprintEnd_date: ""
+        sprintEnd_date: "",
+
+        currentUser: ''
     }
 
     componentDidMount() {
@@ -62,8 +66,8 @@ class Project extends React.Component {
                 projectId: response.data[0].id
             });
             //pass project id here
-            this.getSprints(this.state.projectId);
-            this.getMembers(this.state.sprintId)
+            this.getMembers(this.state.sprintId);
+            this.getCurrentUserId();
             console.log(this.state);
         }).catch((err) => {
             window.location.assign("/404");
@@ -96,7 +100,7 @@ class Project extends React.Component {
             }
             console.log(this.state);
             this.setState({
-                unassignedTasks: unassigned, 
+                unassignedTasks: unassigned,
                 assignedTasks: assigned
             })
         });
@@ -138,21 +142,27 @@ class Project extends React.Component {
     }
 
     assignTask = (task) => {
-        axios.post("/api/decrypt", { token: localStorage.getItem("token"), id: sessionStorage.getItem("id") }).then((response) => {
-            let user = response.data;
-            axios.put("/api/task/by/" + task.id + "/" + user).then((res) => {
-              // console.log(res.data);
-              this.getTasks();
-              //window.location.reload();
+      axios.post("/api/decrypt", { token: localStorage.getItem("token"), id: sessionStorage.getItem("id") }).then((response) => {
+          let user = response.data;
+          axios.put("/api/task/by/" + task.id + "/" + user).then((res) => {
+            // console.log(res.data);
+            this.getTasks();
+            //window.location.reload();
 
-            })
-        });
+          })
+      });
+    }
+
+    unassignTask = (id) => {
+      axios.put("/api/task/unassign",{id: id}).then((response) => {
+        this.getTasks();
+      });
     }
 
     updateActiveSprint = (sprintId) => {
-        this.setState({ sprintId: sprintId }, () => {
-            this.getTasks();
-        });
+      this.setState({ sprintId: sprintId }, () => {
+        this.getTask();
+      });
     }
 
     defaultVal = () => {
@@ -163,10 +173,10 @@ class Project extends React.Component {
         });
     };
 
-    getSprints = projectId => {
+    getSprints = (projectId, userId) => {
       let sprintData = [];
-      axios.get(`/api/sprint/${projectId}`)
-      .then(res => {
+        axios.get(`/api/sprints/project/${projectId}/user/${userId}`)
+        .then((res)=> {
         console.log(res.data);
           let today = new Date();
           //default to latest sprint
@@ -174,12 +184,12 @@ class Project extends React.Component {
           res.data.map((pSprint, i) => {
             sprintData.push({
                 key: i,
-                label: pSprint.name,
-                id: pSprint.id
+                label: pSprint.sprintName,
+                id: pSprint.sprintId
             });
             //if a sprint is not complete, it'll be set to that instead.
             if(!pSprint.isComplete){
-              currentSprint = pSprint.id;
+              currentSprint = pSprint.sprintId;
             }
         });
         console.log(currentSprint);
@@ -195,15 +205,15 @@ class Project extends React.Component {
     addSprint = (event) => {
         event.preventDefault();
         let obj = {
-            name: this.state.sprintName, 
+            name: this.state.sprintName,
             start_date: this.state.sprintStart_date,
-            end_date: this.state.sprintEnd_date, 
+            end_date: this.state.sprintEnd_date,
             project_id: this.state.projectId
         }
         axios.post('/api/sprint', {
-            name: this.state.sprintName, 
+            name: this.state.sprintName,
             start_date: this.state.sprintStart_date,
-            end_date: this.state.sprintEnd_date, 
+            end_date: this.state.sprintEnd_date,
             project_id: this.state.projectId
         })
         .then(() => {
@@ -224,6 +234,19 @@ class Project extends React.Component {
         })
     }
 
+    getCurrentUserId = () => {
+        axios.post("/api/decrypt", {
+            id: sessionStorage.getItem("id"),
+            token: localStorage.getItem("token")
+        }).then(res => {
+            console.log(res.data)
+            this.setState({currentUser: res.data}, 
+                ()=> {
+                    this.getSprints(this.state.projectId, this.state.currentUser)})
+        }) 
+        }
+    
+
     inviteMember = () => {
         //we'll pass the sprint id as an encrypted id
         axios.post("/api/encrypt", {
@@ -241,7 +264,7 @@ class Project extends React.Component {
             <div>
                 <ButtonAppBar />
                 <div style={{ paddingTop: "100px" }}>
-                    <SprintSelect pastSprints={this.state.chipData} onClick={this.updateActiveSprint} activeSprint={this.state.sprintId} />
+                    <SprintSelect sprints={this.state.chipData} onClick={this.updateActiveSprint} activeSprint={this.state.sprintId} currentUser={this.state.currentUser} />
                     <ButtonSizes
                         onClick={() => this.handleOpen('sprintOpen')}
                         title="Add a Sprint"
@@ -304,11 +327,15 @@ class Project extends React.Component {
 
                         </Grid>
                         <Grid item xs={6} style={{ padding: "10px" }}>
-                            <UserPool sprintId={this.state.sprintId} members={this.state.members} tasks={this.state.assignedTasks}></UserPool>
+                            <UserPool sprintId={this.state.sprintId} members={this.state.members} tasks={this.state.assignedTasks}
+                            unassign={this.unassignTask}></UserPool>
                         </Grid>
                         <br />
                         <div><Link to="/homepage">Back to home page.</Link></div>
                     </Grid>
+                </div>
+                <div style={{position:"fixed", width:"100%", bottom:"0"}}>
+                <SimpleBottomNavigation /> 
                 </div>
             </div>
         );
