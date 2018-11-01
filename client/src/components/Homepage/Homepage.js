@@ -81,7 +81,7 @@ class Homepage extends Component {
               <ProjectList />
             </Grid>
           </Grid>
-        </Grid>
+        </Grid> */}
         </div>
       </div>
     );
