@@ -42,7 +42,7 @@ class Homepage extends Component {
           >
             <Grid item xs={8}>
               <Paper
-              style={{ height: "100%" }}
+                style={{ height: "100%" }}
               >
                 <ActiveTasks />
               </Paper>
@@ -50,6 +50,20 @@ class Homepage extends Component {
             <Grid item xs={1} />
             <Grid item xs>
               <ProfileCard />
+            </Grid>
+          </Grid>
+
+          <Grid
+            container
+            spacing={8}
+            style={{ padding: "50px" }}
+          >
+            <Grid item xs={12}>
+              <Paper
+                style={{ height: "100%" }}
+              >
+                <ProjectList />
+              </Paper>
             </Grid>
           </Grid>
 

@@ -2,13 +2,12 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Grid } from "@material-ui/core";
 import axios from "axios";
-import ProjectListTab from "./ProjectListTab/ProjectListTab.js";
+import SingleLineGridList from "./ProjectListTab/ProjectListTab.js";
 import SimpleModalProjectWrapped from "../utils/ModalProject.js";
 import AddProjectLayout from "../utils/AddProjectLayout.js";
 import ButtonSizes from "../utils/FAB.js";
 import GridList from '@material-ui/core/GridList';
 import MouseOverPopover from '../utils/popover.js';
-
 
 
 class ProjectList extends Component {
@@ -46,7 +45,7 @@ class ProjectList extends Component {
     }
     else {
       return this.state.projects.map((item) => {
-        return <ProjectListTab
+        return <SingleLineGridList
           key={item.id}
           name={item.name}
           summary={item.summary}
@@ -107,8 +106,8 @@ class ProjectList extends Component {
 
   handleInviteSubmit = (event) => {
     event.preventDefault();
-    axios.post("/api/sprintMembershipWithCode",{sId: this.state.inviteCode, uId: sessionStorage.getItem("id"), token: localStorage.getItem("token")}).then((response) => {
-      if(response.data === "Already part of sprint!"){
+    axios.post("/api/sprintMembershipWithCode", { sId: this.state.inviteCode, uId: sessionStorage.getItem("id"), token: localStorage.getItem("token") }).then((response) => {
+      if (response.data === "Already part of sprint!") {
         console.log(response.data);
       }
     });
@@ -118,7 +117,15 @@ class ProjectList extends Component {
     const { direction, justify, alignItems } = this.state;
     return (
       <div>
-        <Grid xs={12}
+
+        <Grid container>
+          <Grid item xs={8}>
+            {this.populate()}
+          </Grid>
+        </Grid>
+
+
+        {/* <Grid xs={12}
           container
           alignItems={alignItems}
           direction={direction}
@@ -164,22 +171,18 @@ class ProjectList extends Component {
                 </GridList>
               </div>
             </Grid>
-            {/* <MouseOverPopover> */}
             <ButtonSizes
               onClick={this.handleOpen}
             />
-            {/* </MouseOverPopover> */}
-            <h2>Join Sprint with Invite Code</h2>
+            <h2>Join Sprint with Invite Code</h2> */}
 
-            <div className="invCodeDiv">
+        {/* <div className="invCodeDiv">
               <form onSubmit={this.handleInviteSubmit}>
                 <h3>Invite Code:</h3>
                 <input type="text" name="inviteCode" onChange={this.handleInviteChange} />
                 <button>Submit</button>
               </form>
-            </div>
-          </div>
-        </Grid>
+            </div> */}
       </div>
     );
   }
