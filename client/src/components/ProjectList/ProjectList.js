@@ -7,6 +7,8 @@ import SimpleModalProjectWrapped from "../utils/ModalProject.js";
 import AddProjectLayout from "../utils/AddProjectLayout.js";
 import ButtonSizes from "../utils/FAB.js";
 import GridList from '@material-ui/core/GridList';
+import MouseOverPopover from '../utils/popover.js';
+
 
 
 class ProjectList extends Component {
@@ -56,7 +58,8 @@ class ProjectList extends Component {
 
   //we'll pass project id into this and link it to a specific project page
   onProjectPress = (id) => {
-    axios.post("/api/encrypt",{
+
+    axios.post("/api/encrypt", {
       token: "project",
       id: id.toString()
     }).then((data) => {
@@ -115,11 +118,12 @@ class ProjectList extends Component {
     const { direction, justify, alignItems } = this.state;
     return (
       <div>
-        <Grid
+        <Grid xs={12}
           container
           alignItems={alignItems}
           direction={direction}
           justify={justify}
+          style={{ marginBottom: 20 }}
         >
           <SimpleModalProjectWrapped
             open={this.state.open}
@@ -132,33 +136,49 @@ class ProjectList extends Component {
             <AddProjectLayout
             />
           </SimpleModalProjectWrapped>
-      <div className="projList">
-      <div style={{
+          <div className="projList" >
+            <Grid item xs={12}>
+              <div style={{
+                boxShadow: "4px 4px 5px 1px rgb(23, 23, 23, 0.5)",
+                border: "10px solid lightgray",
+                borderRadius: "20px",
+                paddingTop: "7px",
+                paddingBottom: "7px",
+                paddingLeft: "6px",
+                paddingRight: "6px",
                 display: 'flex',
                 flexWrap: 'wrap',
                 justifyContent: 'space-around',
-                maxWidth: 1200,
-                overflow: 'hidden'}}>
-            <GridList style={{
-              flexWrap: 'nowrap',
-              transform: 'translateZ(0)'}}>
-              {this.populate()}
-            </GridList>
-        </div>
-        <ButtonSizes
-            onClick={this.handleOpen}
-          />
+                maxWidth: 900,
+                overflow: 'hidden',
+                // width: "1200px"
+                marginTop: 20,
 
-        <h2>Join Sprint with Invite Code</h2>
+              }}>
+                <GridList style={{
+                  flexWrap: 'nowrap',
+                  transform: 'translateZ(0)',
+                  width: "100%"
+                }}>
+                  {this.populate()}
+                </GridList>
+              </div>
+            </Grid>
+            <MouseOverPopover>
+            <ButtonSizes
+              onClick={this.handleOpen}
+            />
+            </MouseOverPopover>
+            <h2>Join Sprint with Invite Code</h2>
 
-        <div className="invCodeDiv">
-          <form onSubmit={this.handleInviteSubmit}>
-            <h3>Invite Code:</h3>
-            <input type="text" name="inviteCode" onChange={this.handleInviteChange} />
-            <button>Submit</button>
-          </form>
-        </div>
-        </div>
+            <div className="invCodeDiv">
+              <form onSubmit={this.handleInviteSubmit}>
+                <h3>Invite Code:</h3>
+                <input type="text" name="inviteCode" onChange={this.handleInviteChange} />
+                <button>Submit</button>
+              </form>
+            </div>
+          </div>
         </Grid>
       </div>
     );

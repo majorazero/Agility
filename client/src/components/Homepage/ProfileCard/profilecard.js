@@ -20,7 +20,7 @@ import Axios from 'axios';
 
 const styles = theme => ({
     card: {
-        maxWidth: 400,
+        maxWidth: 300,
     },
     media: {
         height: 0,

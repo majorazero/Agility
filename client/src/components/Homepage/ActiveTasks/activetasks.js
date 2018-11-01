@@ -60,6 +60,7 @@ class ActiveTasks extends Component {
             }
         })
         let filteredData = joinedData.filter(object => object.tasks.length > 0)
+        console.log(filteredData)
         this.setState({data: filteredData})
     }
 

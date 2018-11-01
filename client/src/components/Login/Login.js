@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import LoginLayout from "../utils/LoginLayout.js"
+import LoginLayout from "../utils/LoginLayout.js";
+import SimpleBottomNavigation from "../utils/Footer/Footer.js";
+import Grid from '@material-ui/core/Grid';
+
+
 
 class Login extends Component {
   state = {
@@ -35,22 +39,26 @@ class Login extends Component {
       }
     });
   }
+render() {
+  return (
+    <div>
 
-  render() {
-    return (
-      <div>
-        <h1>This is a login page.</h1>
+        <h1 style={{textAlign: "center"}}>This is a login page.</h1>
         <small>{this.state.message}</small>
 
         <LoginLayout
           onSubmit={this.handleSubmit}
           onChange={this.handleChange}
         />
+        <div style={{textAlign: "center", marginTop:"20px"}}>
         <div><Link to="/register">New user? Register!</Link></div>
         <div><Link to="/">Back to landing page.</Link></div>
-      </div>
-    );
-  }
-}
+        </div>
 
-export default Login;
+        <div style={{ marginTop: "96px" }}> <SimpleBottomNavigation /> </div>       
+      </div>
+      );
+    }
+  }
+  
+  export default Login;

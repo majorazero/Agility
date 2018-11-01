@@ -11,10 +11,10 @@ import StarBorderIcon from '@material-ui/icons/StarBorder';
 const ProjectListTab = (props) => {
   return(
       <GridListTile style={{marginLeft: 5}}>
-        <img src='https://www.projectsmart.co.uk/img/project.png' alt={props.name} />
+        <img src="/assets/images/project-img.jpg" width="240px" alt={props.name} style={{borderRadius: "10px"}}/>
         <GridListTileBar
           title={props.name}
-          style={{background:'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)'}}
+          style={{background:'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)', borderRadius: "10px"}}
           actionIcon={
             <IconButton onClick={props.onProjectPress}>
               Go
