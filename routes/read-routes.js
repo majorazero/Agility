@@ -24,14 +24,21 @@ module.exports = function(app) {
       ).then((data) => {
         console.log(encrypt.decrypt(req.body.token,req.body.id));
         db.sequelize.query(`SELECT DISTINCT projects.name, projects.id, projects.due_date, projects.complete, projects.completed_date, projects.summary, projects.userId FROM users INNER JOIN sprintmemberships ON sprintmemberships.userId = users.id AND users.id = ${encrypt.decrypt(req.body.token,req.body.id)} INNER JOIN sprints ON sprints.id = sprintmemberships.sprintId INNER JOIN projects ON sprints.project_id = projects.id`, { type: sequelize.QueryTypes.SELECT}).then(dbSprintUser => {
+            console.log(dbSprintUser);
             let aggregate = JSON.parse(JSON.stringify(data));
+            console.log(aggregate);
             for(let i = 0; i < dbSprintUser.length; i++){
-              for(let j = 0; j < aggregate.length; j++){
-                if(dbSprintUser[i].id === aggregate[j].id){
-                  break;
-                }
-                if(j === aggregate.length-1){
-                  aggregate.push(dbSprintUser[i]);
+              if(aggregate.length === 0){
+                aggregate.push(dbSprintUser[i]);
+              }
+              else{
+                for(let j = 0; j < aggregate.length; j++){
+                  if(dbSprintUser[i].id === aggregate[j].id){
+                    break;
+                  }
+                  if(j === aggregate.length-1){
+                    aggregate.push(dbSprintUser[i]);
+                  }
                 }
               }
             }

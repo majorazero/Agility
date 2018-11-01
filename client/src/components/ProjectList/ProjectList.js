@@ -32,12 +32,12 @@ class ProjectList extends Component {
       id: sessionStorage.getItem("id"),
       token: localStorage.getItem("token")
     }).then((response) => {
+      console.log(response.data);
       this.setState({ projects: response.data });
     });
   }
 
   populate = () => {
-    console.log(this.state);
     if (this.state.projects.length === 0) {
       //maybe ill replace this with something if no projects appeared yet.
       return <h1>Oops no projects yet.</h1>;
@@ -56,7 +56,6 @@ class ProjectList extends Component {
 
   //we'll pass project id into this and link it to a specific project page
   onProjectPress = (id) => {
-
     axios.post("/api/encrypt",{
       token: "project",
       id: id.toString()
@@ -67,11 +66,17 @@ class ProjectList extends Component {
 
   handleChange = name => event => {
     this.setState({
-      [name]: event.target.value,
+      [name]: event.target.value
     }, () => {
-      console.log(this.state.due_date)
+      console.log(this.state);
     });
   };
+
+  handleInviteChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+  }
 
   handleSubmit = (event) => {
     event.preventDefault();
@@ -100,7 +105,7 @@ class ProjectList extends Component {
   handleInviteSubmit = (event) => {
     event.preventDefault();
     axios.post("/api/sprintMembershipWithCode",{sId: this.state.inviteCode, uId: sessionStorage.getItem("id"), token: localStorage.getItem("token")}).then((response) => {
-      console.log(response.data);
+      console.log(this.state);
     });
     console.log(this.state.inviteCode);
   }
@@ -148,7 +153,7 @@ class ProjectList extends Component {
         <div className="invCodeDiv">
           <form onSubmit={this.handleInviteSubmit}>
             <h3>Invite Code:</h3>
-            <input type="text" name="inviteCode" onChange={this.handleChange} />
+            <input type="text" name="inviteCode" onChange={this.handleInviteChange} />
             <button>Submit</button>
           </form>
         </div>

@@ -40,25 +40,31 @@ module.exports = function(app){
         });
     });
 
-    app.post("/api/sprintMembershipWithCode",(req,res)=>{
-      let sprintId = encrypt.decrypt("invite",req.body.sId);
-      console.log(sprintId);
-      db.SprintMembership.find({where:{
-        sprintId: sprintId
-      }}).then((data) => {
-        if(data === null){
+    app.post("/api/sprintMembershipWithCode", (req,res) => {
+      console.log(req.body);
+      console.log(encrypt.decrypt(req.body.token,req.body.uId),encrypt.decrypt("invite",req.body.sId));
+      //res.json("Hit it!");
+      db.SprintMembership.findAll({
+        where:{
+          userId: encrypt.decrypt(req.body.token,req.body.uId),
+          sprintId: encrypt.decrypt("invite",req.body.sId)
+        }
+      }).then((data) => {
+        console.log(data.length);
+        if(data.length === 0){
           db.SprintMembership.create({
-            sprintId: sprintId,
-            userId: encrypt.decrypt(req.body.token,req.body.uId)
-          }).then((data) => {
-            res.json("Created!");
-          })
+            userId: encrypt.decrypt(req.body.token,req.body.uId),
+            sprintId: encrypt.decrypt("invite",req.body.sId)
+          }).then((item) => {
+            res.json(item);
+          });
         }
         else{
-          res.json("Already a member!");
+          res.json("User already exist!");
         }
       });
-    })
+    });
+
 
     app.post("/api/task", function(req, res) {
         db.Task.create(req.body)
