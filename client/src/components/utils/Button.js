@@ -25,6 +25,7 @@ function ContainedButtons(props) {
         to={props.to}
         component={props.component}
         onClick={props.onClick}
+        target={props.target} 
       >
         {props.name}
 
