@@ -22,6 +22,10 @@ module.exports = function(sequelize, DataTypes) {
         },
         stack: {
           type: DataTypes.STRING
+        },
+        isCompleted : {
+          type: DataTypes.BOOLEAN,
+          defaultValue: false
         }
     });
     return Task;
