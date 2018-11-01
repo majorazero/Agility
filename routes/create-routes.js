@@ -60,7 +60,7 @@ module.exports = function(app){
           });
         }
         else{
-          res.json("User already exist!");
+          res.json("Already part of sprint!");
         }
       });
     });
