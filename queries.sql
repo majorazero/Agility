@@ -46,7 +46,7 @@ INNER JOIN sprintmemberships ON sprintmemberships.userId = users.id AND users.id
 INNER JOIN sprints ON sprints.id = sprintmemberships.sprintId
 INNER JOIN projects ON sprints.project_id = projects.id
 
-SELECT sprints.name AS sprintName, sprints.id AS sprintId, sprints.start_date AS startDate, sprints.end_data AS endDate, projects.id AS project_id, users.id AS user_id, users.first_name
+SELECT sprints.name AS sprintName, sprints.id AS sprintId, sprints.start_date AS startDate, sprints.end_date AS endDate, projects.id AS project_id, users.id AS user_id, users.first_name
 FROM projects
 INNER JOIN sprints ON sprints.project_id = projects.id AND projects.id=1
 INNER JOIN sprintmemberships ON sprints.id = sprintmemberships.sprintId

@@ -64,7 +64,6 @@ class Project extends React.Component {
                 projectId: response.data[0].id
             });
             //pass project id here
-            this.getSprints(this.state.projectId);
             this.getMembers(this.state.sprintId);
             this.getCurrentUserId();
             console.log(this.state);
@@ -166,34 +165,33 @@ class Project extends React.Component {
         });
     };
 
-    getSprints = projectId => {
-    //   let sprintData = [];
-    //   axios.get(`/api/sprint/${projectId}`)
-    //   .then(res => {
-    //     console.log(res.data);
-    //       let today = new Date();
-    //       //default to latest sprint
-    //       let currentSprint = res.data[0].id;
-    //       res.data.map((pSprint, i) => {
-    //         sprintData.push({
-    //             key: i,
-    //             label: pSprint.name,
-    //             id: pSprint.id
-    //         });
-    //         //if a sprint is not complete, it'll be set to that instead.
-    //         if(!pSprint.isComplete){
-    //           currentSprint = pSprint.id;
-    //         }
-    //     });
-    //     console.log(currentSprint);
-    //     this.setState({
-    //       chipData: sprintData,
-    //       sprintId: currentSprint
-    //      });
-    //   }).then(() => {
-    //     this.getTasks();
-    //   });
-        let sprint
+    getSprints = (projectId, userId) => {
+      let sprintData = [];
+        axios.get(`/api/sprints/project/${projectId}/user/${userId}`)
+        .then((res)=> {
+        console.log(res.data);
+          let today = new Date();
+          //default to latest sprint
+          let currentSprint = res.data[0].id;
+          res.data.map((pSprint, i) => {
+            sprintData.push({
+                key: i,
+                label: pSprint.sprintName,
+                id: pSprint.sprintId
+            });
+            //if a sprint is not complete, it'll be set to that instead.
+            if(!pSprint.isComplete){
+              currentSprint = pSprint.sprintId;
+            }
+        });
+        console.log(currentSprint);
+        this.setState({
+          chipData: sprintData,
+          sprintId: currentSprint
+         });
+      }).then(() => {
+        this.getTasks();
+      });
     };
 
     addSprint = (event) => {
@@ -234,9 +232,12 @@ class Project extends React.Component {
             token: localStorage.getItem("token")
         }).then(res => {
             console.log(res.data)
-            this.setState({currentUser: res.data})
-        })
-    }
+            this.setState({currentUser: res.data}, 
+                ()=> {
+                    this.getSprints(this.state.projectId, this.state.currentUser)})
+        }) 
+        }
+    
 
     inviteMember = () => {
         //we'll pass the sprint id as an encrypted id
@@ -255,7 +256,7 @@ class Project extends React.Component {
             <div>
                 <ButtonAppBar />
                 <div style={{ paddingTop: "100px" }}>
-                    <SprintSelect pastSprints={this.state.chipData} onClick={this.updateActiveSprint} activeSprint={this.state.sprintId} currentUser={this.state.currentUser} />
+                    <SprintSelect sprints={this.state.chipData} onClick={this.updateActiveSprint} activeSprint={this.state.sprintId} currentUser={this.state.currentUser} />
                     <ButtonSizes
                         onClick={() => this.handleOpen('sprintOpen')}
                     />
