@@ -244,6 +244,8 @@ class Project extends React.Component {
                     <SprintSelect pastSprints={this.state.chipData} onClick={this.updateActiveSprint} activeSprint={this.state.sprintId} />
                     <ButtonSizes
                         onClick={() => this.handleOpen('sprintOpen')}
+                        title="Add a Sprint"
+                        color="secondary"
                     />
                     <SimpleModalSprintWrapped
                         open={this.state.sprintOpen}
