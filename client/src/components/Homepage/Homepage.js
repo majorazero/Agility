@@ -60,7 +60,7 @@ class Homepage extends Component {
           >
             <Grid item xs={12}>
               <Paper
-                style={{ height: "100%" }}
+                // style={{ height: 100 }}
               >
                 <ProjectList />
               </Paper>

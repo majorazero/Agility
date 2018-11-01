@@ -6,21 +6,35 @@
 // import GridListTileBar from '@material-ui/core/GridListTileBar';
 // import IconButton from '@material-ui/core/IconButton';
 // import StarBorderIcon from '@material-ui/icons/StarBorder';
+// import Grid from '@material-ui/core/Grid';
+// import Paper from '@material-ui/core/Paper';
+// import Typography from '@material-ui/core/Typography';
 
 
 // const ProjectListTab = (props) => {
-//   return(
-//       <GridListTile style={{marginLeft: 5}}>
-//         <img src="/assets/images/project-img.jpg" width="240px" alt={props.name} style={{borderRadius: "10px"}}/>
-//         <GridListTileBar
-//           title={props.name}
-//           style={{background:'red', borderRadius: "10px"}}
-//           actionIcon={
-//             <IconButton onClick={props.onProjectPress}>
-//               Go
+//   return (
+//     // <Grid
+//     //   container
+//     //   spacing={16}
+//     //   style={{ padding: 5, width: 150 }}
+//     // >
+//     //   <Grid item xs>
+//           <GridListTile>
+//             <img src="assets/images/background.jpg" alt={props.name} style={{
+//               height: 150,
+//               backgroundSize: 'cover',
+//               backgroundPosition: "center center"
+//             }} />
+//             <GridListTileBar
+//               style={{ background: 'red' }}
+//               actionIcon={
+//                 <IconButton onClick={props.onProjectPress}>
+//                   <Typography variant="h6" gutterBottom>{props.name}</Typography>
 //             </IconButton>}
-//         />
-//       </GridListTile>
+//             />
+//           </GridListTile>
+//     //   </Grid>
+//     // </Grid>
 //     //   <h1>{props.name}</h1>
 //     //   <h2>{props.summary}</h2>
 //     // <button onClick={props.onProjectPress}>Go to project.</button>
@@ -62,7 +76,7 @@ const styles = theme => ({
   titleBar: {
     background:
       'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
-  },
+  }
 });
 
 /**
@@ -86,27 +100,30 @@ function SingleLineGridList(props) {
   const { classes } = props;
 
   return (
-    <div className={classes.root}>
-      <GridList className={classes.gridList} cols={2.5}>
-          <GridListTile>
-            <img src="../../../../../../public/assets/images/background.jpg" alt={props.name} />
-            <GridListTileBar
-              title={props.name}
-              onClick={props.onProjectPress}
-              classes={{
-                root: classes.titleBar,
-                title: classes.title,
-              }}
-              actionIcon={
-                <IconButton>
-                  <StarBorderIcon className={classes.title} />
-                </IconButton>
-              }
-            />
-          </GridListTile>
-        ))}
-      </GridList>
-    </div>
+    <GridListTile>
+      <img src="assets/images/background.jpg"
+        alt={props.name}
+        style={{
+          // width: 150,
+          height: 200,
+          backgroundSize: 'cover',
+          backgroundPosition: "center center"
+        }}
+      />
+      <GridListTileBar
+        title={props.name}
+        onClick={props.onProjectPress}
+        classes={{
+          root: classes.titleBar,
+          title: classes.title,
+        }}
+        actionIcon={
+          <IconButton>
+            <StarBorderIcon className={classes.title} />
+          </IconButton>
+        }
+      />
+    </GridListTile>
   );
 }
 

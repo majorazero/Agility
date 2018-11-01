@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Grid } from "@material-ui/core";
+import { Grid, Paper } from "@material-ui/core";
 import axios from "axios";
 import SingleLineGridList from "./ProjectListTab/ProjectListTab.js";
 import SimpleModalProjectWrapped from "../utils/ModalProject.js";
@@ -9,7 +9,6 @@ import ButtonSizes from "../utils/FAB.js";
 import GridList from '@material-ui/core/GridList';
 import MouseOverPopover from '../utils/popover.js';
 
-
 class ProjectList extends Component {
   state = {
     name: "",
@@ -17,9 +16,9 @@ class ProjectList extends Component {
     due_date: "",
     projects: [],
     open: false,
-    direction: 'column',
-    justify: 'flex-start',
-    alignItems: 'flex-start',
+    direction: "row",
+    justify: "center",
+    alignItems: "center",
     projects: [],
     inviteCode: ""
   }
@@ -45,12 +44,18 @@ class ProjectList extends Component {
     }
     else {
       return this.state.projects.map((item) => {
-        return <SingleLineGridList
-          key={item.id}
-          name={item.name}
-          summary={item.summary}
-          duedate={item.due_date}
-          onProjectPress={() => { this.onProjectPress(item.id) }} />;
+        return (
+          // <Grid item xs
+          //   style={{ padding: 5, width: 150 }}
+          // >
+          <SingleLineGridList
+            key={item.id}
+            name={item.name}
+            summary={item.summary}
+            duedate={item.due_date}
+            onProjectPress={() => { this.onProjectPress(item.id) }} />
+        )
+
       });
     }
   }
@@ -118,18 +123,40 @@ class ProjectList extends Component {
     return (
       <div>
 
-        <Grid container>
-          <Grid item xs={8}>
-            {this.populate()}
-          </Grid>
-        </Grid>
+        {/* <Grid container
+          spacing={16}
+          alignItems={alignItems}
+          direction={direction}
+          justify={justify}
+        >
+          <Paper> */}
+          <div
+            style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              justifyContent: 'space-around',
+              overflow: 'hidden',
+              padding: 10,
+              height: "100%"
+            }}
+          >
+            <GridList
+              cols={2.5}
+              style={{
+                flexWrap: 'nowrap',
+                transform: 'translateZ(0)'
+              }}
+            >
+        {this.populate()}
+        </GridList>
+        </div>
+        {/* </Paper>
+        </Grid> */}
 
 
         {/* <Grid xs={12}
           container
-          alignItems={alignItems}
-          direction={direction}
-          justify={justify}
+          
           style={{ marginBottom: 20 }}
         >
           <SimpleModalProjectWrapped
