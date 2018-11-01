@@ -5,6 +5,7 @@ import axios from 'axios';
 // import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import TaskCard from '../utils/TaskCard/TaskCard';
+import Pool from './Pool';
 
 
 // const style = {
@@ -20,16 +21,7 @@ class UserPool extends Component {
 
     constructor(props) {
         super(props);
-
-        this.state = {
-            users: [],
-            tasks: []
-        };
       }
-
-    componentDidMount(){
-        // this.getUsers(this.props.sprintId);
-    }
 
     componentDidUpdate(prevProps){
         if((prevProps.sprintId !== this.props.sprintId) || (prevProps.tasks !== this.props.tasks) || (prevProps.members !== this.props.members)){
@@ -45,11 +37,16 @@ class UserPool extends Component {
               return(
               <Grid key={i} item>
                 <p>{member.User.first_name} {member.User.last_name}</p>
-                {this.props.tasks.filter(task => task.assigned_id === member.User.id).map(fTask => (
-                    <TaskCard key={fTask.id} title={fTask.name} summary={fTask.description} dueDate={fTask.due_date} unAssign={()=>{
-                      this.props.unassign(fTask.id)
-                    }} titleSize="subtitle2" subtitleSize='caption'></TaskCard>
-                ))}
+                {this.props.tasks.filter(task => task.assigned_id === member.User.id).map(fTask => {
+                    console.log(fTask)
+                    return(
+                    <Pool key={fTask.id} id={this.key} tasks={fTask} onClickDelete={() => this.props.onClickDelete(fTask)}
+                    unAssign={() => this.props.unassign(fTask.id)} assigned>
+                    </Pool>)
+                    // <TaskCard key={fTask.id} title={fTask.name} summary={fTask.description} dueDate={fTask.due_date} unAssign={()=>{
+                    //   this.props.unassign(fTask.id)
+                    // }} titleSize="subtitle2" subtitleSize='caption'></TaskCard>
+                })}
               </Grid>)
             })}
         </Grid>

@@ -41,9 +41,9 @@ function SimpleExpansionPanel(props) {
           </Typography>
           {/* {(location.pathname === "/homepage") ? null :  */}
           <ContainedButtons
-            name="Select"
+            name={props.assigned ? "Unassign" : "Select"}
             color="primary"
-            onClick={props.onClickAdd}
+            onClick={props.assigned ? props.unAssign : props.onClickAdd}
           />
           {/* } */}
           {/* {(location.pathname === "/homepage") ? null :  */}
