@@ -35,7 +35,6 @@ class ProjectList extends Component {
       id: sessionStorage.getItem("id"),
       token: localStorage.getItem("token")
     }).then((response) => {
-      console.log(response.data);
       this.setState({ projects: response.data });
     });
   }
