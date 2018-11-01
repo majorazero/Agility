@@ -28,7 +28,6 @@ class UserPool extends Component {
       }
 
     componentDidMount(){
-        console.log(this.props.sprintId);
         this.getUsers(this.props.sprintId);
     }
 
@@ -41,7 +40,6 @@ class UserPool extends Component {
     getUsers = (sprintId) => {
         axios.post('/api/allMemberInSprint', {sprintId: sprintId})
         .then(res => {
-            console.log(res.data)
             this.setState({users: res.data}, () => this.getTasks(sprintId))
         })
     }
@@ -54,7 +52,6 @@ class UserPool extends Component {
     }
 
     render(){
-        console.log(this.state.users)
         return(
             <Grid container spacing={24}>
                 {this.state.users.map((user, i) => (
