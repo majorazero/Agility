@@ -388,92 +388,122 @@ setTimeout(()=>{
     name: "Hunt new dummies",
     due_date: "2018-11-02",
     sprint_id: 4,
-    description: "Hunt new dummies to eat. What's wrong with us."
+    description: "Hunt new dummies to eat. What's wrong with us.",
+    complexity: 4,
+    stack: "Javascript"
   });
   db.Task.create({
     name: "Get some Tums",
     due_date: "2018-11-06",
     sprint_id: 4,
-    description: "Eating dummies can irritate the belly."
+    description: "Eating dummies can irritate the belly.",
+    complexity: 1,
+    stack: "CSS"
   });
   db.Task.create({
     name: "Reconsider the life choice of being a cannibal.",
     due_date: "2018-11-7",
     sprint_id: 4,
-    description: "This is kinda' not good."
+    description: "This is kinda' not good.",
+    complexity: 2,
+    stack: "HTML"
   });
   db.Task.create({
     name: "Hunt babies instead.",
     due_date: "2018-11-08",
     sprint_id: 4,
-    description: "Anyone ever read 'A Modest Proposal'?"
+    description: "Anyone ever read 'A Modest Proposal'?",
+    complexity: 2,
+    stack: "React"
   });
   db.Task.create({
     name: "Read up on what React is.",
     due_date: "2018-11-02",
     sprint_id: 8,
-    description: "Maybe we shouldn't have thrown our old framework in the trash."
+    description: "Maybe we shouldn't have thrown our old framework in the trash.",
+    complexity: 2,
+    stack: "React"
   });
   db.Task.create({
     name: "Decide if crying in the corner is better than using Polymer again.",
     due_date: "2018-11-04",
     sprint_id: 8,
-    description: "It's real bad you guys."
+    description: "It's real bad you guys.",
+    complexity: 4,
+    stack: "React"
   });
   db.Task.create({
     name: "Listen to Michael talk about how Polymer 3 is way better you guys.",
     due_date: "2018-11-07",
     sprint_id: 8,
-    description: "Let's just use React."
+    description: "Let's just use React.",
+    complexity: 3,
+    stack: "React"
   });
   db.Task.create({
     name: "Actually install React now.",
     due_date: "2018-11-08",
     sprint_id: 8,
-    description: "This probably didn't need a week with a team of people."
+    description: "This probably didn't need a week with a team of people.",
+    complexity: 2,
+    stack: "React"
   });
   db.Task.create({
     name: "Start digging in your own nose for boogers.",
     due_date: "2018-11-02",
     sprint_id: 9,
-    description: "But do it with javascript."
+    description: "But do it with javascript.",
+    complexity: 5,
+    stack: "Javascript"
   });
 
   db.Task.create({
     name: "Consider the possiblilty of constructing a webpage with boogers.",
     due_date: "2018-11-03",
     sprint_id: 9,
-    description: "Ask Unkindman why we do this."
+    description: "Ask Unkindman why we do this.",
+    complexity: 5,
+    stack: "HTML"
   });
 
   db.Task.create({
     name: "Consider trashing this project.",
     due_date: "2018-11-05",
     sprint_id: 9,
-    description: "42."
+    description: "42.",
+    complexity: 1,
+    stack: "HTML"
   });
   db.Task.create({
     name: "Is the answer 42?",
     due_date: "2018-11-02",
     sprint_id: 10,
-    description: "Of course it is. But we should get someone on it to confirm."
+    description: "Of course it is. But we should get someone on it to confirm.",
+    complexity: 1,
+    stack: "CSS"
   });
   db.Task.create({
     name: "Wonder why you set a sprint for this.",
     due_date: "2018-11-02",
     sprint_id: 10,
-    description: "Job creation though."
+    description: "Job creation though.",
+    complexity: 3,
+    stack: "Node.js"
   });
   db.Task.create({
     name: "Send someone to get the coffee.",
     due_date: "2018-11-02",
     sprint_id: 10,
-    description: "Because being busy is more important than what we're actually doing."
+    description: "Because being busy is more important than what we're actually doing.",
+    complexity: 3,
+    stack: "Node.js"
   });
   db.Task.create({
     name: "Code your existential crisis away with javascript.",
     due_date: "2018-11-02",
     sprint_id: 10,
-    description: "We might need a new sprint for this."
+    description: "We might need a new sprint for this.",
+    complexity: 5,
+    stack: "Javascript"
   });
 },1250);
