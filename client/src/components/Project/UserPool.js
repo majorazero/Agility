@@ -32,9 +32,9 @@ class UserPool extends Component {
     }
 
     componentDidUpdate(prevProps){
-        if((prevProps.sprintId !== this.props.sprintId) || (prevProps.tasks !== this.props.tasks) || (prevProps.members !== this.props.members)){
-           this.render();
-        }
+      if((prevProps.sprintId !== this.props.sprintId) || (prevProps.tasks !== this.props.tasks) || (prevProps.members !== this.props.members)){
+         this.render();
+      }
     }
 
     render(){
