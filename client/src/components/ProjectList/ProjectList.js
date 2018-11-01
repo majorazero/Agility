@@ -203,13 +203,13 @@ class ProjectList extends Component {
             />
             <h2>Join Sprint with Invite Code</h2> */}
 
-        {/* <div className="invCodeDiv">
+        <div className="invCodeDiv">
               <form onSubmit={this.handleInviteSubmit}>
                 <h3>Invite Code:</h3>
                 <input type="text" name="inviteCode" onChange={this.handleInviteChange} />
                 <button>Submit</button>
               </form>
-            </div> */}
+            </div>
       </div>
     );
   }

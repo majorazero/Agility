@@ -20,7 +20,7 @@ import Axios from 'axios';
 
 const styles = theme => ({
     card: {
-        maxWidth: 300,
+        width: 300,
     },
     media: {
         height: 75,
@@ -82,7 +82,7 @@ class RecipeReviewCard extends React.Component {
         const { classes } = this.props;
 
         return (
-            <Card className={classes.card}>
+            <Card className={classes.card} style={{width: "100%"}}>
                 <CardMedia
                     className={classes.media}
                     image="/assets/images/profileimg.jpg"

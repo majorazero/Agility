@@ -48,7 +48,7 @@ class Homepage extends Component {
               </Paper>
             </Grid>
             <Grid item xs={1} />
-            <Grid item xs>
+            <Grid item xs={3}>
               <ProfileCard />
             </Grid>
           </Grid>
