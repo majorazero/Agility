@@ -6,8 +6,7 @@ import ProfileCard from "./ProfileCard/profilecard.js";
 import ActiveTasks from "./ActiveTasks/activetasks";
 import Grid from '@material-ui/core/Grid';
 import ButtonAppBar from "../utils/Navbar/Navbar.js";
-import SimpleBottomNavigation from "../utils/Footer/Footer.js";
-
+import Paper from '@material-ui/core/Paper';
 
 //doesn't has to be
 
@@ -24,43 +23,53 @@ class Homepage extends Component {
   render() {
     return (
       <div>
-        <ButtonAppBar/>
-      <Grid container spacing={8} style={{ marginTop: 100 }}>
-        <Grid container item xs={12} style={{  }}>
-         
-          <Grid container item xs={6} style={{  justifyContent: "right" }}>
-            <Grid item xs={6} style={{ marginLeft: 200, marginTop: 70}}>
+        <ButtonAppBar />
+        <div
+          className="parallax"
+          style={{
+            paddingTop: "50px",
+            overflowX: "hidden",
+
+            // possible?
+            backgroundImage: `url("/assets/images/background.png")`,
+            resizeMode: 'cover',
+            // height: "3050px"
+          }} >
+          <Grid
+            container
+            spacing={8}
+            style={{ padding: "50px" }}
+          >
+            <Grid item xs={8}>
+              <Paper
+              style={{ height: "100%" }}
+              >
+                <ActiveTasks />
+              </Paper>
+            </Grid>
+            <Grid item xs={1} />
+            <Grid item xs>
               <ProfileCard />
             </Grid>
           </Grid>
-          <Grid container item xs={6} style={{  }}>
-            <Grid item xs={6} style={{ marginLeft: 100 }}>
-              <Grid item xs={5} >
-                <h1>Task List</h1>
-              </Grid>
-            </Grid>
-            <Grid item xs={12} style={{ 
-              maxHeight: 300, 
-              height: 300,
-              overflow: "auto" , 
-              marginRight: 140, 
-              border: "0.5px solid rgb(23, 23, 23, 0.2) ", 
-              borderRadius: 7,
-              boxShadow: "4px 4px 5px 1px rgb(23, 23, 23, 0.5)",
-              }}>
+
+          {/* <Grid container spacing={8} style={{ marginTop: 100 }}>
+          <Grid container item xs={12} style={{ marginLeft: 100 }}>
+            <Grid item xs={4} style={{ maxHeight: 375, overflow: "auto", marginLeft: 35, marginRight: 140 }}>
               <ActiveTasks />
             </Grid>
+            <Grid item xs={4} style={{ justifyContent: "left" }}>
+              <ProfileCard />
+            </Grid>
           </Grid>
-        </Grid>
-        <Grid container style={{ justifyContent: 'center' }}>
-          <Grid item xs={12}   style={{ marginLeft: 100, maxWidth: 900}}>
-            <ProjectList />
+          <Grid container style={{ justifyContent: 'center' }}>
+            <Grid item xs={10} >
+              <ProjectList />
+            </Grid>
           </Grid>
-        </Grid>
-        </Grid>
-        <SimpleBottomNavigation/>
+        </Grid> */}
+        </div>
       </div>
-
     );
   }
 }
