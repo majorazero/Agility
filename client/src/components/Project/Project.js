@@ -35,18 +35,18 @@ class Project extends React.Component {
 
         // temp id set
         sprintId: 4,
-    
+
         taskOpen: false,
         taskName: "",
         taskDue_date: "",
         taskDescription: "",
         chipData: [],
 
-        sprintOpen: false, 
+        sprintOpen: false,
         sprintName: "",
         sprintStart_date: "",
-        sprintEnd_date: "", 
-        
+        sprintEnd_date: "",
+
         currentUser: ''
     }
 
@@ -98,7 +98,7 @@ class Project extends React.Component {
             }
             console.log(this.state);
             this.setState({
-                unassignedTasks: unassigned, 
+                unassignedTasks: unassigned,
                 assignedTasks: assigned
             })
         });
@@ -140,21 +140,27 @@ class Project extends React.Component {
     }
 
     assignTask = (task) => {
-        axios.post("/api/decrypt", { token: localStorage.getItem("token"), id: sessionStorage.getItem("id") }).then((response) => {
-            let user = response.data;
-            axios.put("/api/task/by/" + task.id + "/" + user).then((res) => {
-              // console.log(res.data);
-              this.getTasks();
-              //window.location.reload();
+      axios.post("/api/decrypt", { token: localStorage.getItem("token"), id: sessionStorage.getItem("id") }).then((response) => {
+          let user = response.data;
+          axios.put("/api/task/by/" + task.id + "/" + user).then((res) => {
+            // console.log(res.data);
+            this.getTasks();
+            //window.location.reload();
 
-            })
-        });
+          })
+      });
+    }
+
+    unassignTask = (id) => {
+      axios.put("/api/task/unassign",{id: id}).then((response) => {
+        this.getTasks();
+      });
     }
 
     updateActiveSprint = (sprintId) => {
-        this.setState({ sprintId: sprintId }, () => {
-            this.getTasks();
-        });
+      this.setState({ sprintId: sprintId }, () => {
+        this.getTask();
+      });
     }
 
     defaultVal = () => {
@@ -197,15 +203,15 @@ class Project extends React.Component {
     addSprint = (event) => {
         event.preventDefault();
         let obj = {
-            name: this.state.sprintName, 
+            name: this.state.sprintName,
             start_date: this.state.sprintStart_date,
-            end_date: this.state.sprintEnd_date, 
+            end_date: this.state.sprintEnd_date,
             project_id: this.state.projectId
         }
         axios.post('/api/sprint', {
-            name: this.state.sprintName, 
+            name: this.state.sprintName,
             start_date: this.state.sprintStart_date,
-            end_date: this.state.sprintEnd_date, 
+            end_date: this.state.sprintEnd_date,
             project_id: this.state.projectId
         })
         .then(() => {
@@ -317,7 +323,8 @@ class Project extends React.Component {
 
                         </Grid>
                         <Grid item xs={6} style={{ padding: "10px" }}>
-                            <UserPool sprintId={this.state.sprintId} members={this.state.members} tasks={this.state.assignedTasks}></UserPool>
+                            <UserPool sprintId={this.state.sprintId} members={this.state.members} tasks={this.state.assignedTasks}
+                            unassign={this.unassignTask}></UserPool>
                         </Grid>
                         <br />
                         <div><Link to="/homepage">Back to home page.</Link></div>
