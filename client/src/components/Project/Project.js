@@ -167,32 +167,33 @@ class Project extends React.Component {
     };
 
     getSprints = projectId => {
-      let sprintData = [];
-      axios.get(`/api/sprint/${projectId}`)
-      .then(res => {
-        console.log(res.data);
-          let today = new Date();
-          //default to latest sprint
-          let currentSprint = res.data[0].id;
-          res.data.map((pSprint, i) => {
-            sprintData.push({
-                key: i,
-                label: pSprint.name,
-                id: pSprint.id
-            });
-            //if a sprint is not complete, it'll be set to that instead.
-            if(!pSprint.isComplete){
-              currentSprint = pSprint.id;
-            }
-        });
-        console.log(currentSprint);
-        this.setState({
-          chipData: sprintData,
-          sprintId: currentSprint
-         });
-      }).then(() => {
-        this.getTasks();
-      });
+    //   let sprintData = [];
+    //   axios.get(`/api/sprint/${projectId}`)
+    //   .then(res => {
+    //     console.log(res.data);
+    //       let today = new Date();
+    //       //default to latest sprint
+    //       let currentSprint = res.data[0].id;
+    //       res.data.map((pSprint, i) => {
+    //         sprintData.push({
+    //             key: i,
+    //             label: pSprint.name,
+    //             id: pSprint.id
+    //         });
+    //         //if a sprint is not complete, it'll be set to that instead.
+    //         if(!pSprint.isComplete){
+    //           currentSprint = pSprint.id;
+    //         }
+    //     });
+    //     console.log(currentSprint);
+    //     this.setState({
+    //       chipData: sprintData,
+    //       sprintId: currentSprint
+    //      });
+    //   }).then(() => {
+    //     this.getTasks();
+    //   });
+        let sprint
     };
 
     addSprint = (event) => {
