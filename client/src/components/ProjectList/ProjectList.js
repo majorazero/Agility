@@ -170,11 +170,11 @@ class ProjectList extends Component {
                 </GridList>
               </div>
             </Grid>
-            <MouseOverPopover>
+            {/* <MouseOverPopover> */}
             <ButtonSizes
               onClick={this.handleOpen}
             />
-            </MouseOverPopover>
+            {/* </MouseOverPopover> */}
             <h2>Join Sprint with Invite Code</h2>
 
             <div className="invCodeDiv">

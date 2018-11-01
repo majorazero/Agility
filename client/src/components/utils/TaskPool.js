@@ -7,6 +7,8 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ContainedButtons from "./Button.js";
+import {BrowserRouter as Router, Route, Redirect, Switch} from "react-router-dom";
+
 
 const styles = theme => ({
   root: {
@@ -37,16 +39,21 @@ function SimpleExpansionPanel(props) {
           <Typography className={classes.notHeading}>
               {props.due}
           </Typography>
+          {/* {(location.pathname === "/homepage") ? null :  */}
           <ContainedButtons
             name="Select"
             color="primary"
             onClick={props.onClickAdd}
           />
+          {/* } */}
+          {/* {(location.pathname === "/homepage") ? null :  */}
           <ContainedButtons
             name="Delete"
             color="secondary"
             onClick={props.onClickDelete}
           />
+          {/* } */}
+          
         </ExpansionPanelDetails>
       </ExpansionPanel>
   );
