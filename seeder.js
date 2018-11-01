@@ -15,6 +15,13 @@ for(let i = 0; i < 20; i++){
     token: encrypt.encrypt(`dummy${i}@dummy.com`,"dummy")
   });
 }
+db.User.create({
+  first_name: "Clark",
+  last_name: "Nielsen",
+  email: "clark.nielsen@potato.com",
+  password: "clark",
+  token: encrypt.encrypt("clark.nielsen@potato.com","clark")
+})
 //////////////////
 /// Project
 /////////////////
@@ -56,6 +63,12 @@ db.Project.create({
   due_date: "2017-11-15",
   completed_date: "2017-11-15",
   userId: 5
+});
+db.Project.create({
+  name: "How to pronounce GIF",
+  summary: "A project to determine the correct way of pronouncing GIF",
+  due_date: "2018-12-15",
+  userId: 21
 });
 //////////////////
 /// Sprint
