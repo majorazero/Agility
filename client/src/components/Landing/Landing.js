@@ -7,7 +7,8 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import ContainedButtons from "../utils/Button.js";
 import './landing.css';
 import Typography from '@material-ui/core/Typography';
-import MediaCard from "../utils/MediaCard.js"
+import MediaCard from "../utils/MediaCard.js";
+
 
 
 //import Image from "/assets/images/profileimg.png";
@@ -32,6 +33,12 @@ const theme = createMuiTheme({
 });
 
 class Landing extends Component {
+
+
+handleClick = () => {
+  window.open("https://github.com/majorazero/project3");
+
+}
 
   state = {
     creator: [
@@ -159,9 +166,10 @@ class Landing extends Component {
               <MuiThemeProvider theme={theme}>
                 <ContainedButtons
                   component={Link}
-                  to="#"
+                  to=""
                   name="See How It Works"
                   color="secondary"
+                  onClick ={this.handleClick}
                 />
               </MuiThemeProvider>
 

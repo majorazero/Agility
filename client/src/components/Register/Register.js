@@ -60,7 +60,9 @@ class Register extends Component {
         <div style={{textAlign:"center", marginTop: "5px"}}>
       <Link  to="/login">Back to login.</Link>
       </div>
+      <div style={{position:"fixed", width:"100%", bottom:"0"}}>
       <SimpleBottomNavigation/>
+      </div>
     </div>
     );
   }
