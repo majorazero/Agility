@@ -5,53 +5,64 @@ import axios from 'axios';
 // import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import TaskCard from '../utils/TaskCard/TaskCard';
-import Pool from './Pool';
+import Paper from '@material-ui/core/Paper';
+import Pool from "./Pool.js"
 
-
-// const style = {
-//     gridItem: {
-//         padding: 10
-//     },
-//     taskCard: {
-//         marginTop: 5
-//     }
-// }
+const style = {
+  gridItem: {
+    padding: 10
+  },
+  taskCard: {
+    marginTop: 5
+  }
+}
 
 class UserPool extends Component {
 
-    constructor(props) {
-        super(props);
-      }
+  constructor(props) {
+    super(props);
 
-    componentDidUpdate(prevProps){
-      if((prevProps.sprintId !== this.props.sprintId) || (prevProps.tasks !== this.props.tasks) || (prevProps.members !== this.props.members)){
-         this.render();
-      }
+    this.state = {
+      users: [],
+      tasks: []
+    };
+  }
+
+  componentDidMount() {
+    // this.getUsers(this.props.sprintId);
+  }
+
+  componentDidUpdate(prevProps) {
+    if ((prevProps.sprintId !== this.props.sprintId) || (prevProps.tasks !== this.props.tasks) || (prevProps.members !== this.props.members)) {
+      this.render();
     }
+  }
 
-    render(){
-      console.log(this.props);
-      return(
-        <Grid container spacing={24}>
-            {this.props.members.map((member, i) => {
-              return(
-              <Grid key={i} item>
+  render() {
+    console.log(this.props);
+    return (
+      <Grid container spacing={24}
+        direction="column"
+        justify="flex-start"
+        alignItems="flex-start"
+      >
+        {this.props.members.map((member, i) => {
+          return (
+            <Grid item>
+              <Paper key={i}>
                 <p>{member.User.first_name} {member.User.last_name}</p>
                 {this.props.tasks.filter(task => task.assigned_id === member.User.id).map(fTask => {
-                    console.log(fTask)
-                    return(
-                    <Pool key={fTask.id} id={this.key} tasks={fTask} onClickDelete={() => this.props.onClickDelete(fTask)}
-                    unAssign={() => this.props.unassign(fTask.id)} onClickComplete={() => this.props.onClickComplete(fTask.id)} assigned> 
-                    </Pool>)
-                    // <TaskCard key={fTask.id} title={fTask.name} summary={fTask.description} dueDate={fTask.due_date} unAssign={()=>{
-                    //   this.props.unassign(fTask.id)
-                    // }} titleSize="subtitle2" subtitleSize='caption'></TaskCard>
+                  console.log(fTask)
+                  return (
+                    <Pool key={fTask.id} id={this.key} tasks={fTask} onClickDelete={() => this.props.onClickDelete(fTask)} unAssign={() => this.props.unassign(fTask.id)} onClickComplete={() => this.props.onClickComplete(fTask.id)} assigned />
+                  )
                 })}
-              </Grid>)
-            })}
-        </Grid>
-      );
-    }
+              </Paper>
+            </Grid>)
+        })}
+      </Grid>
+    );
+  }
 };
 
 export default UserPool;

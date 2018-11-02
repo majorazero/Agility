@@ -214,6 +214,19 @@ class ProjectList extends Component {
               onClick={this.handleOpen}
             />
             <h2>Join Sprint with Invite Code</h2> */}
+
+        <SimpleModalProjectWrapped
+          open={this.state.open}
+          onClose={this.handleClose}
+          name="Add a New Project ..."
+          onSubmit={this.handleSubmit}
+          onChange={this.handleChange}
+        >
+
+          <AddProjectLayout
+          />
+        </SimpleModalProjectWrapped>
+
         <ButtonSizes
           onClick={this.handleOpen}
           title="Add a Project"
@@ -224,11 +237,17 @@ class ProjectList extends Component {
         />
         <Grid
           container
+          direction="row"
+          justify="flex-end"
+          alignItems="flex-start"
           spacing={8}
+          style={{
+            height: 90,
+          }}
         >
           <Grid item xs={9} />
           <Grid item xs>
-            <Typography variant="h3" gutterBottom>{this.state.message}</Typography>
+            <Typography variant="h5" gutterBottom>{this.state.message}</Typography>
 
             <InputTextField
               onSubmit={this.handleInviteSubmit}
