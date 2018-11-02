@@ -397,6 +397,7 @@ class Project extends React.Component {
                                 <Pool
                                   key={task.id}
                                   id={this.key}
+                                  isAdmin={this.state.isAdmin}
                                   tasks={task}
                                   onClickDelete={this.deleteTask.bind(this, task)}
                                 />
@@ -406,6 +407,7 @@ class Project extends React.Component {
                               <Pool
                                 key={task.id}
                                 id={this.key}
+                                isAdmin={this.state.isAdmin}
                                 tasks={task}
                                 onClickDelete={this.deleteTask.bind(this, task)}
                                 onClickAdd={this.assignTask.bind(this, task)}

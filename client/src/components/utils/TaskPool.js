@@ -47,13 +47,20 @@ function SimpleExpansionPanel(props) {
           />
           {/* } */}
           {/* {(location.pathname === "/homepage") ? null :  */}
+          {props.isAdmin ?
           <ContainedButtons
             name={props.assigned ? "Mark Complete" : "Delete"}
             color="secondary"
             onClick={props.assigned ? props.onClickComplete : props.onClickDelete}
           />
+          :
+          (props.assigned) ?
+          <ContainedButtons
+            name={props.assigned ? "Mark Complete" : "Delete"}
+            color="secondary"
+            onClick={props.assigned ? props.onClickComplete : props.onClickDelete}
+          /> : ""}
           {/* } */}
-          
         </ExpansionPanelDetails>
       </ExpansionPanel>
   );
