@@ -244,10 +244,10 @@ class Project extends React.Component {
     }
 
     getMembers = (sprintId) => {
-      axios.post('/api/allMemberInSprint', { sprintId: sprintId }).then(res => {
-        console.log("Members:", res.data);
-        this.setState({ members: res.data });
-      })
+        axios.post('/api/allMemberInSprint', { sprintId: sprintId }).then(res => {
+            console.log("Members:", res.data);
+            this.setState({ members: res.data });
+        })
     }
 
     getCurrentUserId = () => {
@@ -334,6 +334,7 @@ class Project extends React.Component {
                                         onClick={() => this.handleOpen('sprintOpen')}
                                         title="Add a Sprint"
                                         color="secondary"
+                                        mini
                                     />
                                     {/* </MuiThemeProvider> */}
                                     <SimpleModalSprintWrapped
@@ -383,7 +384,8 @@ class Project extends React.Component {
                                     </SimpleModalWrapped>
                                     <SwitchLabel
                                         onChange={this.switchTaskPool}
-                                    ></SwitchLabel>
+                                        label="Show Completed Tasks"
+                                    />
                                     {this.state.showComplete ? this.state.completedTasks.map((task) => {
                                         return (
                                             <Pool
@@ -401,7 +403,6 @@ class Project extends React.Component {
                                                 tasks={task}
                                                 onClickDelete={this.deleteTask.bind(this, task)}
                                                 onClickAdd={this.assignTask.bind(this, task)}
-                                                style={this.state.showComplete ? { display: 'default' } : { display: 'none' }}
                                             />
                                         );
                                     })}
@@ -412,12 +413,12 @@ class Project extends React.Component {
                                     style={{ height: "300px" }}
                                 >
                                     <UserPool
-                                    sprintId={this.state.sprintId}
-                                    members={this.state.members}
-                                    tasks={this.state.assignedTasks}
-                                    unassign={this.unassignTask}
-                                    onClickDelete={this.deleteTask}
-                                    onClickComplete={this.markComplete}
+                                        sprintId={this.state.sprintId}
+                                        members={this.state.members}
+                                        tasks={this.state.assignedTasks}
+                                        unassign={this.unassignTask}
+                                        onClickDelete={this.deleteTask}
+                                        onClickComplete={this.markComplete}
                                     />
                                 </Paper>
                             </Grid>

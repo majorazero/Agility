@@ -26,7 +26,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import Chip from '@material-ui/core/Chip';
-import FaceIcon from '@material-ui/icons/Face';
+import Icon from '@material-ui/icons/TurnedIn';
 import DoneIcon from '@material-ui/icons/Done';
 
 const styles = theme => ({
@@ -40,22 +40,13 @@ const styles = theme => ({
     },
 });
 
-function handleDelete() {
-    alert('You clicked the delete icon.'); // eslint-disable-line no-alert
-}
-
-function handleClick() {
-    alert('You clicked the Chip.'); // eslint-disable-line no-alert
-}
-
 function Chips(props) {
     const { classes } = props;
     return (
         <div className={classes.root}>
             {props.sprints.map((data, i) => {
                 return (<Chip
-                    icon={<FaceIcon />}
-                    onDelete={handleDelete}
+                    icon={<Icon />}
                     className={classes.chip}
                     key={data.key}
                     label={data.label}

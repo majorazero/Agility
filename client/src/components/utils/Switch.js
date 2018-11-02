@@ -3,22 +3,29 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 
-const SwitchLabel = (props) => {
+class SwitchLabel extends React.Component {
 
+  constructor(props) {
+    super(props);
+
+  }
+
+  render() {
     return (
       <FormGroup row>
         <FormControlLabel
           control={
             <Switch
-              checked={props.checked}
-              onChange={props.onChange}
+              checked={this.props.checked}
+              onChange={this.props.onChange}
               value="checkedA"
             />
           }
-          label="Show Completed Tasks"
+          label={this.props.label}
         />
       </FormGroup>
     );
   }
+}
 
 export default SwitchLabel;
