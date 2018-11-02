@@ -54,7 +54,7 @@ class Project extends React.Component {
         sprintStart_date: "",
         sprintEnd_date: "",
 
-        currentUser: '', 
+        currentUser: '',
         showComplete: false
     }
 
@@ -102,17 +102,17 @@ class Project extends React.Component {
                     unassigned.push(task[i])
                 }
 
-                else if (!task[i].isCompleted){
+                else if (!task[i].isCompleted) {
                     assigned.push(task[i]);
                 }
-                else if(task[i].isCompleted){
+                else if (task[i].isCompleted) {
                     completed.push(task[i])
                 }
             }
             console.log(this.state);
             this.setState({
                 unassignedTasks: unassigned,
-                assignedTasks: assigned, 
+                assignedTasks: assigned,
                 completedTasks: completed
             }, () => {
                 console.log(this.state.completedTasks)
@@ -158,27 +158,27 @@ class Project extends React.Component {
 
     assignTask = (task) => {
         console.log("assign task")
-      axios.post("/api/decrypt", { token: localStorage.getItem("token"), id: sessionStorage.getItem("id") }).then((response) => {
-          let user = response.data;
-          axios.put("/api/task/by/" + task.id + "/" + user).then((res) => {
-            // console.log(res.data);
-            this.getTasks();
-            //window.location.reload();
+        axios.post("/api/decrypt", { token: localStorage.getItem("token"), id: sessionStorage.getItem("id") }).then((response) => {
+            let user = response.data;
+            axios.put("/api/task/by/" + task.id + "/" + user).then((res) => {
+                // console.log(res.data);
+                this.getTasks();
+                //window.location.reload();
             })
         });
     }
 
     unassignTask = (id) => {
         console.log('unassign task')
-      axios.put("/api/task/unassign",{id: id}).then((response) => {
-        this.getTasks();
-      });
+        axios.put("/api/task/unassign", { id: id }).then((response) => {
+            this.getTasks();
+        });
     }
 
     updateActiveSprint = (sprintId) => {
-      this.setState({ sprintId: sprintId }, () => {
-        this.getTasks();
-      });
+        this.setState({ sprintId: sprintId }, () => {
+            this.getTasks();
+        });
     }
 
     defaultVal = () => {
@@ -277,17 +277,17 @@ class Project extends React.Component {
 
     markComplete = (id) => {
         axios.put(`/api/complete/task/${id}`)
-        .then(() => {
-            this.getTasks();
-        })
-    } 
+            .then(() => {
+                this.getTasks();
+            })
+    }
 
     switchTaskPool = () => {
-        if(this.state.showComplete === true){
-            this.setState({showComplete: false})
+        if (this.state.showComplete === true) {
+            this.setState({ showComplete: false })
         }
-        else{
-            this.setState({showComplete: true})
+        else {
+            this.setState({ showComplete: true })
         }
     }
 
@@ -330,11 +330,11 @@ class Project extends React.Component {
                                     style={{ height: "100%" }}
                                 >
                                     {/* <MuiThemeProvider theme={theme}> */}
-                                        <ButtonSizes
-                                            onClick={() => this.handleOpen('sprintOpen')}
-                                            title="Add a Sprint"
-                                            color="secondary"
-                                        />
+                                    <ButtonSizes
+                                        onClick={() => this.handleOpen('sprintOpen')}
+                                        title="Add a Sprint"
+                                        color="secondary"
+                                    />
                                     {/* </MuiThemeProvider> */}
                                     <SimpleModalSprintWrapped
                                         open={this.state.sprintOpen}
@@ -365,11 +365,11 @@ class Project extends React.Component {
                                     style={{ height: "300px" }}
                                 >
                                     {/* <MuiThemeProvider theme={theme2}> */}
-                                        <ButtonSizes
-                                            onClick={() => this.handleOpen('taskOpen')}
-                                            title="Add a Task"
-                                            color="secondary"
-                                        />
+                                    <ButtonSizes
+                                        onClick={() => this.handleOpen('taskOpen')}
+                                        title="Add a Task"
+                                        color="secondary"
+                                    />
                                     {/* </MuiThemeProvider> */}
                                     <SimpleModalWrapped
                                         open={this.state.taskOpen}
@@ -381,7 +381,19 @@ class Project extends React.Component {
                                         <AddTaskLayout
                                         />
                                     </SimpleModalWrapped>
-                                    {this.state.unassignedTasks.map((task) => {
+                                    <SwitchLabel
+                                        onChange={this.switchTaskPool}
+                                    ></SwitchLabel>
+                                    {this.state.showComplete ? this.state.completedTasks.map((task) => {
+                                        return (
+                                            <Pool
+                                                key={task.id}
+                                                id={this.key}
+                                                tasks={task}
+                                                onClickDelete={this.deleteTask.bind(this, task)}
+                                            />
+                                        );
+                                    }) : this.state.unassignedTasks.map((task) => {
                                         return (
                                             <Pool
                                                 key={task.id}
@@ -389,6 +401,7 @@ class Project extends React.Component {
                                                 tasks={task}
                                                 onClickDelete={this.deleteTask.bind(this, task)}
                                                 onClickAdd={this.assignTask.bind(this, task)}
+                                                style={this.state.showComplete ? { display: 'default' } : { display: 'none' }}
                                             />
                                         );
                                     })}
@@ -398,11 +411,13 @@ class Project extends React.Component {
                                 <Paper
                                     style={{ height: "300px" }}
                                 >
-                                    <UserPool
-                                        sprintId={this.state.sprintId}
-                                        members={this.state.members}
-                                        tasks={this.state.assignedTasks}
-                                        unassign={this.unassignTask}
+                                    <UserPool 
+                                    sprintId={this.state.sprintId} 
+                                    members={this.state.members} 
+                                    tasks={this.state.assignedTasks}
+                                    unassign={this.unassignTask}
+                                    onClickDelete={this.deleteTask}
+                                    onClickComplete={this.markComplete}
                                     />
                                 </Paper>
                             </Grid>
