@@ -59,7 +59,10 @@ class RecipeReviewCard extends React.Component {
         userLastName: "",
         userEmail: "",
         totalTask: "",
-        totalCompletedTask: ""
+        totalCompletedTask: "",
+        sprintParticipate: "",
+        projectContributed: "",
+        projectCreated: ""
     };
 
     componentDidMount() {
@@ -75,7 +78,11 @@ class RecipeReviewCard extends React.Component {
               userLastName: response.data.prof.last_name,
               userEmail: response.data.prof.email,
               totalTask: response.data.totalTask,
-              totalCompletedTask: response.data.totalCompletedTask
+              totalCompletedTask: response.data.totalCompletedTask,
+              sprintParticipate: response.data.sprintParticipate,
+              projectContributed: response.data.projectContributed,
+              projectCreated:
+              response.data.projectCreated
             }
           );
         });
@@ -108,9 +115,23 @@ class RecipeReviewCard extends React.Component {
                     </Typography>
                     <Typography>
                       {(this.state.totalTask === 0) ? "Start working on something!":
-                        `${this.state.totalCompletedTask/this.state.totalTask*100}% Completed ${this.state.totalCompletedTask} tasks out of ${this.state.totalTask} tasks!`
+                        `${this.state.totalCompletedTask/this.state.totalTask*100}%`
                       }
-                      
+                    </Typography>
+                    <Typography>
+                      Total Tasks Taken: {this.state.totalTask}
+                    </Typography>
+                    <Typography>
+                      Total Tasks Completed: {this.state.totalCompletedTask}
+                    </Typography>
+                    <Typography>
+                      Total Sprints Participated: {this.state.sprintParticipate}
+                    </Typography>
+                    <Typography>
+                      Total Projects Contributed:  {this.state.projectContributed}
+                    </Typography>
+                    <Typography>
+                      Total Projects Created:  {this.state.projectCreated}
                     </Typography>
                     <br />
                     {/* <Typography component="p">

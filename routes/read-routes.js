@@ -134,7 +134,34 @@ module.exports = function(app) {
                 Obj.totalCompletedTask++;
               }
             }
-            res.json(Obj);
+            db.SprintMembership.findAll({
+              where: {
+                userId: simpleId
+              },
+              include:[{
+                model: db.Sprint,
+                as: "Sprint"
+              }]
+            }).then((spRes) => {
+              Obj.sprintDat = spRes;
+              Obj.sprintParticipate = spRes.length;
+              Obj.projectContributed = 0;
+              let projectCheckArr = [];
+              for(let i = 0; i < spRes.length; i++){
+                if(!projectCheckArr.includes(spRes[i].Sprint.project_id) === true){
+                  projectCheckArr.push(spRes[i].Sprint.project_id);
+                  Obj.projectContributed++;
+                }
+              }
+              db.Project.findAll({
+                where: {
+                  userId: simpleId
+                }
+              }).then((pRes) => {
+                Obj.projectCreated = pRes.length;
+                res.json(Obj);
+              });
+            });
           });
         })
     });
