@@ -12,6 +12,16 @@ module.exports = function (app) {
         })
     });
 
+    app.post("/api/userByDecrypt",(req,res) => {
+      db.User.findAll({
+        where:{
+          id: encrypt.decrypt(req.body.token,req.body.id)
+        }
+      }).then((data) => {
+        res.json(data[0]);
+      });
+    });
+
     app.get("/api/project", (req, res) => {
         db.Project.findAll({}).then(dbSprint => {
             res.json(dbSprint);
@@ -87,16 +97,17 @@ module.exports = function (app) {
         })
     });
 
-    app.post("/api/allMemberInSprint", (req, res) => {
-        db.SprintMembership.findAll({
-            where: { sprintId: req.body.sprintId },
-            include: [{
-                model: db.User,
-                as: "User"
-            }]
-        }).then((data) => {
-            res.json(data);
-        })
+    app.post("/api/allMemberInSprint", (req,res) => {
+      db.SprintMembership.findAll({
+        where: {sprintId: req.body.sprintId},
+        include: [{
+          model: db.User,
+          as: "User"
+        }]
+      }).then((data) => {
+        console.log(data,req.body.sprintId);
+        res.json(data);
+      })
     });
 
     app.post("/api/allSprintsForMember", (req, res) => {
@@ -112,12 +123,79 @@ module.exports = function (app) {
     });
 
     app.post("/api/getuser/", (req, res) => {
+        let Obj = {};
+        let simpleId = encrypt.decrypt(req.body.token,req.body.id);
         db.User.findAll({
-            where: {
-                id: encrypt.decrypt(req.body.token, req.body.id)
-            }
+         where: {
+          id: simpleId
+         }
         }).then(response => {
-            res.json(response);
+          Obj.prof = response[0];
+          //lets also pull some career data in here.
+          db.Task.findAll({
+            where: {
+              assigned_id: simpleId
+            }
+          }).then((tRes) => {
+            Obj.task = tRes;
+            Obj.totalTask = tRes.length;
+            Obj.totalCompletedTask = 0;
+            //for complexity
+            Obj.complexity = 0;
+            for(let i = 0; i < tRes.length; i++){
+              Obj.complexity += tRes[i].complexity;
+              if(tRes[i].isCompleted === true){
+                Obj.totalCompletedTask++;
+              }
+            }
+            Obj.complexity = (Obj.complexity/tRes.length).toFixed(2);
+            if(Obj.complexity <= 1.5){
+              Obj.compSemantics = "Easy";
+            }
+            else if (Obj.complexity <= 2.5){
+              Obj.compSemantics = "Easy-Medium";
+            }
+            else if (Obj.complexity <= 3.5){
+              Obj.compSemantics = "Medium";
+            }
+            else if (Obj.complexity <= 4.5){
+              Obj.compSemantics = "Medium-Hard";
+            }
+            else if (Obj.complexity <= 5){
+              Obj.compSemantics = "Hard";
+            }
+            else{
+              Obj.compSemantics = "Start doing some tasks, see where you at!";
+            }
+            db.SprintMembership.findAll({
+              where: {
+                userId: simpleId
+              },
+              include:[{
+                model: db.Sprint,
+                as: "Sprint"
+              }]
+            }).then((spRes) => {
+              Obj.sprintDat = spRes;
+              Obj.sprintParticipate = spRes.length;
+              Obj.projectContributed = 0;
+              let projectCheckArr = [];
+              for(let i = 0; i < spRes.length; i++){
+                if(!projectCheckArr.includes(spRes[i].Sprint.project_id) === true){
+                  projectCheckArr.push(spRes[i].Sprint.project_id);
+                  Obj.projectContributed++;
+                }
+              }
+              db.Project.findAll({
+                where: {
+                  userId: simpleId
+                }
+              }).then((pRes) => {
+                Obj.projectCreated = pRes.length;
+                res.json(Obj);
+              });
+            });
+          });
         })
     });
 

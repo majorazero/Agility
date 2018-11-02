@@ -7,12 +7,23 @@ import ActiveTasks from "./ActiveTasks/activetasks";
 import Grid from '@material-ui/core/Grid';
 import ButtonAppBar from "../utils/Navbar/Navbar.js";
 import Paper from '@material-ui/core/Paper';
+import ButtonSizes from "../utils/FAB.js";
 import SimpleBottomNavigation from "../utils/Footer/Footer.js";
-
 
 //doesn't has to be
 
 class Homepage extends Component {
+
+  constructor(props){
+
+    super(props);
+
+    this.state ={
+    userId: 0,
+    tasks: [],
+    sprints: []
+    }
+  }
 
   componentDidMount = () => {
     if (sessionStorage.getItem("id") === null) {
@@ -20,6 +31,39 @@ class Homepage extends Component {
       //we might want to change this to a 404
       window.location.assign("/");
     }
+    this.getCurrentUserId();
+  }
+
+  getCurrentUserId = () => {
+    axios.post("/api/decrypt", {
+        id: sessionStorage.getItem("id"),
+        token: localStorage.getItem("token")
+    }).then(res => {
+        console.log(res.data)
+        this.setState({ userId: res.data }, ()=>{
+          this.getTasks(this.state.userId)
+        })
+    })
+  }
+
+  getTasks = (currentUserId) => {
+    axios.get(`/api/sprints/tasks/user/${currentUserId}`)
+    .then(res => {
+      let incomplete = res.data.filter(task => !task.isCompleted)
+
+        let data = []
+        incomplete.forEach(task => {
+            if(!(data.includes(task.sprint))){
+                data.push({
+                    sprint: task.sprint,
+                    tasks: [task]
+                })
+            } else{
+                data[task.sprint].tasks.push(task)
+            }
+        })
+      this.setState({tasks: data})
+    })
   }
 
   render() {
@@ -30,12 +74,11 @@ class Homepage extends Component {
           className="parallax"
           style={{
             paddingTop: "50px",
-            overflowX: "hidden",
 
             // possible?
             backgroundImage: `url("/assets/images/background.png")`,
             resizeMode: 'cover',
-            // height: "3050px"
+            height: "100%"
           }} >
           <Grid
             container
@@ -46,11 +89,11 @@ class Homepage extends Component {
               <Paper
                 style={{ height: "100%" }}
               >
-                <ActiveTasks />
+                <ActiveTasks tasks={this.state.tasks} />
               </Paper>
             </Grid>
             <Grid item xs={1} />
-            <Grid item xs>
+            <Grid item xs={3}>
               <ProfileCard />
             </Grid>
           </Grid>
@@ -62,7 +105,7 @@ class Homepage extends Component {
           >
             <Grid item xs={12}>
               <Paper
-                // style={{ height: 100 }}
+              // style={{ height: 100 }}
               >
                 <ProjectList />
               </Paper>
@@ -85,12 +128,13 @@ class Homepage extends Component {
           </Grid>
         </Grid> */}
         </div >
-        <div style={{position:"relative"}}>
-        <SimpleBottomNavigation /> 
+        <div style={{position:"inherit"}}>
+        <SimpleBottomNavigation />
         </div>
       </div>
     );
   }
 }
+
 
 export default Homepage;

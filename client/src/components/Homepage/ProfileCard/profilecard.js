@@ -16,17 +16,19 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 // import MoreVertIcon from '@material-ui/icons/MoreVert';
-import Axios from 'axios';
+import axios from 'axios';
+import TextMobileStepper from "../../utils/Stepper.js";
 
 const styles = theme => ({
     card: {
-        maxWidth: 300,
+        width: 300,
     },
     media: {
-        height: 75,
-        paddingBottom: "60%",
+        height: 40,
+        paddingBottom: "40%",
         backgroundSize: 'cover',
-        backgroundPosition: "center center"
+        backgroundPosition: "center center",
+        margin: 5
     },
     actions: {
         display: 'flex',
@@ -55,26 +57,44 @@ class RecipeReviewCard extends React.Component {
         expanded: false,
         userFirstName: "",
         userLastName: "",
-        userEmail: ""
+        userEmail: "",
+        totalTask: "",
+        totalCompletedTask: "",
+        sprintParticipate: "",
+        projectContributed: "",
+        projectCreated: "",
+        complexity: "",
+        complexitySemantics: ""
     };
 
     componentDidMount() {
-        Axios.post("/api/getuser",
+      axios.post("/api/getuser",
+        {
+          id: sessionStorage.getItem("id"),
+          token: localStorage.getItem("token")
+        }).then((response) => {
+          console.log(response.data);
+          this.setState(
             {
-                id: sessionStorage.getItem("id"),
-                token: localStorage.getItem("token")
-            }).then((response) => {
-                this.setState(
-                    {
-                        userFirstName: response.data[0].first_name,
-                        userLastName: response.data[0].last_name,
-                        userEmail: response.data[0].email
-                    }
-                )
-            })
+              userFirstName: response.data.prof.first_name,
+              userLastName: response.data.prof.last_name,
+              userEmail: response.data.prof.email,
+              totalTask: response.data.totalTask,
+              totalCompletedTask: response.data.totalCompletedTask,
+              sprintParticipate: response.data.sprintParticipate,
+              projectContributed: response.data.projectContributed,
+              projectCreated:
+              response.data.projectCreated,
+              complexity:
+              response.data.complexity,
+              complexitySemantics:
+              response.data.compSemantics
+            }
+          );
+        });
     }
     handleExpandClick = () => {
-        this.setState(state => ({ expanded: !state.expanded }));
+      this.setState(state => ({ expanded: !state.expanded }));
     };
 
 
@@ -82,7 +102,7 @@ class RecipeReviewCard extends React.Component {
         const { classes } = this.props;
 
         return (
-            <Card className={classes.card}>
+            <Card className={classes.card} style={{width: "100%"}}>
                 <CardMedia
                     className={classes.media}
                     image="/assets/images/profileimg.jpg"
@@ -96,17 +116,38 @@ class RecipeReviewCard extends React.Component {
                     <Typography component="p">
                         {this.state.userEmail}
                     </Typography>
-                    <Typography component="p">
+                    <Typography component="h2">
+                      Career
+                    </Typography>
+                    <Typography>
+                      {(this.state.totalTask === 0) ? "Start working on something!":
+                        `${this.state.totalCompletedTask/this.state.totalTask*100}%`
+                      }
+                    </Typography>
+                    <Typography>
+                      Total Tasks Completed: {this.state.totalCompletedTask}
+                    </Typography>
+                    <Typography>
+                      Total Tasks Taken: {this.state.totalTask}
+                    </Typography>
+                    <Typography>
+                      Average Task Complexity: {this.state.complexity} ({this.state.complexitySemantics})
+                    </Typography>
+                    <Typography>
+                      Total Sprints Participated: {this.state.sprintParticipate}
+                    </Typography>
+                    <Typography>
+                      Total Projects Contributed:  {this.state.projectContributed}
+                    </Typography>
+                    <Typography>
+                      Total Projects Created:  {this.state.projectCreated}
+                    </Typography>
+                    <br />
+                    {/* <Typography component="p">
                         Progress
           </Typography>
                 </CardContent>
                 <CardActions className={classes.actions} disableActionSpacing>
-                    <IconButton aria-label="Add to favorites">
-                        <FavoriteIcon />
-                    </IconButton>
-                    <IconButton aria-label="Share">
-                        <ShareIcon />
-                    </IconButton>
                     <IconButton
                         className={classnames(classes.expand, {
                             [classes.expandOpen]: this.state.expanded,
@@ -119,13 +160,10 @@ class RecipeReviewCard extends React.Component {
                     </IconButton>
                 </CardActions>
                 <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
-                    <CardContent>
-                        <Typography paragraph>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </Typography>
-
+                    <CardContent> */}
+                        <TextMobileStepper />
                     </CardContent>
-                </Collapse>
+                {/* </Collapse> */}
             </Card>
         );
     }

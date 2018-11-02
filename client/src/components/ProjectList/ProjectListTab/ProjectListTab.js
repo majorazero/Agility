@@ -56,6 +56,7 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton from '@material-ui/core/IconButton';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 // import tileData from './tileData';
+import Icon from '@material-ui/core/Icon';
 
 const styles = theme => ({
   root: {
@@ -71,6 +72,7 @@ const styles = theme => ({
     transform: 'translateZ(0)',
   },
   title: {
+    // height: 200,
     color: theme.palette.primary.light,
   },
   titleBar: {
@@ -119,7 +121,9 @@ function SingleLineGridList(props) {
         }}
         actionIcon={
           <IconButton>
-            <StarBorderIcon className={classes.title} />
+            <Icon className={classes.title}>
+              how_to_vote
+            </Icon>
           </IconButton>
         }
       />

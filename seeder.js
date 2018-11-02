@@ -385,95 +385,224 @@ setTimeout(()=>{
 /////////////////
 setTimeout(()=>{
   db.Task.create({
+    name: "Define what a dummy is.",
+    due_date: "2018-09-04",
+    sprint_id: 1,
+    description: "Like a doll?",
+    complexity: 4,
+    assigned_id: 1,
+    stack: "Javascript",
+    isComplete: true,
+    estimatedTimeToComplete: 15,
+    estimatedTimeWorked: 16
+  });
+  db.Task.create({
+    name: "Are dummies edible?",
+    due_date: "2018-09-05",
+    sprint_id: 1,
+    description: "What strange thoughts.",
+    complexity: 3,
+    assigned_id: 1,
+    stack: "CSS",
+    isComplete: true,
+    estimatedTimeToComplete: 2,
+    estimatedTimeWorked: 13
+  });
+  db.Task.create({
+    name: "Realizing an impending dummy army is inevitable if not stopped.",
+    due_date: "2018-09-07",
+    sprint_id: 1,
+    description: "Let's start eating dummies.",
+    complexity: 2,
+    assigned_id: 10,
+    stack: "Javascript",
+    isComplete: true,
+    estimatedTimeToComplete: 1,
+    estimatedTimeWorked: 11
+  });
+  db.Task.create({
+    name: "Determine if cooking dummies is the way to go.",
+    due_date: "2018-09-20",
+    sprint_id: 2,
+    description: "Balls likes them raw.",
+    complexity: 5,
+    assigned_id: 11,
+    stack: "Javascript",
+    isComplete: true,
+    estimatedTimeToComplete: 2,
+    estimatedTimeWorked: 5
+  });
+  db.Task.create({
+    name: "Wonder if that pang in your stomach is normal.",
+    due_date: "2018-09-22",
+    sprint_id: 2,
+    description: "Do they have doctors for things like this?",
+    complexity: 3,
+    assigned_id: 12,
+    stack: "Javascript",
+    isComplete: true,
+    estimatedTimeToComplete: 3,
+    estimatedTimeWorked: 1
+  });
+  db.Task.create({
+    name: "Clean up evidence.",
+    due_date: "2018-10-02",
+    sprint_id: 3,
+    description: "This is a mess.",
+    complexity: 3,
+    assigned_id: 13,
+    stack: "HTML",
+    isComplete: true,
+    estimatedTimeToComplete: 2,
+    estimatedTimeWorked: 1
+  });
+  db.Task.create({
+    name: "Try again with bleach.",
+    due_date: "2018-10-03",
+    sprint_id: 3,
+    description: "Like that episode in Breaking Bad.",
+    complexity: 4,
+    assigned_id: 1,
+    stack: "HTML",
+    isComplete: true,
+    estimatedTimeToComplete: 1,
+    estimatedTimeWorked: 2
+  });
+  db.Task.create({
     name: "Hunt new dummies",
     due_date: "2018-11-02",
     sprint_id: 4,
-    description: "Hunt new dummies to eat. What's wrong with us."
+    description: "Hunt new dummies to eat. What's wrong with us.",
+    complexity: 4,
+    stack: "Javascript",
+    estimatedTimeToComplete: 4
   });
   db.Task.create({
     name: "Get some Tums",
     due_date: "2018-11-06",
     sprint_id: 4,
-    description: "Eating dummies can irritate the belly."
+    description: "Eating dummies can irritate the belly.",
+    complexity: 1,
+    stack: "CSS",
+    estimatedTimeToComplete: 1
   });
   db.Task.create({
     name: "Reconsider the life choice of being a cannibal.",
     due_date: "2018-11-7",
     sprint_id: 4,
-    description: "This is kinda' not good."
+    description: "This is kinda' not good.",
+    complexity: 2,
+    stack: "HTML",
+    estimatedTimeToComplete: 3
   });
   db.Task.create({
     name: "Hunt babies instead.",
     due_date: "2018-11-08",
     sprint_id: 4,
-    description: "Anyone ever read 'A Modest Proposal'?"
+    description: "Anyone ever read 'A Modest Proposal'?",
+    complexity: 2,
+    stack: "React",
+    estimatedTimeToComplete: 15
   });
   db.Task.create({
     name: "Read up on what React is.",
     due_date: "2018-11-02",
     sprint_id: 8,
-    description: "Maybe we shouldn't have thrown our old framework in the trash."
+    description: "Maybe we shouldn't have thrown our old framework in the trash.",
+    complexity: 2,
+    stack: "React",
+    estimatedTimeToComplete: 1
   });
   db.Task.create({
     name: "Decide if crying in the corner is better than using Polymer again.",
     due_date: "2018-11-04",
     sprint_id: 8,
-    description: "It's real bad you guys."
+    description: "It's real bad you guys.",
+    complexity: 4,
+    stack: "React",
+    estimatedTimeToComplete: 2
   });
   db.Task.create({
     name: "Listen to Michael talk about how Polymer 3 is way better you guys.",
     due_date: "2018-11-07",
     sprint_id: 8,
-    description: "Let's just use React."
+    description: "Let's just use React.",
+    complexity: 3,
+    stack: "React",
+    estimatedTimeToComplete: 48
   });
   db.Task.create({
     name: "Actually install React now.",
     due_date: "2018-11-08",
     sprint_id: 8,
-    description: "This probably didn't need a week with a team of people."
+    description: "This probably didn't need a week with a team of people.",
+    complexity: 2,
+    stack: "React",
+    estimatedTimeToComplete: 16
   });
   db.Task.create({
     name: "Start digging in your own nose for boogers.",
     due_date: "2018-11-02",
     sprint_id: 9,
-    description: "But do it with javascript."
+    description: "But do it with javascript.",
+    complexity: 5,
+    stack: "Javascript",
+    estimatedTimeToComplete: 32
   });
 
   db.Task.create({
     name: "Consider the possiblilty of constructing a webpage with boogers.",
     due_date: "2018-11-03",
     sprint_id: 9,
-    description: "Ask Unkindman why we do this."
+    description: "Ask Unkindman why we do this.",
+    complexity: 5,
+    stack: "HTML",
+    estimatedTimeToComplete: 24
   });
 
   db.Task.create({
     name: "Consider trashing this project.",
     due_date: "2018-11-05",
     sprint_id: 9,
-    description: "42."
+    description: "42.",
+    complexity: 1,
+    stack: "HTML",
+    estimatedTimeToComplete: 2
   });
   db.Task.create({
     name: "Is the answer 42?",
     due_date: "2018-11-02",
     sprint_id: 10,
-    description: "Of course it is. But we should get someone on it to confirm."
+    description: "Of course it is. But we should get someone on it to confirm.",
+    complexity: 1,
+    stack: "CSS",
+    estimatedTimeToComplete: 10
   });
   db.Task.create({
     name: "Wonder why you set a sprint for this.",
     due_date: "2018-11-02",
     sprint_id: 10,
-    description: "Job creation though."
+    description: "Job creation though.",
+    complexity: 3,
+    stack: "Node.js",
+    estimatedTimeToComplete: 9
   });
   db.Task.create({
     name: "Send someone to get the coffee.",
     due_date: "2018-11-02",
     sprint_id: 10,
-    description: "Because being busy is more important than what we're actually doing."
+    description: "Because being busy is more important than what we're actually doing.",
+    complexity: 3,
+    stack: "Node.js",
+    estimatedTimeToComplete: 5
   });
   db.Task.create({
     name: "Code your existential crisis away with javascript.",
     due_date: "2018-11-02",
     sprint_id: 10,
-    description: "We might need a new sprint for this."
+    description: "We might need a new sprint for this.",
+    complexity: 5,
+    stack: "Javascript",
+    estimatedTimeToComplete: 12
   });
 },1250);
