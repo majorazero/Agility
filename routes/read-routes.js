@@ -151,8 +151,11 @@ module.exports = function(app) {
             else if (Obj.complexity <= 4.5){
               Obj.compSemantics = "Medium-Hard";
             }
-            else {
+            else if (Obj.complexity <= 5){
               Obj.compSemantics = "Hard";
+            }
+            else{
+              Obj.compSemantics = "Start doing some tasks, see where you at!";
             }
             db.SprintMembership.findAll({
               where: {
