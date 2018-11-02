@@ -212,7 +212,8 @@ class Project extends React.Component {
                 console.log(currentSprint);
                 this.setState({
                     chipData: sprintData,
-                    sprintId: currentSprint
+                    sprintId: currentSprint, 
+                    sprints: res.data
                 });
             }).then(() => {
                 this.getTasks();
