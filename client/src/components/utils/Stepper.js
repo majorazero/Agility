@@ -58,10 +58,16 @@ const styles = theme => ({
 });
 
 class TextMobileStepper extends React.Component {
-  state = {
-    activeStep: 0,
-  };
 
+  constructor(props) {
+    super(props)
+    
+  }
+
+  state = {
+      activeStep: 0,
+    };
+    
   handleNext = () => {
     this.setState(prevState => ({
       activeStep: prevState.activeStep + 1,
@@ -81,18 +87,16 @@ class TextMobileStepper extends React.Component {
 
     return (
       <div className={classes.root}>
-        {/* <Paper square elevation={0} className={classes.header}>
+        <Paper square elevation={0} className={classes.header}>
           <Typography>{tutorialSteps[activeStep].label}</Typography>
-        </Paper> */}
-        <img
-          className={classes.img}
-          src={tutorialSteps[activeStep].imgPath}
-          alt={tutorialSteps[activeStep].label}
-        />
+        </Paper>
+        <Paper>
+
+        </Paper>
         <MobileStepper
-            style={{
-                height: 20
-            }}
+          style={{
+            height: 20
+          }}
           steps={maxSteps}
           position="static"
           activeStep={activeStep}

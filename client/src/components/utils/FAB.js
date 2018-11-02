@@ -34,14 +34,15 @@ function ButtonSizes(props) {
     
         <Button
         style={getFabStyle()}
-        variant="extendedFab" 
+        variant="fab"
+        // onMouseOver={this.variant="extendedFab"} 
         color={props.color} 
-        aria-label="Add" 
         className={classes.button}
         onClick={props.onClick}
+        mini
         >
           <AddIcon />
-               {props.title}
+               {/* {props.title} */}
         </Button>
   );
 }

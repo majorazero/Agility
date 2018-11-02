@@ -334,11 +334,13 @@ class Project extends React.Component {
                                     style={{ height: "100%" }}
                                 >
                                     {/* <MuiThemeProvider theme={theme}> */}
+
                                     {(this.state.isAdmin === true) ?
                                         <ButtonSizes
                                             onClick={() => this.handleOpen('sprintOpen')}
                                             title="Add a Sprint"
                                             color="secondary"
+                                            mini
                                         /> :
                                         ""}
 
@@ -367,6 +369,7 @@ class Project extends React.Component {
                             spacing={24}
                             style={{ padding: "50px" }}
                         >
+
                         <Grid item xs={6}>
                           <Paper
                               style={{ height: "300px" }}
@@ -392,7 +395,8 @@ class Project extends React.Component {
                             </SimpleModalWrapped>
                             <SwitchLabel
                                 onChange={this.switchTaskPool}
-                            ></SwitchLabel>
+                                label="Show Completed Tasks"
+                             />
                             {this.state.showComplete ? this.state.completedTasks.map((task) => {
                               return (
                                 <Pool
@@ -412,7 +416,6 @@ class Project extends React.Component {
                                 tasks={task}
                                 onClickDelete={this.deleteTask.bind(this, task)}
                                 onClickAdd={this.assignTask.bind(this, task)}
-                                style={this.state.showComplete ? { display: 'default' } : { display: 'none' }}
                               />
                             );
                             })}
