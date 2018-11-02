@@ -85,11 +85,13 @@ class Homepage extends Component {
         </Grid> */}
         </div >
         <div style={{position:"relative"}}>
-        <SimpleBottomNavigation /> 
+
         </div>
       </div>
     );
   }
 }
+
+// <SimpleBottomNavigation /> 
 
 export default Homepage;

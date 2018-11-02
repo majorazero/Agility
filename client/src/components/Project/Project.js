@@ -22,40 +22,41 @@ import SwitchLabel from '../utils/Switch';
 class Project extends React.Component {
 
     state = {
-        //this is the project's personal info
-        projName: "",
-        summary: "",
-        projDueDate: "",
-        projectId: "",
+      //this is the project's personal info
+      projName: "",
+      summary: "",
+      projDueDate: "",
+      projectId: "",
+      adminId: "",
 
-        inviteCode: "",
+      inviteCode: "",
 
-        unassignedTasks: [],
-        assignedTasks: [],
-        completedTasks: [],
-        projects: [],
-        sprints: [],
-        members: [],
-        direction: 'column',
-        justify: 'flex-start',
-        alignItems: 'flex-start',
+      unassignedTasks: [],
+      assignedTasks: [],
+      completedTasks: [],
+      projects: [],
+      sprints: [],
+      members: [],
+      direction: 'column',
+      justify: 'flex-start',
+      alignItems: 'flex-start',
 
-        // temp id set
-        sprintId: 4,
+      // temp id set
+      sprintId: 4,
 
-        taskOpen: false,
-        taskName: "",
-        taskDue_date: "",
-        taskDescription: "",
-        chipData: [],
+      taskOpen: false,
+      taskName: "",
+      taskDue_date: "",
+      taskDescription: "",
+      chipData: [],
 
-        sprintOpen: false,
-        sprintName: "",
-        sprintStart_date: "",
-        sprintEnd_date: "",
+      sprintOpen: false,
+      sprintName: "",
+      sprintStart_date: "",
+      sprintEnd_date: "",
 
-        currentUser: '',
-        showComplete: false
+      currentUser: '',
+      showComplete: false
     }
 
     componentDidMount() {
@@ -66,10 +67,11 @@ class Project extends React.Component {
         }).then((response) => {
             console.log(response.data);
             this.setState({
-                projName: response.data[0].name,
-                summary: response.data[0].summary,
-                projDueDate: response.data[0].due_date,
-                projectId: response.data[0].id
+              projName: response.data[0].name,
+              summary: response.data[0].summary,
+              projDueDate: response.data[0].due_date,
+              projectId: response.data[0].id,
+              adminId: response.data[0].userId
             });
             //pass project id here
             this.getMembers(this.state.sprintId);
@@ -87,37 +89,35 @@ class Project extends React.Component {
     };
 
     getTasks = () => {
+      // let number = this.state.projects
+      // below we'll just place the variable in where we grab the dynamically updated 'project' that we're on depending on user choice
+      axios.get("/api/task/" + this.state.sprintId).then((res) => {
 
-        // let number = this.state.projects
-        // below we'll just place the variable in where we grab the dynamically updated 'project' that we're on depending on user choice
-        axios.get("/api/task/" + this.state.sprintId).then((res) => {
+          let task = res.data;
+          let unassigned = [];
+          let assigned = [];
+          let completed = [];
 
-            let task = res.data;
-            let unassigned = [];
-            let assigned = [];
-            let completed = [];
+          for (let i = 0; i < task.length; i++) {
+              if (task[i].assigned_id === null) {
+                  unassigned.push(task[i])
+              }
 
-            for (let i = 0; i < task.length; i++) {
-                if (task[i].assigned_id === null) {
-                    unassigned.push(task[i])
-                }
-
-                else if (!task[i].isCompleted) {
-                    assigned.push(task[i]);
-                }
-                else if (task[i].isCompleted) {
-                    completed.push(task[i])
-                }
-            }
-            console.log(this.state);
-            this.setState({
-                unassignedTasks: unassigned,
-                assignedTasks: assigned,
-                completedTasks: completed
-            }, () => {
-                console.log(this.state.completedTasks)
-            })
-        });
+              else if (!task[i].isCompleted) {
+                  assigned.push(task[i]);
+              }
+              else if (task[i].isCompleted) {
+                  completed.push(task[i])
+              }
+          }
+          this.setState({
+              unassignedTasks: unassigned,
+              assignedTasks: assigned,
+              completedTasks: completed
+          }, () => {
+              console.log(this.state.completedTasks)
+          })
+      });
     };
 
     addTask = (event) => {
@@ -251,16 +251,16 @@ class Project extends React.Component {
     }
 
     getCurrentUserId = () => {
-        axios.post("/api/decrypt", {
-            id: sessionStorage.getItem("id"),
-            token: localStorage.getItem("token")
-        }).then(res => {
-            console.log(res.data)
-            this.setState({ currentUser: res.data },
-                () => {
-                    this.getSprints(this.state.projectId, this.state.currentUser)
-                })
-        })
+      axios.post("/api/userByDecrypt", {
+          id: sessionStorage.getItem("id"),
+          token: localStorage.getItem("token")
+      }).then(res => {
+        console.log(res.data)
+        this.setState({ currentUser: res.data.id },
+          () => {
+            this.getSprints(this.state.projectId, this.state.currentUser)
+          })
+      })
     }
 
 
@@ -296,7 +296,6 @@ class Project extends React.Component {
         return (
             <div>
                 <ButtonAppBar />
-
                 <div
                     className="parallax"
                     style={{
@@ -309,48 +308,48 @@ class Project extends React.Component {
                     }} >
 
                     <Grid
-                        container
-                        spacing={8}
-                        style={{ padding: "50px" }}
+                      container
+                      spacing={8}
+                      style={{ padding: "50px" }}
                     >
                         <Grid item xs={12}>
                             <Paper
-                                style={{ height: "100%" }}
+                              style={{ height: "100%" }}
                             >
                             // where the progress bar would go
                             </Paper>
                         </Grid>
                         <Grid
-                            container
-                            spacing={8}
-                            style={{ padding: "50px" }}
+                          container
+                          spacing={8}
+                          style={{ padding: "50px" }}
                         >
                             <Grid item xs={12}>
                                 <Paper
-                                    style={{ height: "100%" }}
+                                  style={{ height: "100%" }}
                                 >
                                     {/* <MuiThemeProvider theme={theme}> */}
                                     <ButtonSizes
-                                        onClick={() => this.handleOpen('sprintOpen')}
-                                        title="Add a Sprint"
-                                        color="secondary"
+                                      onClick={() => this.handleOpen('sprintOpen')}
+                                      title="Add a Sprint"
+                                      color="secondary"
                                     />
                                     {/* </MuiThemeProvider> */}
                                     <SimpleModalSprintWrapped
-                                        open={this.state.sprintOpen}
-                                        onClose={() => this.handleClose('sprintOpen')}
-                                        name="Add a New Sprint ..."
-                                        onSubmit={this.addSprint}
-                                        onChange={this.handleChange}
+                                      open={this.state.sprintOpen}
+                                      onClose={() => this.handleClose('sprintOpen')}
+                                      name="Add a New Sprint ..."
+                                      onSubmit={this.addSprint}
+                                      onChange={this.handleChange}
                                     >
-                                        <AddSprintLayout
-                                        />
+                                      <AddSprintLayout
+                                      />
                                     </SimpleModalSprintWrapped>
                                     <Chips
-                                        sprints={this.state.chipData}
-                                        onClick={this.updateActiveSprint}
-                                        activeSprint={this.state.sprintId}
-                                        currentUser={this.state.currentUser}
+                                      sprints={this.state.chipData}
+                                      onClick={this.updateActiveSprint}
+                                      activeSprint={this.state.sprintId}
+                                      currentUser={this.state.currentUser}
                                     />
                                 </Paper>
                             </Grid>
@@ -360,67 +359,67 @@ class Project extends React.Component {
                             spacing={24}
                             style={{ padding: "50px" }}
                         >
-                            <Grid item xs={6}>
-                                <Paper
-                                    style={{ height: "300px" }}
-                                >
-                                    {/* <MuiThemeProvider theme={theme2}> */}
-                                    <ButtonSizes
-                                        onClick={() => this.handleOpen('taskOpen')}
-                                        title="Add a Task"
-                                        color="secondary"
-                                    />
-                                    {/* </MuiThemeProvider> */}
-                                    <SimpleModalWrapped
-                                        open={this.state.taskOpen}
-                                        onClose={() => this.handleClose('taskOpen')}
-                                        name="Add a New Task ..."
-                                        onSubmit={this.addTask}
-                                        onChange={this.handleChange}
-                                    >
-                                        <AddTaskLayout
-                                        />
-                                    </SimpleModalWrapped>
-                                    <SwitchLabel
-                                        onChange={this.switchTaskPool}
-                                    ></SwitchLabel>
-                                    {this.state.showComplete ? this.state.completedTasks.map((task) => {
-                                        return (
-                                            <Pool
-                                                key={task.id}
-                                                id={this.key}
-                                                tasks={task}
-                                                onClickDelete={this.deleteTask.bind(this, task)}
-                                            />
-                                        );
-                                    }) : this.state.unassignedTasks.map((task) => {
-                                        return (
-                                            <Pool
-                                                key={task.id}
-                                                id={this.key}
-                                                tasks={task}
-                                                onClickDelete={this.deleteTask.bind(this, task)}
-                                                onClickAdd={this.assignTask.bind(this, task)}
-                                                style={this.state.showComplete ? { display: 'default' } : { display: 'none' }}
-                                            />
-                                        );
-                                    })}
-                                </Paper>
-                            </Grid>
-                            <Grid item xs={6}>
-                                <Paper
-                                    style={{ height: "300px" }}
-                                >
-                                    <UserPool
-                                    sprintId={this.state.sprintId}
-                                    members={this.state.members}
-                                    tasks={this.state.assignedTasks}
-                                    unassign={this.unassignTask}
-                                    onClickDelete={this.deleteTask}
-                                    onClickComplete={this.markComplete}
-                                    />
-                                </Paper>
-                            </Grid>
+                        <Grid item xs={6}>
+                          <Paper
+                              style={{ height: "300px" }}
+                          >
+                            {/* <MuiThemeProvider theme={theme2}> */}
+                            <ButtonSizes
+                                onClick={() => this.handleOpen('taskOpen')}
+                                title="Add a Task"
+                                color="secondary"
+                            />
+                            {/* </MuiThemeProvider> */}
+                            <SimpleModalWrapped
+                                open={this.state.taskOpen}
+                                onClose={() => this.handleClose('taskOpen')}
+                                name="Add a New Task ..."
+                                onSubmit={this.addTask}
+                                onChange={this.handleChange}
+                            >
+                                <AddTaskLayout
+                                />
+                            </SimpleModalWrapped>
+                            <SwitchLabel
+                                onChange={this.switchTaskPool}
+                            ></SwitchLabel>
+                            {this.state.showComplete ? this.state.completedTasks.map((task) => {
+                              return (
+                                <Pool
+                                  key={task.id}
+                                  id={this.key}
+                                  tasks={task}
+                                  onClickDelete={this.deleteTask.bind(this, task)}
+                                />
+                              );
+                          }) : this.state.unassignedTasks.map((task) => {
+                            return (
+                              <Pool
+                                key={task.id}
+                                id={this.key}
+                                tasks={task}
+                                onClickDelete={this.deleteTask.bind(this, task)}
+                                onClickAdd={this.assignTask.bind(this, task)}
+                                style={this.state.showComplete ? { display: 'default' } : { display: 'none' }}
+                              />
+                            );
+                            })}
+                          </Paper>
+                        </Grid>
+                          <Grid item xs={6}>
+                            <Paper
+                                style={{ height: "300px" }}
+                            >
+                              <UserPool
+                              sprintId={this.state.sprintId}
+                              members={this.state.members}
+                              tasks={this.state.assignedTasks}
+                              unassign={this.unassignTask}
+                              onClickDelete={this.deleteTask}
+                              onClickComplete={this.markComplete}
+                              />
+                            </Paper>
+                          </Grid>
                         </Grid>
                     </Grid>
                 </div>

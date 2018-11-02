@@ -12,6 +12,16 @@ module.exports = function(app) {
         })
     });
 
+    app.post("/api/userByDecrypt",(req,res) => {
+      db.User.findAll({
+        where:{
+          id: encrypt.decrypt(req.body.token,req.body.id)
+        }
+      }).then((data) => {
+        res.json(data[0]);
+      });
+    });
+
     app.get("/api/project", (req, res) => {
         db.Project.findAll({}).then(dbSprint => {
             res.json(dbSprint);
