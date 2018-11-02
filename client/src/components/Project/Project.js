@@ -28,6 +28,7 @@ class Project extends React.Component {
       projDueDate: "",
       projectId: "",
       adminId: "",
+      isAdmin: "",
 
       inviteCode: "",
 
@@ -60,26 +61,26 @@ class Project extends React.Component {
     }
 
     componentDidMount() {
-        const { id } = this.props.match.params;
-        axios.post("/api/projectById", {
-            token: "project",
-            id: id
-        }).then((response) => {
-            console.log(response.data);
-            this.setState({
-              projName: response.data[0].name,
-              summary: response.data[0].summary,
-              projDueDate: response.data[0].due_date,
-              projectId: response.data[0].id,
-              adminId: response.data[0].userId
-            });
-            //pass project id here
-            this.getMembers(this.state.sprintId);
-            this.getCurrentUserId();
-            console.log(this.state);
-        }).catch((err) => {
-            window.location.assign("/404");
-        });
+      const { id } = this.props.match.params;
+      axios.post("/api/projectById", {
+          token: "project",
+          id: id
+      }).then((response) => {
+          console.log(response.data);
+          this.setState({
+            projName: response.data[0].name,
+            summary: response.data[0].summary,
+            projDueDate: response.data[0].due_date,
+            projectId: response.data[0].id,
+            adminId: response.data[0].userId
+          });
+          //pass project id here
+          this.getMembers(this.state.sprintId);
+          this.getCurrentUserId();
+          console.log(this.state);
+      }).catch((err) => {
+          window.location.assign("/404");
+      });
     }
 
     handleChange = name => event => {
@@ -220,27 +221,26 @@ class Project extends React.Component {
     };
 
     addSprint = (event) => {
-        event.preventDefault();
-        let obj = {
-            name: this.state.sprintName,
-            start_date: this.state.sprintStart_date,
-            end_date: this.state.sprintEnd_date,
-            project_id: this.state.projectId
-        }
-        axios.post('/api/sprint', {
-            name: this.state.sprintName,
-            start_date: this.state.sprintStart_date,
-            end_date: this.state.sprintEnd_date,
-            project_id: this.state.projectId
-        })
-            .then(() => {
-                this.setState({
-                    sprintOpen: false
-                }, () => {
-                    console.log(this.state.sprintOpen)
-                    this.getSprints(this.state.projectId)
-                })
-            })
+      event.preventDefault();
+      let obj = {
+          name: this.state.sprintName,
+          start_date: this.state.sprintStart_date,
+          end_date: this.state.sprintEnd_date,
+          project_id: this.state.projectId
+      }
+      axios.post('/api/sprint', {
+          name: this.state.sprintName,
+          start_date: this.state.sprintStart_date,
+          end_date: this.state.sprintEnd_date,
+          project_id: this.state.projectId
+      }).then(() => {
+        this.setState({
+            sprintOpen: false
+        }, () => {
+            console.log(this.state.sprintOpen);
+            this.getSprints(this.state.projectId);
+        });
+      });
     }
 
     getMembers = (sprintId) => {
@@ -255,9 +255,13 @@ class Project extends React.Component {
           id: sessionStorage.getItem("id"),
           token: localStorage.getItem("token")
       }).then(res => {
-        console.log(res.data)
-        this.setState({ currentUser: res.data.id },
+        let isAdmin = false;
+        if(res.data.id === this.state.adminId){
+          isAdmin = true;
+        }
+        this.setState({ currentUser: res.data.id, isAdmin: isAdmin },
           () => {
+            console.log(this.state);
             this.getSprints(this.state.projectId, this.state.currentUser)
           })
       })
@@ -329,11 +333,14 @@ class Project extends React.Component {
                                   style={{ height: "100%" }}
                                 >
                                     {/* <MuiThemeProvider theme={theme}> */}
-                                    <ButtonSizes
-                                      onClick={() => this.handleOpen('sprintOpen')}
-                                      title="Add a Sprint"
-                                      color="secondary"
-                                    />
+                                    {(this.state.isAdmin === true) ?
+                                      <ButtonSizes
+                                        onClick={() => this.handleOpen('sprintOpen')}
+                                        title="Add a Sprint"
+                                        color="secondary"
+                                      /> :
+                                      ""}
+
                                     {/* </MuiThemeProvider> */}
                                     <SimpleModalSprintWrapped
                                       open={this.state.sprintOpen}
@@ -364,11 +371,13 @@ class Project extends React.Component {
                               style={{ height: "300px" }}
                           >
                             {/* <MuiThemeProvider theme={theme2}> */}
-                            <ButtonSizes
-                                onClick={() => this.handleOpen('taskOpen')}
-                                title="Add a Task"
-                                color="secondary"
-                            />
+                            {(this.state.isAdmin === true) ?
+                              <ButtonSizes
+                                  onClick={() => this.handleOpen('taskOpen')}
+                                  title="Add a Task"
+                                  color="secondary"
+                              /> :
+                              ""}
                             {/* </MuiThemeProvider> */}
                             <SimpleModalWrapped
                                 open={this.state.taskOpen}
