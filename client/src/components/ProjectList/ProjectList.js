@@ -254,6 +254,9 @@ class ProjectList extends Component {
               label="Project Invite Code:"
               name="inviteCode"
               onChange={this.handleInviteChange}
+              style={{
+                position: "inherit"
+              }}
             />
           </Grid>
         </Grid>
