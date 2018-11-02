@@ -6,14 +6,41 @@ import { Grid } from "@material-ui/core";
 import ButtonSizes from "../utils/FAB.js";
 import SimpleModalWrapped from "../utils/Modal";
 import AddTaskLayout from "../utils/AddTaskLayout.js";
-import SprintSelect from './SprintSelect';
+import Chips from './SprintSelect';
 import UserPool from './UserPool';
 import ButtonAppBar from "../utils/Navbar/Navbar.js";
 import AddSprintLayout from "../utils/AddSprintLayout.js";
 import SimpleModalSprintWrapped from '../utils/ModalSprint';
 import SimpleBottomNavigation from "../utils/Footer/Footer.js";
+import Paper from '@material-ui/core/Paper';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
+import { withStyles } from '@material-ui/core/styles';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
+// const theme = createMuiTheme({
+//     overrides: {
+//         MuiButton: {
+//             root: {
+//                 top: "18%!important",
+//                 left: "75%!important",
+//                 position: "inherit"
+//             }
+//         }
+//     }
+// });
 
+// const theme2 = createMuiTheme({
+//     overrides: {
+//         MuiButton: {
+//             root: {
+//                 top: "38%!important",
+//                 left: "30%!important",
+//                 position: "inherit"
+//             }
+//         }
+//     }
+// });
 
 class Project extends React.Component {
 
@@ -94,7 +121,7 @@ class Project extends React.Component {
                 if (task[i].assigned_id === null) {
                     unassigned.push(task[i])
                 }
-                else{
+                else {
                     assigned.push(task[i]);
                 }
             }
@@ -117,7 +144,7 @@ class Project extends React.Component {
             sprint_id: this.state.sprintId
         }).then(() => {
             this.setState({
-              taskOpen: false
+                taskOpen: false
             });
             this.getTasks();
         });
@@ -128,7 +155,8 @@ class Project extends React.Component {
         this.setState({
             [name]: true
         }, () => {
-            console.log(this.state.taskOpen)})
+            console.log(this.state.taskOpen)
+        })
     }
 
     handleClose = (name) => {
@@ -142,27 +170,27 @@ class Project extends React.Component {
     }
 
     assignTask = (task) => {
-      axios.post("/api/decrypt", { token: localStorage.getItem("token"), id: sessionStorage.getItem("id") }).then((response) => {
-          let user = response.data;
-          axios.put("/api/task/by/" + task.id + "/" + user).then((res) => {
-            // console.log(res.data);
-            this.getTasks();
-            //window.location.reload();
+        axios.post("/api/decrypt", { token: localStorage.getItem("token"), id: sessionStorage.getItem("id") }).then((response) => {
+            let user = response.data;
+            axios.put("/api/task/by/" + task.id + "/" + user).then((res) => {
+                // console.log(res.data);
+                this.getTasks();
+                //window.location.reload();
 
-          })
-      });
+            })
+        });
     }
 
     unassignTask = (id) => {
-      axios.put("/api/task/unassign",{id: id}).then((response) => {
-        this.getTasks();
-      });
+        axios.put("/api/task/unassign", { id: id }).then((response) => {
+            this.getTasks();
+        });
     }
 
     updateActiveSprint = (sprintId) => {
-      this.setState({ sprintId: sprintId }, () => {
-        this.getTask();
-      });
+        this.setState({ sprintId: sprintId }, () => {
+            this.getTasks();
+        });
     }
 
     defaultVal = () => {
@@ -174,32 +202,32 @@ class Project extends React.Component {
     };
 
     getSprints = (projectId, userId) => {
-      let sprintData = [];
+        let sprintData = [];
         axios.get(`/api/sprints/project/${projectId}/user/${userId}`)
-        .then((res)=> {
-        console.log(res.data);
-          let today = new Date();
-          //default to latest sprint
-          let currentSprint = res.data[0].id;
-          res.data.map((pSprint, i) => {
-            sprintData.push({
-                key: i,
-                label: pSprint.sprintName,
-                id: pSprint.sprintId
+            .then((res) => {
+                console.log(res.data);
+                let today = new Date();
+                //default to latest sprint
+                let currentSprint = res.data[0].id;
+                res.data.map((pSprint, i) => {
+                    sprintData.push({
+                        key: i,
+                        label: pSprint.sprintName,
+                        id: pSprint.sprintId
+                    });
+                    //if a sprint is not complete, it'll be set to that instead.
+                    if (!pSprint.isComplete) {
+                        currentSprint = pSprint.sprintId;
+                    }
+                });
+                console.log(currentSprint);
+                this.setState({
+                    chipData: sprintData,
+                    sprintId: currentSprint
+                });
+            }).then(() => {
+                this.getTasks();
             });
-            //if a sprint is not complete, it'll be set to that instead.
-            if(!pSprint.isComplete){
-              currentSprint = pSprint.sprintId;
-            }
-        });
-        console.log(currentSprint);
-        this.setState({
-          chipData: sprintData,
-          sprintId: currentSprint
-         });
-      }).then(() => {
-        this.getTasks();
-      });
     };
 
     addSprint = (event) => {
@@ -216,22 +244,22 @@ class Project extends React.Component {
             end_date: this.state.sprintEnd_date,
             project_id: this.state.projectId
         })
-        .then(() => {
-            this.setState({
-                sprintOpen: false
-            }, () => {
-                console.log(this.state.sprintOpen)
-                this.getSprints(this.state.projectId)
+            .then(() => {
+                this.setState({
+                    sprintOpen: false
+                }, () => {
+                    console.log(this.state.sprintOpen)
+                    this.getSprints(this.state.projectId)
+                })
             })
-        })
     }
 
     getMembers = (sprintId) => {
-        axios.post('/api/allMemberInSprint', {sprintId: sprintId})
-        .then(res => {
-            console.log("Members:", res.data)
-            this.setState({members: res.data})
-        })
+        axios.post('/api/allMemberInSprint', { sprintId: sprintId })
+            .then(res => {
+                console.log("Members:", res.data)
+                this.setState({ members: res.data })
+            })
     }
 
     getCurrentUserId = () => {
@@ -240,12 +268,13 @@ class Project extends React.Component {
             token: localStorage.getItem("token")
         }).then(res => {
             console.log(res.data)
-            this.setState({currentUser: res.data}, 
-                ()=> {
-                    this.getSprints(this.state.projectId, this.state.currentUser)})
-        }) 
-        }
-    
+            this.setState({ currentUser: res.data },
+                () => {
+                    this.getSprints(this.state.projectId, this.state.currentUser)
+                })
+        })
+    }
+
 
     inviteMember = () => {
         //we'll pass the sprint id as an encrypted id
@@ -263,8 +292,128 @@ class Project extends React.Component {
         return (
             <div>
                 <ButtonAppBar />
-                <div style={{ paddingTop: "100px" }}>
-                    <SprintSelect sprints={this.state.chipData} onClick={this.updateActiveSprint} activeSprint={this.state.sprintId} currentUser={this.state.currentUser} />
+
+                <div
+                    className="parallax"
+                    style={{
+                        paddingTop: "50px",
+
+                        // possible?
+                        backgroundImage: `url("/assets/images/background.png")`,
+                        resizeMode: 'cover',
+                        height: "1050px"
+                    }} >
+
+                    <Grid
+                        container
+                        spacing={8}
+                        style={{ padding: "50px" }}
+                    >
+                        <Grid item xs={12}>
+                            <Paper
+                                style={{ height: "100%" }}
+                            >
+                            // where the progress bar would go
+                            </Paper>
+                        </Grid>
+                        <Grid
+                            container
+                            spacing={8}
+                            style={{ padding: "50px" }}
+                        >
+                            <Grid item xs={12}>
+                                <Paper
+                                    style={{ height: "100%" }}
+                                >
+                                    {/* <MuiThemeProvider theme={theme}> */}
+                                        <ButtonSizes
+                                            onClick={() => this.handleOpen('sprintOpen')}
+                                            title="Add a Sprint"
+                                            color="secondary"
+                                        />
+                                    {/* </MuiThemeProvider> */}
+                                    <SimpleModalSprintWrapped
+                                        open={this.state.sprintOpen}
+                                        onClose={() => this.handleClose('sprintOpen')}
+                                        name="Add a New Sprint ..."
+                                        onSubmit={this.addSprint}
+                                        onChange={this.handleChange}
+                                    >
+                                        <AddSprintLayout
+                                        />
+                                    </SimpleModalSprintWrapped>
+                                    <Chips
+                                        sprints={this.state.chipData}
+                                        onClick={this.updateActiveSprint}
+                                        activeSprint={this.state.sprintId}
+                                        currentUser={this.state.currentUser}
+                                    />
+                                </Paper>
+                            </Grid>
+                        </Grid>
+                        <Grid
+                            container
+                            spacing={24}
+                            style={{ padding: "50px" }}
+                        >
+                            <Grid item xs={6}>
+                                <Paper
+                                    style={{ height: "300px" }}
+                                >
+                                    {/* <MuiThemeProvider theme={theme2}> */}
+                                        <ButtonSizes
+                                            onClick={() => this.handleOpen('taskOpen')}
+                                            title="Add a Task"
+                                            color="secondary"
+                                        />
+                                    {/* </MuiThemeProvider> */}
+                                    <SimpleModalWrapped
+                                        open={this.state.taskOpen}
+                                        onClose={() => this.handleClose('taskOpen')}
+                                        name="Add a New Task ..."
+                                        onSubmit={this.addTask}
+                                        onChange={this.handleChange}
+                                    >
+                                        <AddTaskLayout
+                                        />
+                                    </SimpleModalWrapped>
+                                    {this.state.unassignedTasks.map((task) => {
+                                        return (
+                                            <Pool
+                                                key={task.id}
+                                                id={this.key}
+                                                tasks={task}
+                                                onClickDelete={this.deleteTask.bind(this, task)}
+                                                onClickAdd={this.assignTask.bind(this, task)}
+                                            />
+                                        );
+                                    })}
+                                </Paper>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <Paper
+                                    style={{ height: "300px" }}
+                                >
+                                    <UserPool
+                                        sprintId={this.state.sprintId}
+                                        members={this.state.members}
+                                        tasks={this.state.assignedTasks}
+                                        unassign={this.unassignTask}
+                                    />
+                                </Paper>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </div>
+
+
+                {/* <div style={{ paddingTop: "100px" }}>
+                    <SprintSelect 
+                    sprints={this.state.chipData} 
+                    onClick={this.updateActiveSprint} 
+                    activeSprint={this.state.sprintId} 
+                    currentUser={this.state.currentUser} 
+                    />
                     <ButtonSizes
                         onClick={() => this.handleOpen('sprintOpen')}
                         title="Add a Sprint"
@@ -279,7 +428,7 @@ class Project extends React.Component {
                     >
                         {/* <AddSprintLayout
                         /> */}
-                    </SimpleModalSprintWrapped>
+                {/* </SimpleModalSprintWrapped>
                     <Grid container>
                         <h1>{this.state.projName}</h1>
                         <h2>{this.state.summary}</h2>
@@ -335,8 +484,9 @@ class Project extends React.Component {
                     </Grid>
                 </div>
                 <div style={{position:"fixed", width:"100%", bottom:"0"}}>
-                <SimpleBottomNavigation /> 
-                </div>
+                
+                </div> */}
+                <SimpleBottomNavigation />
             </div>
         );
     }

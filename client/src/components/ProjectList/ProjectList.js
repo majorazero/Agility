@@ -237,11 +237,17 @@ class ProjectList extends Component {
         />
         <Grid
           container
+          direction="row"
+          justify="flex-end"
+          alignItems="flex-start"
           spacing={8}
+          style={{
+            height: 90,
+          }}
         >
           <Grid item xs={9} />
           <Grid item xs>
-            <Typography variant="h3" gutterBottom>{this.state.message}</Typography>
+            <Typography variant="h5" gutterBottom>{this.state.message}</Typography>
 
             <InputTextField
               onSubmit={this.handleInviteSubmit}

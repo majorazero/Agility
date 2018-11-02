@@ -21,7 +21,7 @@ const styles = theme => ({
   button: {
     margin: theme.spacing.unit,
     zIndex: 100,
-    position: "absolute"
+    position: "sticky"
   },
   extendedIcon: {
     marginRight: theme.spacing.unit,
