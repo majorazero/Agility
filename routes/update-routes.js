@@ -20,6 +20,19 @@ module.exports = function(app) {
         });
     });
 
+    app.put("/api/complete/task/:taskId", function(req, res){
+      db.Task.update({
+        isCompleted: true
+      }, {
+        where: {
+          id: req.params.taskId
+        }
+      })
+      .then(function(dbTask){
+        res.json(dbTask)
+      })
+    })
+
     app.put("/api/task/unassign", (req,res) => {
       db.Task.update({
         assigned_id: null

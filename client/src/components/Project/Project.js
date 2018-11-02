@@ -94,7 +94,7 @@ class Project extends React.Component {
                 if (task[i].assigned_id === null) {
                     unassigned.push(task[i])
                 }
-                else{
+                else if (!task[i].isCompleted){
                     assigned.push(task[i]);
                 }
             }
@@ -260,6 +260,13 @@ class Project extends React.Component {
         });
     }
 
+    markComplete = (id) => {
+        axios.put(`/api/complete/task/${id}`)
+        .then(() => {
+            this.getTasks();
+        })
+    } 
+
     render() {
         const { direction, justify, alignItems } = this.state;
         return (
@@ -271,6 +278,11 @@ class Project extends React.Component {
                         onClick={() => this.handleOpen('sprintOpen')}
                         title="Add a Sprint"
                         color="secondary"
+                        style= {{
+                            position: "absolute!important",
+                            top: "50px!important",
+                            left: "50px!important"
+                        }}
                     />
                     <SimpleModalSprintWrapped
                         open={this.state.sprintOpen}
@@ -332,6 +344,7 @@ class Project extends React.Component {
                             <UserPool sprintId={this.state.sprintId} members={this.state.members} tasks={this.state.assignedTasks}
                             unassign={this.unassignTask}
                             onClickDelete={this.deleteTask}
+                            onClickComplete={this.markComplete}
                             ></UserPool>
                         </Grid>
                         <br />

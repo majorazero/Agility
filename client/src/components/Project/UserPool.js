@@ -41,7 +41,7 @@ class UserPool extends Component {
                     console.log(fTask)
                     return(
                     <Pool key={fTask.id} id={this.key} tasks={fTask} onClickDelete={() => this.props.onClickDelete(fTask)}
-                    unAssign={() => this.props.unassign(fTask.id)} assigned>
+                    unAssign={() => this.props.unassign(fTask.id)} onClickComplete={() => this.props.onClickComplete(fTask.id)} assigned> 
                     </Pool>)
                     // <TaskCard key={fTask.id} title={fTask.name} summary={fTask.description} dueDate={fTask.due_date} unAssign={()=>{
                     //   this.props.unassign(fTask.id)
