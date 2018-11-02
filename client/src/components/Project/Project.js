@@ -12,7 +12,7 @@ import ButtonAppBar from "../utils/Navbar/Navbar.js";
 import AddSprintLayout from "../utils/AddSprintLayout.js";
 import SimpleModalSprintWrapped from '../utils/ModalSprint';
 import SimpleBottomNavigation from "../utils/Footer/Footer.js";
-
+// import LinearDeterminate from "../utils/ProgressBar/ProgressBar.js"
 
 
 class Project extends React.Component {
@@ -284,7 +284,7 @@ class Project extends React.Component {
                         <h3>{this.state.projDueDate}</h3>
                         <Grid item xs={6} style={{ padding: "10px" }}>
                             <h2>This is pool.</h2>
-
+                            {/* <LinearDeterminate sprintId={this.state.sprintId}/> */}
                             <div>
                                 {this.state.inviteCode}
                             </div>
