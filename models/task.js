@@ -26,6 +26,12 @@ module.exports = function(sequelize, DataTypes) {
         isCompleted : {
           type: DataTypes.BOOLEAN,
           defaultValue: false
+        },
+        estimatedTimeToComplete : {
+          type: DataTypes.INTEGER
+        },
+        estimatedTimeWorked : {
+          type: DataTypes.INTEGER
         }
     });
     return Task;
