@@ -22,65 +22,65 @@ import SwitchLabel from '../utils/Switch';
 class Project extends React.Component {
 
     state = {
-      //this is the project's personal info
-      projName: "",
-      summary: "",
-      projDueDate: "",
-      projectId: "",
-      adminId: "",
-      isAdmin: "",
+        //this is the project's personal info
+        projName: "",
+        summary: "",
+        projDueDate: "",
+        projectId: "",
+        adminId: "",
+        isAdmin: "",
 
-      inviteCode: "",
+        inviteCode: "",
 
-      unassignedTasks: [],
-      assignedTasks: [],
-      completedTasks: [],
-      projects: [],
-      sprints: [],
-      members: [],
-      direction: 'column',
-      justify: 'flex-start',
-      alignItems: 'flex-start',
+        unassignedTasks: [],
+        assignedTasks: [],
+        completedTasks: [],
+        projects: [],
+        sprints: [],
+        members: [],
+        direction: 'column',
+        justify: 'flex-start',
+        alignItems: 'flex-start',
 
-      // temp id set
-      sprintId: 4,
+        // temp id set
+        sprintId: 4,
 
-      taskOpen: false,
-      taskName: "",
-      taskDue_date: "",
-      taskDescription: "",
-      chipData: [],
+        taskOpen: false,
+        taskName: "",
+        taskDue_date: "",
+        taskDescription: "",
+        chipData: [],
 
-      sprintOpen: false,
-      sprintName: "",
-      sprintStart_date: "",
-      sprintEnd_date: "",
+        sprintOpen: false,
+        sprintName: "",
+        sprintStart_date: "",
+        sprintEnd_date: "",
 
-      currentUser: '',
-      showComplete: false
+        currentUser: '',
+        showComplete: false
     }
 
     componentDidMount() {
-      const { id } = this.props.match.params;
-      axios.post("/api/projectById", {
-          token: "project",
-          id: id
-      }).then((response) => {
-          console.log(response.data);
-          this.setState({
-            projName: response.data[0].name,
-            summary: response.data[0].summary,
-            projDueDate: response.data[0].due_date,
-            projectId: response.data[0].id,
-            adminId: response.data[0].userId
-          });
-          //pass project id here
-          this.getMembers(this.state.sprintId);
-          this.getCurrentUserId();
-          console.log(this.state);
-      }).catch((err) => {
-          window.location.assign("/404");
-      });
+        const { id } = this.props.match.params;
+        axios.post("/api/projectById", {
+            token: "project",
+            id: id
+        }).then((response) => {
+            console.log(response.data);
+            this.setState({
+                projName: response.data[0].name,
+                summary: response.data[0].summary,
+                projDueDate: response.data[0].due_date,
+                projectId: response.data[0].id,
+                adminId: response.data[0].userId
+            });
+            //pass project id here
+            this.getMembers(this.state.sprintId);
+            this.getCurrentUserId();
+            console.log(this.state);
+        }).catch((err) => {
+            window.location.assign("/404");
+        });
     }
 
     handleChange = name => event => {
@@ -90,35 +90,35 @@ class Project extends React.Component {
     };
 
     getTasks = () => {
-      // let number = this.state.projects
-      // below we'll just place the variable in where we grab the dynamically updated 'project' that we're on depending on user choice
-      axios.get("/api/task/" + this.state.sprintId).then((res) => {
+        // let number = this.state.projects
+        // below we'll just place the variable in where we grab the dynamically updated 'project' that we're on depending on user choice
+        axios.get("/api/task/" + this.state.sprintId).then((res) => {
 
-          let task = res.data;
-          let unassigned = [];
-          let assigned = [];
-          let completed = [];
+            let task = res.data;
+            let unassigned = [];
+            let assigned = [];
+            let completed = [];
 
-          for (let i = 0; i < task.length; i++) {
-              if (task[i].assigned_id === null) {
-                  unassigned.push(task[i])
-              }
+            for (let i = 0; i < task.length; i++) {
+                if (task[i].assigned_id === null) {
+                    unassigned.push(task[i])
+                }
 
-              else if (!task[i].isCompleted) {
-                  assigned.push(task[i]);
-              }
-              else if (task[i].isCompleted) {
-                  completed.push(task[i])
-              }
-          }
-          this.setState({
-              unassignedTasks: unassigned,
-              assignedTasks: assigned,
-              completedTasks: completed
-          }, () => {
-              console.log(this.state.completedTasks)
-          })
-      });
+                else if (!task[i].isCompleted) {
+                    assigned.push(task[i]);
+                }
+                else if (task[i].isCompleted) {
+                    completed.push(task[i])
+                }
+            }
+            this.setState({
+                unassignedTasks: unassigned,
+                assignedTasks: assigned,
+                completedTasks: completed
+            }, () => {
+                console.log(this.state.completedTasks)
+            })
+        });
     };
 
     addTask = (event) => {
@@ -221,50 +221,50 @@ class Project extends React.Component {
     };
 
     addSprint = (event) => {
-      event.preventDefault();
-      let obj = {
-          name: this.state.sprintName,
-          start_date: this.state.sprintStart_date,
-          end_date: this.state.sprintEnd_date,
-          project_id: this.state.projectId
-      }
-      axios.post('/api/sprint', {
-          name: this.state.sprintName,
-          start_date: this.state.sprintStart_date,
-          end_date: this.state.sprintEnd_date,
-          project_id: this.state.projectId
-      }).then(() => {
-        this.setState({
-            sprintOpen: false
-        }, () => {
-            console.log(this.state.sprintOpen);
-            this.getSprints(this.state.projectId);
+        event.preventDefault();
+        let obj = {
+            name: this.state.sprintName,
+            start_date: this.state.sprintStart_date,
+            end_date: this.state.sprintEnd_date,
+            project_id: this.state.projectId
+        }
+        axios.post('/api/sprint', {
+            name: this.state.sprintName,
+            start_date: this.state.sprintStart_date,
+            end_date: this.state.sprintEnd_date,
+            project_id: this.state.projectId
+        }).then(() => {
+            this.setState({
+                sprintOpen: false
+            }, () => {
+                console.log(this.state.sprintOpen);
+                this.getSprints(this.state.projectId);
+            });
         });
-      });
     }
 
     getMembers = (sprintId) => {
-      axios.post('/api/allMemberInSprint', { sprintId: sprintId }).then(res => {
-        console.log("Members:", res.data);
-        this.setState({ members: res.data });
-      })
+        axios.post('/api/allMemberInSprint', { sprintId: sprintId }).then(res => {
+            console.log("Members:", res.data);
+            this.setState({ members: res.data });
+        })
     }
 
     getCurrentUserId = () => {
-      axios.post("/api/userByDecrypt", {
-          id: sessionStorage.getItem("id"),
-          token: localStorage.getItem("token")
-      }).then(res => {
-        let isAdmin = false;
-        if(res.data.id === this.state.adminId){
-          isAdmin = true;
-        }
-        this.setState({ currentUser: res.data.id, isAdmin: isAdmin },
-          () => {
-            console.log(this.state);
-            this.getSprints(this.state.projectId, this.state.currentUser)
-          })
-      })
+        axios.post("/api/userByDecrypt", {
+            id: sessionStorage.getItem("id"),
+            token: localStorage.getItem("token")
+        }).then(res => {
+            let isAdmin = false;
+            if (res.data.id === this.state.adminId) {
+                isAdmin = true;
+            }
+            this.setState({ currentUser: res.data.id, isAdmin: isAdmin },
+                () => {
+                    console.log(this.state);
+                    this.getSprints(this.state.projectId, this.state.currentUser)
+                })
+        })
     }
 
 
@@ -312,51 +312,51 @@ class Project extends React.Component {
                     }} >
 
                     <Grid
-                      container
-                      spacing={8}
-                      style={{ padding: "50px" }}
+                        container
+                        spacing={8}
+                        style={{ padding: "50px" }}
                     >
                         <Grid item xs={12}>
                             <Paper
-                              style={{ height: "100%" }}
+                                style={{ height: "100%" }}
                             >
                             // where the progress bar would go
                             </Paper>
                         </Grid>
                         <Grid
-                          container
-                          spacing={8}
-                          style={{ padding: "50px" }}
+                            container
+                            spacing={8}
+                            style={{ padding: "50px" }}
                         >
                             <Grid item xs={12}>
                                 <Paper
-                                  style={{ height: "100%" }}
+                                    style={{ height: "100%" }}
                                 >
                                     {/* <MuiThemeProvider theme={theme}> */}
                                     {(this.state.isAdmin === true) ?
-                                      <ButtonSizes
-                                        onClick={() => this.handleOpen('sprintOpen')}
-                                        title="Add a Sprint"
-                                        color="secondary"
-                                      /> :
-                                      ""}
+                                        <ButtonSizes
+                                            onClick={() => this.handleOpen('sprintOpen')}
+                                            title="Add a Sprint"
+                                            color="secondary"
+                                        /> :
+                                        ""}
 
                                     {/* </MuiThemeProvider> */}
                                     <SimpleModalSprintWrapped
-                                      open={this.state.sprintOpen}
-                                      onClose={() => this.handleClose('sprintOpen')}
-                                      name="Add a New Sprint ..."
-                                      onSubmit={this.addSprint}
-                                      onChange={this.handleChange}
+                                        open={this.state.sprintOpen}
+                                        onClose={() => this.handleClose('sprintOpen')}
+                                        name="Add a New Sprint ..."
+                                        onSubmit={this.addSprint}
+                                        onChange={this.handleChange}
                                     >
-                                      <AddSprintLayout
-                                      />
+                                        <AddSprintLayout
+                                        />
                                     </SimpleModalSprintWrapped>
                                     <Chips
-                                      sprints={this.state.chipData}
-                                      onClick={this.updateActiveSprint}
-                                      activeSprint={this.state.sprintId}
-                                      currentUser={this.state.currentUser}
+                                        sprints={this.state.chipData}
+                                        onClick={this.updateActiveSprint}
+                                        activeSprint={this.state.sprintId}
+                                        currentUser={this.state.currentUser}
                                     />
                                 </Paper>
                             </Grid>
@@ -471,75 +471,75 @@ class Project extends React.Component {
                         <h3>{this.state.projDueDate}</h3>
                         <Grid item xs={6} style={{ padding: "10px" }}>
                             <h2>This is pool.</h2>
-
-                            <div>
-                                {this.state.inviteCode}
-                            </div>
-                            <button onClick={this.inviteMember}>Invite Code</button>
-
-                            <Grid
-                                container
-                                alignItems={alignItems}
-                                direction={direction}
-                                justify={justify}
-                            >
-                                <ButtonSizes
-                                    onClick={() => this.handleOpen('taskOpen')}
-                                />
-                                <SimpleModalWrapped
-                                    open={this.state.taskOpen}
-                                    onClose={() => this.handleClose('taskOpen')}
-                                    name="Add a New Task ..."
-                                    onSubmit={this.addTask}
-                                    onChange={this.handleChange}
-                                >
-                                    <AddTaskLayout
-                                    />
-                                </SimpleModalWrapped>
-                                <SwitchLabel
-                                    onChange = {this.switchTaskPool}
-                                ></SwitchLabel>
-                                {this.state.showComplete ?  this.state.completedTasks.map((task) => {
-                                    return (
-                                        <Pool
-                                            key={task.id}
-                                            id={this.key}
-                                            tasks={task}
-                                            onClickDelete={this.deleteTask.bind(this, task)}
-                                        />
-                                    );
-                                }):this.state.unassignedTasks.map((task) => {
-                                    return (
-                                        <Pool
-                                            key={task.id}
-                                            id={this.key}
-                                            tasks={task}
-                                            onClickDelete={this.deleteTask.bind(this, task)}
-                                            onClickAdd={this.assignTask.bind(this, task)}
-                                            style={this.state.showComplete ? {display: 'default'}:{display: 'none'}}
-                                        />
-                                    );
-                                })}
-
-                            </Grid>
-
-                        </Grid>
-                        <Grid item xs={6} style={{ padding: "10px" }}>
-                            <UserPool sprintId={this.state.sprintId} members={this.state.members} tasks={this.state.assignedTasks}
-                            unassign={this.unassignTask}
-                            onClickDelete={this.deleteTask}
-                            onClickComplete={this.markComplete}
-                            ></UserPool>
-                        </Grid>
-                        <br />
-                        <div><Link to="/homepage">Back to home page.</Link></div>
-                    </Grid>
+                            {/* <LinearDeterminate sprintId={this.state.sprintId}/> */}
+                {/* <div>
+                    {this.state.inviteCode}
                 </div>
-                <div style={{position:"fixed", width:"100%", bottom:"0"}}>
+                <button onClick={this.inviteMember}>Invite Code</button>
 
-                </div> */}
-                <SimpleBottomNavigation />
-            </div>
+                <Grid
+                    container
+                    alignItems={alignItems}
+                    direction={direction}
+                    justify={justify}
+                >
+                    <ButtonSizes
+                        onClick={() => this.handleOpen('taskOpen')}
+                    />
+                    <SimpleModalWrapped
+                        open={this.state.taskOpen}
+                        onClose={() => this.handleClose('taskOpen')}
+                        name="Add a New Task ..."
+                        onSubmit={this.addTask}
+                        onChange={this.handleChange}
+                    >
+                        <AddTaskLayout
+                        />
+                    </SimpleModalWrapped>
+                    <SwitchLabel
+                        onChange={this.switchTaskPool}
+                    ></SwitchLabel>
+                    {this.state.showComplete ? this.state.completedTasks.map((task) => {
+                        return (
+                            <Pool
+                                key={task.id}
+                                id={this.key}
+                                tasks={task}
+                                onClickDelete={this.deleteTask.bind(this, task)}
+                            />
+                        );
+                    }) : this.state.unassignedTasks.map((task) => {
+                        return (
+                            <Pool
+                                key={task.id}
+                                id={this.key}
+                                tasks={task}
+                                onClickDelete={this.deleteTask.bind(this, task)}
+                                onClickAdd={this.assignTask.bind(this, task)}
+                                style={this.state.showComplete ? { display: 'default' } : { display: 'none' }}
+                            />
+                        );
+                    })}
+
+                </Grid>
+
+                        </Grid>
+            <Grid item xs={6} style={{ padding: "10px" }}>
+                <UserPool sprintId={this.state.sprintId} members={this.state.members} tasks={this.state.assignedTasks}
+                    unassign={this.unassignTask}
+                    onClickDelete={this.deleteTask}
+                    onClickComplete={this.markComplete}
+                ></UserPool>
+            </Grid>
+            <br />
+            <div><Link to="/homepage">Back to home page.</Link></div>
+                    </Grid >
+                </div >
+            <div style={{ position: "fixed", width: "100%", bottom: "0" }}> */}
+
+            {/* </div> * /} */}
+            < SimpleBottomNavigation />
+            </div >
         );
     }
 }
