@@ -63,7 +63,8 @@ class Project extends React.Component {
         showComplete: false,
 
         //Progress Bar Time
-        ProgressTime: 20
+        SprintTime: 20,
+        SprintProgress: 50
     }
 
     componentDidMount() {
@@ -354,7 +355,9 @@ class Project extends React.Component {
                             <Paper
                                 style={{ height: "100%", paddingLeft: 10, paddingRight: 10, paddingTop: 3, paddingBottom: 10 }}
                             >
-                             {<LinearDeterminate whatBar={false} completed ={this.state.ProgressTime} title={"Progress"}/> }
+                             {<LinearDeterminate whatBar completed ={this.state.SprintTime} title={"Sprint Time"}/> }
+                             {<LinearDeterminate  completed ={this.state.SprintProgress} title={"Sprint Progress"}/> }
+
 
                             </Paper>
                         </Grid>
