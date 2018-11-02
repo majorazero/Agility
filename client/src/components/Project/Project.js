@@ -213,7 +213,8 @@ class Project extends React.Component {
                 console.log(currentSprint);
                 this.setState({
                     chipData: sprintData,
-                    sprintId: currentSprint
+                    sprintId: currentSprint,
+                    sprints: res.data
                 });
             }).then(() => {
                 this.getTasks();
@@ -333,26 +334,28 @@ class Project extends React.Component {
                                 <Paper
                                     style={{ height: "100%" }}
                                 >
-                                  {/* <MuiThemeProvider theme={theme}> */}
-                                  {(this.state.isAdmin === true) ?
-                                      <ButtonSizes
-                                          onClick={() => this.handleOpen('sprintOpen')}
-                                          title="Add a Sprint"
-                                          color="secondary"
-                                      /> :
-                                      ""}
+                                    {/* <MuiThemeProvider theme={theme}> */}
 
-                                  {/* </MuiThemeProvider> */}
-                                  <SimpleModalSprintWrapped
-                                    open={this.state.sprintOpen}
-                                    onClose={() => this.handleClose('sprintOpen')}
-                                    name="Add a New Sprint ..."
-                                    onSubmit={this.addSprint}
-                                    onChange={this.handleChange}
-                                  >
-                                    <AddSprintLayout
-                                    />
-                                  </SimpleModalSprintWrapped>
+                                    {(this.state.isAdmin === true) ?
+                                        <ButtonSizes
+                                            onClick={() => this.handleOpen('sprintOpen')}
+                                            title="Add a Sprint"
+                                            color="secondary"
+                                            mini
+                                        /> :
+                                        ""}
+
+                                    {/* </MuiThemeProvider> */}
+                                    <SimpleModalSprintWrapped
+                                        open={this.state.sprintOpen}
+                                        onClose={() => this.handleClose('sprintOpen')}
+                                        name="Add a New Sprint ..."
+                                        onSubmit={this.addSprint}
+                                        onChange={this.handleChange}
+                                    >
+                                        <AddSprintLayout
+                                        />
+                                    </SimpleModalSprintWrapped>
                                   <Chips
                                     sprints={this.state.chipData}
                                     onClick={this.updateActiveSprint}
@@ -367,6 +370,7 @@ class Project extends React.Component {
                             spacing={24}
                             style={{ padding: "50px" }}
                         >
+
                         <Grid item xs={6}>
                           <Paper
                               style={{ height: "300px" }}
@@ -392,10 +396,8 @@ class Project extends React.Component {
                             </SimpleModalWrapped>
                             <SwitchLabel
                                 onChange={this.switchTaskPool}
-                            ></SwitchLabel>
-
-                            <Summary />
-
+                                label="Show Completed Tasks"
+                             />
                             {this.state.showComplete ? this.state.completedTasks.map((task) => {
                               return (
                                 <Pool
@@ -415,7 +417,6 @@ class Project extends React.Component {
                                 tasks={task}
                                 onClickDelete={this.deleteTask.bind(this, task)}
                                 onClickAdd={this.assignTask.bind(this, task)}
-                                style={this.state.showComplete ? { display: 'default' } : { display: 'none' }}
                               />
                             );
                             })}
