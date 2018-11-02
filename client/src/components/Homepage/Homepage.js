@@ -14,12 +14,56 @@ import SimpleBottomNavigation from "../utils/Footer/Footer.js";
 
 class Homepage extends Component {
 
+  constructor(props){
+
+    super(props);
+
+    this.state ={
+    userId: 0,
+    tasks: [],
+    sprints: []
+    }
+  }
+
   componentDidMount = () => {
     if (sessionStorage.getItem("id") === null) {
       console.log("You're not logged in!");
       //we might want to change this to a 404
       window.location.assign("/");
     }
+    this.getCurrentUserId();
+  }
+
+  getCurrentUserId = () => {
+    axios.post("/api/decrypt", {
+        id: sessionStorage.getItem("id"),
+        token: localStorage.getItem("token")
+    }).then(res => {
+        console.log(res.data)
+        this.setState({ userId: res.data }, ()=>{
+          this.getTasks(this.state.userId)
+        })
+    })
+  }
+
+  getTasks = (currentUserId) => {
+    axios.get(`/api/sprints/tasks/user/${currentUserId}`)
+    .then(res => {
+      let incomplete = res.data.filter(task => !task.isCompleted)
+
+        let data = []
+        incomplete.forEach(task => {
+            if(!(data.includes(task.sprint))){
+                data.push({
+                    sprint: task.sprint,
+                    tasks: [task]
+                })
+            } else{
+                data[task.sprint].tasks.push(task)
+            }
+        })
+      this.setState({tasks: data})
+    })
   }
 
   render() {
@@ -34,7 +78,7 @@ class Homepage extends Component {
             // possible?
             backgroundImage: `url("/assets/images/background.png")`,
             resizeMode: 'cover',
-            height: "1050px"
+            height: "100%"
           }} >
           <Grid
             container
@@ -45,7 +89,7 @@ class Homepage extends Component {
               <Paper
                 style={{ height: "100%" }}
               >
-                <ActiveTasks />
+                <ActiveTasks tasks={this.state.tasks} />
               </Paper>
             </Grid>
             <Grid item xs={1} />
@@ -84,14 +128,13 @@ class Homepage extends Component {
           </Grid>
         </Grid> */}
         </div >
-        <div style={{position:"relative"}}>
-
+        <div style={{position:"inherit"}}>
+        <SimpleBottomNavigation />
         </div>
       </div>
     );
   }
 }
 
-// <SimpleBottomNavigation /> 
 
 export default Homepage;
