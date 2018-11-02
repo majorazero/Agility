@@ -385,6 +385,69 @@ setTimeout(()=>{
 /////////////////
 setTimeout(()=>{
   db.Task.create({
+    name: "Define what a dummy is.",
+    due_date: "2018-09-04",
+    sprint_id: 1,
+    description: "Like a doll?",
+    complexity: 4,
+    stack: "Javascript",
+    isComplete: true
+  });
+  db.Task.create({
+    name: "Are dummies edible?",
+    due_date: "2018-09-05",
+    sprint_id: 1,
+    description: "What strange thoughts.",
+    complexity: 3,
+    stack: "CSS",
+    isComplete: true
+  });
+  db.Task.create({
+    name: "Realizing an impending dummy army is inevitable if not stopped.",
+    due_date: "2018-09-07",
+    sprint_id: 1,
+    description: "Let's start eating dummies.",
+    complexity: 2,
+    stack: "Javascript",
+    isComplete: true
+  });
+  db.Task.create({
+    name: "Determine if cooking dummies is the way to go.",
+    due_date: "2018-09-20",
+    sprint_id: 2,
+    description: "Balls likes them raw.",
+    complexity: 5,
+    stack: "Javascript",
+    isComplete: true
+  });
+  db.Task.create({
+    name: "Wonder if that pang in your stomach is normal.",
+    due_date: "2018-09-22",
+    sprint_id: 2,
+    description: "Do they have doctors for things like this?",
+    complexity: 3,
+    stack: "Javascript",
+    isComplete: true
+  });
+  db.Task.create({
+    name: "Clean up evidence.",
+    due_date: "2018-10-02",
+    sprint_id: 3,
+    description: "This is a mess.",
+    complexity: 3,
+    stack: "HTML",
+    isComplete: true
+  });
+  db.Task.create({
+    name: "Try again with bleach.",
+    due_date: "2018-10-03",
+    sprint_id: 3,
+    description: "Like that episode in Breaking Bad.",
+    complexity: 4,
+    stack: "HTML",
+    isComplete: true
+  });
+  db.Task.create({
     name: "Hunt new dummies",
     due_date: "2018-11-02",
     sprint_id: 4,
