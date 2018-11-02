@@ -27,6 +27,8 @@ class Project extends React.Component {
         summary: "",
         projDueDate: "",
         projectId: "",
+        adminId: "",
+        isAdmin: "",
 
         inviteCode: "",
 
@@ -69,7 +71,8 @@ class Project extends React.Component {
                 projName: response.data[0].name,
                 summary: response.data[0].summary,
                 projDueDate: response.data[0].due_date,
-                projectId: response.data[0].id
+                projectId: response.data[0].id,
+                adminId: response.data[0].userId
             });
             //pass project id here
             this.getMembers(this.state.sprintId);
@@ -87,7 +90,6 @@ class Project extends React.Component {
     };
 
     getTasks = () => {
-
         // let number = this.state.projects
         // below we'll just place the variable in where we grab the dynamically updated 'project' that we're on depending on user choice
         axios.get("/api/task/" + this.state.sprintId).then((res) => {
@@ -109,7 +111,6 @@ class Project extends React.Component {
                     completed.push(task[i])
                 }
             }
-            console.log(this.state);
             this.setState({
                 unassignedTasks: unassigned,
                 assignedTasks: assigned,
@@ -211,7 +212,8 @@ class Project extends React.Component {
                 console.log(currentSprint);
                 this.setState({
                     chipData: sprintData,
-                    sprintId: currentSprint
+                    sprintId: currentSprint, 
+                    sprints: res.data
                 });
             }).then(() => {
                 this.getTasks();
@@ -232,15 +234,14 @@ class Project extends React.Component {
             start_date: this.state.sprintStart_date,
             end_date: this.state.sprintEnd_date,
             project_id: this.state.projectId
-        })
-            .then(() => {
-                this.setState({
-                    sprintOpen: false
-                }, () => {
-                    console.log(this.state.sprintOpen)
-                    this.getSprints(this.state.projectId)
-                })
-            })
+        }).then(() => {
+            this.setState({
+                sprintOpen: false
+            }, () => {
+                console.log(this.state.sprintOpen);
+                this.getSprints(this.state.projectId);
+            });
+        });
     }
 
     getMembers = (sprintId) => {
@@ -251,13 +252,17 @@ class Project extends React.Component {
     }
 
     getCurrentUserId = () => {
-        axios.post("/api/decrypt", {
+        axios.post("/api/userByDecrypt", {
             id: sessionStorage.getItem("id"),
             token: localStorage.getItem("token")
         }).then(res => {
-            console.log(res.data)
-            this.setState({ currentUser: res.data },
+            let isAdmin = false;
+            if (res.data.id === this.state.adminId) {
+                isAdmin = true;
+            }
+            this.setState({ currentUser: res.data.id, isAdmin: isAdmin },
                 () => {
+                    console.log(this.state);
                     this.getSprints(this.state.projectId, this.state.currentUser)
                 })
         })
@@ -296,7 +301,6 @@ class Project extends React.Component {
         return (
             <div>
                 <ButtonAppBar />
-
                 <div
                     className="parallax"
                     style={{
@@ -330,12 +334,16 @@ class Project extends React.Component {
                                     style={{ height: "100%" }}
                                 >
                                     {/* <MuiThemeProvider theme={theme}> */}
-                                    <ButtonSizes
-                                        onClick={() => this.handleOpen('sprintOpen')}
-                                        title="Add a Sprint"
-                                        color="secondary"
-                                        mini
-                                    />
+
+                                    {(this.state.isAdmin === true) ?
+                                        <ButtonSizes
+                                            onClick={() => this.handleOpen('sprintOpen')}
+                                            title="Add a Sprint"
+                                            color="secondary"
+                                            mini
+                                        /> :
+                                        ""}
+
                                     {/* </MuiThemeProvider> */}
                                     <SimpleModalSprintWrapped
                                         open={this.state.sprintOpen}
@@ -361,67 +369,74 @@ class Project extends React.Component {
                             spacing={24}
                             style={{ padding: "50px" }}
                         >
-                            <Grid item xs={6}>
-                                <Paper
-                                    style={{ height: "300px" }}
-                                >
-                                    {/* <MuiThemeProvider theme={theme2}> */}
-                                    <ButtonSizes
-                                        onClick={() => this.handleOpen('taskOpen')}
-                                        title="Add a Task"
-                                        color="secondary"
-                                    />
-                                    {/* </MuiThemeProvider> */}
-                                    <SimpleModalWrapped
-                                        open={this.state.taskOpen}
-                                        onClose={() => this.handleClose('taskOpen')}
-                                        name="Add a New Task ..."
-                                        onSubmit={this.addTask}
-                                        onChange={this.handleChange}
-                                    >
-                                        <AddTaskLayout
-                                        />
-                                    </SimpleModalWrapped>
-                                    <SwitchLabel
-                                        onChange={this.switchTaskPool}
-                                        label="Show Completed Tasks"
-                                    />
-                                    {this.state.showComplete ? this.state.completedTasks.map((task) => {
-                                        return (
-                                            <Pool
-                                                key={task.id}
-                                                id={this.key}
-                                                tasks={task}
-                                                onClickDelete={this.deleteTask.bind(this, task)}
-                                            />
-                                        );
-                                    }) : this.state.unassignedTasks.map((task) => {
-                                        return (
-                                            <Pool
-                                                key={task.id}
-                                                id={this.key}
-                                                tasks={task}
-                                                onClickDelete={this.deleteTask.bind(this, task)}
-                                                onClickAdd={this.assignTask.bind(this, task)}
-                                            />
-                                        );
-                                    })}
-                                </Paper>
-                            </Grid>
-                            <Grid item xs={6}>
-                                <Paper
-                                    style={{ height: "300px" }}
-                                >
-                                    <UserPool
-                                        sprintId={this.state.sprintId}
-                                        members={this.state.members}
-                                        tasks={this.state.assignedTasks}
-                                        unassign={this.unassignTask}
-                                        onClickDelete={this.deleteTask}
-                                        onClickComplete={this.markComplete}
-                                    />
-                                </Paper>
-                            </Grid>
+
+                        <Grid item xs={6}>
+                          <Paper
+                              style={{ height: "300px" }}
+                          >
+                            {/* <MuiThemeProvider theme={theme2}> */}
+                            {(this.state.isAdmin === true) ?
+                              <ButtonSizes
+                                  onClick={() => this.handleOpen('taskOpen')}
+                                  title="Add a Task"
+                                  color="secondary"
+                              /> :
+                              ""}
+                            {/* </MuiThemeProvider> */}
+                            <SimpleModalWrapped
+                                open={this.state.taskOpen}
+                                onClose={() => this.handleClose('taskOpen')}
+                                name="Add a New Task ..."
+                                onSubmit={this.addTask}
+                                onChange={this.handleChange}
+                            >
+                                <AddTaskLayout
+                                />
+                            </SimpleModalWrapped>
+                            <SwitchLabel
+                                onChange={this.switchTaskPool}
+                                label="Show Completed Tasks"
+                             />
+                            {this.state.showComplete ? this.state.completedTasks.map((task) => {
+                              return (
+                                <Pool
+                                  key={task.id}
+                                  id={this.key}
+                                  isAdmin={this.state.isAdmin}
+                                  tasks={task}
+                                  onClickDelete={this.deleteTask.bind(this, task)}
+                                />
+                              );
+                          }) : this.state.unassignedTasks.map((task) => {
+                            return (
+                              <Pool
+                                key={task.id}
+                                id={this.key}
+                                isAdmin={this.state.isAdmin}
+                                tasks={task}
+                                onClickDelete={this.deleteTask.bind(this, task)}
+                                onClickAdd={this.assignTask.bind(this, task)}
+                              />
+                            );
+                            })}
+                          </Paper>
+                        </Grid>
+                          <Grid item xs={6}>
+                            <Paper
+                                style={{ height: "300px" }}
+                            >
+                              <UserPool
+                              isAdmin={this.state.isAdmin}
+                              currentUser={this.state.currentUser}
+                              sprintId={this.state.sprintId}
+                              members={this.state.members}
+                              tasks={this.state.assignedTasks}
+                              unassign={this.unassignTask}
+                              onClickDelete={this.deleteTask}
+                              onClickComplete={this.markComplete}
+                              />
+                            </Paper>
+                          </Grid>
                         </Grid>
                     </Grid>
                 </div>
@@ -460,75 +475,75 @@ class Project extends React.Component {
                         <h3>{this.state.projDueDate}</h3>
                         <Grid item xs={6} style={{ padding: "10px" }}>
                             <h2>This is pool.</h2>
-
-                            <div>
-                                {this.state.inviteCode}
-                            </div>
-                            <button onClick={this.inviteMember}>Invite Code</button>
-
-                            <Grid
-                                container
-                                alignItems={alignItems}
-                                direction={direction}
-                                justify={justify}
-                            >
-                                <ButtonSizes
-                                    onClick={() => this.handleOpen('taskOpen')}
-                                />
-                                <SimpleModalWrapped
-                                    open={this.state.taskOpen}
-                                    onClose={() => this.handleClose('taskOpen')}
-                                    name="Add a New Task ..."
-                                    onSubmit={this.addTask}
-                                    onChange={this.handleChange}
-                                >
-                                    <AddTaskLayout
-                                    />
-                                </SimpleModalWrapped>
-                                <SwitchLabel
-                                    onChange = {this.switchTaskPool}
-                                ></SwitchLabel>
-                                {this.state.showComplete ?  this.state.completedTasks.map((task) => {
-                                    return (
-                                        <Pool
-                                            key={task.id}
-                                            id={this.key}
-                                            tasks={task}
-                                            onClickDelete={this.deleteTask.bind(this, task)}
-                                        />
-                                    );
-                                }):this.state.unassignedTasks.map((task) => {
-                                    return (
-                                        <Pool
-                                            key={task.id}
-                                            id={this.key}
-                                            tasks={task}
-                                            onClickDelete={this.deleteTask.bind(this, task)}
-                                            onClickAdd={this.assignTask.bind(this, task)}
-                                            style={this.state.showComplete ? {display: 'default'}:{display: 'none'}}
-                                        />
-                                    );
-                                })}
-
-                            </Grid>
-
-                        </Grid>
-                        <Grid item xs={6} style={{ padding: "10px" }}>
-                            <UserPool sprintId={this.state.sprintId} members={this.state.members} tasks={this.state.assignedTasks}
-                            unassign={this.unassignTask}
-                            onClickDelete={this.deleteTask}
-                            onClickComplete={this.markComplete}
-                            ></UserPool>
-                        </Grid>
-                        <br />
-                        <div><Link to="/homepage">Back to home page.</Link></div>
-                    </Grid>
+                            {/* <LinearDeterminate sprintId={this.state.sprintId}/> */}
+                {/* <div>
+                    {this.state.inviteCode}
                 </div>
-                <div style={{position:"fixed", width:"100%", bottom:"0"}}>
+                <button onClick={this.inviteMember}>Invite Code</button>
 
-                </div> */}
-                <SimpleBottomNavigation />
-            </div>
+                <Grid
+                    container
+                    alignItems={alignItems}
+                    direction={direction}
+                    justify={justify}
+                >
+                    <ButtonSizes
+                        onClick={() => this.handleOpen('taskOpen')}
+                    />
+                    <SimpleModalWrapped
+                        open={this.state.taskOpen}
+                        onClose={() => this.handleClose('taskOpen')}
+                        name="Add a New Task ..."
+                        onSubmit={this.addTask}
+                        onChange={this.handleChange}
+                    >
+                        <AddTaskLayout
+                        />
+                    </SimpleModalWrapped>
+                    <SwitchLabel
+                        onChange={this.switchTaskPool}
+                    ></SwitchLabel>
+                    {this.state.showComplete ? this.state.completedTasks.map((task) => {
+                        return (
+                            <Pool
+                                key={task.id}
+                                id={this.key}
+                                tasks={task}
+                                onClickDelete={this.deleteTask.bind(this, task)}
+                            />
+                        );
+                    }) : this.state.unassignedTasks.map((task) => {
+                        return (
+                            <Pool
+                                key={task.id}
+                                id={this.key}
+                                tasks={task}
+                                onClickDelete={this.deleteTask.bind(this, task)}
+                                onClickAdd={this.assignTask.bind(this, task)}
+                                style={this.state.showComplete ? { display: 'default' } : { display: 'none' }}
+                            />
+                        );
+                    })}
+
+                </Grid>
+
+                        </Grid>
+            <Grid item xs={6} style={{ padding: "10px" }}>
+                <UserPool sprintId={this.state.sprintId} members={this.state.members} tasks={this.state.assignedTasks}
+                    unassign={this.unassignTask}
+                    onClickDelete={this.deleteTask}
+                    onClickComplete={this.markComplete}
+                ></UserPool>
+            </Grid>
+            <br />
+            <div><Link to="/homepage">Back to home page.</Link></div>
+                    </Grid >
+                </div >
+            <div style={{ position: "fixed", width: "100%", bottom: "0" }}> */}
+
+            {/* </div> * /} */}
+            < SimpleBottomNavigation />
+            </div >
         );
     }
 }

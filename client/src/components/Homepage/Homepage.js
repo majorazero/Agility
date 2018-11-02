@@ -15,12 +15,12 @@ import SimpleBottomNavigation from "../utils/Footer/Footer.js";
 class Homepage extends Component {
 
   constructor(props){
-    
+
     super(props);
-    
+
     this.state ={
     userId: 0,
-    tasks: [], 
+    tasks: [],
     sprints: []
     }
   }
@@ -44,7 +44,7 @@ class Homepage extends Component {
           this.getTasks(this.state.userId)
         })
     })
-  } 
+  }
 
   getTasks = (currentUserId) => {
     axios.get(`/api/sprints/tasks/user/${currentUserId}`)
@@ -56,7 +56,7 @@ class Homepage extends Component {
             if(!(data.includes(task.sprint))){
                 data.push({
                     sprint: task.sprint,
-                    tasks: [task] 
+                    tasks: [task]
                 })
             } else{
                 data[task.sprint].tasks.push(task)
@@ -129,11 +129,12 @@ class Homepage extends Component {
         </Grid> */}
         </div >
         <div style={{position:"inherit"}}>
-        <SimpleBottomNavigation /> 
+        <SimpleBottomNavigation />
         </div>
       </div>
     );
   }
 }
+
 
 export default Homepage;

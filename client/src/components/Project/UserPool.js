@@ -37,7 +37,7 @@ class UserPool extends Component {
       this.render();
     }
   }
-  
+
   render() {
     console.log(this.props);
     return (
@@ -53,8 +53,11 @@ class UserPool extends Component {
                 <p>{member.User.first_name} {member.User.last_name}</p>
                 {this.props.tasks.filter(task => task.assigned_id === member.User.id).map(fTask => {
                   console.log(fTask)
+                  console.log(this.props.currentUser,fTask.assigned_id);
                   return (
-                    <Pool key={fTask.id} id={this.key} tasks={fTask} onClickDelete={() => this.props.onClickDelete(fTask)} unAssign={() => this.props.unassign(fTask.id)} onClickComplete={() => this.props.onClickComplete(fTask.id)} assigned />
+                    <Pool key={fTask.id} id={this.key}
+                      isAdmin={this.props.isAdmin}
+                     currentUser={this.props.currentUser} assignedUser={fTask.assigned_id} tasks={fTask} onClickDelete={() => this.props.onClickDelete(fTask)} unAssign={() => this.props.unassign(fTask.id)} onClickComplete={() => this.props.onClickComplete(fTask.id)} assigned />
                   )
                 })}
               </Paper>

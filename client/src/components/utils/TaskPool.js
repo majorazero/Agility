@@ -26,6 +26,7 @@ const styles = theme => ({
 
 function SimpleExpansionPanel(props) {
   const { classes } = props;
+  console.log(props.isAdmin,props.currentUser,props.assignedUser,props.assigned);
   return (
       <ExpansionPanel key={props.id}>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
@@ -40,20 +41,40 @@ function SimpleExpansionPanel(props) {
               {props.due}
           </Typography>
           {/* {(location.pathname === "/homepage") ? null :  */}
+          {props.isAdmin ?
+            <ContainedButtons
+              name={props.assigned ? "Unassign" : "Select"}
+              color="primary"
+              onClick={props.assigned ? props.unAssign : props.onClickAdd}
+            /> :
+          (props.assigned && (props.currentUser === props.assignedUser)) ?
+            <ContainedButtons
+              name={props.assigned ? "Unassign" : "Select"}
+              color="primary"
+              onClick={props.assigned ? props.unAssign : props.onClickAdd}
+            /> :
+          (!props.assigned) ?
           <ContainedButtons
             name={props.assigned ? "Unassign" : "Select"}
             color="primary"
             onClick={props.assigned ? props.unAssign : props.onClickAdd}
-          />
+          /> : ""}
           {/* } */}
           {/* {(location.pathname === "/homepage") ? null :  */}
+          {props.isAdmin ?
           <ContainedButtons
             name={props.assigned ? "Mark Complete" : "Delete"}
             color="secondary"
             onClick={props.assigned ? props.onClickComplete : props.onClickDelete}
           />
+          :
+          (props.assigned && (props.currentUser === props.assignedUser)) ?
+          <ContainedButtons
+            name={props.assigned ? "Mark Complete" : "Delete"}
+            color="secondary"
+            onClick={props.assigned ? props.onClickComplete : props.onClickDelete}
+          /> : ""}
           {/* } */}
-          
         </ExpansionPanelDetails>
       </ExpansionPanel>
   );
