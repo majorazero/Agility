@@ -12,6 +12,7 @@ import ButtonAppBar from "../utils/Navbar/Navbar.js";
 import AddSprintLayout from "../utils/AddSprintLayout.js";
 import SimpleModalSprintWrapped from '../utils/ModalSprint';
 import SimpleBottomNavigation from "../utils/Footer/Footer.js";
+import SwitchLabel from '../utils/Switch';
 
 
 
@@ -28,6 +29,7 @@ class Project extends React.Component {
 
         unassignedTasks: [],
         assignedTasks: [],
+        completedTasks: [],
         projects: [],
         sprints: [],
         members: [],
@@ -49,7 +51,8 @@ class Project extends React.Component {
         sprintStart_date: "",
         sprintEnd_date: "",
 
-        currentUser: ''
+        currentUser: '', 
+        showComplete: false
     }
 
     componentDidMount() {
@@ -89,6 +92,7 @@ class Project extends React.Component {
             let task = res.data;
             let unassigned = [];
             let assigned = [];
+            let completed = [];
 
             for (let i = 0; i < task.length; i++) {
                 if (task[i].assigned_id === null) {
@@ -97,11 +101,17 @@ class Project extends React.Component {
                 else if (!task[i].isCompleted){
                     assigned.push(task[i]);
                 }
+                else if(task[i].isCompleted){
+                    completed.push(task[i])
+                }
             }
             console.log(this.state);
             this.setState({
                 unassignedTasks: unassigned,
-                assignedTasks: assigned
+                assignedTasks: assigned, 
+                completedTasks: completed
+            }, () => {
+                console.log(this.state.completedTasks)
             })
         });
     };
@@ -267,6 +277,15 @@ class Project extends React.Component {
         })
     } 
 
+    switchTaskPool = () => {
+        if(this.state.showComplete === true){
+            this.setState({showComplete: false})
+        }
+        else{
+            this.setState({showComplete: true})
+        }
+    }
+
     render() {
         const { direction, justify, alignItems } = this.state;
         return (
@@ -325,7 +344,19 @@ class Project extends React.Component {
                                     <AddTaskLayout
                                     />
                                 </SimpleModalWrapped>
-                                {this.state.unassignedTasks.map((task) => {
+                                <SwitchLabel
+                                    onChange = {this.switchTaskPool}
+                                ></SwitchLabel>
+                                {this.state.showComplete ?  this.state.completedTasks.map((task) => {
+                                    return (
+                                        <Pool
+                                            key={task.id}
+                                            id={this.key}
+                                            tasks={task}
+                                            onClickDelete={this.deleteTask.bind(this, task)}
+                                        />
+                                    );
+                                }):this.state.unassignedTasks.map((task) => {
                                     return (
                                         <Pool
                                             key={task.id}
@@ -333,6 +364,7 @@ class Project extends React.Component {
                                             tasks={task}
                                             onClickDelete={this.deleteTask.bind(this, task)}
                                             onClickAdd={this.assignTask.bind(this, task)}
+                                            style={this.state.showComplete ? {display: 'default'}:{display: 'none'}}
                                         />
                                     );
                                 })}
