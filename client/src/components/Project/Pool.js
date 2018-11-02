@@ -5,6 +5,8 @@ const Pool = (props) => {
 
     return (
         <SimpleExpansionPanel
+            currentUser={props.currentUser}
+            assignedUser={props.assignedUser}
             name={props.tasks.name}
             key={props.id}
             isAdmin={props.isAdmin}

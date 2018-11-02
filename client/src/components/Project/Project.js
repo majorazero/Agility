@@ -422,6 +422,8 @@ class Project extends React.Component {
                                 style={{ height: "300px" }}
                             >
                               <UserPool
+                              isAdmin={this.state.isAdmin}
+                              currentUser={this.state.currentUser}
                               sprintId={this.state.sprintId}
                               members={this.state.members}
                               tasks={this.state.assignedTasks}
