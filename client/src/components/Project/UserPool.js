@@ -36,7 +36,8 @@ class UserPool extends Component {
     if ((prevProps.sprintId !== this.props.sprintId) || (prevProps.tasks !== this.props.tasks) || (prevProps.members !== this.props.members)) {
       this.render();
     }
-
+  }
+  
   render() {
     console.log(this.props);
     return (
