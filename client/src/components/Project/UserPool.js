@@ -28,7 +28,6 @@ class UserPool extends Component {
          this.render();
       }
     }
-  }
 
   render() {
     console.log(this.props);
