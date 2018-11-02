@@ -16,7 +16,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 // import MoreVertIcon from '@material-ui/icons/MoreVert';
-import Axios from 'axios';
+import axios from 'axios';
 import TextMobileStepper from "../../utils/Stepper.js";
 
 const styles = theme => ({
@@ -57,26 +57,31 @@ class RecipeReviewCard extends React.Component {
         expanded: false,
         userFirstName: "",
         userLastName: "",
-        userEmail: ""
+        userEmail: "",
+        totalTask: "",
+        totalCompletedTask: ""
     };
 
     componentDidMount() {
-        Axios.post("/api/getuser",
+      axios.post("/api/getuser",
+        {
+          id: sessionStorage.getItem("id"),
+          token: localStorage.getItem("token")
+        }).then((response) => {
+          console.log(response.data);
+          this.setState(
             {
-                id: sessionStorage.getItem("id"),
-                token: localStorage.getItem("token")
-            }).then((response) => {
-                this.setState(
-                    {
-                        userFirstName: response.data[0].first_name,
-                        userLastName: response.data[0].last_name,
-                        userEmail: response.data[0].email
-                    }
-                )
-            })
+              userFirstName: response.data.prof.first_name,
+              userLastName: response.data.prof.last_name,
+              userEmail: response.data.prof.email,
+              totalTask: response.data.totalTask,
+              totalCompletedTask: response.data.totalCompletedTask
+            }
+          );
+        });
     }
     handleExpandClick = () => {
-        this.setState(state => ({ expanded: !state.expanded }));
+      this.setState(state => ({ expanded: !state.expanded }));
     };
 
 
@@ -97,6 +102,15 @@ class RecipeReviewCard extends React.Component {
                     </Typography>
                     <Typography component="p">
                         {this.state.userEmail}
+                    </Typography>
+                    <Typography component="h2">
+                      Career
+                    </Typography>
+                    <Typography>
+                      {(this.state.totalTask === 0) ? "Start working on something!":
+                        `${this.state.totalCompletedTask/this.state.totalTask*100}% Completed ${this.state.totalCompletedTask} tasks out of ${this.state.totalTask} tasks!`
+                      }
+                      
                     </Typography>
                     <br />
                     {/* <Typography component="p">

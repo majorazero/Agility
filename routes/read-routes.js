@@ -112,12 +112,30 @@ module.exports = function(app) {
     });
 
     app.post("/api/getuser/", (req, res) => {
+        let Obj = {};
+        let simpleId = encrypt.decrypt(req.body.token,req.body.id);
         db.User.findAll({
          where: {
-             id: encrypt.decrypt(req.body.token,req.body.id)
+          id: simpleId
          }
         }).then(response => {
-            res.json(response);
+          Obj.prof = response[0];
+          //lets also pull some career data in here.
+          db.Task.findAll({
+            where: {
+              assigned_id: simpleId
+            }
+          }).then((tRes) => {
+            Obj.task = tRes;
+            Obj.totalTask = tRes.length;
+            Obj.totalCompletedTask = 0;
+            for(let i = 0; i < tRes.length; i++){
+              if(tRes[i].isCompleted === true){
+                Obj.totalCompletedTask++;
+              }
+            }
+            res.json(Obj);
+          });
         })
     });
 }
