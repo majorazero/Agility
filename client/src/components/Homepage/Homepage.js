@@ -34,7 +34,7 @@ class Homepage extends Component {
             // possible?
             backgroundImage: `url("/assets/images/background.png")`,
             resizeMode: 'cover',
-            height: "1050px"
+            height: "100%"
           }} >
           <Grid
             container
@@ -84,7 +84,7 @@ class Homepage extends Component {
           </Grid>
         </Grid> */}
         </div >
-        <div style={{position:"relative"}}>
+        <div style={{position:"inherit"}}>
         <SimpleBottomNavigation /> 
         </div>
       </div>
