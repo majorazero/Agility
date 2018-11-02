@@ -95,7 +95,7 @@ module.exports = function(app) {
           as: "User"
         }]
       }).then((data) => {
-        console.log(data,req.body.sprintId);
+        // console.log(data,req.body.sprintId);
         res.json(data);
       })
     });
