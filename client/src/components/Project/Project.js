@@ -18,6 +18,7 @@ import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import SwitchLabel from '../utils/Switch';
+import Summary from "./Summary/Summary.js";
 
 class Project extends React.Component {
 
@@ -332,32 +333,32 @@ class Project extends React.Component {
                                 <Paper
                                     style={{ height: "100%" }}
                                 >
-                                    {/* <MuiThemeProvider theme={theme}> */}
-                                    {(this.state.isAdmin === true) ?
-                                        <ButtonSizes
-                                            onClick={() => this.handleOpen('sprintOpen')}
-                                            title="Add a Sprint"
-                                            color="secondary"
-                                        /> :
-                                        ""}
+                                  {/* <MuiThemeProvider theme={theme}> */}
+                                  {(this.state.isAdmin === true) ?
+                                      <ButtonSizes
+                                          onClick={() => this.handleOpen('sprintOpen')}
+                                          title="Add a Sprint"
+                                          color="secondary"
+                                      /> :
+                                      ""}
 
-                                    {/* </MuiThemeProvider> */}
-                                    <SimpleModalSprintWrapped
-                                        open={this.state.sprintOpen}
-                                        onClose={() => this.handleClose('sprintOpen')}
-                                        name="Add a New Sprint ..."
-                                        onSubmit={this.addSprint}
-                                        onChange={this.handleChange}
-                                    >
-                                        <AddSprintLayout
-                                        />
-                                    </SimpleModalSprintWrapped>
-                                    <Chips
-                                        sprints={this.state.chipData}
-                                        onClick={this.updateActiveSprint}
-                                        activeSprint={this.state.sprintId}
-                                        currentUser={this.state.currentUser}
+                                  {/* </MuiThemeProvider> */}
+                                  <SimpleModalSprintWrapped
+                                    open={this.state.sprintOpen}
+                                    onClose={() => this.handleClose('sprintOpen')}
+                                    name="Add a New Sprint ..."
+                                    onSubmit={this.addSprint}
+                                    onChange={this.handleChange}
+                                  >
+                                    <AddSprintLayout
                                     />
+                                  </SimpleModalSprintWrapped>
+                                  <Chips
+                                    sprints={this.state.chipData}
+                                    onClick={this.updateActiveSprint}
+                                    activeSprint={this.state.sprintId}
+                                    currentUser={this.state.currentUser}
+                                  />
                                 </Paper>
                             </Grid>
                         </Grid>
@@ -392,6 +393,9 @@ class Project extends React.Component {
                             <SwitchLabel
                                 onChange={this.switchTaskPool}
                             ></SwitchLabel>
+
+                            <Summary />
+
                             {this.state.showComplete ? this.state.completedTasks.map((task) => {
                               return (
                                 <Pool
