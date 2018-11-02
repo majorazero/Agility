@@ -62,7 +62,9 @@ class RecipeReviewCard extends React.Component {
         totalCompletedTask: "",
         sprintParticipate: "",
         projectContributed: "",
-        projectCreated: ""
+        projectCreated: "",
+        complexity: "",
+        complexitySemantics: ""
     };
 
     componentDidMount() {
@@ -82,7 +84,11 @@ class RecipeReviewCard extends React.Component {
               sprintParticipate: response.data.sprintParticipate,
               projectContributed: response.data.projectContributed,
               projectCreated:
-              response.data.projectCreated
+              response.data.projectCreated,
+              complexity:
+              response.data.complexity,
+              complexitySemantics:
+              response.data.compSemantics
             }
           );
         });
@@ -119,10 +125,13 @@ class RecipeReviewCard extends React.Component {
                       }
                     </Typography>
                     <Typography>
+                      Total Tasks Completed: {this.state.totalCompletedTask}
+                    </Typography>
+                    <Typography>
                       Total Tasks Taken: {this.state.totalTask}
                     </Typography>
                     <Typography>
-                      Total Tasks Completed: {this.state.totalCompletedTask}
+                      Average Task Complexity: {this.state.complexity} ({this.state.complexitySemantics})
                     </Typography>
                     <Typography>
                       Total Sprints Participated: {this.state.sprintParticipate}

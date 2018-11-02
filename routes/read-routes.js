@@ -129,10 +129,29 @@ module.exports = function(app) {
             Obj.task = tRes;
             Obj.totalTask = tRes.length;
             Obj.totalCompletedTask = 0;
+            //for complexity
+            Obj.complexity = 0;
             for(let i = 0; i < tRes.length; i++){
+              Obj.complexity += tRes[i].complexity;
               if(tRes[i].isCompleted === true){
                 Obj.totalCompletedTask++;
               }
+            }
+            Obj.complexity = Obj.complexity/tRes.length;
+            if(Obj.complexity <= 1.5){
+              Obj.compSemantics = "Easy";
+            }
+            else if (Obj.complexity <= 2.5){
+              Obj.compSemantics = "Easy-Medium";
+            }
+            else if (Obj.complexity <= 3.5){
+              Obj.compSemantics = "Medium";
+            }
+            else if (Obj.complexity <= 4.5){
+              Obj.compSemantics = "Medium-Hard";
+            }
+            else {
+              Obj.compSemantics = "Hard";
             }
             db.SprintMembership.findAll({
               where: {
