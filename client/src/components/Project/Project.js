@@ -215,6 +215,7 @@ class Project extends React.Component {
                 });
             }).then(() => {
                 this.getTasks();
+                this.getMembers(this.state.sprintId);
             });
     };
 
@@ -243,11 +244,10 @@ class Project extends React.Component {
     }
 
     getMembers = (sprintId) => {
-        axios.post('/api/allMemberInSprint', { sprintId: sprintId })
-            .then(res => {
-                console.log("Members:", res.data)
-                this.setState({ members: res.data })
-            })
+      axios.post('/api/allMemberInSprint', { sprintId: sprintId }).then(res => {
+        console.log("Members:", res.data);
+        this.setState({ members: res.data });
+      })
     }
 
     getCurrentUserId = () => {
@@ -411,9 +411,9 @@ class Project extends React.Component {
                                 <Paper
                                     style={{ height: "300px" }}
                                 >
-                                    <UserPool 
-                                    sprintId={this.state.sprintId} 
-                                    members={this.state.members} 
+                                    <UserPool
+                                    sprintId={this.state.sprintId}
+                                    members={this.state.members}
                                     tasks={this.state.assignedTasks}
                                     unassign={this.unassignTask}
                                     onClickDelete={this.deleteTask}
@@ -427,11 +427,11 @@ class Project extends React.Component {
 
 
                 {/* <div style={{ paddingTop: "100px" }}>
-                    <SprintSelect 
-                    sprints={this.state.chipData} 
-                    onClick={this.updateActiveSprint} 
-                    activeSprint={this.state.sprintId} 
-                    currentUser={this.state.currentUser} 
+                    <SprintSelect
+                    sprints={this.state.chipData}
+                    onClick={this.updateActiveSprint}
+                    activeSprint={this.state.sprintId}
+                    currentUser={this.state.currentUser}
                     />
                     <ButtonSizes
                         onClick={() => this.handleOpen('sprintOpen')}
@@ -524,7 +524,7 @@ class Project extends React.Component {
                     </Grid>
                 </div>
                 <div style={{position:"fixed", width:"100%", bottom:"0"}}>
-                
+
                 </div> */}
                 <SimpleBottomNavigation />
             </div>
