@@ -138,7 +138,7 @@ module.exports = function(app) {
                 Obj.totalCompletedTask++;
               }
             }
-            Obj.complexity = Obj.complexity/tRes.length;
+            Obj.complexity = (Obj.complexity/tRes.length).toFixed(2);
             if(Obj.complexity <= 1.5){
               Obj.compSemantics = "Easy";
             }
