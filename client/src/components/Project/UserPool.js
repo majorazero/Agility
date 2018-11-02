@@ -6,7 +6,7 @@ import axios from 'axios';
 import Grid from '@material-ui/core/Grid';
 import TaskCard from '../utils/TaskCard/TaskCard';
 import Paper from '@material-ui/core/Paper';
-
+import Pool from './Pool';
 
 const style = {
     gridItem: {
@@ -19,22 +19,14 @@ const style = {
 
 class UserPool extends Component {
 
-  constructor(props) {
-    super(props);
+    constructor(props) {
+        super(props);
+      }
 
-    this.state = {
-      users: [],
-      tasks: []
-    };
-  }
-
-  componentDidMount() {
-    // this.getUsers(this.props.sprintId);
-  }
-
-  componentDidUpdate(prevProps) {
-    if ((prevProps.sprintId !== this.props.sprintId) || (prevProps.tasks !== this.props.tasks) || (prevProps.members !== this.props.members)) {
-      this.render();
+    componentDidUpdate(prevProps){
+      if((prevProps.sprintId !== this.props.sprintId) || (prevProps.tasks !== this.props.tasks) || (prevProps.members !== this.props.members)){
+         this.render();
+      }
     }
   }
 
@@ -51,11 +43,13 @@ class UserPool extends Component {
             <Grid item>
               <Paper key={i}>
                 <p>{member.User.first_name} {member.User.last_name}</p>
-                {this.props.tasks.filter(task => task.assigned_id === member.User.id).map(fTask => (
-                  <TaskCard key={fTask.id} title={fTask.name} summary={fTask.description} dueDate={fTask.due_date} unAssign={() => {
-                    this.props.unassign(fTask.id)
-                  }} titleSize="subtitle2" subtitleSize='caption'></TaskCard>
-                ))}
+                {this.props.tasks.filter(task => task.assigned_id === member.User.id).map(fTask => {
+                    console.log(fTask)
+                    return(
+                    <Pool key={fTask.id} id={this.key} tasks={fTask} onClickDelete={() => this.props.onClickDelete(fTask)}
+                    unAssign={() => this.props.unassign(fTask.id)} onClickComplete={() => this.props.onClickComplete(fTask.id)} assigned> 
+                    </Pool>)
+                })}
               </Paper>
             </Grid>
           )
@@ -63,6 +57,7 @@ class UserPool extends Component {
       </Grid>
     );
   }
+
 };
 
 export default UserPool;

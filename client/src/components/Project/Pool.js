@@ -13,6 +13,9 @@ const Pool = (props) => {
             difficulty={props.tasks.difficulty}
             onClickDelete={props.onClickDelete}
             onClickAdd={props.onClickAdd}
+            unAssign={props.unAssign}
+            assigned={props.assigned}
+            onClickComplete={props.onClickComplete}
         />
     );
 };

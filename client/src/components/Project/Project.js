@@ -17,30 +17,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-
-// const theme = createMuiTheme({
-//     overrides: {
-//         MuiButton: {
-//             root: {
-//                 top: "18%!important",
-//                 left: "75%!important",
-//                 position: "inherit"
-//             }
-//         }
-//     }
-// });
-
-// const theme2 = createMuiTheme({
-//     overrides: {
-//         MuiButton: {
-//             root: {
-//                 top: "38%!important",
-//                 left: "30%!important",
-//                 position: "inherit"
-//             }
-//         }
-//     }
-// });
+import SwitchLabel from '../utils/Switch';
 
 class Project extends React.Component {
 
@@ -55,6 +32,7 @@ class Project extends React.Component {
 
         unassignedTasks: [],
         assignedTasks: [],
+        completedTasks: [],
         projects: [],
         sprints: [],
         members: [],
@@ -76,7 +54,8 @@ class Project extends React.Component {
         sprintStart_date: "",
         sprintEnd_date: "",
 
-        currentUser: ''
+        currentUser: '', 
+        showComplete: false
     }
 
     componentDidMount() {
@@ -116,19 +95,27 @@ class Project extends React.Component {
             let task = res.data;
             let unassigned = [];
             let assigned = [];
+            let completed = [];
 
             for (let i = 0; i < task.length; i++) {
                 if (task[i].assigned_id === null) {
                     unassigned.push(task[i])
                 }
-                else {
+
+                else if (!task[i].isCompleted){
                     assigned.push(task[i]);
+                }
+                else if(task[i].isCompleted){
+                    completed.push(task[i])
                 }
             }
             console.log(this.state);
             this.setState({
                 unassignedTasks: unassigned,
-                assignedTasks: assigned
+                assignedTasks: assigned, 
+                completedTasks: completed
+            }, () => {
+                console.log(this.state.completedTasks)
             })
         });
     };
@@ -170,27 +157,28 @@ class Project extends React.Component {
     }
 
     assignTask = (task) => {
-        axios.post("/api/decrypt", { token: localStorage.getItem("token"), id: sessionStorage.getItem("id") }).then((response) => {
-            let user = response.data;
-            axios.put("/api/task/by/" + task.id + "/" + user).then((res) => {
-                // console.log(res.data);
-                this.getTasks();
-                //window.location.reload();
-
+        console.log("assign task")
+      axios.post("/api/decrypt", { token: localStorage.getItem("token"), id: sessionStorage.getItem("id") }).then((response) => {
+          let user = response.data;
+          axios.put("/api/task/by/" + task.id + "/" + user).then((res) => {
+            // console.log(res.data);
+            this.getTasks();
+            //window.location.reload();
             })
         });
     }
 
     unassignTask = (id) => {
-        axios.put("/api/task/unassign", { id: id }).then((response) => {
-            this.getTasks();
-        });
+        console.log('unassign task')
+      axios.put("/api/task/unassign",{id: id}).then((response) => {
+        this.getTasks();
+      });
     }
 
     updateActiveSprint = (sprintId) => {
-        this.setState({ sprintId: sprintId }, () => {
-            this.getTasks();
-        });
+      this.setState({ sprintId: sprintId }, () => {
+        this.getTasks();
+      });
     }
 
     defaultVal = () => {
@@ -285,6 +273,22 @@ class Project extends React.Component {
             console.log(response.data);
             this.setState({ inviteCode: response.data });
         });
+    }
+
+    markComplete = (id) => {
+        axios.put(`/api/complete/task/${id}`)
+        .then(() => {
+            this.getTasks();
+        })
+    } 
+
+    switchTaskPool = () => {
+        if(this.state.showComplete === true){
+            this.setState({showComplete: false})
+        }
+        else{
+            this.setState({showComplete: true})
+        }
     }
 
     render() {
@@ -418,6 +422,11 @@ class Project extends React.Component {
                         onClick={() => this.handleOpen('sprintOpen')}
                         title="Add a Sprint"
                         color="secondary"
+                        style= {{
+                            position: "absolute!important",
+                            top: "50px!important",
+                            left: "50px!important"
+                        }}
                     />
                     <SimpleModalSprintWrapped
                         open={this.state.sprintOpen}
@@ -460,7 +469,19 @@ class Project extends React.Component {
                                     <AddTaskLayout
                                     />
                                 </SimpleModalWrapped>
-                                {this.state.unassignedTasks.map((task) => {
+                                <SwitchLabel
+                                    onChange = {this.switchTaskPool}
+                                ></SwitchLabel>
+                                {this.state.showComplete ?  this.state.completedTasks.map((task) => {
+                                    return (
+                                        <Pool
+                                            key={task.id}
+                                            id={this.key}
+                                            tasks={task}
+                                            onClickDelete={this.deleteTask.bind(this, task)}
+                                        />
+                                    );
+                                }):this.state.unassignedTasks.map((task) => {
                                     return (
                                         <Pool
                                             key={task.id}
@@ -468,6 +489,7 @@ class Project extends React.Component {
                                             tasks={task}
                                             onClickDelete={this.deleteTask.bind(this, task)}
                                             onClickAdd={this.assignTask.bind(this, task)}
+                                            style={this.state.showComplete ? {display: 'default'}:{display: 'none'}}
                                         />
                                     );
                                 })}
@@ -477,7 +499,10 @@ class Project extends React.Component {
                         </Grid>
                         <Grid item xs={6} style={{ padding: "10px" }}>
                             <UserPool sprintId={this.state.sprintId} members={this.state.members} tasks={this.state.assignedTasks}
-                            unassign={this.unassignTask}></UserPool>
+                            unassign={this.unassignTask}
+                            onClickDelete={this.deleteTask}
+                            onClickComplete={this.markComplete}
+                            ></UserPool>
                         </Grid>
                         <br />
                         <div><Link to="/homepage">Back to home page.</Link></div>
