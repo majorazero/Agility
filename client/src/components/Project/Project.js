@@ -151,7 +151,7 @@ class Project extends React.Component {
                 assignedTasks: assigned,
                 completedTasks: completed
             }, () => {
-                console.log(this.state.completedTasks)
+                console.log(this.state.sprints)
             })
         });
     };
