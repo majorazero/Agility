@@ -1,81 +1,32 @@
-
-/* eslint-disable jsx-a11y/mouse-events-have-key-events */
-
 import React from 'react';
 import PropTypes from 'prop-types';
-import Popover from '@material-ui/core/Popover';
-import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
-import ButtonSizes from "../utils/FAB.js";
-
+import AddIcon from '@material-ui/icons/Add';
+import Button from '@material-ui/core/Button';
+import DeleteIcon from '@material-ui/icons/Delete';
+import IconButton from '@material-ui/core/IconButton';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const styles = theme => ({
-  popover: {
-    pointerEvents: 'none',
+  fab: {
+    margin: theme.spacing.unit * 2,
   },
-  paper: {
-    padding: theme.spacing.unit,
+  absolute: {
+    position: 'absolute',
+    bottom: theme.spacing.unit * 2,
+    right: theme.spacing.unit * 3,
   },
 });
 
-class MouseOverPopover extends React.Component {
-  state = {
-    anchorEl: null,
-  };
-
-  handlePopoverOpen = event => {
-    this.setState({ anchorEl: event.currentTarget });
-  };
-
-  handlePopoverClose = () => {
-    this.setState({ anchorEl: null });
-  };
-
-  render() {
-    const { classes } = this.props;
-    const { anchorEl } = this.state;
-    const open = Boolean(anchorEl);
-
-    return (
-      <div>
-        <Typography
-          aria-owns={open ? 'mouse-over-popover' : undefined}
-          aria-haspopup="true"
-          onMouseEnter={this.handlePopoverOpen}
-          onMouseLeave={this.handlePopoverClose}
-        >
-          <ButtonSizes
-            onClick={this.handleOpen}
-          />
-        </Typography>
-        <Popover
-          id="mouse-over-popover"
-          className={classes.popover}
-          classes={{
-            paper: classes.paper,
-          }}
-          open={open}
-          anchorEl={anchorEl}
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'center',
-          }}
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'center',
-          }}
-          onClose={this.handlePopoverClose}
-          disableRestoreFocus
-        >
-          <Typography>Add New Project</Typography>
-        </Popover>
-      </div>
-    );
-  }
+function SimpleTooltips(props) {
+  const { classes } = props;
+  return (
+    <Tooltip title={props.title} />
+  );
 }
 
-MouseOverPopover.propTypes = {
+SimpleTooltips.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(MouseOverPopover);
+export default withStyles(styles)(SimpleTooltips);

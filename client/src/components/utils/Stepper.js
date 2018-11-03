@@ -7,39 +7,40 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
+import DescIcon from '@material-ui/icons/Description';
 
-const tutorialSteps = [
-  {
-    label: 'San Francisco – Oakland Bay Bridge, United States',
-    imgPath:
-      'https://images.unsplash.com/photo-1537944434965-cf4679d1a598?auto=format&fit=crop&w=400&h=250&q=60',
-  },
-  {
-    label: 'Bird',
-    imgPath:
-      'https://images.unsplash.com/photo-1538032746644-0212e812a9e7?auto=format&fit=crop&w=400&h=250&q=60',
-  },
-  {
-    label: 'Bali, Indonesia',
-    imgPath:
-      'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=400&h=250&q=80',
-  },
-  {
-    label: 'NeONBRAND Digital Marketing, Las Vegas, United States',
-    imgPath:
-      'https://images.unsplash.com/photo-1518732714860-b62714ce0c59?auto=format&fit=crop&w=400&h=250&q=60',
-  },
-  {
-    label: 'Goč, Serbia',
-    imgPath:
-      'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60',
-  },
-];
+// const tutorialSteps = [
+//   {
+//     label: 'San Francisco – Oakland Bay Bridge, United States',
+//     imgPath:
+//       'https://images.unsplash.com/photo-1537944434965-cf4679d1a598?auto=format&fit=crop&w=400&h=250&q=60',
+//   },
+//   {
+//     label: 'Bird',
+//     imgPath:
+//       'https://images.unsplash.com/photo-1538032746644-0212e812a9e7?auto=format&fit=crop&w=400&h=250&q=60',
+//   },
+//   {
+//     label: 'Bali, Indonesia',
+//     imgPath:
+//       'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=400&h=250&q=80',
+//   },
+//   {
+//     label: 'NeONBRAND Digital Marketing, Las Vegas, United States',
+//     imgPath:
+//       'https://images.unsplash.com/photo-1518732714860-b62714ce0c59?auto=format&fit=crop&w=400&h=250&q=60',
+//   },
+//   {
+//     label: 'Goč, Serbia',
+//     imgPath:
+//       'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60',
+//   },
+// ];
 
 const styles = theme => ({
   root: {
-    maxWidth: 400,
     flexGrow: 1,
+    padding: 5
   },
   header: {
     display: 'flex',
@@ -48,12 +49,10 @@ const styles = theme => ({
     paddingLeft: theme.spacing.unit * 4,
     backgroundColor: theme.palette.background.default,
   },
-  img: {
-    height: 200,
-    maxWidth: 400,
-    overflow: 'hidden',
-    display: 'block',
-    width: '100%',
+  balls: {
+    backgroundColor: "lemonchiffon",
+    width: "auto",
+    padding: 5
   },
 });
 
@@ -61,13 +60,13 @@ class TextMobileStepper extends React.Component {
 
   constructor(props) {
     super(props)
-    
-  }
 
-  state = {
+    this.state = {
       activeStep: 0,
     };
-    
+  }
+
+
   handleNext = () => {
     this.setState(prevState => ({
       activeStep: prevState.activeStep + 1,
@@ -83,19 +82,27 @@ class TextMobileStepper extends React.Component {
   render() {
     const { classes, theme } = this.props;
     const { activeStep } = this.state;
-    const maxSteps = tutorialSteps.length;
+    const maxSteps = this.props.tutorialSteps.length;
+
+    console.log(this.props.tutorialSteps[activeStep])
 
     return (
       <div className={classes.root}>
-        <Paper square elevation={0} className={classes.header}>
-          <Typography>{tutorialSteps[activeStep].label}</Typography>
-        </Paper>
-        <Paper>
-
+        <Paper square elevation={0} className={classes.balls}>
+          <DescIcon />
+          <Typography variant="body1" gutterBottom>{this.props.tutorialSteps[activeStep].label1}</Typography>
+          <Typography variant="body2" gutterBottom>{this.props.tutorialSteps[activeStep].info1}</Typography>
+          <br />
+          <Typography variant="body1" gutterBottom>{this.props.tutorialSteps[activeStep].label2}</Typography>
+          <Typography variant="body2" gutterBottom>{this.props.tutorialSteps[activeStep].info2}</Typography>
+          <br />
+          <Typography variant="body1" gutterBottom>{this.props.tutorialSteps[activeStep].label3}</Typography>
+          <Typography variant="body2" gutterBottom>{this.props.tutorialSteps[activeStep].info3}</Typography>
+          <br />
         </Paper>
         <MobileStepper
           style={{
-            height: 20
+            padding: 5
           }}
           steps={maxSteps}
           position="static"
