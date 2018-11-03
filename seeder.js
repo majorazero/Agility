@@ -409,6 +409,18 @@ setTimeout(()=>{
     estimatedTimeWorked: 13
   });
   db.Task.create({
+    name: "Look into dummy recipes.",
+    due_date: "2018-09-06",
+    sprint_id: 1,
+    description: "Some kind of cuisine or what not.",
+    complexity: 3,
+    assigned_id: 12,
+    stack: "CSS",
+    isComplete: true,
+    estimatedTimeToComplete: 2,
+    estimatedTimeWorked: 12
+  });
+  db.Task.create({
     name: "Realizing an impending dummy army is inevitable if not stopped.",
     due_date: "2018-09-07",
     sprint_id: 1,

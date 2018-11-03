@@ -424,7 +424,20 @@ class Project extends React.Component {
                                 onChange={this.switchTaskPool}
                                 label="Show Completed Tasks"
                              />
-                            {!this.state.isActive ?  <Summary /> :
+                           {!this.state.isActive ?  <div>
+
+                             {this.state.showComplete ? this.state.completedTasks.map((task) => {
+                               return (
+                                 <Pool
+                                   key={task.id}
+                                   id={this.key}
+                                   isAdmin={this.state.isAdmin}
+                                   tasks={task}
+                                   onClickDelete={this.deleteTask.bind(this, task)}
+                                 />
+                               );
+                             }) : <Summary />}
+                           </div> :
                               <div>
                                 {/* <MuiThemeProvider theme={theme2}> */}
                                 {(this.state.isAdmin === true) ?
