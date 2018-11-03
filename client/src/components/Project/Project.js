@@ -37,6 +37,7 @@ class Project extends React.Component {
         inviteCode: "",
 
         isActive: "",
+        activeSprintId: '',
 
         unassignedTasks: [],
         assignedTasks: [],
@@ -213,11 +214,14 @@ class Project extends React.Component {
 
     updateActiveSprint = (sprintId) => {
         let isActive = false;
-        for(let i = 0; i < this.state.sprints.length; i++){
-          if((this.state.sprints[i].sprintId === sprintId) && this.state.sprints[i].isActive === 1){
+        if(this.state.activeSprintId === sprintId){
             isActive = true;
-          }
         }
+        // for(let i = 0; i < this.state.sprints.length; i++){
+        //   if((this.state.sprints[i].sprintId === sprintId) && this.state.sprints[i].isActive === 1){
+        //     isActive = true;
+        //   }
+        // }
         this.setState({ sprintId: sprintId, isActive: isActive }, () => {
             this.getTasks();
             console.log(this.state);
@@ -237,26 +241,56 @@ class Project extends React.Component {
         axios.get(`/api/sprints/project/${projectId}/user/${userId}`)
             .then((res) => {
                 console.log(res.data)
+                let sprints = res.data
                 let today = new Date();
-                //default to latest sprint
                 let currentSprint = res.data[0].sprintId;
                 let isActive = false;
-                res.data.map((pSprint, i) => {
+    
+                // check for active sprint
+                for(let i=0; i<sprints.length; i++){
+                    let endDate = new Date(sprints[i].endDate)
+                    let startDate = new Date(sprints[i].startDate)
+                    console.log(startDate, endDate)
                     sprintData.push({
                         key: i,
-                        label: pSprint.sprintName,
-                        id: pSprint.sprintId
+                        label: sprints[i].sprintName,
+                        id: sprints[i].sprintId
                     });
-                    //if a sprint is not complete, it'll be set to that instead.
-                    if (pSprint.isActive === 1) {
-                      currentSprint = pSprint.sprintId;
-                      isActive = true;
+                    if(sprints[i].isActive){
+                        //verify end date has not passed
+                        if(today > endDate){
+                            
+                        }
+                        else{
+                            //set currentSprint, set isActive
+                            currentSprint = sprints[i].sprintId
+                            isActive = true
+                        }
                     }
-                });
+                    else if(today >= startDate && today <= endDate) {
+                        currentSprint = sprints[i].sprintId
+                        isActive = true
+                    }  
+                }
+
+
+                // res.data.map((pSprint, i) => {
+                //     sprintData.push({
+                //         key: i,
+                //         label: pSprint.sprintName,
+                //         id: pSprint.sprintId
+                //     });
+                //     //if a sprint is not complete, it'll be set to that instead.
+                //     if (pSprint.isActive === 1) {
+                //       currentSprint = pSprint.sprintId;
+                //       isActive = true;
+                //     }
+                // });
               //  console.log(currentSprint,isActive);
                 this.setState({
                     chipData: sprintData,
                     sprintId: currentSprint,
+                    activeSprintId: currentSprint,
                     sprints: res.data,
                     isActive: isActive
                 });

@@ -44,4 +44,13 @@ module.exports = function(app) {
         res.json(data);
       });
     });
+
+    app.put('/api/sprint/active/:sprintId', (req, res) => {
+      db.Sprint.update({
+        isActive: req.body}, {
+          where: {
+            id: req.params.sprintId
+          }
+        })
+    })
 }
