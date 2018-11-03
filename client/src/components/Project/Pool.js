@@ -19,6 +19,7 @@ const Pool = (props) => {
             unAssign={props.unAssign}
             assigned={props.assigned}
             onClickComplete={props.onClickComplete}
+            complete = {props.complete}
         />
     );
 };

@@ -41,25 +41,35 @@ function SimpleExpansionPanel(props) {
           </Typography>
           {/* {(location.pathname === "/homepage") ? null :  */}
         
-          {props.isAdmin ?
+          {/* {props.isAdmin ?
             <ContainedButtons
               name={props.assigned ? "Unassign" : "Select"}
               color="primary"
               onClick={props.assigned ? props.unAssign : props.onClickAdd}
-            /> :
+            /> 
+            :
           (props.assigned && (props.currentUser === props.assignedUser)) ?
             <ContainedButtons
-              name={props.assigned ? "Unassign" : "Select"}
+              name='Unassign'
               color="primary"
-              onClick={props.assigned ? props.unAssign : props.onClickAdd}
-            /> :
-          (!props.assigned) ?
+              onClick={props.unAssign}
+            /> 
+            :
           <ContainedButtons
-            name={props.assigned ? "Unassign" : "Select"}
+            name='Select'
+            color="primary"
+            onClick={props.onClickAdd}
+          />} */}
+
+
+            <ContainedButtons
+            name={props.assigned ? 'Unassign':'Claim'}
             color="primary"
             onClick={props.assigned ? props.unAssign : props.onClickAdd}
-          /> : ""}
-          {/* } */}
+            style={props.isAdmin ? null:{display: 'none'}}
+            />
+
+          
           {/* {(location.pathname === "/homepage") ? null :  */}
           {props.isAdmin ?
           <ContainedButtons

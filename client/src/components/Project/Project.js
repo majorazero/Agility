@@ -236,6 +236,7 @@ class Project extends React.Component {
         let sprintData = [];
         axios.get(`/api/sprints/project/${projectId}/user/${userId}`)
             .then((res) => {
+                console.log(res.data)
                 let today = new Date();
                 //default to latest sprint
                 let currentSprint = res.data[0].sprintId;
