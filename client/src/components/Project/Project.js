@@ -19,6 +19,9 @@ import { withStyles } from '@material-ui/core/styles';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import SwitchLabel from '../utils/Switch';
 import Summary from "./Summary/Summary.js";
+import LinearDeterminate from "../utils/ProgressBar/ProgressBar.js";
+import moment from "moment";
+
 
 class Project extends React.Component {
 
@@ -60,7 +63,11 @@ class Project extends React.Component {
         sprintEnd_date: "",
 
         currentUser: '',
-        showComplete: false
+        showComplete: false,
+
+        //Progress Bar Time
+        SprintTime: 20,
+        SprintProgress: 50
     }
 
     componentDidMount() {
@@ -84,7 +91,34 @@ class Project extends React.Component {
         }).catch((err) => {
             window.location.assign("/404");
         });
+
+        // this.ProgressBar();
     }
+
+    // ProgressBar = () => {
+
+    //     // axios.get("/api/sprintById/" + this.state.sprintId).then((res) => {
+    //         // console.log(res)
+    //         let startDate = res.data[0].start_date;
+    //         let endDate = res.data[0].end_date;
+    //         var momentStart = moment(startDate).valueOf()
+    //         var momentEnd = moment(endDate).valueOf()
+    //         var difference = momentEnd - momentStart
+    //         var currentTime = moment(Date.now()).valueOf()
+    //         console.log(currentTime)
+
+    //         var timeHasPassed =  currentTime - momentStart;
+
+    //         var timeLeft = timeHasPassed - currentTime;
+
+    //         this.setState({timeHasPassed})
+    //         this.setState({timeLeft})
+
+
+    //         console.log(timeHasPassed)
+    //         console.log(timeLeft)
+    //     // })
+    // }
 
     handleChange = name => event => {
         this.setState({
@@ -334,9 +368,12 @@ class Project extends React.Component {
                     >
                         <Grid item xs={12}>
                             <Paper
-                                style={{ height: "100%" }}
+                                style={{ height: "100%", paddingLeft: 10, paddingRight: 10, paddingTop: 3, paddingBottom: 10 }}
                             >
-                            // where the progress bar would go
+                             {<LinearDeterminate whatBar completed ={this.state.SprintTime} title={"Sprint Time"}/> }
+                             {<LinearDeterminate  completed ={this.state.SprintProgress} title={"Sprint Progress"}/> }
+
+
                             </Paper>
                         </Grid>
                         <Grid
