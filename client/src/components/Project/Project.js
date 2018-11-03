@@ -198,19 +198,23 @@ class Project extends React.Component {
                 console.log(res.data);
                 let today = new Date();
                 //default to latest sprint
-                let currentSprint = res.data[0].id;
+                let currentSprint = res.data[0].sprintId;
+                //let isActive = false;
                 res.data.map((pSprint, i) => {
+                    console.log(pSprint.isActive);
                     sprintData.push({
                         key: i,
                         label: pSprint.sprintName,
                         id: pSprint.sprintId
                     });
                     //if a sprint is not complete, it'll be set to that instead.
-                    if (!pSprint.isComplete) {
-                        currentSprint = pSprint.sprintId;
+                    if (pSprint.isActive === 1) {
+                      console.log("Hi");
+                      currentSprint = pSprint.sprintId;
+                    //  isActive = true;
                     }
                 });
-                console.log(currentSprint);
+              //  console.log(currentSprint,isActive);
                 this.setState({
                     chipData: sprintData,
                     sprintId: currentSprint,
@@ -398,6 +402,9 @@ class Project extends React.Component {
                                 onChange={this.switchTaskPool}
                                 label="Show Completed Tasks"
                              />
+
+                           <Summary />
+
                             {this.state.showComplete ? this.state.completedTasks.map((task) => {
                               return (
                                 <Pool

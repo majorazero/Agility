@@ -28,7 +28,7 @@ module.exports = function(app){
 
   //returns all sprints within a given project that a given user participated in
     app.get('/api/sprints/project/:projectId/user/:userId', (req, res)=> {
-      db.sequelize.query(`SELECT sprints.name AS sprintName, sprints.id AS sprintId, sprints.isActive, sprints.start_date AS startDate, sprints.end_date AS endDate, projects.id AS project_id, users.id AS user_id, users.first_name FROM projects INNER JOIN sprints ON sprints.project_id = projects.id AND projects.id=${req.params.projectId} INNER JOIN sprintmemberships ON sprints.id = sprintmemberships.sprintId INNER JOIN users ON users.id = sprintmemberships.userId AND users.id=${req.params.userId}`, { type: sequelize.QueryTypes.SELECT}).then(dbSPU => {
+      db.sequelize.query(`SELECT sprints.name AS sprintName, sprints.id AS sprintId, sprints.isActive, sprints.start_date AS startDate, sprints.end_date AS endDate, projects.id AS project_id, users.id AS user_id, users.first_name FROM projects INNER JOIN sprints ON sprints.project_id = projects.id AND projects.id=${req.params.projectId} INNER JOIN sprintmemberships ON sprints.id = sprintmemberships.sprintId INNER JOIN users ON users.id = sprintmemberships.userId AND users.id=${req.params.userId} ORDER BY endDate DESC`, { type: sequelize.QueryTypes.SELECT}).then(dbSPU => {
           res.json(dbSPU)
       })
     });
@@ -40,8 +40,8 @@ module.exports = function(app){
       })
     });
 
-    
-    
+
+
 
       app.post("/api/login",(req,res) => {
         //find if user exists by mail
