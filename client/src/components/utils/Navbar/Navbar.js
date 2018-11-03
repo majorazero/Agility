@@ -5,9 +5,9 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
+// import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-
+import Drawer from './Drawer.js';
 
 const styles = {
   root: {
@@ -29,18 +29,16 @@ function ButtonAppBar(props) {
     <div className={classes.root}>
       <AppBar position="fixed" color="primary">
         <Toolbar>
-          <IconButton className={classes.menuButton} color="inherit" aria-label="Menu" >
-            <MenuIcon />
-          </IconButton>
+          <Drawer />
           <Typography to="/" variant="h4" color="inherit" className={classes.grow}>
             agility.
           </Typography>
-          {sessionStorage.getItem("id") ? null : <Button href = "/register" color="inherit">Sign Up</Button>}
-          {sessionStorage.getItem("id") ? <Button onClick={()=>{
+          {sessionStorage.getItem("id") ? null : <Button href="/register" color="inherit">Sign Up</Button>}
+          {sessionStorage.getItem("id") ? <Button onClick={() => {
             sessionStorage.clear();
             localStorage.clear();
             window.location.assign("/");
-          }}  color="inherit">Logout</Button> : <Button href = "/login" color="inherit">Login</Button>}
+          }} color="inherit">Logout</Button> : <Button href="/login" color="inherit">Login</Button>}
         </Toolbar>
       </AppBar>
     </div>

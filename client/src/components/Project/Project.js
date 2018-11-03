@@ -119,6 +119,10 @@ class Project extends React.Component {
     //     // })
     // }
 
+    updateComplete = () => {
+
+    }
+
     handleChange = name => event => {
         this.setState({
             [name]: event.target.value,
@@ -295,7 +299,6 @@ class Project extends React.Component {
                     isActive: isActive
                 });
             }).then(() => {
-                console.log("Active: ",this.state.isActive);
                 this.getTasks();
                 this.getMembers(this.state.sprintId);
             });
@@ -460,7 +463,6 @@ class Project extends React.Component {
                                 label="Show Completed Tasks"
                              />
                            {!this.state.isActive ?  <div>
-
                              {this.state.showComplete ? this.state.completedTasks.map((task) => {
                                return (
                                  <Pool
@@ -471,7 +473,13 @@ class Project extends React.Component {
                                    onClickDelete={this.deleteTask.bind(this, task)}
                                  />
                                );
-                             }) : <Summary />}
+                             }) : <Summary
+                                  members= {this.state.members}
+                                  completed= {this.state.completedTasks}
+                                  assigned={this.state.assignedTasks}
+                                  unAssigned = {this.state.unassignedTasks}
+                                  currentSprint = {this.state.sprintId}
+                                  sprints={this.state.sprints} />}
                            </div> :
                               <div>
                                 {/* <MuiThemeProvider theme={theme2}> */}
