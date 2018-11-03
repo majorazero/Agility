@@ -33,6 +33,8 @@ class Project extends React.Component {
 
         inviteCode: "",
 
+        isActive: "",
+
         unassignedTasks: [],
         assignedTasks: [],
         completedTasks: [],
@@ -178,8 +180,15 @@ class Project extends React.Component {
     }
 
     updateActiveSprint = (sprintId) => {
-        this.setState({ sprintId: sprintId }, () => {
+        let isActive = false;
+        for(let i = 0; i < this.state.sprints.length; i++){
+          if((this.state.sprints[i].sprintId === sprintId) && this.state.sprints[i].isActive === 1){
+            isActive = true;
+          }
+        }
+        this.setState({ sprintId: sprintId, isActive: isActive }, () => {
             this.getTasks();
+            console.log(this.state);
         });
     }
 
@@ -199,7 +208,7 @@ class Project extends React.Component {
                 let today = new Date();
                 //default to latest sprint
                 let currentSprint = res.data[0].sprintId;
-                //let isActive = false;
+                let isActive = false;
                 res.data.map((pSprint, i) => {
                     console.log(pSprint.isActive);
                     sprintData.push({
@@ -209,18 +218,19 @@ class Project extends React.Component {
                     });
                     //if a sprint is not complete, it'll be set to that instead.
                     if (pSprint.isActive === 1) {
-                      console.log("Hi");
                       currentSprint = pSprint.sprintId;
-                    //  isActive = true;
+                      isActive = true;
                     }
                 });
               //  console.log(currentSprint,isActive);
                 this.setState({
                     chipData: sprintData,
                     sprintId: currentSprint,
-                    sprints: res.data
+                    sprints: res.data,
+                    isActive: isActive
                 });
             }).then(() => {
+                console.log(this.state);
                 this.getTasks();
                 this.getMembers(this.state.sprintId);
             });
@@ -379,54 +389,57 @@ class Project extends React.Component {
                           <Paper
                               style={{ height: "300px" }}
                           >
-                            {/* <MuiThemeProvider theme={theme2}> */}
-                            {(this.state.isAdmin === true) ?
-                              <ButtonSizes
-                                  onClick={() => this.handleOpen('taskOpen')}
-                                  title="Add a Task"
-                                  color="secondary"
-                              /> :
-                              ""}
-                            {/* </MuiThemeProvider> */}
-                            <SimpleModalWrapped
-                                open={this.state.taskOpen}
-                                onClose={() => this.handleClose('taskOpen')}
-                                name="Add a New Task ..."
-                                onSubmit={this.addTask}
-                                onChange={this.handleChange}
-                            >
-                                <AddTaskLayout
-                                />
-                            </SimpleModalWrapped>
                             <SwitchLabel
                                 onChange={this.switchTaskPool}
                                 label="Show Completed Tasks"
                              />
+                            {!this.state.isActive ?  <Summary /> :
+                              <div>
+                                {/* <MuiThemeProvider theme={theme2}> */}
+                                {(this.state.isAdmin === true) ?
+                                  <ButtonSizes
+                                      onClick={() => this.handleOpen('taskOpen')}
+                                      title="Add a Task"
+                                      color="secondary"
+                                  /> :
+                                  ""}
+                                {/* </MuiThemeProvider> */}
+                                <SimpleModalWrapped
+                                    open={this.state.taskOpen}
+                                    onClose={() => this.handleClose('taskOpen')}
+                                    name="Add a New Task ..."
+                                    onSubmit={this.addTask}
+                                    onChange={this.handleChange}
+                                >
+                                    <AddTaskLayout
+                                    />
+                                </SimpleModalWrapped>
 
-                           <Summary />
 
-                            {this.state.showComplete ? this.state.completedTasks.map((task) => {
-                              return (
-                                <Pool
-                                  key={task.id}
-                                  id={this.key}
-                                  isAdmin={this.state.isAdmin}
-                                  tasks={task}
-                                  onClickDelete={this.deleteTask.bind(this, task)}
-                                />
-                              );
-                          }) : this.state.unassignedTasks.map((task) => {
-                            return (
-                              <Pool
-                                key={task.id}
-                                id={this.key}
-                                isAdmin={this.state.isAdmin}
-                                tasks={task}
-                                onClickDelete={this.deleteTask.bind(this, task)}
-                                onClickAdd={this.assignTask.bind(this, task)}
-                              />
-                            );
-                            })}
+                                {this.state.showComplete ? this.state.completedTasks.map((task) => {
+                                  return (
+                                    <Pool
+                                      key={task.id}
+                                      id={this.key}
+                                      isAdmin={this.state.isAdmin}
+                                      tasks={task}
+                                      onClickDelete={this.deleteTask.bind(this, task)}
+                                    />
+                                  );
+                              }) : this.state.unassignedTasks.map((task) => {
+                                return (
+                                  <Pool
+                                    key={task.id}
+                                    id={this.key}
+                                    isAdmin={this.state.isAdmin}
+                                    tasks={task}
+                                    onClickDelete={this.deleteTask.bind(this, task)}
+                                    onClickAdd={this.assignTask.bind(this, task)}
+                                  />
+                                );
+                                })}
+                              </div>}
+
                           </Paper>
                         </Grid>
                           <Grid item xs={6}>
