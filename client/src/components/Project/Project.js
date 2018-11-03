@@ -118,6 +118,10 @@ class Project extends React.Component {
     //     // })
     // }
 
+    updateComplete = () => {
+
+    }
+
     handleChange = name => event => {
         this.setState({
             [name]: event.target.value,
