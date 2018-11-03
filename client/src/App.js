@@ -21,7 +21,6 @@ class App extends Component {
 
   componentWillMount = () => {
     //obviously we'll have to be updated once i get the database going.
-    console.log(sessionStorage.getItem("id"), localStorage.getItem("token"));
     //if sessionStorage doesn't exist
     if (sessionStorage.getItem("id") === null) {
       console.log("no session storage!");
@@ -31,7 +30,6 @@ class App extends Component {
         axios.post("/api/tokenLogin", {
           token: localStorage.getItem("token")
         }).then((response) => {
-          console.log(response);
           sessionStorage.setItem("id", response.data.id);
           this.setState({loaded:true, loggedIn: true});
         });

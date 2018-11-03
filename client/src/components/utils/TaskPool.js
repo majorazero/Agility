@@ -26,7 +26,6 @@ const styles = theme => ({
 
 function SimpleExpansionPanel(props) {
   const { classes } = props;
-  console.log(props.isAdmin,props.currentUser,props.assignedUser,props.assigned);
   return (
       <ExpansionPanel key={props.id}>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
@@ -41,6 +40,7 @@ function SimpleExpansionPanel(props) {
               {props.due}
           </Typography>
           {/* {(location.pathname === "/homepage") ? null :  */}
+        
           {props.isAdmin ?
             <ContainedButtons
               name={props.assigned ? "Unassign" : "Select"}

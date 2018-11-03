@@ -76,7 +76,6 @@ class Project extends React.Component {
             token: "project",
             id: id
         }).then((response) => {
-            console.log(response.data);
             this.setState({
                 projName: response.data[0].name,
                 summary: response.data[0].summary,
@@ -87,7 +86,6 @@ class Project extends React.Component {
             //pass project id here
             this.getMembers(this.state.sprintId);
             this.getCurrentUserId();
-            console.log(this.state);
         }).catch((err) => {
             window.location.assign("/404");
         });
@@ -238,13 +236,11 @@ class Project extends React.Component {
         let sprintData = [];
         axios.get(`/api/sprints/project/${projectId}/user/${userId}`)
             .then((res) => {
-                console.log(res.data);
                 let today = new Date();
                 //default to latest sprint
                 let currentSprint = res.data[0].sprintId;
                 let isActive = false;
                 res.data.map((pSprint, i) => {
-                    console.log(pSprint.isActive);
                     sprintData.push({
                         key: i,
                         label: pSprint.sprintName,
@@ -264,7 +260,7 @@ class Project extends React.Component {
                     isActive: isActive
                 });
             }).then(() => {
-                console.log(this.state);
+                console.log("Active: ",this.state.isActive);
                 this.getTasks();
                 this.getMembers(this.state.sprintId);
             });
@@ -311,8 +307,7 @@ class Project extends React.Component {
             }
             this.setState({ currentUser: res.data.id, isAdmin: isAdmin },
                 () => {
-                    console.log(this.state);
-                    this.getSprints(this.state.projectId, this.state.currentUser)
+                  this.getSprints(this.state.projectId, this.state.currentUser)
                 })
         })
     }
@@ -324,7 +319,6 @@ class Project extends React.Component {
             id: this.state.sprintId.toString(),
             token: "invite"
         }).then((response) => {
-            console.log(response.data);
             this.setState({ inviteCode: response.data });
         });
     }
