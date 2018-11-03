@@ -134,8 +134,10 @@ handleClick = () => {
               spacing={24}
             >
               <Typography variant="h6" gutterBottom color="textSecondary" align="center">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Morbi tristique senectus et netus et malesuada. Dictumst vestibulum rhoncus est pellentesque elit. Risus ultricies tristique nulla aliquet enim. Urna cursus eget nunc scelerisque viverra mauris in. Aliquam malesuada bibendum arcu vitae elementum. Mattis vulputate enim nulla aliquet porttitor lacus luctus accumsan. Fringilla phasellus faucibus scelerisque eleifend donec pretium. A iaculis at erat pellentesque. Pharetra magna ac placerat vestibulum. Mi quis hendrerit dolor magna eget est.
-<br />
+
+              Collaboration is hard.
+              We're going to make it easy. 
+                <br />
                 <br />
                 Quisque id diam vel quam elementum pulvinar etiam non quam. Euismod in pellentesque massa placerat duis ultricies lacus sed. Ante metus dictum at tempor commodo. Nulla facilisi nullam vehicula ipsum a arcu cursus vitae. Fermentum leo vel orci porta non pulvinar. At erat pellentesque adipiscing commodo. Diam maecenas ultricies mi eget. Elit at imperdiet dui accumsan sit amet. Suscipit tellus mauris a diam maecenas. At tempor commodo ullamcorper a lacus. Duis at tellus at urna condimentum. Arcu non sodales neque sodales ut. Pellentesque nec nam aliquam sem et. Vitae justo eget magna fermentum. Vitae turpis massa sed elementum tempus.
               </Typography>
