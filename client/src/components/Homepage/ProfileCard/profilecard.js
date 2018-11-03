@@ -18,10 +18,13 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 // import MoreVertIcon from '@material-ui/icons/MoreVert';
 import axios from 'axios';
 import TextMobileStepper from "../../utils/Stepper.js";
+import { MobileStepper } from '@material-ui/core';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+
 
 const styles = theme => ({
     card: {
-        width: 300,
+        width: "100%",
     },
     media: {
         height: 40,
@@ -48,9 +51,18 @@ const styles = theme => ({
     },
     avatar: {
         backgroundColor: red[500],
-    },
+    }
 });
 
+const theme = createMuiTheme({
+    overrides: {
+        MuiButton: {
+            root: {
+                paddingBottom: 0
+            },
+        },
+    },
+});
 
 class RecipeReviewCard extends React.Component {
     state = {
@@ -68,33 +80,59 @@ class RecipeReviewCard extends React.Component {
     };
 
     componentDidMount() {
-      axios.post("/api/getuser",
-        {
-          id: sessionStorage.getItem("id"),
-          token: localStorage.getItem("token")
-        }).then((response) => {
-          console.log(response.data);
-          this.setState(
+        axios.post("/api/getuser",
             {
-              userFirstName: response.data.prof.first_name,
-              userLastName: response.data.prof.last_name,
-              userEmail: response.data.prof.email,
-              totalTask: response.data.totalTask,
-              totalCompletedTask: response.data.totalCompletedTask,
-              sprintParticipate: response.data.sprintParticipate,
-              projectContributed: response.data.projectContributed,
-              projectCreated:
-              response.data.projectCreated,
-              complexity:
-              response.data.complexity,
-              complexitySemantics:
-              response.data.compSemantics
-            }
-          );
-        });
+                id: sessionStorage.getItem("id"),
+                token: localStorage.getItem("token")
+            }).then((response) => {
+                console.log(response.data);
+                this.setState(
+                    {
+                        userFirstName: response.data.prof.first_name,
+                        userLastName: response.data.prof.last_name,
+                        userEmail: response.data.prof.email,
+                        totalTask: response.data.totalTask,
+                        totalCompletedTask: response.data.totalCompletedTask,
+                        sprintParticipate: response.data.sprintParticipate,
+                        projectContributed: response.data.projectContributed,
+                        projectCreated:
+                            response.data.projectCreated,
+                        complexity:
+                            response.data.complexity,
+                        complexitySemantics:
+                            response.data.compSemantics
+                    }
+                );
+            });
     }
+
+    makeArray = () => {
+        var tutorialSteps = [
+            {
+                label1: 'Total Tasks Completed: ',
+                info1: this.state.totalCompletedTask,
+                label2: 'Total Tasks Taken: ',
+                info2: this.state.totalTask,
+                label3: 'Average Task Complexity: ',
+                info3: this.state.complexity
+            },
+            {
+                label1: 'Total Sprints Participated: ',
+                info1: this.state.sprintParticipate,
+                label2: 'Total Projects Contributed: ',
+                info2: this.state.projectContributed,
+                label3: 'Total Projects Created: ',
+                info3: this.state.projectCreated
+            }
+        ];
+        return (
+            tutorialSteps
+        );
+    }
+
+
     handleExpandClick = () => {
-      this.setState(state => ({ expanded: !state.expanded }));
+        this.setState(state => ({ expanded: !state.expanded }));
     };
 
 
@@ -102,31 +140,34 @@ class RecipeReviewCard extends React.Component {
         const { classes } = this.props;
 
         return (
-            <Card className={classes.card} style={{width: "100%"}}>
+            <Card className={classes.card}>
                 <CardMedia
                     className={classes.media}
                     image="/assets/images/profileimg.jpg"
                     title=""
                 />
 
-                <CardContent>
-                    <Typography component="p">
-                        {this.state.userFirstName + " " + this.state.userLastName}
+                <MuiThemeProvider theme={theme}>
+                    <CardContent>
+                        <Typography variant="h5" gutterBottom>
+                            {this.state.userFirstName + " " + this.state.userLastName}
+                        </Typography>
+                        <Typography variant="subtitle1" gutterBottom>
+                            {this.state.userEmail}
+                        </Typography>
+                        <br />
+                        <Typography variant="h6" gutterBottom>
+                            Career
                     </Typography>
-                    <Typography component="p">
-                        {this.state.userEmail}
-                    </Typography>
-                    <Typography component="h2">
-                      Career
-                    </Typography>
-                    <Typography>
-                      {(this.state.totalTask === 0) ? "Start working on something!":
-                        `${this.state.totalCompletedTask/this.state.totalTask*100}%`
-                      }
-                    </Typography>
-                    <Typography>
-                      Total Tasks Completed: {this.state.totalCompletedTask}
-                    </Typography>
+                        <Typography variant="subtitle1" gutterBottom>
+                            {(this.state.totalTask === 0) ? "Start working on something!" :
+                                `${this.state.totalCompletedTask / this.state.totalTask * 100}%`
+                            }
+                        </Typography>
+                        <br />
+                        {/* <Typography
+
+                    />
                     <Typography>
                       Total Tasks Taken: {this.state.totalTask}
                     </Typography>
@@ -141,13 +182,14 @@ class RecipeReviewCard extends React.Component {
                     </Typography>
                     <Typography>
                       Total Projects Created:  {this.state.projectCreated}
-                    </Typography>
-                    <br />
-                    {/* <Typography component="p">
+                    </Typography> */}
+                        {/* <Typography component="p">
                         Progress
-          </Typography>
-                </CardContent>
-                <CardActions className={classes.actions} disableActionSpacing>
+          </Typography> */}
+                    </CardContent>
+                </MuiThemeProvider>
+
+                {/* <CardActions className={classes.actions} disableActionSpacing>
                     <IconButton
                         className={classnames(classes.expand, {
                             [classes.expandOpen]: this.state.expanded,
@@ -159,10 +201,12 @@ class RecipeReviewCard extends React.Component {
                         <ExpandMoreIcon />
                     </IconButton>
                 </CardActions>
-                <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
-                    <CardContent> */}
-                        <TextMobileStepper />
-                    </CardContent>
+                <Collapse in={this.state.expanded} timeout="auto" unmountOnExit> */}
+                <CardContent>
+                    <TextMobileStepper
+                        tutorialSteps={this.makeArray()}
+                    />
+                </CardContent>
                 {/* </Collapse> */}
             </Card>
         );
