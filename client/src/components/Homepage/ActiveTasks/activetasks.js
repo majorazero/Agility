@@ -10,7 +10,7 @@ import Pool from '../../Project/Pool';
 import Grid from '@material-ui/core/Grid';
 
 
-const ActiveTasks= (props) => (
+const ActiveTasks = (props) => (
     <div>
         <List subheader={<li />}>
             {props.tasks.map((sprint, i) => (

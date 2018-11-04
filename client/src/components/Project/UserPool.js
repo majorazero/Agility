@@ -7,6 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import TaskCard from '../utils/TaskCard/TaskCard';
 import Paper from '@material-ui/core/Paper';
 import Pool from "./Pool.js"
+import ListItem from '@material-ui/core/ListItem';
 
 const style = {
   gridItem: {
@@ -40,27 +41,31 @@ class UserPool extends Component {
 
   render() {
     return (
-      <Grid container spacing={24}
-        direction="column"
-        justify="flex-start"
-        alignItems="flex-start"
-      >
-        {this.props.members.map((member, i) => {
-          return (
-            <Grid item>
-              <Paper key={i}>
-                <p>{member.User.first_name} {member.User.last_name}</p>
-                {this.props.tasks.filter(task => task.assigned_id === member.User.id).map(fTask => {
-                  return (
-                    <Pool key={fTask.id} id={this.key}
-                      isAdmin={this.props.isAdmin}
-                     currentUser={this.props.currentUser} assignedUser={fTask.assigned_id} tasks={fTask} onClickDelete={() => this.props.onClickDelete(fTask)} unAssign={() => this.props.unassign(fTask.id)} onClickComplete={() => this.props.onClickComplete(fTask.id)} assigned />
-                  )
-                })}
-              </Paper>
-            </Grid>)
-        })}
-      </Grid>
+
+      <ListItem>
+        
+      </ListItem>
+      // <Grid container spacing={24}
+      //   direction="column"
+      //   justify="flex-start"
+      //   alignItems="flex-start"
+      // >
+      //   {this.props.members.map((member, i) => {
+      //     return (
+      //       <Grid item>
+      //         <Paper key={i}>
+      //           <p>{member.User.first_name} {member.User.last_name}</p>
+      //           {this.props.tasks.filter(task => task.assigned_id === member.User.id).map(fTask => {
+      //             return (
+      //               <Pool key={fTask.id} id={this.key}
+      //                 isAdmin={this.props.isAdmin}
+      //                currentUser={this.props.currentUser} assignedUser={fTask.assigned_id} tasks={fTask} onClickDelete={() => this.props.onClickDelete(fTask)} unAssign={() => this.props.unassign(fTask.id)} onClickComplete={() => this.props.onClickComplete(fTask.id)} assigned />
+      //             )
+      //           })}
+      //         </Paper>
+      //       </Grid>)
+      //   })}
+      // </Grid>
     );
   }
 };

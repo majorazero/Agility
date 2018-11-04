@@ -127,10 +127,11 @@ class Homepage extends Component {
             </Grid>
           </Grid>
         </Grid> */}
-        </div >
-        <div style={{position:"inherit"}}>
         <SimpleBottomNavigation />
-        </div>
+        </div >
+        {/* <div style={{position:"inherit"}}>
+        <SimpleBottomNavigation />
+        </div> */}
       </div>
     );
   }
