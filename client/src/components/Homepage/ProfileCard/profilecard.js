@@ -155,6 +155,11 @@ class RecipeReviewCard extends React.Component {
                         <Typography variant="subtitle1" gutterBottom>
                             {this.state.userEmail}
                         </Typography>
+                        {/* <br /> */}
+                        {/* <Typography variant="h6" gutterBottom>
+                            Career
+                    </Typography> */}
+                        {/* <Typography variant="subtitle1" gutterBottom>
                         <br />
                         <Typography variant="h6" gutterBottom>
                             Career History
@@ -163,8 +168,8 @@ class RecipeReviewCard extends React.Component {
                             {(this.state.totalTask === 0) ? "Start working on something!" :
                                 `${this.state.totalCompletedTask / this.state.totalTask * 100}%`
                             }
-                        </Typography>
-                        <br />
+                        </Typography> */}
+                        {/* <br /> */}
                         {/* <Typography
 
                     />
@@ -189,7 +194,10 @@ class RecipeReviewCard extends React.Component {
                     </CardContent>
                 </MuiThemeProvider>
 
-                {/* <CardActions className={classes.actions} disableActionSpacing>
+                <CardActions className={classes.actions} disableActionSpacing>
+                    <Typography variant="h6" gutterBottom style={{ textAlign: "left" }}>
+                        Career History
+                    </Typography>
                     <IconButton
                         className={classnames(classes.expand, {
                             [classes.expandOpen]: this.state.expanded,
@@ -201,13 +209,13 @@ class RecipeReviewCard extends React.Component {
                         <ExpandMoreIcon />
                     </IconButton>
                 </CardActions>
-                <Collapse in={this.state.expanded} timeout="auto" unmountOnExit> */}
-                <CardContent>
-                    <TextMobileStepper
-                        tutorialSteps={this.makeArray()}
-                    />
-                </CardContent>
-                {/* </Collapse> */}
+                <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
+                    <CardContent>
+                        <TextMobileStepper
+                            tutorialSteps={this.makeArray()}
+                        />
+                    </CardContent>
+                </Collapse>
             </Card>
         );
     }

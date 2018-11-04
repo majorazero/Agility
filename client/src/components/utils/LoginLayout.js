@@ -84,6 +84,16 @@ function LoginLayout(props) {
             >
               Sign in
             </Button>
+            <Button
+              href="/register"
+              // type="submit"
+              fullWidth
+              variant="contained"
+              color="secondary"
+              className={classes.submit}
+            >
+              Register Account
+            </Button>
           </form>
         </Paper>
       </main>

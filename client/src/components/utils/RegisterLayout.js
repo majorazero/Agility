@@ -62,19 +62,19 @@ function RegisterLayout(props) {
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="fname">First Name</InputLabel>
               <Input id="fname" name="fName" autoComplete="fname" autoFocus
-              onChange={props.onChange("fName")}
+                onChange={props.onChange("fName")}
               />
             </FormControl>
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="lname">Last Name</InputLabel>
               <Input id="lname" name="lName" autoComplete="lname" autoFocus
-              onChange={props.onChange("lName")}
+                onChange={props.onChange("lName")}
               />
             </FormControl>
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="email">Email Address</InputLabel>
               <Input id="email" name="email" autoComplete="email" autoFocus
-              onChange={props.onChange("email")}
+                onChange={props.onChange("email")}
               />
             </FormControl>
             <FormControl margin="normal" required fullWidth>
@@ -87,6 +87,19 @@ function RegisterLayout(props) {
                 onChange={props.onChange("password")}
               />
             </FormControl>
+            <Typography
+              style={{
+                marginTop: 5,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                padding: 5,
+              }}
+              variant="subtitle1"
+              gutterBottom
+            >
+              {props.message}
+            </Typography>
             <Button
               type="submit"
               fullWidth
@@ -94,8 +107,19 @@ function RegisterLayout(props) {
               color="primary"
               className={classes.submit}
             >
-              Sign in
+              Register Account
             </Button>
+            <Button
+              // variant="contained"
+              href="/login"
+              // type="submit"
+              fullWidth
+              variant="contained"
+              color="secondary"
+              className={classes.submit}
+            >
+              Sign In
+      </Button>
           </form>
         </Paper>
       </main>

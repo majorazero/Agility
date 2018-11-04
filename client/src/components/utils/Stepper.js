@@ -50,7 +50,7 @@ const styles = theme => ({
     backgroundColor: theme.palette.background.default,
   },
   balls: {
-    backgroundColor: "lemonchiffon",
+    backgroundColor: "gray",
     width: "auto",
     padding: 5
   },
@@ -89,7 +89,7 @@ class TextMobileStepper extends React.Component {
     return (
       <div className={classes.root}>
         <Paper square elevation={0} className={classes.balls}>
-          <DescIcon />
+          <DescIcon style={{fill: 'blue'}} />
           <Typography variant="body1" gutterBottom>{this.props.tutorialSteps[activeStep].label1}</Typography>
           <Typography variant="body2" gutterBottom>{this.props.tutorialSteps[activeStep].info1}</Typography>
           <br />
