@@ -263,6 +263,7 @@ class Project extends React.Component {
         let sprintData = [];
         axios.get(`/api/sprints/project/${projectId}/user/${userId}`)
             .then((res) => {
+                if(res.data.length > 0){
                 console.log(res.data)
                 let sprints = res.data
                 let today = new Date();
@@ -295,21 +296,6 @@ class Project extends React.Component {
                         isActive = true
                     }
                 }
-
-
-                // res.data.map((pSprint, i) => {
-                //     sprintData.push({
-                //         key: i,
-                //         label: pSprint.sprintName,
-                //         id: pSprint.sprintId
-                //     });
-                //     //if a sprint is not complete, it'll be set to that instead.
-                //     if (pSprint.isActive === 1) {
-                //       currentSprint = pSprint.sprintId;
-                //       isActive = true;
-                //     }
-                // });
-                //  console.log(currentSprint,isActive);
                 this.setState({
                     chipData: sprintData,
                     sprintId: currentSprint,
@@ -317,6 +303,7 @@ class Project extends React.Component {
                     sprints: res.data,
                     isActive: isActive
                 });
+            }
             }).then(() => {
                 this.getTasks();
                 this.getMembers(this.state.sprintId);
