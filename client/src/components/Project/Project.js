@@ -332,24 +332,23 @@ class Project extends React.Component {
 
     addSprint = (event) => {
         event.preventDefault();
-        let obj = {
-            name: this.state.sprintName,
-            start_date: this.state.sprintStart_date,
-            end_date: this.state.sprintEnd_date,
-            project_id: this.state.projectId
-        }
+        
         axios.post('/api/sprint', {
             name: this.state.sprintName,
             start_date: this.state.sprintStart_date,
             end_date: this.state.sprintEnd_date,
             project_id: this.state.projectId
-        }).then(() => {
-            this.setState({
-                sprintOpen: false
-            }, () => {
-                console.log(this.state.sprintOpen);
-                this.getSprints(this.state.projectId);
-            });
+        }).then((res) => {
+            console.log(this.state.currentUser, res.data.id)
+            axios.post(`/api/sprintMembership`, {userId: this.state.currentUser, sprintId: res.data.id})
+            .then(() => {
+                this.setState({
+                    sprintOpen: false
+                }, () => {
+                    console.log(this.state.sprintOpen);
+                    this.getSprints(this.state.projectId);
+                });
+            })
         });
     }
 
@@ -392,6 +391,14 @@ class Project extends React.Component {
             .then(() => {
                 this.getTasks();
             })
+    }
+
+    reopenTask = (id) => {
+        console.log('Reopen Task', id)
+        axios.put(`/api/reopen/task/${id}`)
+        .then(() => {
+            this.getTasks();
+        })
     }
 
     switchTaskPool = () => {
@@ -524,6 +531,10 @@ class Project extends React.Component {
                                                         isAdmin={this.state.isAdmin}
                                                         tasks={task}
                                                         onClickDelete={this.deleteTask.bind(this, task)}
+                                                        onClickReopen={() => this.reopenTask(task.id)}
+                                                        assignedUser={task.assigned_id}
+                                                        currentUser={this.state.currentUser}
+                                                        complete 
                                                     />
                                                 );
                                             }) : <Summary
@@ -564,6 +575,7 @@ class Project extends React.Component {
                                                             isAdmin={this.state.isAdmin}
                                                             tasks={task}
                                                             onClickDelete={this.deleteTask.bind(this, task)}
+                                                            onClickReopen={() => this.reopenTask(task.id)}
                                                             assignedUser={task.assigned_id}
                                                             currentUser={this.state.currentUser}
                                                             complete
