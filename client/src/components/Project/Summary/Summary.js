@@ -50,13 +50,21 @@ const SummaryCard = (props) => {
 
   return(
     <div>
-      <div>Task Completion Rate: {props.completed.length/(props.completed.length + props.assigned.length + props.unAssigned.length)*100}% ({props.completed.length}/{props.completed.length + props.assigned.length + props.unAssigned.length})</div>
-      <div>Total Untaken Tasks Across Sprint: {props.unAssigned.length}</div>
-      <div></div>
-      <div>-----------</div>
-      <div>
-        {membersCard}
-      </div>
+      {(props.currentSprint === -1) ?
+        <div>
+          <div>No data avaiable yet!</div>
+          <div>Create a sprint!</div>
+        </div>
+        :
+        <div>
+          <div>Task Completion Rate: {props.completed.length/(props.completed.length + props.assigned.length + props.unAssigned.length)*100}% ({props.completed.length}/{props.completed.length + props.assigned.length + props.unAssigned.length})</div>
+          <div>Total Untaken Tasks Across Sprint: {props.unAssigned.length}</div>
+          <div></div>
+          <div>-----------</div>
+          <div>
+            {membersCard}
+          </div>
+        </div>}
     </div>
   );
 }
