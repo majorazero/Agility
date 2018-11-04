@@ -29,39 +29,33 @@ setTimeout(()=>{
   db.Project.create({
     name: "The Dummy Project",
     summary: "A project for dummies.",
-    due_date: "2018-11-15",
     userId: 1
   });
   db.Project.create({
     name: "The Itch On MY Back",
     summary: "We're going to write a back scratching app. Implentation pending.",
     due_date: "2018-09-15",
-    completed_date: "2018-09-15",
     complete: true,
     userId: 1
   });
   db.Project.create({
     name: "The Polymer Project",
     summary: "Dear god why LOL.",
-    due_date: "2018-11-18",
     userId: 2
   });
   db.Project.create({
     name: "The Booger Project",
     summary: "A project for collectng boogers using javascript.",
-    due_date: "2018-12-15",
     userId: 3
   });
   db.Project.create({
     name: "The Infinity Loop",
     summary: "We like recursions, so we're going to figure out how to run an inifinite amount of them without crashing our computer.",
-    due_date: "2050-11-15",
     userId: 4
   });
   db.Project.create({
     name: "Algorithmically Rating Butts",
     summary: "A project for ordering butts in order from moldiest to fuzziest.",
-    due_date: "2017-11-15",
     completed_date: "2017-11-15",
     userId: 5
   });

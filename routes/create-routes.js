@@ -17,7 +17,6 @@ module.exports = function(app){
       db.Project.create({
         name: req.body.name,
         summary: req.body.summary,
-        due_date: req.body.due_date,
         userId: encrypt.decrypt(req.body.token,req.body.id)
       })
           .then(function(dbProject) {
@@ -31,7 +30,7 @@ module.exports = function(app){
             res.json(dbSprint);
         });
     });
-  
+
     app.post("/api/sprintMembership", (req,res) => {
       db.SprintMembership.create(req.body)
         .then((membership) => {

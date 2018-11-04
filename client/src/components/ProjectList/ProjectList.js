@@ -15,7 +15,6 @@ class ProjectList extends Component {
   state = {
     name: "",
     summary: "",
-    due_date: "",
     projects: [],
     open: false,
     direction: "row",
@@ -54,7 +53,6 @@ class ProjectList extends Component {
             key={item.id}
             name={item.name}
             summary={item.summary}
-            duedate={item.due_date}
             onProjectPress={() => { this.onProjectPress(item.id) }} />
         )
 
@@ -92,7 +90,6 @@ class ProjectList extends Component {
     axios.post("/api/project", {
       name: this.state.name,
       summary: this.state.summary,
-      due_date: this.state.due_date,
       id: sessionStorage.getItem("id"),
       token: localStorage.getItem("token")
     }).then((response) => {
@@ -168,7 +165,7 @@ class ProjectList extends Component {
 
         {/* <Grid xs={12}
           container
-          
+
           style={{ marginBottom: 20 }}
         >
           <SimpleModalProjectWrapped
