@@ -14,14 +14,14 @@ import SimpleBottomNavigation from "../utils/Footer/Footer.js";
 
 class Homepage extends Component {
 
-  constructor(props){
+  constructor(props) {
 
     super(props);
 
-    this.state ={
-    userId: 0,
-    tasks: [],
-    sprints: []
+    this.state = {
+      userId: 0,
+      tasks: [],
+      sprints: []
     }
   }
 
@@ -36,39 +36,91 @@ class Homepage extends Component {
 
   getCurrentUserId = () => {
     axios.post("/api/decrypt", {
-        id: sessionStorage.getItem("id"),
-        token: localStorage.getItem("token")
+      id: sessionStorage.getItem("id"),
+      token: localStorage.getItem("token")
     }).then(res => {
-        console.log(res.data)
-        this.setState({ userId: res.data }, ()=>{
-          this.getTasks(this.state.userId)
-        })
+      console.log(res.data)
+      this.setState({ userId: res.data }, () => {
+        this.getTasks(this.state.userId)
+      })
     })
   }
 
   getTasks = (currentUserId) => {
     axios.get(`/api/sprints/tasks/user/${currentUserId}`)
-    .then(res => {
-      let incomplete = res.data.filter(task => !task.isCompleted)
+      .then(res => {
+        let incomplete = res.data.filter(task => !task.isCompleted)
 
         let data = []
         incomplete.forEach(task => {
-            if(!(data.includes(task.sprint))){
-                data.push({
-                    sprint: task.sprint,
-                    tasks: [task]
-                })
-            } else{
-                data[task.sprint].tasks.push(task)
-            }
+          if (!(data.includes(task.sprint))) {
+            data.push({
+              sprint: task.sprint,
+              tasks: [task]
+            })
+          } else {
+            data[task.sprint].tasks.push(task)
+          }
         })
-      this.setState({tasks: data})
-    })
+        this.setState({ tasks: data })
+      })
   }
 
   render() {
     return (
       <div>
+        <ButtonAppBar />
+        <div
+          className="parallax"
+          style={{
+            paddingTop: 50,
+            overflowX: "hidden",
+            backgroundImage: `url("/assets/images/background.png")`,
+            resizeMode: 'cover',
+            height: "-webkit-fill-available"
+          }} >
+
+          <Grid container>
+            <Grid
+              item
+              xs
+              direction="column"
+              justify="center"
+              alignItems="stretch"
+              spacing={24}
+              style={{
+                // backgroundImage: `url("/assets/images/background.png")`,
+                // resizeMode: 'cover',
+                height: "100%",
+                padding: "10px",
+                backgroundPosition: "center",
+                color: "whitesmoke",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center"
+              }}
+            >
+              <Grid
+                container
+                spacing={24}
+                style={{ padding: 50 }}
+              >
+                <Grid item xs={8}>
+                  <Paper
+                    style={{ height: "100%" }}
+                  >
+                    <ActiveTasks tasks={this.state.tasks} />
+                  </Paper>
+                </Grid>
+                <Grid item xs={1} />
+                <Grid item xs={3}>
+                  <ProfileCard />
+                </Grid>
+              </Grid>
+
+            </Grid>
+          </Grid>
+          {/* <div>
         <ButtonAppBar />
         <div
           className="parallax"
@@ -104,13 +156,13 @@ class Homepage extends Component {
             style={{ padding: "50px" }}
           >
             <Grid item xs={12}>
-              <Paper
-              // style={{ height: 100 }}
+              <Paper */}
+          {/* // style={{ height: 100 }}
               >
                 <ProjectList />
               </Paper>
             </Grid>
-          </Grid>
+          </Grid> */}
 
           {/* <Grid container spacing={8} style={{ marginTop: 100 }}>
           <Grid container item xs={12} style={{ marginLeft: 100 }}>
@@ -120,19 +172,18 @@ class Homepage extends Component {
             <Grid item xs={4} style={{ justifyContent: "left" }}>
               <ProfileCard />
             </Grid>
-          </Grid>
+          </Grid>*/}
           <Grid container style={{ justifyContent: 'center' }}>
-            <Grid item xs={10} >
+            <Grid item xs={12} >
               <ProjectList />
             </Grid>
           </Grid>
-        </Grid> */}
-        <SimpleBottomNavigation />
-        </div >
-        {/* <div style={{position:"inherit"}}>
-        <SimpleBottomNavigation />
-        </div> */}
-      </div>
+          {/* </Grid> */}
+          {/* </div >
+        <div style={{position:"inherit"}}>
+        <SimpleBottomNavigation />*/}
+        </div>
+      </div >
     );
   }
 }

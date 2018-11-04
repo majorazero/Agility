@@ -35,10 +35,10 @@ const theme = createMuiTheme({
 class Landing extends Component {
 
 
-handleClick = () => {
-  window.open("https://github.com/majorazero/project3");
+  handleClick = () => {
+    window.open("https://github.com/majorazero/project3");
 
-}
+  }
 
   state = {
     creator: [
@@ -73,7 +73,7 @@ handleClick = () => {
           overflowX: "hidden",
           backgroundImage: `url("/assets/images/background.png")`,
           resizeMode: 'cover',
-          height: "3050px"
+          height: "2250px"
         }} >
 
 
@@ -127,7 +127,7 @@ handleClick = () => {
               alignItems="stretch"
               style={{
                 padding: "25px 50px 25px 50px",
-                height: "500px",
+                height: "125%",
                 background: "whitesmoke",
                 position: "relative"
               }}
@@ -135,11 +135,10 @@ handleClick = () => {
             >
               <Typography variant="h6" gutterBottom color="textSecondary" align="center">
 
-              Collaboration is hard.
-              We're going to make it easy. 
+                "Collaboration is challenging. We’re here to make it easier."  - The <span style={{fontStyle: 'italic'}}>agility.</span> Team
                 <br />
                 <br />
-                Quisque id diam vel quam elementum pulvinar etiam non quam. Euismod in pellentesque massa placerat duis ultricies lacus sed. Ante metus dictum at tempor commodo. Nulla facilisi nullam vehicula ipsum a arcu cursus vitae. Fermentum leo vel orci porta non pulvinar. At erat pellentesque adipiscing commodo. Diam maecenas ultricies mi eget. Elit at imperdiet dui accumsan sit amet. Suscipit tellus mauris a diam maecenas. At tempor commodo ullamcorper a lacus. Duis at tellus at urna condimentum. Arcu non sodales neque sodales ut. Pellentesque nec nam aliquam sem et. Vitae justo eget magna fermentum. Vitae turpis massa sed elementum tempus.
+                <span style={{fontStyle: 'italic'}}>agility.</span> is a project management app that tracks the progress of its individual users with the principal intent of promoting accountability and providing the opportunity to ensure innovation for future projects. This is done by visualizing not only the successes but also the conflicts as they occur throughout the entirety of a given project.  Daunting projects can therefore be effectively analyzed and broken down to allow for a better and overall more streamlined process. The app is specifically designed for project managers, allowing them the ability to assign tasks to project workers and monitor the efficiency of each member assigned a task within a project sprint. Ultimately, we believe this will drive the best collaborative results.
               </Typography>
             </Grid>
           </Grid>
@@ -163,17 +162,7 @@ handleClick = () => {
               }}
             >
 
-              <Typography variant="h3" gutterBottom>How does it work?</Typography>
-
-              <MuiThemeProvider theme={theme}>
-                <ContainedButtons
-                  component={Link}
-                  to=""
-                  name="See How It Works"
-                  color="secondary"
-                  onClick ={this.handleClick}
-                />
-              </MuiThemeProvider>
+              <Typography variant="h3" gutterBottom>See How It Works</Typography>
 
               {/* <div style={{backgroundImage: `url("/assets/images/down-arrow.png")`}} ></div> */}
             </Grid>
@@ -187,17 +176,14 @@ handleClick = () => {
               alignItems="stretch"
               style={{
                 padding: "25px 50px 25px 50px",
-                height: "500px",
+                height: "125%",
                 background: "whitesmoke",
                 position: "relative"
               }}
               spacing={24}
             >
-              <Typography variant="h6" gutterBottom color="textSecondary" align="center">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Morbi tristique senectus et netus et malesuada. Dictumst vestibulum rhoncus est pellentesque elit. Risus ultricies tristique nulla aliquet enim. Urna cursus eget nunc scelerisque viverra mauris in. Aliquam malesuada bibendum arcu vitae elementum. Mattis vulputate enim nulla aliquet porttitor lacus luctus accumsan. Fringilla phasellus faucibus scelerisque eleifend donec pretium. A iaculis at erat pellentesque. Pharetra magna ac placerat vestibulum. Mi quis hendrerit dolor magna eget est.
-<br />
-                <br />
-                Quisque id diam vel quam elementum pulvinar etiam non quam. Euismod in pellentesque massa placerat duis ultricies lacus sed. Ante metus dictum at tempor commodo. Nulla facilisi nullam vehicula ipsum a arcu cursus vitae. Fermentum leo vel orci porta non pulvinar. At erat pellentesque adipiscing commodo. Diam maecenas ultricies mi eget. Elit at imperdiet dui accumsan sit amet. Suscipit tellus mauris a diam maecenas. At tempor commodo ullamcorper a lacus. Duis at tellus at urna condimentum. Arcu non sodales neque sodales ut. Pellentesque nec nam aliquam sem et. Vitae justo eget magna fermentum. Vitae turpis massa sed elementum tempus.
+              <Typography variant="h5" gutterBottom color="textSecondary" align="center">
+                We desired to design and build a project management tool that was constructed from the ground up to work successfully within an agile environment. Our mission is to help project managers foster teamwork, promote accountability, and ensure efficiency within the project-management environment.
               </Typography>
             </Grid>
           </Grid>

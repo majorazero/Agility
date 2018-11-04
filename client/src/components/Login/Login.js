@@ -4,8 +4,7 @@ import axios from "axios";
 import LoginLayout from "../utils/LoginLayout.js";
 import SimpleBottomNavigation from "../utils/Footer/Footer.js";
 import Grid from '@material-ui/core/Grid';
-
-
+import Button from '@material-ui/core/Button';
 
 class Login extends Component {
   state = {
@@ -39,26 +38,80 @@ class Login extends Component {
       }
     });
   }
-render() {
-  return (
-    <div>
+  render() {
+    return (
 
-        <h1 style={{textAlign: "center"}}>This is a login page.</h1>
-        <small>{this.state.message}</small>
+      /* <h1 style={{textAlign: "center"}}>This is a login page.</h1> */
+      /* <small>{this.state.message}</small> */
+      <div
+        className="parallax"
+        style={{
+          // paddingTop: "50px",
+          overflowX: "hidden",
+          backgroundImage: `url("/assets/images/background.png")`,
+          resizeMode: 'cover',
+          height: "-webkit-fill-available"
+        }} >
 
-        <LoginLayout
-          onSubmit={this.handleSubmit}
-          onChange={this.handleChange}
-        />
-        <div style={{textAlign: "center", marginTop:"20px"}}>
-        <div><Link to="/register">New user? Register!</Link></div>
-        <div><Link to="/">Back to landing page.</Link></div>
-        </div>
 
-        <div style={{position:"fixed", width:"100%", bottom:"0"}}> <SimpleBottomNavigation /> </div>       
+        <Grid container>
+          <Grid
+            item
+            xs
+            direction="column"
+            justify="center"
+            alignItems="stretch"
+            spacing={24}
+            style={{
+              // backgroundImage: `url("/assets/images/background.png")`,
+              // resizeMode: 'cover',
+              height: "100%",
+              padding: "10px",
+              backgroundPosition: "center",
+              color: "whitesmoke",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center"
+            }}
+          >
+            <LoginLayout
+              onSubmit={this.handleSubmit}
+              onChange={this.handleChange}
+            />
+          </Grid>
+          <Grid container>
+            <Grid
+              item
+              xs
+              direction="column"
+              justify="center"
+              alignItems="stretch"
+              spacing={24}
+              style={{
+                // backgroundImage: `url("/assets/images/background.png")`,
+                // resizeMode: 'cover',
+                height: "100%",
+                padding: "10px",
+                backgroundPosition: "center",
+                color: "whitesmoke",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center"
+              }}
+            >
+              <Button variant="contained" href="/">
+                Back To Landing Page
+      </Button>
+              {/* <div style={{ textAlign: "center", marginTop: "20px" }}>
+                <div><Link to="/">Back to landing page.</Link></div>
+              </div> */}
+            </Grid>
+          </Grid>
+        </Grid>
+        {/* <div style={{position:"fixed", width:"100%", bottom:"0"}}> <SimpleBottomNavigation /> </div>        */}
       </div>
-      );
-    }
+    );
   }
-  
-  export default Login;
+}
+
+export default Login;

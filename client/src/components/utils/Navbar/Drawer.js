@@ -49,7 +49,11 @@ class TemporaryDrawer extends React.Component {
         <List>
             <ListItem button key="Profile">
               <ListItemIcon><HomeIcon /></ListItemIcon>
-              <ListItemText primary="Profile" to="/homepage" />
+              <ListItemText primary="Profile" href="/homepage" />
+            </ListItem>
+            <ListItem button key="Project">
+              <ListItemIcon><HomeIcon /></ListItemIcon>
+              <ListItemText primary="Project" href="/project/:id" />
             </ListItem>
         </List>
         <Divider />
