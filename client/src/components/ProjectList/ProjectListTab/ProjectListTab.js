@@ -109,7 +109,8 @@ function SingleLineGridList(props) {
           // width: 150,
           height: 200,
           backgroundSize: 'cover',
-          backgroundPosition: "center center"
+          backgroundPosition: "center center",
+          margin: 2
         }}
       />
       <GridListTileBar
