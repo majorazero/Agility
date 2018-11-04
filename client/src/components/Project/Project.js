@@ -183,7 +183,8 @@ class Project extends React.Component {
     };
 
     addTask = (event) => {
-        event.preventDefault();
+      event.preventDefault();
+      if(this.state.taskComplexity <= 5 && this.state.taskComplexity >= 1){
         axios.post("/api/task", {
             name: this.state.taskName,
             due_date: this.state.taskDue_date,
@@ -197,6 +198,10 @@ class Project extends React.Component {
             });
             this.getTasks();
         });
+      }
+      else {
+        console.log("Invalid complexity value!");
+      }
     }
 
     handleOpen = (name) => {
