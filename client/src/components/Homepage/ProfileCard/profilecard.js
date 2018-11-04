@@ -45,6 +45,7 @@ const styles = theme => ({
         [theme.breakpoints.up('sm')]: {
             marginRight: -8,
         },
+        // position: 'absolute'
     },
     expandOpen: {
         transform: 'rotate(180deg)',

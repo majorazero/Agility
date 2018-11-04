@@ -12,23 +12,33 @@ import Grid from '@material-ui/core/Grid';
 
 const ActiveTasks = (props) => (
     <div>
-        <List subheader={<li />}>
+        <List
+            subheader={<li />}
+            style={{
+                width: '100%',
+                maxWidth: '100%',
+                position: 'relative',
+                overflow: 'auto',
+                maxHeight: 300,
+            }}
+        >
             {props.tasks.map((sprint, i) => (
                 <li key={i}>
-
                     <ListSubheader style={{ backgroundColor: 'whitesmoke' }}>{sprint.sprint}</ListSubheader>
                     {sprint.tasks.map((task, index) => (
+                        <ul>
                         <ListItem key={index}>
-                            <Grid container>
-                                <Grid item xs>
-                                    <Pool
-                                        tasks={task}
-                                    />
-                                </Grid>
-                            </Grid>
+                            {/* <Grid container> */}
+                            {/* <Grid item xs> */}
+                            <Pool
+                                tasks={task}
+                            />
+                            {/* </Grid> */}
+                            {/* </Grid> */}
                         </ListItem>
-                    ))
-                    }
+                        </ul>
+                ))
+                }
 
                 </li>
             ))}
