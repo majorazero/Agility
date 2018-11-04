@@ -43,7 +43,7 @@ function SimpleExpansionPanel(props) {
         
           {/* {props.isAdmin ?
             <ContainedButtons
-              name={props.assigned ? "Unassign" : "Select"}
+              name={props.assigned ? "Unassign" : "Claim"}
               color="primary"
               onClick={props.assigned ? props.unAssign : props.onClickAdd}
             /> 
@@ -56,22 +56,23 @@ function SimpleExpansionPanel(props) {
             /> 
             :
           <ContainedButtons
-            name='Select'
+            name='Claim'
             color="primary"
             onClick={props.onClickAdd}
           />} */}
 
 
             <ContainedButtons
-            name={props.assigned ? 'Unassign':'Claim'}
+            name={props.complete ? (props.isAdmin ? 'Reopen':null):(props.assigned ? 'Unassign':'Claim') }
             color="primary"
             onClick={props.assigned ? props.unAssign : props.onClickAdd}
-            style={props.isAdmin ? null:{display: 'none'}}
+            hidden = {(props.currentUser === props.assignedUser) ? false:(props.isAdmin ? false: true)}
+            // hidden={props.complete ? (props.isAdmin ? (props.currentUser === props.assignedUser ? false:true):true) : false}
             />
 
           
           {/* {(location.pathname === "/homepage") ? null :  */}
-          {props.isAdmin ?
+          {/* {props.isAdmin ?
           <ContainedButtons
             name={props.assigned ? "Mark Complete" : "Delete"}
             color="secondary"
@@ -83,7 +84,16 @@ function SimpleExpansionPanel(props) {
             name={props.assigned ? "Mark Complete" : "Delete"}
             color="secondary"
             onClick={props.assigned ? props.onClickComplete : props.onClickDelete}
-          /> : ""}
+          /> : ""} */}
+
+          <ContainedButtons
+            name={props.assigned ? 'Mark Complete' : props.isAdmin ? 'Delete':null}
+            color='secondary'
+            onClick={props.assigned ? props.onClickComplete : props.onClickDelete}
+            hidden={props.complete ? true:(props.currentUser === props.assignedUser) ? false:(props.isAdmin ? false: true)}
+          />
+
+
           {/* } */}
         </ExpansionPanelDetails>
       </ExpansionPanel>
