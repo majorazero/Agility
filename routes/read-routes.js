@@ -165,6 +165,7 @@ module.exports = function (app) {
             }
             else{
               Obj.compSemantics = "Start doing some tasks, see where you at!";
+              Obj.complexity = 0;
             }
             db.SprintMembership.findAll({
               where: {

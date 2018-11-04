@@ -557,6 +557,9 @@ class Project extends React.Component {
                                                             isAdmin={this.state.isAdmin}
                                                             tasks={task}
                                                             onClickDelete={this.deleteTask.bind(this, task)}
+                                                            assignedUser={task.assigned_id}
+                                                            currentUser={this.state.currentUser}
+                                                            complete                                        
                                                         />
                                                     );
                                                 }) : this.state.unassignedTasks.map((task) => {
@@ -568,6 +571,7 @@ class Project extends React.Component {
                                                             tasks={task}
                                                             onClickDelete={this.deleteTask.bind(this, task)}
                                                             onClickAdd={this.assignTask.bind(this, task)}
+                                                            currentUser={this.state.currentUser}
                                                         />
                                                     );
                                                 })}
