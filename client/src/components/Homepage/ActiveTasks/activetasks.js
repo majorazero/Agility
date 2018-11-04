@@ -23,6 +23,8 @@ const ActiveTasks = (props) => (
                                 <Grid item xs>
                                     <Pool
                                         tasks={task}
+                                        activetasks={true}
+                                        goToProject={props.goToProject}
                                     />
                                 </Grid>
                             </Grid>

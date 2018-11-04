@@ -66,6 +66,15 @@ class Homepage extends Component {
       })
   }
 
+  goToProject = (id) => {
+    axios.post("/api/encrypt", {
+      token: "project",
+      id: id.toString()
+    }).then((data) => {
+      window.location.assign(`/project/${data.data}`);
+    });
+  }
+
   render() {
     return (
       <div>
@@ -109,7 +118,7 @@ class Homepage extends Component {
                   <Paper
                     style={{ height: "100%" }}
                   >
-                    <ActiveTasks tasks={this.state.tasks} />
+                    <ActiveTasks tasks={this.state.tasks} goToProject={this.goToProject} />
                   </Paper>
                 </Grid>
                 <Grid item xs={1} />
