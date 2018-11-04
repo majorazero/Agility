@@ -114,7 +114,7 @@ class RecipeReviewCard extends React.Component {
                 label2: 'Total Tasks Taken: ',
                 info2: this.state.totalTask,
                 label3: 'Average Task Complexity: ',
-                info3: this.state.complexity
+                info3: `${this.state.complexity} (${this.state.complexitySemantics})`
             },
             {
                 label1: 'Total Sprints Participated: ',
@@ -157,7 +157,7 @@ class RecipeReviewCard extends React.Component {
                         </Typography>
                         <br />
                         <Typography variant="h6" gutterBottom>
-                            Career
+                            Career History
                     </Typography>
                         <Typography variant="subtitle1" gutterBottom>
                             {(this.state.totalTask === 0) ? "Start working on something!" :
