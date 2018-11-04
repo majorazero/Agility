@@ -94,6 +94,7 @@ class ProjectList extends Component {
       token: localStorage.getItem("token")
     }).then((response) => {
       this.fetch();
+      this.handleClose();
     });
   }
 
@@ -104,6 +105,7 @@ class ProjectList extends Component {
   }
 
   handleClose = () => {
+    console.log(1);
     this.setState({ open: false });
   };
 
