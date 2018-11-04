@@ -52,6 +52,7 @@ const Pool = (props) => {
                 unAssign={props.unAssign}
                 assigned={props.assigned}
                 onClickComplete={props.onClickComplete}
+                onClickReopen={props.onClickReopen}
                 complete={props.complete}
             />
         </ListItem>

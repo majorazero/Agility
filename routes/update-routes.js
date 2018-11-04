@@ -33,6 +33,19 @@ module.exports = function(app) {
       })
     })
 
+    app.put("/api/reopen/task/:taskId", function(req, res){
+      db.Task.update({
+        isCompleted: false
+      }, {
+        where: {
+          id: req.params.taskId
+        }
+      })
+      .then(function(incomplete){
+        res.json(incomplete)
+      })
+    })
+
     app.put("/api/task/unassign", (req,res) => {
       db.Task.update({
         assigned_id: null
