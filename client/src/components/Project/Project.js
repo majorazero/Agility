@@ -75,6 +75,8 @@ class Project extends React.Component {
         taskName: "",
         taskDue_date: "",
         taskDescription: "",
+        taskComplexity: "",
+        taskStack: "",
         chipData: [],
 
         sprintOpen: false,
@@ -182,13 +184,13 @@ class Project extends React.Component {
 
     addTask = (event) => {
         event.preventDefault();
-        console.log(this.state.name, this.state.due_date, this.state.description, this.state.sprintId)
-        // would put sprintId state in as basis for task addition
         axios.post("/api/task", {
             name: this.state.taskName,
             due_date: this.state.taskDue_date,
             description: this.state.taskDescription,
-            sprint_id: this.state.sprintId
+            sprint_id: this.state.sprintId,
+            complexity: this.state.taskComplexity,
+            stack: this.state.taskStack
         }).then(() => {
             this.setState({
                 taskOpen: false
@@ -487,13 +489,13 @@ class Project extends React.Component {
                                         />
                                     </Grid>
                                     <Grid item xs>
-                                        {(this.state.isAdmin === true) ?
-                                            <ButtonSizes
-                                                onClick={() => this.handleOpen('taskOpen')}
-                                                title="Add a Task"
-                                                color="secondary"
-                                            /> :
-                                            ""}
+                                      {(this.state.isAdmin === true) ?
+                                          <ButtonSizes
+                                              onClick={() => this.handleOpen('taskOpen')}
+                                              title="Add a Task"
+                                              color="secondary"
+                                          /> :
+                                          ""}
                                     </Grid>
                                 </Grid>
                                 <Grid
@@ -559,7 +561,7 @@ class Project extends React.Component {
                                                             onClickDelete={this.deleteTask.bind(this, task)}
                                                             assignedUser={task.assigned_id}
                                                             currentUser={this.state.currentUser}
-                                                            complete                                        
+                                                            complete
                                                         />
                                                     );
                                                 }) : this.state.unassignedTasks.map((task) => {
