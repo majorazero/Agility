@@ -26,6 +26,8 @@ const styles = theme => ({
 
 function SimpleExpansionPanel(props) {
   const { classes } = props;
+  // console.log(props.onClickReopen,props.unAssign, props.onClickAdd);
+  console.log(props);
   return (
       <ExpansionPanel key={props.id}>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
@@ -40,20 +42,20 @@ function SimpleExpansionPanel(props) {
               {props.due}
           </Typography>
           {/* {(location.pathname === "/homepage") ? null :  */}
-        
+
           {/* {props.isAdmin ?
             <ContainedButtons
               name={props.assigned ? "Unassign" : "Claim"}
               color="primary"
               onClick={props.assigned ? props.unAssign : props.onClickAdd}
-            /> 
+            />
             :
           (props.assigned && (props.currentUser === props.assignedUser)) ?
             <ContainedButtons
               name='Unassign'
               color="primary"
               onClick={props.unAssign}
-            /> 
+            />
             :
           <ContainedButtons
             name='Claim'
@@ -70,7 +72,7 @@ function SimpleExpansionPanel(props) {
             // hidden={props.complete ? (props.isAdmin ? (props.currentUser === props.assignedUser ? false:true):true) : false}
             />
 
-          
+
           {/* {(location.pathname === "/homepage") ? null :  */}
           {/* {props.isAdmin ?
           <ContainedButtons
