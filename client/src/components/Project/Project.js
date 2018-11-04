@@ -75,6 +75,8 @@ class Project extends React.Component {
         taskName: "",
         taskDue_date: "",
         taskDescription: "",
+        taskComplexity: "",
+        taskStack: "",
         chipData: [],
 
         sprintOpen: false,
@@ -152,11 +154,12 @@ class Project extends React.Component {
         // let number = this.state.projects
         // below we'll just place the variable in where we grab the dynamically updated 'project' that we're on depending on user choice
         axios.get("/api/task/" + this.state.sprintId).then((res) => {
-
             let task = res.data;
             let unassigned = [];
             let assigned = [];
             let completed = [];
+
+            console.log(task);
 
             for (let i = 0; i < task.length; i++) {
                 if (task[i].assigned_id === null) {
@@ -181,20 +184,25 @@ class Project extends React.Component {
     };
 
     addTask = (event) => {
-        event.preventDefault();
-        console.log(this.state.name, this.state.due_date, this.state.description, this.state.sprintId)
-        // would put sprintId state in as basis for task addition
+      event.preventDefault();
+      if(this.state.taskComplexity <= 5 && this.state.taskComplexity >= 1){
         axios.post("/api/task", {
             name: this.state.taskName,
             due_date: this.state.taskDue_date,
             description: this.state.taskDescription,
-            sprint_id: this.state.sprintId
+            sprint_id: this.state.sprintId,
+            complexity: this.state.taskComplexity,
+            stack: this.state.taskStack
         }).then(() => {
             this.setState({
                 taskOpen: false
             });
             this.getTasks();
         });
+      }
+      else {
+        console.log("Invalid complexity value!");
+      }
     }
 
     handleOpen = (name) => {
@@ -312,7 +320,7 @@ class Project extends React.Component {
 
     addSprint = (event) => {
         event.preventDefault();
-        
+
         axios.post('/api/sprint', {
             name: this.state.sprintName,
             start_date: this.state.sprintStart_date,
@@ -367,17 +375,18 @@ class Project extends React.Component {
     }
 
     markComplete = (id) => {
-        axios.put(`/api/complete/task/${id}`)
-            .then(() => {
-                this.getTasks();
-            })
+      console.log("WHAT");
+      axios.put(`/api/complete/task/${id}`)
+        .then(() => {
+          this.getTasks();
+        })
     }
 
     reopenTask = (id) => {
         console.log('Reopen Task', id)
         axios.put(`/api/reopen/task/${id}`)
         .then(() => {
-            this.getTasks();
+          this.getTasks();
         })
     }
 
@@ -481,13 +490,13 @@ class Project extends React.Component {
                                         />
                                     </Grid>
                                     <Grid item xs>
-                                        {(this.state.isAdmin === true) ?
-                                            <ButtonSizes
-                                                onClick={() => this.handleOpen('taskOpen')}
-                                                title="Add a Task"
-                                                color="secondary"
-                                            /> :
-                                            ""}
+                                      {(this.state.isAdmin === true) ?
+                                          <ButtonSizes
+                                              onClick={() => this.handleOpen('taskOpen')}
+                                              title="Add a Task"
+                                              color="secondary"
+                                          /> :
+                                          ""}
                                     </Grid>
                                 </Grid>
                                 <Grid
@@ -495,113 +504,116 @@ class Project extends React.Component {
                                     spacing={8}
                                 // style={{ padding: 25 }}
                                 >
-                                    <List style={{
-                                        width: '100%',
-                                        maxWidth: '100%',
-                                        position: 'relative',
-                                        overflow: 'auto',
-                                        maxHeight: 300,
-                                    }}>
-                                        {!this.state.isActive ? <ul>
-                                            {this.state.showComplete ? this.state.completedTasks.map((task) => {
-                                                return (
-                                                    <Pool
-                                                        key={task.id}
-                                                        id={this.key}
-                                                        isAdmin={this.state.isAdmin}
-                                                        tasks={task}
-                                                        onClickDelete={this.deleteTask.bind(this, task)}
-                                                        onClickReopen={() => this.reopenTask(task.id)}
-                                                        assignedUser={task.assigned_id}
-                                                        currentUser={this.state.currentUser}
-                                                        complete 
-                                                    />
-                                                );
-                                            }) : <Summary
-                                                    members={this.state.members}
-                                                    completed={this.state.completedTasks}
-                                                    assigned={this.state.assignedTasks}
-                                                    unAssigned={this.state.unassignedTasks}
-                                                    currentSprint={this.state.sprintId}
-                                                    sprints={this.state.sprints} />}
-                                        </ul> :
-                                            <ul>
-                                                {/* <MuiThemeProvider theme={theme2}> */}
-                                                {/* {(this.state.isAdmin === true) ?
-                                                    <ButtonSizes
-                                                        onClick={() => this.handleOpen('taskOpen')}
-                                                        title="Add a Task"
-                                                        color="secondary"
-                                                    /> :
-                                                    ""} */}
-                                                {/* </MuiThemeProvider> */}
-                                                <SimpleModalWrapped
-                                                    open={this.state.taskOpen}
-                                                    onClose={() => this.handleClose('taskOpen')}
-                                                    name="Add a New Task ..."
-                                                    onSubmit={this.addTask}
-                                                    onChange={this.handleChange}
-                                                >
-                                                    <AddTaskLayout
-                                                    />
-                                                </SimpleModalWrapped>
+                                  <List style={{
+                                    width: '100%',
+                                    maxWidth: '100%',
+                                    position: 'relative',
+                                    overflow: 'auto',
+                                    maxHeight: 300,
+                                  }}>
+                                    {!this.state.isActive ?
+                                      <ul>
+                                        {this.state.showComplete ? this.state.completedTasks.map((task) => {
+                                          return (
+                                            <Pool
+                                              key={task.id}
+                                              id={this.key}
+                                              isAdmin={this.state.isAdmin}
+                                              tasks={task}
+                                              onClickDelete={this.deleteTask.bind(this, task)}
+                                              onClickReopen={() => this.reopenTask(task.id)}
+                                              assignedUser={task.assigned_id}
+                                              currentUser={this.state.currentUser}
+                                              complete
+                                            />
+                                          );
+                                        }) :
+                                        <Summary
+                                          members={this.state.members}
+                                          completed={this.state.completedTasks}
+                                          assigned={this.state.assignedTasks}
+                                          unAssigned={this.state.unassignedTasks}
+                                          currentSprint={this.state.sprintId}
+                                          sprints={this.state.sprints} />}
+                                    </ul> :
+                                      <ul>
+                                          {/* <MuiThemeProvider theme={theme2}> */}
+                                          {/* {(this.state.isAdmin === true) ?
+                                              <ButtonSizes
+                                                  onClick={() => this.handleOpen('taskOpen')}
+                                                  title="Add a Task"
+                                                  color="secondary"
+                                              /> :
+                                              ""} */}
+                                          {/* </MuiThemeProvider> */}
+                                          <SimpleModalWrapped
+                                              open={this.state.taskOpen}
+                                              onClose={() => this.handleClose('taskOpen')}
+                                              name="Add a New Task ..."
+                                              onSubmit={this.addTask}
+                                              onChange={this.handleChange}
+                                          >
+                                              <AddTaskLayout
+                                              />
+                                          </SimpleModalWrapped>
 
 
-                                                {this.state.showComplete ? this.state.completedTasks.map((task) => {
-                                                    return (
-                                                        <Pool
-                                                            key={task.id}
-                                                            id={this.key}
-                                                            isAdmin={this.state.isAdmin}
-                                                            tasks={task}
-                                                            onClickDelete={this.deleteTask.bind(this, task)}
-                                                            onClickReopen={() => this.reopenTask(task.id)}
-                                                            assignedUser={task.assigned_id}
-                                                            currentUser={this.state.currentUser}
-                                                            complete                                        
-                                                        />
-                                                    );
-                                                }) : this.state.unassignedTasks.map((task) => {
-                                                    return (
-                                                        <Pool
-                                                            key={task.id}
-                                                            id={this.key}
-                                                            isAdmin={this.state.isAdmin}
-                                                            tasks={task}
-                                                            onClickDelete={this.deleteTask.bind(this, task)}
-                                                            onClickAdd={this.assignTask.bind(this, task)}
-                                                            currentUser={this.state.currentUser}
-                                                        />
-                                                    );
-                                                })}
-                                            </ul>}
+                                          {this.state.showComplete ? this.state.completedTasks.map((task) => {
+                                            return (
+                                              <Pool
+                                                key={task.id}
+                                                id={this.key}
+                                                isAdmin={this.state.isAdmin}
+                                                tasks={task}
+                                                onClickDelete={this.deleteTask.bind(this, task)}
+                                                onClickReopen={() => this.reopenTask(task.id)}
+                                                assignedUser={task.assigned_id}
+                                                assigned={true}
+                                                currentUser={this.state.currentUser}
+                                                complete
+                                              />
+                                            );
+                                          }) : this.state.unassignedTasks.map((task) => {
+                                            return (
+                                              <Pool
+                                                key={task.id}
+                                                id={this.key}
+                                                isAdmin={this.state.isAdmin}
+                                                tasks={task}
+                                                onClickDelete={this.deleteTask.bind(this, task)}
+                                                onClickAdd={this.assignTask.bind(this, task)}
+                                                currentUser={this.state.currentUser}
+                                              />
+                                            );
+                                          })}
+                                      </ul>}
                                     </List>
                                 </Grid>
                             </Paper>
                         </Grid>
                         <Grid item xs={6}>
-                            <Paper
-                                style={{ height: 300 }}
+                          <Paper
+                            style={{ height: 300 }}
+                          >
+                            <Grid
+                            container
+                            spacing={8}
+                            style={{ padding: 25 }}
                             >
-                                <Grid
-                                    container
-                                    spacing={8}
-                                    style={{ padding: 25 }}
-                                >
-                                    <Grid item xs>
-                                        <UserPool
-                                            isAdmin={this.state.isAdmin}
-                                            currentUser={this.state.currentUser}
-                                            sprintId={this.state.sprintId}
-                                            members={this.state.members}
-                                            tasks={this.state.assignedTasks}
-                                            unassign={this.unassignTask}
-                                            onClickDelete={this.deleteTask}
-                                            onClickComplete={this.markComplete}
-                                        />
-                                    </Grid>
-                                </Grid>
-                            </Paper>
+                              <Grid item xs>
+                                <UserPool
+                                  isAdmin={this.state.isAdmin}
+                                  currentUser={this.state.currentUser}
+                                  sprintId={this.state.sprintId}
+                                  members={this.state.members}
+                                  tasks={this.state.assignedTasks}
+                                  unassign={this.unassignTask}
+                                  onClickDelete={this.deleteTask}
+                                  onClickComplete={this.markComplete}
+                                />
+                              </Grid>
+                            </Grid>
+                          </Paper>
                         </Grid>
                     </Grid>
                 </div>

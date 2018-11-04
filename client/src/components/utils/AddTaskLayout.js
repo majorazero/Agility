@@ -67,7 +67,7 @@ function AddTaskLayout(props) {
           </FormControl>
           <FormControl margin="normal" required fullWidth>
             <DatePickers
-              label="Due Date"
+              label=""
               id="due_date"
               name="due_date"
               autoComplete="due_date"
@@ -79,6 +79,18 @@ function AddTaskLayout(props) {
             <InputLabel htmlFor="description">Description</InputLabel>
             <Input id="description" name="description" autoComplete="description" autoFocus
               onChange={props.onChange("taskDescription")}
+            />
+          </FormControl>
+          <FormControl margin="normal" required fullWidth>
+            <InputLabel htmlFor="complexity">Complexity (1-5)</InputLabel>
+            <Input id="complexity" name="complexity" autoComplete="complexity" autoFocus
+              onChange={props.onChange("taskComplexity")}
+            />
+          </FormControl>
+          <FormControl margin="normal" required fullWidth>
+            <InputLabel htmlFor="stack">Stack (Javascript, CSS, HTML, React ...)</InputLabel>
+            <Input id="stack" name="stack" autoComplete="stack" autoFocus
+              onChange={props.onChange("taskStack")}
             />
           </FormControl>
           <Button
