@@ -714,7 +714,7 @@ class Project extends React.Component {
             <div style={{ position: "fixed", width: "100%", bottom: "0" }}> */}
 
                 {/* </div> * /} */}
-                < SimpleBottomNavigation />
+                {/* < SimpleBottomNavigation /> */}
             </div >
         );
     }

@@ -108,9 +108,9 @@ class Homepage extends Component {
                 style={{ padding: 50 }}
               >
                 <Grid
-                item 
-                xs={8}
-                style={{ height: 'fit-content' }}
+                  item
+                  xs={8}
+                  style={{ height: 'fit-content' }}
                 >
                   <Paper
                     style={{ height: "100%" }}
@@ -121,13 +121,13 @@ class Homepage extends Component {
                       style={{ padding: 25 }}
                     >
                       <Grid item xs>
-                        <Typography fullWidth variant="h3" gutterBottom>Active Tasks</Typography>
+                        <Typography fullWidth variant="h4" gutterBottom>Active Tasks</Typography>
                       </Grid>
                     </Grid>
                     <Grid
                       container
                       spacing={8}
-                      // style={{ padding: 50 }}
+                    // style={{ padding: 50 }}
                     >
                       <Grid item xs>
                         <ActiveTasks tasks={this.state.tasks} />
@@ -201,11 +201,13 @@ class Homepage extends Component {
             style={{ padding: 50, justifyContent: 'center' }}
             spacing={8}
           >
-            <Paper>
-              <Grid item xs={12} >
-                <ProjectList />
-              </Grid>
-            </Paper>
+            <Grid item xs={12} >
+              <Paper>
+                <Grid item xs={12} >
+                  <ProjectList />
+                </Grid>
+              </Paper>
+            </Grid>
           </Grid>
           {/* </Grid> */}
           {/* </div >

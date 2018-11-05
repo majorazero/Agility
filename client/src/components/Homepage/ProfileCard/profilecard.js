@@ -150,10 +150,10 @@ class RecipeReviewCard extends React.Component {
 
                 <MuiThemeProvider theme={theme}>
                     <CardContent>
-                        <Typography variant="h5" gutterBottom>
+                        <Typography variant="h6" gutterBottom>
                             {this.state.userFirstName + " " + this.state.userLastName}
                         </Typography>
-                        <Typography variant="subtitle1" gutterBottom>
+                        <Typography variant="subtitle2" gutterBottom>
                             {this.state.userEmail}
                         </Typography>
                         {/* <br /> */}
@@ -196,7 +196,7 @@ class RecipeReviewCard extends React.Component {
                 </MuiThemeProvider>
 
                 <CardActions className={classes.actions} disableActionSpacing>
-                    <Typography variant="h6" gutterBottom style={{ textAlign: "left" }}>
+                    <Typography variant="subtitle1" gutterBottom style={{ textAlign: "left" }}>
                         Career History
                     </Typography>
                     <IconButton
