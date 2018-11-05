@@ -21,14 +21,14 @@ module.exports = function(app){
 
     //returns all projects for a given user
     app.get('/api/projects/user/:userId', (req, res)=> {
-      db.sequelize.query(`SELECT DISTINCT Projects.name as project, Projects.id, Projects.due_date, Projects.complete, Projects.completed_date, Projects.summary, Projects.userId FROM Users INNER JOIN Sprintmemberships ON Sprintmemberships.userId = Users.id AND Users.id = ${req.params.userId}INNER JOIN Sprints ON Sprints.id = Sprintmemberships.sprintId INNER JOIN Projects ON Sprints.project_id = Projects.id`, { type: sequelize.QueryTypes.SELECT}).then(dbSprintUser => {
+      db.sequelize.query(`SELECT DISTINCT Projects.name as project, Projects.id, Projects.due_date, Projects.complete, Projects.completed_date, Projects.summary, Projects.userId FROM Users INNER JOIN SprintMemberships ON SprintMemberships.userId = Users.id AND Users.id = ${req.params.userId}INNER JOIN Sprints ON Sprints.id = SprintMemberships.sprintId INNER JOIN Projects ON Sprints.project_id = Projects.id`, { type: sequelize.QueryTypes.SELECT}).then(dbSprintUser => {
           res.json(dbSprintUser)
       })
   });
 
   //returns all sprints within a given project that a given user participated in
     app.get('/api/sprints/project/:projectId/user/:userId', (req, res)=> {
-      db.sequelize.query(`SELECT Sprints.name AS sprintName, Sprints.id AS sprintId, Sprints.isActive, Sprints.start_date AS startDate, Sprints.end_date AS endDate, Projects.id AS project_id, Users.id AS user_id, Users.first_name FROM Projects INNER JOIN Sprints ON Sprints.project_id = Projects.id AND Projects.id=${req.params.projectId} INNER JOIN Sprintmemberships ON Sprints.id = Sprintmemberships.sprintId INNER JOIN Users ON Users.id = Sprintmemberships.userId AND Users.id=${req.params.userId} ORDER BY endDate DESC`, { type: sequelize.QueryTypes.SELECT}).then(dbSPU => {
+      db.sequelize.query(`SELECT Sprints.name AS sprintName, Sprints.id AS sprintId, Sprints.isActive, Sprints.start_date AS startDate, Sprints.end_date AS endDate, Projects.id AS project_id, Users.id AS user_id, Users.first_name FROM Projects INNER JOIN Sprints ON Sprints.project_id = Projects.id AND Projects.id=${req.params.projectId} INNER JOIN SprintMemberships ON Sprints.id = SprintMemberships.sprintId INNER JOIN Users ON Users.id = SprintMemberships.userId AND Users.id=${req.params.userId} ORDER BY endDate DESC`, { type: sequelize.QueryTypes.SELECT}).then(dbSPU => {
           res.json(dbSPU)
       })
     });
@@ -46,7 +46,7 @@ module.exports = function(app){
       })
     });
 
-    
+
 
 
 
