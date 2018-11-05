@@ -457,22 +457,6 @@ class Project extends React.Component {
                         spacing={8}
                         style={{ padding: "50px 50px 25px 50px" }}
                     >
-                        <Grid item xs={12}>
-                            {/* <MuiThemeProvider theme={theme}> */}
-                            {/* <Paper
-                                    style={{ background: 'none', border: 'none', height: "100%", paddingLeft: 10, paddingRight: 10, paddingTop: 3, paddingBottom: 10 }}
-                                > */}
-                            {<LinearDeterminate whatBar completed={this.state.SprintTime} title={"Sprint Time"} />}
-                            {<LinearDeterminate completed={this.state.SprintProgress} title={"Sprint Progress"} />}
-                            {/* </Paper> */}
-                            {/* </MuiThemeProvider> */}
-                        </Grid>
-                    </Grid>
-                    <Grid
-                        container
-                        spacing={8}
-                        style={{ padding: "50px 50px 25px 50px" }}
-                    >
                         <Grid item xs>
                             <Paper
                                 style={{ height: "100%", background: 'whitesmoke' }}
@@ -671,6 +655,22 @@ class Project extends React.Component {
                                     </Grid>
                                 </Grid>
                             </Paper>
+                        </Grid>
+                        <Grid
+                            container
+                            spacing={8}
+                            style={{ padding: "50px 50px 25px 50px" }}
+                        >
+                            <Grid item xs={12}>
+                                {/* <MuiThemeProvider theme={theme}> */}
+                                {/* <Paper
+                                        style={{ background: 'none', border: 'none', height: "100%", paddingLeft: 10, paddingRight: 10, paddingTop: 3, paddingBottom: 10 }}
+                                    > */}
+                                {<LinearDeterminate whatBar completed={this.state.SprintTime} title={"Sprint Time"} />}
+                                {<LinearDeterminate completed={this.state.SprintProgress} title={"Sprint Progress"} />}
+                                {/* </Paper> */}
+                                {/* </MuiThemeProvider> */}
+                            </Grid>
                         </Grid>
                     </Grid>
                 </div>
