@@ -21,7 +21,7 @@ module.exports = function(app){
 
     //returns all projects for a given user
     app.get('/api/projects/user/:userId', (req, res)=> {
-      db.sequelize.query(`SELECT DISTINCT Projects.name as project, Projects.id, Projects.due_date, Projects.complete, Projects.completed_date, Projects.summary, Projects.userId FROM Users INNER JOIN Sprintmemberships ON Sprintmemberships.userId = Users.id AND Users.id = ${req.params.userId}INNER JOIN Sprints ON Sprints.id = Sprintmemberships.sprintId INNER JOIN Projects ON Sprints.project_id = Projects.id`, { type: sequelize.QueryTypes.SELECT}).then(dbSprintUser => {
+      db.sequelize.query(`SELECT DISTINCT Projects.name as project, Projects.id, Projects.due_date, Projects.complete, Projects.completed_date, Projects.summary, Projects.userId FROM Users INNER JOIN SprintMemberships ON SprintMemberships.userId = Users.id AND Users.id = ${req.params.userId}INNER JOIN Sprints ON Sprints.id = SprintMemberships.sprintId INNER JOIN Projects ON Sprints.project_id = Projects.id`, { type: sequelize.QueryTypes.SELECT}).then(dbSprintUser => {
           res.json(dbSprintUser)
       })
   });
