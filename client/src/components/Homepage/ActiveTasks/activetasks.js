@@ -10,7 +10,27 @@ import Pool from '../../Project/Pool';
 import Grid from '@material-ui/core/Grid';
 
 
-const ActiveTasks = (props) => (
+class ActiveTasks extends Component {
+
+    constructor(props){
+        super(props)
+
+        this.state = {
+            expanded: null
+        }
+    }
+
+    handleChange = panel => (event, expanded) => {
+        this.setState({
+          expanded: expanded ? panel : false,
+        });
+      };
+    
+
+    render(){
+    const { expanded } = this.state;
+
+    return(
     <div>
         <List
             subheader={<li />}
@@ -22,7 +42,7 @@ const ActiveTasks = (props) => (
                 maxHeight: 300,
             }}
         >
-            {props.tasks.map((sprint, i) => (
+            {this.props.tasks.map((sprint, i) => (
                 <li key={i}>
                     <ListSubheader style={{ backgroundColor: 'whitesmoke' }}>{sprint.sprint}</ListSubheader>
                     {sprint.tasks.map((task, index) => {
@@ -35,8 +55,11 @@ const ActiveTasks = (props) => (
                             <Pool
                                 tasks={task}
                                 activetasks={true}
-                                goToProject={() => props.goToProject(task.sprintId)}
-                                homepage={props.homepage}
+                                goToProject={() => this.props.goToProject(task.sprintId)}
+                                homepage={this.props.homepage}
+                                id={task.id}
+                                expanded={expanded === `panel${task.id}`} 
+                                onChange={this.handleChange(`panel${task.id}`)}
                             />
                             {/* </Grid> */}
                             {/* </Grid> */}
@@ -53,5 +76,5 @@ const ActiveTasks = (props) => (
             <TaskCard key={i} title={task.name} summary={task.description} dueDate={task.due_date} difficulty={task.difficulty}/>
         ))} */}
     </div>
-)
+    )}}
 export default ActiveTasks;

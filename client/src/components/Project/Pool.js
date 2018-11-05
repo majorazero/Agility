@@ -42,11 +42,13 @@ const Pool = (props) => {
                 assignedUser={props.assignedUser}
                 name={props.tasks.name}
                 key={props.id}
+                id={props.id}
                 isAdmin={props.isAdmin}
                 description={props.tasks.description}
                 due={props.tasks.due_date}
                 summary={props.tasks.description}
-                difficulty={props.tasks.difficulty}
+                complexity={props.tasks.complexity}
+                stack={props.tasks.stack}
                 onClickDelete={props.onClickDelete}
                 onClickAdd={props.onClickAdd}
                 unAssign={props.unAssign}
@@ -57,6 +59,8 @@ const Pool = (props) => {
                 activetasks={props.activetasks}
                 goToProject={props.goToProject}
                 homepage={props.homepage}
+                expanded={props.expanded}
+                onChange={props.onChange}
             />
         </ListItem>
     );
