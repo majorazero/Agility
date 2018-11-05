@@ -140,7 +140,6 @@ class Homepage extends Component {
                     <Grid
                       container
                       spacing={8}
-                    // style={{ padding: 50 }}
                     >
                       <Grid item xs>
                         <ActiveTasks tasks={this.state.tasks} goToProject={this.goToProject} homepage/>
@@ -157,36 +156,36 @@ class Homepage extends Component {
             </Grid>
           </Grid>
           {/* <div>
-        <ButtonAppBar />
-        <div
-          className="parallax"
-          style={{
-            paddingTop: "50px",
+        // <ButtonAppBar />
+        // <div
+        //   className="parallax"
+        //   style={{
+        //     paddingTop: "50px",
 
-            // possible?
-            backgroundImage: `url("/assets/images/background.png")`,
-            resizeMode: 'cover',
-            height: "100%"
-          }} >
-          <Grid
-            container
-            spacing={8}
-            style={{ padding: "50px" }}
-          >
-            <Grid item xs={8}>
-              <Paper
-                style={{ height: "100%" }}
-              >
-                <ActiveTasks tasks={this.state.tasks} />
-              </Paper>
-            </Grid>
-            <Grid item xs={1} />
-            <Grid item xs={3}>
-              <ProfileCard />
-            </Grid>
-          </Grid>
+        //     // possible?
+        //     backgroundImage: `url("/assets/images/background.png")`,
+        //     resizeMode: 'cover',
+        //     height: "100%"
+        //   }} >
+        //   <Grid
+        //     container
+        //     spacing={8}
+        //     style={{ padding: "50px" }}
+        //   >
+        //     <Grid item xs={8}>
+        //       <Paper
+        //         style={{ height: "100%" }}
+        //       >
+        //         <ActiveTasks tasks={this.state.tasks} />
+        //       </Paper>
+        //     </Grid>
+        //     <Grid item xs={1} />
+        //     <Grid item xs={3}>
+        //       <ProfileCard />
+        //     </Grid>
+        //   </Grid>
 
-          <Grid
+          {/* <Grid
             container
             spacing={8}
             style={{ padding: "50px" }}
