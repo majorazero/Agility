@@ -21,6 +21,7 @@ import SwitchLabel from '../utils/Switch';
 import Summary from "./Summary/Summary.js";
 import LinearDeterminate from "../utils/ProgressBar/ProgressBar.js";
 import moment from "moment";
+import ListItem from '@material-ui/core/ListItem';
 import List from '@material-ui/core/List';
 
 const styles = theme => ({
@@ -486,10 +487,10 @@ class Project extends React.Component {
                         spacing={8}
                         style={{ padding: "50px 50px 25px 50px" }}
                     >
-                        <Grid item xs={12}>
-                            <Paper
+                        <Grid item xs>
+                            {/* <Paper
                                 style={{ height: "100%", background: 'whitesmoke' }}
-                            >
+                            > */}
                                 {/* <MuiThemeProvider theme={theme}> */}
 
                                 {(this.state.isAdmin === true) ?
@@ -519,7 +520,7 @@ class Project extends React.Component {
                                     activeSprint={this.state.sprintId}
                                     currentUser={this.state.currentUser}
                                 />
-                            </Paper>
+                            {/* </Paper> */}
                         </Grid>
                     </Grid>
                     <Grid
@@ -527,8 +528,14 @@ class Project extends React.Component {
                         spacing={32}
                         style={{ padding: 50 }}
                     >
-                        <Grid item xs={6}>
-                            <Paper style={{ background: 'whitesmoke' }}>
+                        <Grid
+                            item
+                            xs={6}
+                            style={{ height: 'fit-content' }}
+                        >
+                            <Paper
+                                style={{ background: 'whitesmoke', height: '100%' }}
+                            >
                                 <Grid
                                     container
                                     spacing={8}
@@ -555,91 +562,104 @@ class Project extends React.Component {
                                 <Grid
                                     container
                                     spacing={8}
-                                    style={{ padding: 25 }}
                                 >
-                                    <List style={{
-                                        width: '100%',
-                                        maxWidth: '100%',
-                                        position: 'relative',
-                                        overflow: 'auto',
-                                        maxHeight: 300,
-                                    }}>
-                                        {!this.state.isActive ?
-                                            <ul>
-                                                {this.state.showComplete ? this.state.completedTasks.map((task) => {
-                                                    return (
-                                                        <Pool
-                                                            key={task.id}
-                                                            id={this.key}
-                                                            isAdmin={this.state.isAdmin}
-                                                            tasks={task}
-                                                            onClickDelete={this.deleteTask.bind(this, task)}
-                                                            onClickReopen={() => this.reopenTask(task.id)}
-                                                            assignedUser={task.assigned_id}
-                                                            currentUser={this.state.currentUser}
-                                                            complete
-                                                        />
-                                                    );
-                                                }) :
-                                                    <Summary
-                                                        members={this.state.members}
-                                                        completed={this.state.completedTasks}
-                                                        assigned={this.state.assignedTasks}
-                                                        unAssigned={this.state.unassignedTasks}
-                                                        currentSprint={this.state.sprintId}
-                                                        sprints={this.state.sprints} />}
-                                            </ul> :
-                                            <ul>
-                                                {/* <MuiThemeProvider theme={theme2}> */}
-                                                {/* {(this.state.isAdmin === true) ?
+                                    <Grid item xs>
+                                        <List style={{
+                                            width: '100%',
+                                            maxWidth: '100%',
+                                            position: 'relative',
+                                            overflow: 'auto',
+                                            maxHeight: 300,
+                                        }}>
+                                            {!this.state.isActive ?
+                                                <li>
+                                                    {this.state.showComplete ? this.state.completedTasks.map((task) => {
+                                                        return (
+                                                            <ul>
+                                                                <ListItem>
+                                                                    <Pool
+                                                                        key={task.id}
+                                                                        id={this.key}
+                                                                        isAdmin={this.state.isAdmin}
+                                                                        tasks={task}
+                                                                        onClickDelete={this.deleteTask.bind(this, task)}
+                                                                        onClickReopen={() => this.reopenTask(task.id)}
+                                                                        assignedUser={task.assigned_id}
+                                                                        currentUser={this.state.currentUser}
+                                                                        complete
+                                                                    />
+                                                                </ListItem>
+                                                            </ul>
+                                                        );
+                                                    }) :
+                                                        <Summary
+                                                            members={this.state.members}
+                                                            completed={this.state.completedTasks}
+                                                            assigned={this.state.assignedTasks}
+                                                            unAssigned={this.state.unassignedTasks}
+                                                            currentSprint={this.state.sprintId}
+                                                            sprints={this.state.sprints} />}
+                                                </li> :
+                                                <li>
+                                                    {/* <MuiThemeProvider theme={theme2}> */}
+                                                    {/* {(this.state.isAdmin === true) ?
                                       <ButtonSizes
                                           onClick={() => this.handleOpen('taskOpen')}
                                           title="Add a Task"
                                           color="secondary"
                                       /> :
                                       ""} */}
-                                                {/* </MuiThemeProvider> */}
-                                                <SimpleModalWrapped
-                                                    open={this.state.taskOpen}
-                                                    onClose={() => this.handleClose('taskOpen')}
-                                                    name="Add a New Task ..."
-                                                    onSubmit={this.addTask}
-                                                    onChange={this.handleChange}
-                                                >
-                                                    <AddTaskLayout
-                                                    />
-                                                </SimpleModalWrapped>
+                                                    {/* </MuiThemeProvider> */}
+                                                    <SimpleModalWrapped
+                                                        open={this.state.taskOpen}
+                                                        onClose={() => this.handleClose('taskOpen')}
+                                                        name="Add a New Task ..."
+                                                        onSubmit={this.addTask}
+                                                        onChange={this.handleChange}
+                                                    >
+                                                        <AddTaskLayout
+                                                        />
+                                                    </SimpleModalWrapped>
 
-                                                {this.state.showComplete ? this.state.completedTasks.map((task) => {
-                                                    return (
-                                                        <Pool
-                                                            key={task.id}
-                                                            id={this.key}
-                                                            isAdmin={this.state.isAdmin}
-                                                            tasks={task}
-                                                            onClickDelete={this.deleteTask.bind(this, task)}
-                                                            onClickReopen={() => this.reopenTask(task.id)}
-                                                            assignedUser={task.assigned_id}
-                                                            assigned={true}
-                                                            currentUser={this.state.currentUser}
-                                                            complete
-                                                        />
-                                                    );
-                                                }) : this.state.unassignedTasks.map((task) => {
-                                                    return (
-                                                        <Pool
-                                                            key={task.id}
-                                                            id={this.key}
-                                                            isAdmin={this.state.isAdmin}
-                                                            tasks={task}
-                                                            onClickDelete={this.deleteTask.bind(this, task)}
-                                                            onClickAdd={this.assignTask.bind(this, task)}
-                                                            currentUser={this.state.currentUser}
-                                                        />
-                                                    );
-                                                })}
-                                            </ul>}
-                                    </List>
+                                                    {this.state.showComplete ? this.state.completedTasks.map((task) => {
+                                                        return (
+                                                            <ul>
+                                                                <ListItem>
+                                                                    <Pool
+                                                                        key={task.id}
+                                                                        id={this.key}
+                                                                        isAdmin={this.state.isAdmin}
+                                                                        tasks={task}
+                                                                        onClickDelete={this.deleteTask.bind(this, task)}
+                                                                        onClickReopen={() => this.reopenTask(task.id)}
+                                                                        assignedUser={task.assigned_id}
+                                                                        assigned={true}
+                                                                        currentUser={this.state.currentUser}
+                                                                        complete
+                                                                    />
+                                                                </ListItem>
+                                                            </ul>
+                                                        );
+                                                    }) : this.state.unassignedTasks.map((task) => {
+                                                        return (
+                                                            <ul>
+                                                                <ListItem>
+                                                                    <Pool
+                                                                        key={task.id}
+                                                                        id={this.key}
+                                                                        isAdmin={this.state.isAdmin}
+                                                                        tasks={task}
+                                                                        onClickDelete={this.deleteTask.bind(this, task)}
+                                                                        onClickAdd={this.assignTask.bind(this, task)}
+                                                                        currentUser={this.state.currentUser}
+                                                                    />
+                                                                </ListItem>
+                                                            </ul>
+                                                        );
+                                                    })}
+                                                </li>}
+                                        </List>
+                                    </Grid>
                                 </Grid>
                             </Paper>
                         </Grid>

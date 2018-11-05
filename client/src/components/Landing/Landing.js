@@ -102,12 +102,14 @@ class Landing extends Component {
 
               <MuiThemeProvider theme={theme}>
                 <ContainedButtons
+                  size="medium"
                   component={Link}
                   to="/register"
                   name="Sign Up"
                   color="secondary"
                 />
                 <ContainedButtons
+                  size="medium"
                   component={Link}
                   to="/login"
                   name="Login"
