@@ -67,73 +67,111 @@ const theme = createMuiTheme({
 
 class RecipeReviewCard extends React.Component {
     state = {
-        expanded: false,
-        userFirstName: "",
-        userLastName: "",
-        userEmail: "",
-        totalTask: "",
-        totalCompletedTask: "",
-        sprintParticipate: "",
-        projectContributed: "",
-        projectCreated: "",
-        complexity: "",
-        complexitySemantics: ""
+      expanded: false,
+      userFirstName: "",
+      userLastName: "",
+      userEmail: "",
+      totalTask: "",
+      totalCompletedTask: "",
+      sprintParticipate: "",
+      projectContributed: "",
+      projectCreated: "",
+      complexity: "",
+      complexitySemantics: ""
     };
 
     componentDidMount() {
-        axios.post("/api/getuser",
-            {
-                id: sessionStorage.getItem("id"),
-                token: localStorage.getItem("token")
-            }).then((response) => {
-                console.log(response.data);
-                this.setState(
-                    {
-                        userFirstName: response.data.prof.first_name,
-                        userLastName: response.data.prof.last_name,
-                        userEmail: response.data.prof.email,
-                        totalTask: response.data.totalTask,
-                        totalCompletedTask: response.data.totalCompletedTask,
-                        sprintParticipate: response.data.sprintParticipate,
-                        projectContributed: response.data.projectContributed,
-                        projectCreated:
-                            response.data.projectCreated,
-                        complexity:
-                            response.data.complexity,
-                        complexitySemantics:
-                            response.data.compSemantics
-                    }
-                );
-            });
+      axios.post("/api/getuser",
+      {
+        id: sessionStorage.getItem("id"),
+        token: localStorage.getItem("token")
+      }).then((response) => {
+        this.setState(
+          {
+            userFirstName: response.data.prof.first_name,
+            userLastName: response.data.prof.last_name,
+            userEmail: response.data.prof.email,
+            totalTask: response.data.totalTask,
+            totalCompletedTask: response.data.totalCompletedTask,
+            sprintParticipate: response.data.sprintParticipate,
+            projectContributed: response.data.projectContributed,
+            projectCreated:
+                response.data.projectCreated,
+            complexity:
+                response.data.complexity,
+            complexitySemantics:
+                response.data.compSemantics,
+            stacks: response.data.stacks
+          }
+        );
+      });
+    }
+
+    stackFormat = () => {
+      console.log(this.state.stacks);
+      let stack = this.state.stacks;
+      if(stack !== undefined){
+        let Obj = {
+          label1: "Top 3 Stacks"
+        };
+        let k = 2;
+        for(let j = 0; j < 3; j++){
+          let maxComplete = 0;
+          let topStack = "";
+          let stackName = "";
+          for(let i in stack){
+            if(stack[i].amountComplete > maxComplete){
+              maxComplete = stack[i].amountComplete;
+              topStack = stack[i];
+              stackName = i;
+            }
+          }
+          console.log(topStack);
+          Obj[`label${k}`] = stackName;
+          k++;
+          Obj[`info${k}`] = `Average Rate of Completion: ${(topStack.amountComplete/topStack.amountAttempted*100).toFixed(2)}%`;
+          k++;
+          Obj[`info${k}`] = `Average Complexity: ${(topStack.complexitySum/topStack.amountComplete).toFixed(2)}`;
+          k++;
+          //console.log(stack[stackName]);
+          stack[stackName] = "";
+          maxComplete = 0;
+          topStack = "";
+          stackName = "";
+        }
+        console.log(Obj);
+        return Obj;
+      }
     }
 
     makeArray = () => {
-        var tutorialSteps = [
-            {
-                label1: 'Total Tasks Completed: ',
-                info1: this.state.totalCompletedTask,
-                label2: 'Total Tasks Taken: ',
-                info2: this.state.totalTask,
-                label3: 'Average Task Complexity: ',
-                info3: `${this.state.complexity} (${this.state.complexitySemantics})`
-            },
-            {
-                label1: 'Total Sprints Participated: ',
-                info1: this.state.sprintParticipate,
-                label2: 'Total Projects Contributed: ',
-                info2: this.state.projectContributed,
-                label3: 'Total Projects Created: ',
-                info3: this.state.projectCreated
-            }
-        ];
-        return (
-            tutorialSteps
-        );
+      var tutorialSteps = [
+        {
+          label1: 'Total Tasks Completed: ',
+          info1: this.state.totalCompletedTask,
+          label2: 'Total Tasks Taken: ',
+          info2: this.state.totalTask,
+          label3: 'Average Task Complexity: ',
+          info3: `${this.state.complexity} (${this.state.complexitySemantics})`
+        },
+        {
+          label1: 'Total Sprints Participated: ',
+          info1: this.state.sprintParticipate,
+          label2: 'Total Projects Contributed: ',
+          info2: this.state.projectContributed,
+          label3: 'Total Projects Created: ',
+          info3: this.state.projectCreated
+        },
+        this.stackFormat()
+      ];
+      return (
+        tutorialSteps
+      );
     }
 
 
     handleExpandClick = () => {
-        this.setState(state => ({ expanded: !state.expanded }));
+      this.setState(state => ({ expanded: !state.expanded }));
     };
 
 

@@ -361,38 +361,38 @@ class Project extends React.Component {
 
 
   inviteMember = () => {
-      //we'll pass the sprint id as an encrypted id
-      axios.post("/api/encrypt", {
-          id: this.state.sprintId.toString(),
-          token: "invite"
-      }).then((response) => {
-          this.setState({ inviteCode: response.data });
-      });
+    //we'll pass the sprint id as an encrypted id
+    axios.post("/api/encrypt", {
+        id: this.state.sprintId.toString(),
+        token: "invite"
+    }).then((response) => {
+        this.setState({ inviteCode: response.data });
+    });
   }
 
   markComplete = (id) => {
     console.log("WHAT");
     axios.put(`/api/complete/task/${id}`)
-      .then(() => {
-        this.getTasks();
-      })
+    .then(() => {
+      this.getTasks();
+    })
   }
 
   reopenTask = (id) => {
-      console.log('Reopen Task', id)
-      axios.put(`/api/reopen/task/${id}`)
-      .then(() => {
-        this.getTasks();
-      })
+    console.log('Reopen Task', id)
+    axios.put(`/api/reopen/task/${id}`)
+    .then(() => {
+      this.getTasks();
+    })
   }
 
   switchTaskPool = () => {
-      if (this.state.showComplete === true) {
-          this.setState({ showComplete: false })
-      }
-      else {
-          this.setState({ showComplete: true })
-      }
+    if (this.state.showComplete === true) {
+      this.setState({ showComplete: false })
+    }
+    else {
+      this.setState({ showComplete: true })
+    }
   }
 
   render() {
