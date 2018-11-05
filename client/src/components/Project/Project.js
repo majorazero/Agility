@@ -611,6 +611,10 @@ class Project extends React.Component {
             </Grid>
           </div>
 
+          <div>
+             {this.state.inviteCode}
+         </div>
+         <button onClick={this.inviteMember}>Invite Code</button>
 
             {/* <div style={{ paddingTop: "100px" }}>
                 <SprintSelect
@@ -708,11 +712,13 @@ class Project extends React.Component {
         <br />
         <div><Link to="/homepage">Back to home page.</Link></div>
                 </Grid >
+
             </div >
         <div style={{ position: "fixed", width: "100%", bottom: "0" }}> */}
 
             {/* </div> * /} */}
-            < SimpleBottomNavigation />
+            {/*< SimpleBottomNavigation />*/}
+
       </div>
     );
   }
