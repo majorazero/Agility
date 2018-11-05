@@ -72,7 +72,7 @@ const styles = theme => ({
     margin: 2
   },
   title: {
-    color: theme.palette.primary.light,
+    color: "whitesmoke",
   },
   titleBar: {
     background:
@@ -103,12 +103,12 @@ function SingleLineGridList(props) {
   return (
     <GridListTile
       style={{
-        height: 200,
+        height: 150,
         width: 250
       }}
       classes={{ root: classes.gridList }}
     >
-      <img src="assets/images/background.jpg"
+      <img src="https://financesonline.com/uploads/2017/12/project-management-featured.jpg"
         alt={props.name}
         style={{
           height: '100%',
