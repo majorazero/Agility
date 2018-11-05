@@ -63,14 +63,28 @@ function SimpleExpansionPanel(props) {
             onClick={props.onClickAdd}
           />} */}
 
-
-            <ContainedButtons
-            name={props.complete ? (props.isAdmin ? 'Reopen':null):(props.assigned ? 'Unassign':'Claim') }
-            color="primary"
-            onClick={props.assigned ? (props.complete ? props.onClickReopen : props.unAssign) : props.onClickAdd}
-            hidden = {(props.currentUser === props.assignedUser) ? false:(props.isAdmin ? false: true)}
-            // hidden={props.complete ? (props.isAdmin ? (props.currentUser === props.assignedUser ? false:true):true) : false}
-            />
+            {props.homepage ?  
+                <ContainedButtons
+                name='View Project'
+                color='primary'
+                onClick= {props.goToProject}
+                hidden={props.activetasks ? false : true}
+              />
+              :
+              (<div><ContainedButtons
+              name={props.complete ? (props.isAdmin ? 'Reopen':null):(props.assigned ? 'Unassign':'Claim') }
+              color="primary"
+              onClick={props.assigned ? (props.complete ? props.onClickReopen : props.unAssign) : props.onClickAdd}
+              hidden = {(props.currentUser === props.assignedUser) ? false:(props.isAdmin ? false: true)}
+              // hidden={props.complete ? (props.isAdmin ? (props.currentUser === props.assignedUser ? false:true):true) : false}
+              />
+              <ContainedButtons
+              name={props.assigned ? 'Mark Complete' : props.isAdmin ? 'Delete':null}
+              color='secondary'
+              onClick={props.assigned ? props.onClickComplete : props.onClickDelete}
+              hidden={props.complete ? true:(props.currentUser === props.assignedUser) ? false:(props.isAdmin ? false: true)}
+            /></div>)
+            }
 
 
           {/* {(location.pathname === "/homepage") ? null :  */}
@@ -88,12 +102,7 @@ function SimpleExpansionPanel(props) {
             onClick={props.assigned ? props.onClickComplete : props.onClickDelete}
           /> : ""} */}
 
-          <ContainedButtons
-            name={props.assigned ? 'Mark Complete' : props.isAdmin ? 'Delete':null}
-            color='secondary'
-            onClick={props.assigned ? props.onClickComplete : props.onClickDelete}
-            hidden={props.complete ? true:(props.currentUser === props.assignedUser) ? false:(props.isAdmin ? false: true)}
-          />
+          
 
 
           {/* } */}

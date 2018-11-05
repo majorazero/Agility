@@ -54,6 +54,9 @@ const Pool = (props) => {
                 onClickComplete={props.onClickComplete}
                 onClickReopen={props.onClickReopen}
                 complete={props.complete}
+                activetasks={props.activetasks}
+                goToProject={props.goToProject}
+                homepage={props.homepage}
             />
         </ListItem>
     );
