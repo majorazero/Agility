@@ -98,7 +98,8 @@ class Homepage extends Component {
           style={{
             paddingTop: 50,
             overflowX: "hidden",
-            backgroundImage: `url("/assets/images/background.png")`,
+            backgroundImage: 'linear-gradient(to bottom right, grey , lightgrey)',
+            // backgroundImage: `url("/assets/images/background.png")`,
             resizeMode: 'cover',
             height: "-webkit-fill-available"
           }} >
@@ -142,7 +143,7 @@ class Homepage extends Component {
                       style={{ padding: 25, }}
                     >
                       <Grid item xs>
-                        <Typography fullWidth variant="h4" gutterBottom>Active Tasks</Typography>
+                        <Typography fullWidth variant="h5" gutterBottom>Active Tasks</Typography>
                       </Grid>
                     </Grid>
                     <Grid
