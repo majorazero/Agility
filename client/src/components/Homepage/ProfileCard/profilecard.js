@@ -17,9 +17,11 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 // import MoreVertIcon from '@material-ui/icons/MoreVert';
 import axios from 'axios';
+import Paper from '@material-ui/core/Paper';
 import TextMobileStepper from "../../utils/Stepper.js";
 import { MobileStepper } from '@material-ui/core';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import Progress from "../../utils/ProgressBar/ProgressBar.js";
 
 
 const styles = theme => ({
@@ -261,6 +263,10 @@ class RecipeReviewCard extends React.Component {
                 </CardActions>
                 <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
                     <CardContent>
+                      <Paper elevation={0} style={{paddingLeft: "20px", paddingRight: "20px", paddingTop: "2px", width: "auto"}}>
+                        <Progress completed={(this.state.totalCompletedTask/this.state.totalTask*100)}/>
+                        <Typography style={{textAlign: "center"}}>Task Compleition Rate ({(this.state.totalCompletedTask/this.state.totalTask*100).toFixed(2)}%)</Typography>
+                      </Paper>
                         <TextMobileStepper
                             tutorialSteps={this.makeArray()}
                         />
