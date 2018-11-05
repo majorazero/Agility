@@ -73,7 +73,7 @@ class Landing extends Component {
           overflowX: "hidden",
           backgroundImage: `url("/assets/images/background.png")`,
           resizeMode: 'cover',
-          height: "2250px"
+          height: "-webkit-fill-available"
         }} >
 
 
