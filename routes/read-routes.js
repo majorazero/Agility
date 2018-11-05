@@ -33,7 +33,7 @@ module.exports = function (app) {
             { where: { userId: encrypt.decrypt(req.body.token, req.body.id) } }
         ).then((data) => {
             console.log(encrypt.decrypt(req.body.token, req.body.id));
-            db.sequelize.query(`SELECT DISTINCT Projects.name, Projects.id, Projects.due_date, Projects.complete, Projects.completed_date, Projects.summary, Projects.userId FROM Users INNER JOIN SprintMemberships ON SprintMemberships.userId = Users.id AND Users.id = ${encrypt.decrypt(req.body.token, req.body.id)} INNER JOIN sprints ON sprints.id = SprintMemberships.sprintId INNER JOIN Projects ON Sprints.project_id = Projects.id`, { type: sequelize.QueryTypes.SELECT }).then(dbSprintUser => {
+            db.sequelize.query(`SELECT DISTINCT Projects.name, Projects.id, Projects.due_date, Projects.complete, Projects.completed_date, Projects.summary, Projects.userId FROM Users INNER JOIN SprintMemberships ON SprintMemberships.userId = Users.id AND Users.id = ${encrypt.decrypt(req.body.token, req.body.id)} INNER JOIN Sprints ON Sprints.id = SprintMemberships.sprintId INNER JOIN Projects ON Sprints.project_id = Projects.id`, { type: sequelize.QueryTypes.SELECT }).then(dbSprintUser => {
                 console.log(dbSprintUser);
                 let aggregate = JSON.parse(JSON.stringify(data));
                 console.log(aggregate);
