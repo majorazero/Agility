@@ -34,7 +34,6 @@ setTimeout(()=>{
   db.Project.create({
     name: "The Itch On MY Back",
     summary: "We're going to write a back scratching app. Implentation pending.",
-    due_date: "2018-09-15",
     complete: true,
     userId: 1
   });
@@ -56,10 +55,9 @@ setTimeout(()=>{
   db.Project.create({
     name: "Algorithmically Rating Butts",
     summary: "A project for ordering butts in order from moldiest to fuzziest.",
-    completed_date: "2017-11-15",
     userId: 5
   });
-},500);
+},600);
 //////////////////
 /// Sprint
 /////////////////
@@ -386,9 +384,7 @@ setTimeout(()=>{
     complexity: 4,
     assigned_id: 1,
     stack: "Javascript",
-    isComplete: true,
-    estimatedTimeToComplete: 15,
-    estimatedTimeWorked: 16
+    isCompleted: true
   });
   db.Task.create({
     name: "Are dummies edible?",
@@ -398,9 +394,124 @@ setTimeout(()=>{
     complexity: 3,
     assigned_id: 1,
     stack: "CSS",
-    isComplete: true,
-    estimatedTimeToComplete: 2,
-    estimatedTimeWorked: 13
+    isCompleted: true
+  });
+  db.Task.create({
+    name: "Don't do this?",
+    due_date: "2018-09-05",
+    sprint_id: 1,
+    description: "If I tell you to not do this, would the act of not doing this be... doing this?",
+    complexity: 3,
+    assigned_id: 1,
+    stack: "CSS"
+  });
+  db.Task.create({
+    name: "Don't do this Again?",
+    due_date: "2018-09-05",
+    sprint_id: 1,
+    description: "You insane?",
+    complexity: 4,
+    assigned_id: 1,
+    stack: "CSS"
+  });
+  db.Task.create({
+    name: "Don't do this YET AGAIN?",
+    due_date: "2018-09-05",
+    sprint_id: 1,
+    description: "I must be crazy",
+    complexity: 5,
+    assigned_id: 1,
+    stack: "CSS"
+  });
+  db.Task.create({
+    name: "Bananas or Dummies? Edition 1",
+    due_date: "2018-09-05",
+    sprint_id: 1,
+    description: "What strange thoughts.",
+    complexity: 3,
+    assigned_id: 1,
+    stack: "Javascript",
+    isCompleted: true
+  });
+  db.Task.create({
+    name: "Bananas or Dummies? Edition 2",
+    due_date: "2018-09-05",
+    sprint_id: 1,
+    description: "What strange thoughts.",
+    complexity: 2,
+    assigned_id: 1,
+    stack: "Javascript",
+    isCompleted: true
+  });
+  db.Task.create({
+    name: "Bananas or Dummies? Edition 3",
+    due_date: "2018-09-05",
+    sprint_id: 1,
+    description: "What strange thoughts.",
+    complexity: 1,
+    assigned_id: 1,
+    stack: "CSS",
+    isCompleted: true
+  });
+  db.Task.create({
+    name: "Bananas or Dummies? Edition 4",
+    due_date: "2018-09-05",
+    sprint_id: 1,
+    description: "What strange thoughts.",
+    complexity: 2,
+    assigned_id: 1,
+    stack: "Javascript",
+    isCompleted: true
+  });
+  db.Task.create({
+    name: "Bananas or Dummies? Edition 5",
+    due_date: "2018-09-05",
+    sprint_id: 1,
+    description: "What strange thoughts.",
+    complexity: 4,
+    assigned_id: 1,
+    stack: "Javascript",
+    isCompleted: true
+  });
+  db.Task.create({
+    name: "Bananas or Apples? Edition 1",
+    due_date: "2018-09-05",
+    sprint_id: 1,
+    description: "What strange thoughts.",
+    complexity: 2,
+    assigned_id: 1,
+    stack: "CSS",
+    isCompleted: true
+  });
+  db.Task.create({
+    name: "Bananas or Poop? Edition 1",
+    due_date: "2018-09-05",
+    sprint_id: 1,
+    description: "What strange thoughts.",
+    complexity: 5,
+    assigned_id: 1,
+    stack: "Javascript",
+    isCompleted: true
+  });
+  db.Task.create({
+    name: "Poops and Bananas? Edition 1",
+    due_date: "2018-09-05",
+    sprint_id: 1,
+    description: "What strange thoughts.",
+    complexity: 1,
+    assigned_id: 1,
+    stack: "HTML",
+    isCompleted: true
+  });
+  db.Task.create({
+    name: "Bananas or Applinies? Edition 1",
+    due_date: "2018-09-05",
+    sprint_id: 1,
+    description: "What strange thoughts.",
+    complexity: 2,
+    assigned_id: 1,
+    stack: "React",
+    isCompleted: true
   });
   db.Task.create({
     name: "Look into dummy recipes.",
@@ -410,9 +521,7 @@ setTimeout(()=>{
     complexity: 3,
     assigned_id: 12,
     stack: "CSS",
-    isComplete: true,
-    estimatedTimeToComplete: 2,
-    estimatedTimeWorked: 12
+    isCompleted: true
   });
   db.Task.create({
     name: "Realizing an impending dummy army is inevitable if not stopped.",
@@ -422,10 +531,9 @@ setTimeout(()=>{
     complexity: 2,
     assigned_id: 10,
     stack: "Javascript",
-    isComplete: true,
-    estimatedTimeToComplete: 1,
-    estimatedTimeWorked: 11
+    isCompleted: true
   });
+
   db.Task.create({
     name: "Determine if cooking dummies is the way to go.",
     due_date: "2018-09-20",
@@ -434,9 +542,7 @@ setTimeout(()=>{
     complexity: 5,
     assigned_id: 11,
     stack: "Javascript",
-    isComplete: true,
-    estimatedTimeToComplete: 2,
-    estimatedTimeWorked: 5
+    isCompleted: true
   });
   db.Task.create({
     name: "Wonder if that pang in your stomach is normal.",
@@ -446,9 +552,7 @@ setTimeout(()=>{
     complexity: 3,
     assigned_id: 12,
     stack: "Javascript",
-    isComplete: true,
-    estimatedTimeToComplete: 3,
-    estimatedTimeWorked: 1
+    isCompleted: true
   });
   db.Task.create({
     name: "Clean up evidence.",
@@ -458,9 +562,7 @@ setTimeout(()=>{
     complexity: 3,
     assigned_id: 13,
     stack: "HTML",
-    isComplete: true,
-    estimatedTimeToComplete: 2,
-    estimatedTimeWorked: 1
+    isCompleted: true
   });
   db.Task.create({
     name: "Try again with bleach.",
@@ -470,9 +572,7 @@ setTimeout(()=>{
     complexity: 4,
     assigned_id: 1,
     stack: "HTML",
-    isComplete: true,
-    estimatedTimeToComplete: 1,
-    estimatedTimeWorked: 2
+    isCompleted: true
   });
   db.Task.create({
     name: "Hunt new dummies",
@@ -480,8 +580,7 @@ setTimeout(()=>{
     sprint_id: 4,
     description: "Hunt new dummies to eat. What's wrong with us.",
     complexity: 4,
-    stack: "Javascript",
-    estimatedTimeToComplete: 4
+    stack: "Javascript"
   });
   db.Task.create({
     name: "Get some Tums",
@@ -489,8 +588,7 @@ setTimeout(()=>{
     sprint_id: 4,
     description: "Eating dummies can irritate the belly.",
     complexity: 1,
-    stack: "CSS",
-    estimatedTimeToComplete: 1
+    stack: "CSS"
   });
   db.Task.create({
     name: "Reconsider the life choice of being a cannibal.",
@@ -498,8 +596,7 @@ setTimeout(()=>{
     sprint_id: 4,
     description: "This is kinda' not good.",
     complexity: 2,
-    stack: "HTML",
-    estimatedTimeToComplete: 3
+    stack: "HTML"
   });
   db.Task.create({
     name: "Hunt babies instead.",
@@ -507,8 +604,7 @@ setTimeout(()=>{
     sprint_id: 4,
     description: "Anyone ever read 'A Modest Proposal'?",
     complexity: 2,
-    stack: "React",
-    estimatedTimeToComplete: 15
+    stack: "React"
   });
   db.Task.create({
     name: "Read up on what React is.",
@@ -516,8 +612,7 @@ setTimeout(()=>{
     sprint_id: 8,
     description: "Maybe we shouldn't have thrown our old framework in the trash.",
     complexity: 2,
-    stack: "React",
-    estimatedTimeToComplete: 1
+    stack: "React"
   });
   db.Task.create({
     name: "Decide if crying in the corner is better than using Polymer again.",
@@ -525,8 +620,7 @@ setTimeout(()=>{
     sprint_id: 8,
     description: "It's real bad you guys.",
     complexity: 4,
-    stack: "React",
-    estimatedTimeToComplete: 2
+    stack: "React"
   });
   db.Task.create({
     name: "Listen to Michael talk about how Polymer 3 is way better you guys.",
@@ -534,8 +628,7 @@ setTimeout(()=>{
     sprint_id: 8,
     description: "Let's just use React.",
     complexity: 3,
-    stack: "React",
-    estimatedTimeToComplete: 48
+    stack: "React"
   });
   db.Task.create({
     name: "Actually install React now.",
@@ -543,8 +636,7 @@ setTimeout(()=>{
     sprint_id: 8,
     description: "This probably didn't need a week with a team of people.",
     complexity: 2,
-    stack: "React",
-    estimatedTimeToComplete: 16
+    stack: "React"
   });
   db.Task.create({
     name: "Start digging in your own nose for boogers.",
@@ -552,8 +644,7 @@ setTimeout(()=>{
     sprint_id: 9,
     description: "But do it with javascript.",
     complexity: 5,
-    stack: "Javascript",
-    estimatedTimeToComplete: 32
+    stack: "Javascript"
   });
 
   db.Task.create({
@@ -562,8 +653,7 @@ setTimeout(()=>{
     sprint_id: 9,
     description: "Ask Unkindman why we do this.",
     complexity: 5,
-    stack: "HTML",
-    estimatedTimeToComplete: 24
+    stack: "HTML"
   });
 
   db.Task.create({
@@ -572,8 +662,7 @@ setTimeout(()=>{
     sprint_id: 9,
     description: "42.",
     complexity: 1,
-    stack: "HTML",
-    estimatedTimeToComplete: 2
+    stack: "HTML"
   });
   db.Task.create({
     name: "Is the answer 42?",
@@ -581,8 +670,7 @@ setTimeout(()=>{
     sprint_id: 10,
     description: "Of course it is. But we should get someone on it to confirm.",
     complexity: 1,
-    stack: "CSS",
-    estimatedTimeToComplete: 10
+    stack: "CSS"
   });
   db.Task.create({
     name: "Wonder why you set a sprint for this.",
@@ -590,8 +678,7 @@ setTimeout(()=>{
     sprint_id: 10,
     description: "Job creation though.",
     complexity: 3,
-    stack: "Node.js",
-    estimatedTimeToComplete: 9
+    stack: "Node.js"
   });
   db.Task.create({
     name: "Send someone to get the coffee.",
@@ -599,8 +686,7 @@ setTimeout(()=>{
     sprint_id: 10,
     description: "Because being busy is more important than what we're actually doing.",
     complexity: 3,
-    stack: "Node.js",
-    estimatedTimeToComplete: 5
+    stack: "Node.js"
   });
   db.Task.create({
     name: "Code your existential crisis away with javascript.",
@@ -608,7 +694,6 @@ setTimeout(()=>{
     sprint_id: 10,
     description: "We might need a new sprint for this.",
     complexity: 5,
-    stack: "Javascript",
-    estimatedTimeToComplete: 12
+    stack: "Javascript"
   });
 },1250);

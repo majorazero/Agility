@@ -26,7 +26,7 @@ const SummaryCard = (props) => {
         }
       }
     }
-    complexity = complexity/amtofTaskComplete;
+    complexity = (complexity/amtofTaskComplete).toFixed(2);
     let topStack = "";
     let topStackNum = 0;
     for (let i in stack){
@@ -42,7 +42,7 @@ const SummaryCard = (props) => {
       <div>Task Completed: {amtofTaskComplete}</div>
       <div>Tasks Taken: {amtofTaskTaken}</div>
       {(amtofTaskComplete === 0) ? "":<div>Avg Complexity: {complexity} (Completed)</div>}
-      {(topStack === "") ? "": <div>Most Taken Stack: {topStack} {(topStackNum/amtofTaskComplete)*100}%</div>}
+      {(topStack === "") ? "": <div>Most Taken Stack: {topStack} {(topStackNum/amtofTaskComplete*100).toFixed(2)}%</div>}
       <div>-----------</div>
     </div>
     );
