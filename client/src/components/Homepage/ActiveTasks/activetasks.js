@@ -8,7 +8,14 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import Pool from '../../Project/Pool';
 import Grid from '@material-ui/core/Grid';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
 
+const styles = {
+    root: {
+        padding: 0
+    }
+}
 
 class ActiveTasks extends Component {
 
@@ -29,6 +36,7 @@ class ActiveTasks extends Component {
 
     render(){
     const { expanded } = this.state;
+    const { classes } = this.props
 
     return(
     <div>
@@ -41,15 +49,16 @@ class ActiveTasks extends Component {
                 overflow: 'auto',
                 maxHeight: 300,
             }}
+           
         >
             {this.props.tasks.map((sprint, i) => (
                 <li key={i}>
-                    <ListSubheader style={{ backgroundColor: 'whitesmoke' }}>{sprint.sprint}</ListSubheader>
+                    <ListSubheader style={{ backgroundColor: 'whitesmoke', marginBottom: 10, marginTop: 5 }}>{sprint.sprint}</ListSubheader>
                     {sprint.tasks.map((task, index) => {
                         console.log(task.sprintId)
                         return(
                         <ul>
-                        <ListItem key={index}>
+                        <ListItem key={index} classes={{root: classes.root}}>
                             {/* <Grid container> */}
                             {/* <Grid item xs> */}
                             <Pool
@@ -77,4 +86,9 @@ class ActiveTasks extends Component {
         ))} */}
     </div>
     )}}
-export default ActiveTasks;
+
+    ActiveTasks.propTypes = {
+        classes: PropTypes.object.isRequired,
+      };
+      
+export default withStyles(styles)(ActiveTasks);

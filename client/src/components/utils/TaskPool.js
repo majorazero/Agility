@@ -45,7 +45,7 @@ class SimpleExpansionPanel extends React.Component {
     const { classes } = this.props;
     const { expanded } = this.state;
     return (
-
+      <div className = {classes.root}>
       <ExpansionPanel expanded={this.props.expanded} onChange={this.props.onChange} key={this.props.id}>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
           <div className={classes.column}>
@@ -103,6 +103,7 @@ class SimpleExpansionPanel extends React.Component {
           </ExpansionPanelDetails>
         </Grid>
       </ExpansionPanel>
+      </div>
     );
   }
 }
