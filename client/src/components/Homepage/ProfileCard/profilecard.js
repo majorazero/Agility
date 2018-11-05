@@ -25,7 +25,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 const styles = theme => ({
     card: {
         width: "100%",
-        background: 'whitesmoke' 
+        background: 'whitesmoke'
     },
     media: {
         height: 40,
@@ -110,18 +110,14 @@ class RecipeReviewCard extends React.Component {
     }
 
     stackFormat = () => {
-      console.log(this.state.stacks);
       let arr = [];
       if(this.state.stacks !== undefined){
         let stack = JSON.parse(JSON.stringify(this.state.stacks));
-        console.log(stack);
         let format = {
           label1: "Start working on some projects! No stack metrics yet!"
         };
-        console.log(stack,"HELLo",Object.keys(stack).length);
         if(Object.keys(stack).length > 0){
           for(let j = 0; j < 3; j++){
-            console.log(stack);
             let Obj = {};
             let maxComplete = -1;
             let topStack = "";
@@ -133,7 +129,6 @@ class RecipeReviewCard extends React.Component {
                 stackName = i;
               }
             }
-            console.log(topStack);
             Obj[`stackName`] = stackName;
             Obj[`stackComplete`] = `Average Rate of Completion: ${(topStack.amountComplete/topStack.amountAttempted*100).toFixed(2)}%`;
             if(topStack.amountComplete > 0){

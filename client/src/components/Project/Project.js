@@ -98,7 +98,7 @@ class Project extends React.Component {
         showComplete: false,
 
         //Progress Bar Time
-        SprintTime: 20,
+        SprintTime: 0,
         SprintProgress: 0
     }
 
@@ -115,13 +115,14 @@ class Project extends React.Component {
                 projectId: response.data[0].id,
                 adminId: response.data[0].userId
             });
+            // let today = new Date.now();
+            // console.log(today);
             //pass project id here
             this.getMembers(this.state.sprintId);
             this.getCurrentUserId();
         }).catch((err) => {
             window.location.assign("/404");
         });
-
         // this.ProgressBar();
     }
     // ProgressBar = () => {
@@ -309,12 +310,14 @@ class Project extends React.Component {
                 let today = new Date();
                 let currentSprint = res.data[0].sprintId;
                 let isActive = false;
-
+                let timeProgress = 0;
                 // check for active sprint
                 for (let i = 0; i < sprints.length; i++) {
                     let endDate = new Date(sprints[i].endDate)
                     let startDate = new Date(sprints[i].startDate)
-                    console.log(startDate, endDate)
+                    let currentDate = new Date();
+                    console.log(startDate, endDate, currentDate);
+                    console.log(endDate - startDate);
                     sprintData.push({
                         key: i,
                         label: sprints[i].sprintName,
@@ -326,17 +329,21 @@ class Project extends React.Component {
 
                         }
                         else {
-                            //set currentSprint, set isActive
-                            currentSprint = sprints[i].sprintId
-                            isActive = true
+                          //set currentSprint, set isActive
+                          currentSprint = sprints[i].sprintId;
+                          isActive = true;
+                          timeProgress = ((endDate-currentDate)/(endDate-startDate)*100);
                         }
                     }
                     else if (today >= startDate && today <= endDate) {
-                        currentSprint = sprints[i].sprintId
-                        isActive = true
+                        currentSprint = sprints[i].sprintId;
+                        isActive = true;
+                          timeProgress = ((endDate-currentDate)/(endDate-startDate)*100);
                     }
                 }
+                console.log(timeProgress);
                 this.setState({
+                    SprintTime: timeProgress,
                     chipData: sprintData,
                     sprintId: currentSprint,
                     activeSprintId: currentSprint,
