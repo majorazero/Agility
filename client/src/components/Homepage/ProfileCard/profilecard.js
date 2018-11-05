@@ -86,6 +86,7 @@ class RecipeReviewCard extends React.Component {
         id: sessionStorage.getItem("id"),
         token: localStorage.getItem("token")
       }).then((response) => {
+        console.log(response.data);
         this.setState(
           {
             userFirstName: response.data.prof.first_name,
@@ -109,13 +110,12 @@ class RecipeReviewCard extends React.Component {
 
     stackFormat = () => {
       console.log(this.state.stacks);
-      let stack = this.state.stacks;
-      if(stack !== undefined){
-        let Obj = {
-          label1: "Top 3 Stacks"
-        };
-        let k = 2;
+      let arr = [];
+      if(this.state.stacks !== undefined){
+        let stack = JSON.parse(JSON.stringify(this.state.stacks));
         for(let j = 0; j < 3; j++){
+          console.log(stack);
+          let Obj = {};
           let maxComplete = 0;
           let topStack = "";
           let stackName = "";
@@ -127,24 +127,23 @@ class RecipeReviewCard extends React.Component {
             }
           }
           console.log(topStack);
-          Obj[`label${k}`] = stackName;
-          k++;
-          Obj[`info${k}`] = `Average Rate of Completion: ${(topStack.amountComplete/topStack.amountAttempted*100).toFixed(2)}%`;
-          k++;
-          Obj[`info${k}`] = `Average Complexity: ${(topStack.complexitySum/topStack.amountComplete).toFixed(2)}`;
-          k++;
+          Obj[`stackName`] = stackName;
+          Obj[`stackComplete`] = `Average Rate of Completion: ${(topStack.amountComplete/topStack.amountAttempted*100).toFixed(2)}%`;
+          Obj[`stackComplex`] = `Average Complexity: ${(topStack.complexitySum/topStack.amountComplete).toFixed(2)}`;
           //console.log(stack[stackName]);
+          // maxComplete = 0;
+          // topStack = "";
+          // stackName = "";
+          arr.push(Obj);
           stack[stackName] = "";
-          maxComplete = 0;
-          topStack = "";
-          stackName = "";
         }
-        console.log(Obj);
-        return Obj;
+        console.log(arr);
+        console.log(this.state);
       }
     }
 
     makeArray = () => {
+      this.stackFormat();
       var tutorialSteps = [
         {
           label1: 'Total Tasks Completed: ',
@@ -161,8 +160,7 @@ class RecipeReviewCard extends React.Component {
           info2: this.state.projectContributed,
           label3: 'Total Projects Created: ',
           info3: this.state.projectCreated
-        },
-        this.stackFormat()
+        }
       ];
       return (
         tutorialSteps

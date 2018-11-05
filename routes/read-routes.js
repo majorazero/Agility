@@ -134,10 +134,7 @@ module.exports = function (app) {
         db.Task.findAll({
           where: {
             assigned_id: simpleId
-          },
-          order: [
-            ["stack","DESC"]
-          ]
+          }
         }).then((tRes) => {
           console.log("Tasks Response:",tRes);
           Obj.stacks = {};
@@ -171,6 +168,7 @@ module.exports = function (app) {
               }
             }
           }
+          console.log("OBJECTYES",Obj.stacks);
           Obj.task = tRes;
           Obj.totalTask = tRes.length;
           Obj.totalCompletedTask = 0;
