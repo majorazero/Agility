@@ -607,6 +607,30 @@ setTimeout(()=>{
     stack: "React"
   });
   db.Task.create({
+    name: "Someone throw it in the trash already",
+    due_date: "2018-11-08",
+    sprint_id: 7,
+    description: "Seems simple enough.",
+    complexity: 1,
+    stack: "React"
+  });
+  db.Task.create({
+    name: "Its still not in the trash?!",
+    due_date: "2018-11-08",
+    sprint_id: 7,
+    description: "Seems simple enough.",
+    complexity: 1,
+    stack: "React"
+  });
+  db.Task.create({
+    name: "Jesus christ, someone please.",
+    due_date: "2018-11-08",
+    sprint_id: 7,
+    description: "Apparently not simple at all.",
+    complexity: 5,
+    stack: "React"
+  });
+  db.Task.create({
     name: "Read up on what React is.",
     due_date: "2018-11-02",
     sprint_id: 8,

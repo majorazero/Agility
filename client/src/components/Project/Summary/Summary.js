@@ -57,7 +57,7 @@ const SummaryCard = (props) => {
         </div>
         :
         <div>
-          <div>Task Completion Rate: {props.completed.length/(props.completed.length + props.assigned.length + props.unAssigned.length)*100}% ({props.completed.length}/{props.completed.length + props.assigned.length + props.unAssigned.length})</div>
+          <div>Task Completion Rate: {(props.completed.length/(props.completed.length + props.assigned.length + props.unAssigned.length)*100).toFixed(2)}% ({props.completed.length}/{props.completed.length + props.assigned.length + props.unAssigned.length})</div>
           <div>Total Untaken Tasks Across Sprint: {props.unAssigned.length}</div>
           <div></div>
           <div>-----------</div>
