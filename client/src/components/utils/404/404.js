@@ -38,6 +38,7 @@ class notFound extends Component{
             zIndex: 10,
         }}>
           <ContainedButtons
+            size="large"
             component={Link}
             to="/"
             name={this.state.message}
