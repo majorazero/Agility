@@ -99,9 +99,9 @@ class Project extends React.Component {
 
         //Progress Bar Time
         SprintTime: 20,
-        SprintProgress: 50
+        SprintProgress: 0
     }
-    
+
     componentDidMount() {
         const { id } = this.props.match.params;
         axios.post("/api/projectById", {
@@ -182,10 +182,12 @@ class Project extends React.Component {
                     completed.push(task[i])
                 }
             }
+            let progressStat = (completed.length/(completed.length+assigned.length+unassigned.length)*100);
             this.setState({
                 unassignedTasks: unassigned,
                 assignedTasks: assigned,
-                completedTasks: completed
+                completedTasks: completed,
+                SprintProgress: progressStat
             }, () => {
                 console.log(this.state.sprints)
             })
