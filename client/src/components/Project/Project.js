@@ -440,7 +440,7 @@ class Project extends React.Component {
                 this.getTasks();
             })
     }
-    
+
     switchTaskPool = () => {
         if (this.state.showComplete === true) {
             this.setState({ showComplete: false })
@@ -578,6 +578,7 @@ class Project extends React.Component {
                                                             assignedUser={task.assigned_id}
                                                             currentUser={this.state.currentUser}
                                                             complete
+                                                            assigned
                                                         />
                                                     );
                                                 }) :
