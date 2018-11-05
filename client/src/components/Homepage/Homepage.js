@@ -54,16 +54,24 @@ class Homepage extends Component {
         let incomplete = res.data.filter(task => !task.isCompleted)
 
         let data = []
+        let sprints = []
+        
         incomplete.forEach(task => {
-          if (!(data.includes(task.sprint))) {
+          if (!(sprints.includes(task.sprintId))) {
+            sprints.push(task.sprintId)
             data.push({
               sprint: task.sprint,
               tasks: [task]
             })
           } else {
-            data[task.sprint].tasks.push(task)
+            for(let i=0; i<data.length; i++){
+              if(data[i].sprint === task.sprint){
+                data[i].tasks.push(task)
+              }
+            }
           }
         })
+        console.log(data)
         this.setState({ tasks: data })
       })
   }
