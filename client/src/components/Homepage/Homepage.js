@@ -98,8 +98,8 @@ class Homepage extends Component {
           style={{
             paddingTop: 50,
             overflowX: "hidden",
-            backgroundImage: 'linear-gradient(to bottom right, grey , lightgrey)',
-            // backgroundImage: `url("/assets/images/background.png")`,
+            // backgroundImage: 'linear-gradient(to bottom right, grey , lightgrey)',
+            backgroundImage: `url("/assets/images/background.png")`,
             resizeMode: 'cover',
             height: "-webkit-fill-available"
           }} >

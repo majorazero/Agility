@@ -448,8 +448,8 @@ class Project extends React.Component {
                     style={{
                         paddingTop: 50,
                         overflowX: "hidden",
-                        backgroundImage: 'linear-gradient(to right, grey , lightgrey)',
-                        // backgroundImage: `url("/assets/images/background.png")`,
+                        // backgroundImage: 'linear-gradient(to right, grey , lightgrey)',
+                        backgroundImage: `url("/assets/images/background.png")`,
                         resizeMode: 'cover',
                         height: "-webkit-fill-available"
                     }} >
