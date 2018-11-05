@@ -53,76 +53,53 @@ const theme = createMuiTheme({
 
 
 class Project extends React.Component {
-  state = {
-    //this is the project's personal info
-    projName: "",
-    summary: "",
-    projDueDate: "",
-    projectId: "",
-    adminId: "",
-    isAdmin: "",
+    state = {
+        //this is the project's personal info
+        projName: "",
+        summary: "",
+        projDueDate: "",
+        projectId: "",
+        adminId: "",
+        isAdmin: "",
 
-    inviteCode: "",
+        inviteCode: "",
 
-    isActive: "",
-    activeSprintId: '',
+        isActive: "",
+        activeSprintId: '',
 
-    unassignedTasks: [],
-    assignedTasks: [],
-    completedTasks: [],
-    projects: [],
-    sprints: [],
-    members: [],
-    direction: 'column',
-    justify: 'flex-start',
-    alignItems: 'flex-start',
+        unassignedTasks: [],
+        assignedTasks: [],
+        completedTasks: [],
+        projects: [],
+        sprints: [],
+        members: [],
+        direction: 'column',
+        justify: 'flex-start',
+        alignItems: 'flex-start',
 
-    // temp id set
-    sprintId: -1,
+        // temp id set
+        sprintId: -1,
 
-    taskOpen: false,
-    taskName: "",
-    taskDue_date: "",
-    taskDescription: "",
-    taskComplexity: "",
-    taskStack: "",
-    chipData: [],
+        taskOpen: false,
+        taskName: "",
+        taskDue_date: "",
+        taskDescription: "",
+        taskComplexity: "",
+        taskStack: "",
+        chipData: [],
 
-    sprintOpen: false,
-    sprintName: "",
-    sprintStart_date: "",
-    sprintEnd_date: "",
+        sprintOpen: false,
+        sprintName: "",
+        sprintStart_date: "",
+        sprintEnd_date: "",
 
-    currentUser: '',
-    showComplete: false,
+        currentUser: '',
+        showComplete: false,
 
-    //Progress Bar Time
-    SprintTime: 20,
-    SprintProgress: 50
-  }
-
-  componentDidMount() {
-    const { id } = this.props.match.params;
-    axios.post("/api/projectById", {
-      token: "project",
-      id: id
-    }).then((response) => {
-      this.setState({
-        projName: response.data[0].name,
-        summary: response.data[0].summary,
-        projDueDate: response.data[0].due_date,
-        projectId: response.data[0].id,
-        adminId: response.data[0].userId
-      });
-      //pass project id here
-      this.getMembers(this.state.sprintId);
-      this.getCurrentUserId();
-    }).catch((err) => {
-      window.location.assign("/404");
-    });
-
-    // this.ProgressBar();
-  }
+        //Progress Bar Time
+        SprintTime: 20,
+        SprintProgress: 50
+    }
 
     componentDidMount() {
         const { id } = this.props.match.params;
@@ -146,34 +123,57 @@ class Project extends React.Component {
 
         // this.ProgressBar();
     }
-  // ProgressBar = () => {
 
-  //     // axios.get("/api/sprintById/" + this.state.sprintId).then((res) => {
-  //         // console.log(res)
-  //         let startDate = res.data[0].start_date;
-  //         let endDate = res.data[0].end_date;
-  //         var momentStart = moment(startDate).valueOf()
-  //         var momentEnd = moment(endDate).valueOf()
-  //         var difference = momentEnd - momentStart
-  //         var currentTime = moment(Date.now()).valueOf()
-  //         console.log(currentTime)
+    componentDidMount() {
+        const { id } = this.props.match.params;
+        axios.post("/api/projectById", {
+            token: "project",
+            id: id
+        }).then((response) => {
+            this.setState({
+                projName: response.data[0].name,
+                summary: response.data[0].summary,
+                projDueDate: response.data[0].due_date,
+                projectId: response.data[0].id,
+                adminId: response.data[0].userId
+            });
+            //pass project id here
+            this.getMembers(this.state.sprintId);
+            this.getCurrentUserId();
+        }).catch((err) => {
+            window.location.assign("/404");
+        });
 
-  //         var timeHasPassed =  currentTime - momentStart;
+        // this.ProgressBar();
+    }
+    // ProgressBar = () => {
 
-  //         var timeLeft = timeHasPassed - currentTime;
+    //     // axios.get("/api/sprintById/" + this.state.sprintId).then((res) => {
+    //         // console.log(res)
+    //         let startDate = res.data[0].start_date;
+    //         let endDate = res.data[0].end_date;
+    //         var momentStart = moment(startDate).valueOf()
+    //         var momentEnd = moment(endDate).valueOf()
+    //         var difference = momentEnd - momentStart
+    //         var currentTime = moment(Date.now()).valueOf()
+    //         console.log(currentTime)
 
-  //         this.setState({timeHasPassed})
-  //         this.setState({timeLeft})
+    //         var timeHasPassed =  currentTime - momentStart;
+
+    //         var timeLeft = timeHasPassed - currentTime;
+
+    //         this.setState({timeHasPassed})
+    //         this.setState({timeLeft})
 
 
-  //         console.log(timeHasPassed)
-  //         console.log(timeLeft)
-  //     // })
-  // }
+    //         console.log(timeHasPassed)
+    //         console.log(timeLeft)
+    //     // })
+    // }
 
-  updateComplete = () => {
+    updateComplete = () => {
 
-  }
+    }
 
     handleChange = name => event => {
         this.setState({
@@ -236,91 +236,91 @@ class Project extends React.Component {
         }
     }
 
-  addTask = (event) => {
-    event.preventDefault();
-    if(this.state.taskComplexity <= 5 && this.state.taskComplexity >= 1){
-      axios.post("/api/task", {
-        name: this.state.taskName,
-        due_date: this.state.taskDue_date,
-        description: this.state.taskDescription,
-        sprint_id: this.state.sprintId,
-        complexity: this.state.taskComplexity,
-        stack: this.state.taskStack
-      }).then(() => {
+    addTask = (event) => {
+        event.preventDefault();
+        if (this.state.taskComplexity <= 5 && this.state.taskComplexity >= 1) {
+            axios.post("/api/task", {
+                name: this.state.taskName,
+                due_date: this.state.taskDue_date,
+                description: this.state.taskDescription,
+                sprint_id: this.state.sprintId,
+                complexity: this.state.taskComplexity,
+                stack: this.state.taskStack
+            }).then(() => {
+                this.setState({
+                    taskOpen: false
+                });
+                this.getTasks();
+            });
+        }
+        else {
+            console.log("Invalid complexity value!");
+        }
+    }
+
+    handleOpen = (name) => {
+        console.log(name)
         this.setState({
-          taskOpen: false
+            [name]: true
+        }, () => {
+            console.log(this.state.taskOpen)
+        })
+    }
+
+    handleClose = (name) => {
+        this.setState({ [name]: false });
+    };
+
+    deleteTask = (task) => {
+        axios.delete("/api/task/by/" + task.id).then(() => {
+            this.getTasks();
         });
-        this.getTasks();
-      });
     }
-    else {
-      console.log("Invalid complexity value!");
+
+    assignTask = (task) => {
+        console.log("assign task")
+        axios.post("/api/decrypt", { token: localStorage.getItem("token"), id: sessionStorage.getItem("id") }).then((response) => {
+            let user = response.data;
+            axios.put("/api/task/by/" + task.id + "/" + user).then((res) => {
+                // console.log(res.data);
+                this.getTasks();
+                //window.location.reload();
+            })
+        });
     }
-  }
 
-  handleOpen = (name) => {
-    console.log(name)
-    this.setState({
-      [name]: true
-    }, () => {
-      console.log(this.state.taskOpen)
-    })
-  }
-
-  handleClose = (name) => {
-    this.setState({ [name]: false });
-  };
-
-  deleteTask = (task) => {
-    axios.delete("/api/task/by/" + task.id).then(() => {
-      this.getTasks();
-    });
-  }
-
-  assignTask = (task) => {
-    console.log("assign task")
-    axios.post("/api/decrypt", { token: localStorage.getItem("token"), id: sessionStorage.getItem("id") }).then((response) => {
-      let user = response.data;
-      axios.put("/api/task/by/" + task.id + "/" + user).then((res) => {
-        // console.log(res.data);
-        this.getTasks();
-        //window.location.reload();
-      })
-    });
-  }
-
-  unassignTask = (id) => {
-    console.log('unassign task')
-    axios.put("/api/task/unassign", { id: id }).then((response) => {
-      this.getTasks();
-    });
-  }
-
-  updateActiveSprint = (sprintId) => {
-    let isActive = false;
-    if (this.state.activeSprintId === sprintId) {
-      isActive = true;
+    unassignTask = (id) => {
+        console.log('unassign task')
+        axios.put("/api/task/unassign", { id: id }).then((response) => {
+            this.getTasks();
+        });
     }
-    // for(let i = 0; i < this.state.sprints.length; i++){
-    //   if((this.state.sprints[i].sprintId === sprintId) && this.state.sprints[i].isActive === 1){
-    //     isActive = true;
-    //   }
-    // }
-    this.setState({ sprintId: sprintId, isActive: isActive }, () => {
-      this.getTasks();
-      console.log(this.state);
-    });
-  }
 
-  defaultVal = () => {
-    let today = new Date().split("T");
+    updateActiveSprint = (sprintId) => {
+        let isActive = false;
+        if (this.state.activeSprintId === sprintId) {
+            isActive = true;
+        }
+        // for(let i = 0; i < this.state.sprints.length; i++){
+        //   if((this.state.sprints[i].sprintId === sprintId) && this.state.sprints[i].isActive === 1){
+        //     isActive = true;
+        //   }
+        // }
+        this.setState({ sprintId: sprintId, isActive: isActive }, () => {
+            this.getTasks();
+            console.log(this.state);
+        });
+    }
 
-    this.setState({
-        due_date: today
-    });
-  };
+    defaultVal = () => {
+        let today = new Date().split("T");
 
-  getSprints = (projectId, userId) => {
+        this.setState({
+            due_date: today
+        });
+    };
+
+    getSprints = (projectId, userId) => {
         let sprintData = [];
         axios.get(`/api/sprints/project/${projectId}/user/${userId}`).then((res) => {
             if (res.data.length > 0) {
@@ -370,62 +370,62 @@ class Project extends React.Component {
         });
     };
 
-  addSprint = (event) => {
-    event.preventDefault();
+    addSprint = (event) => {
+        event.preventDefault();
 
-    axios.post('/api/sprint', {
-      name: this.state.sprintName,
-      start_date: this.state.sprintStart_date,
-      end_date: this.state.sprintEnd_date,
-      project_id: this.state.projectId
-    }).then((res) => {
-      console.log(this.state.currentUser, res.data.id)
-      axios.post(`/api/sprintMembership`, {userId: this.state.currentUser, sprintId: res.data.id})
-      .then(() => {
-        this.setState({
-          sprintOpen: false
-        }, () => {
-          this.getSprints(this.state.projectId,this.state.currentUser);
+        axios.post('/api/sprint', {
+            name: this.state.sprintName,
+            start_date: this.state.sprintStart_date,
+            end_date: this.state.sprintEnd_date,
+            project_id: this.state.projectId
+        }).then((res) => {
+            console.log(this.state.currentUser, res.data.id)
+            axios.post(`/api/sprintMembership`, { userId: this.state.currentUser, sprintId: res.data.id })
+                .then(() => {
+                    this.setState({
+                        sprintOpen: false
+                    }, () => {
+                        this.getSprints(this.state.projectId, this.state.currentUser);
+                    });
+                })
         });
-      })
-    });
-  }
+    }
 
-  getMembers = (sprintId) => {
-    axios.post('/api/allMemberInSprint', { sprintId: sprintId }).then(res => {
-      console.log("Members:", res.data);
-      this.setState({ members: res.data });
-    })
-  }
+    getMembers = (sprintId) => {
+        axios.post('/api/allMemberInSprint', { sprintId: sprintId }).then(res => {
+            console.log("Members:", res.data);
+            this.setState({ members: res.data });
+        })
+    }
 
-  getCurrentUserId = () => {
-    axios.post("/api/userByDecrypt", {
-        id: sessionStorage.getItem("id"),
-        token: localStorage.getItem("token")
-    }).then(res => {
-      let isAdmin = false;
-      if (res.data.id === this.state.adminId) {
-          isAdmin = true;
-      }
-      this.setState({ currentUser: res.data.id, isAdmin: isAdmin },
-      () => {
-        this.getSprints(this.state.projectId, this.state.currentUser)
-      })
-    })
-  }
+    getCurrentUserId = () => {
+        axios.post("/api/userByDecrypt", {
+            id: sessionStorage.getItem("id"),
+            token: localStorage.getItem("token")
+        }).then(res => {
+            let isAdmin = false;
+            if (res.data.id === this.state.adminId) {
+                isAdmin = true;
+            }
+            this.setState({ currentUser: res.data.id, isAdmin: isAdmin },
+                () => {
+                    this.getSprints(this.state.projectId, this.state.currentUser)
+                })
+        })
+    }
 
 
-  inviteMember = () => {
-    //we'll pass the sprint id as an encrypted id
-    axios.post("/api/encrypt", {
-        id: this.state.sprintId.toString(),
-        token: "invite"
-    }).then((response) => {
-        this.setState({ inviteCode: response.data });
-    });
-  }
+    inviteMember = () => {
+        //we'll pass the sprint id as an encrypted id
+        axios.post("/api/encrypt", {
+            id: this.state.sprintId.toString(),
+            token: "invite"
+        }).then((response) => {
+            this.setState({ inviteCode: response.data });
+        });
+    }
 
-  markComplete = (id) => {
+    markComplete = (id) => {
         console.log("WHAT");
         axios.put(`/api/complete/task/${id}`)
             .then(() => {
@@ -488,7 +488,7 @@ class Project extends React.Component {
                     >
                         <Grid item xs={12}>
                             <Paper
-                                style={{ height: "100%", background: 'whitesmoke'  }}
+                                style={{ height: "100%", background: 'whitesmoke' }}
                             >
                                 {/* <MuiThemeProvider theme={theme}> */}
 
@@ -528,7 +528,7 @@ class Project extends React.Component {
                         style={{ padding: 50 }}
                     >
                         <Grid item xs={6}>
-                            <Paper style={{ background: 'whitesmoke'  }}>
+                            <Paper style={{ background: 'whitesmoke' }}>
                                 <Grid
                                     container
                                     spacing={8}
@@ -548,6 +548,8 @@ class Project extends React.Component {
                                                 color="secondary"
                                             /> :
                                             ""}
+                                        <button onClick={this.inviteMember}>Invite Code</button>
+                                        {this.state.inviteCode}
                                     </Grid>
                                 </Grid>
                                 <Grid
@@ -641,14 +643,13 @@ class Project extends React.Component {
                                 </Grid>
                             </Paper>
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={6} style={{ height: 'fit-content' }}>
                             <Paper
-                                style={{ height: '100%', background: 'whitesmoke' }}
+                                style={{ height: '100%', }}
                             >
                                 <Grid
                                     container
                                     spacing={8}
-                                    style={{ padding: 25 }}
                                 >
                                     <Grid item xs>
                                         <UserPool
@@ -763,7 +764,7 @@ class Project extends React.Component {
                 >
                     {/* <AddSprintLayout
                     /> */}
-            {/* </SimpleModalSprintWrapped>
+                {/* </SimpleModalSprintWrapped>
                 <Grid container>
                     <h1>{this.state.projName}</h1>
                     <h2>{this.state.summary}</h2>
@@ -771,7 +772,7 @@ class Project extends React.Component {
                     <Grid item xs={6} style={{ padding: "10px" }}>
                         <h2>This is pool.</h2>
                         {/* <LinearDeterminate sprintId={this.state.sprintId}/> */}
-            {/* <div>
+                {/* <div>
                 {this.state.inviteCode}
             </div>
             <button onClick={this.inviteMember}>Invite Code</button>
@@ -837,12 +838,12 @@ class Project extends React.Component {
             </div >
         <div style={{ position: "fixed", width: "100%", bottom: "0" }}> */}
 
-            {/* </div> * /} */}
-            {/*< SimpleBottomNavigation />*/}
+                {/* </div> * /} */}
+                {/*< SimpleBottomNavigation />*/}
 
-      </div>
-    );
-  }
+            </div>
+        );
+    }
 }
 
 export default Project;
