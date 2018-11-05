@@ -23,6 +23,7 @@ import LinearDeterminate from "../utils/ProgressBar/ProgressBar.js";
 import moment from "moment";
 import ListItem from '@material-ui/core/ListItem';
 import List from '@material-ui/core/List';
+import SimplePopper from '../utils/popovertext.js'
 
 const styles = theme => ({
     root: {
@@ -441,7 +442,7 @@ class Project extends React.Component {
                 this.getTasks();
             })
     }
-    
+
     switchTaskPool = () => {
         if (this.state.showComplete === true) {
             this.setState({ showComplete: false })
@@ -491,35 +492,35 @@ class Project extends React.Component {
                             {/* <Paper
                                 style={{ height: "100%", background: 'whitesmoke' }}
                             > */}
-                                {/* <MuiThemeProvider theme={theme}> */}
+                            {/* <MuiThemeProvider theme={theme}> */}
 
-                                {(this.state.isAdmin === true) ?
-                                    <ButtonSizes
-                                        onClick={() => this.handleOpen('sprintOpen')}
-                                        title="Add a Sprint"
-                                        color="secondary"
-                                        mini
-                                    /> :
-                                    ""}
+                            {(this.state.isAdmin === true) ?
+                                <ButtonSizes
+                                    onClick={() => this.handleOpen('sprintOpen')}
+                                    title="Add a Sprint"
+                                    color="secondary"
+                                    mini
+                                /> :
+                                ""}
 
-                                {/* </MuiThemeProvider> */}
-                                <SimpleModalSprintWrapped
-                                    open={this.state.sprintOpen}
-                                    onClose={() => this.handleClose('sprintOpen')}
-                                    name="Add a New Sprint ..."
-                                    onSubmit={this.addSprint}
-                                    onChange={this.handleChange}
-                                >
-                                    <AddSprintLayout
-                                    />
-                                </SimpleModalSprintWrapped>
-                                <Chips
-                                    // style={{ paddingBottom: 10 }}
-                                    sprints={this.state.chipData}
-                                    onClick={this.updateActiveSprint}
-                                    activeSprint={this.state.sprintId}
-                                    currentUser={this.state.currentUser}
+                            {/* </MuiThemeProvider> */}
+                            <SimpleModalSprintWrapped
+                                open={this.state.sprintOpen}
+                                onClose={() => this.handleClose('sprintOpen')}
+                                name="Add a New Sprint ..."
+                                onSubmit={this.addSprint}
+                                onChange={this.handleChange}
+                            >
+                                <AddSprintLayout
                                 />
+                            </SimpleModalSprintWrapped>
+                            <Chips
+                                // style={{ paddingBottom: 10 }}
+                                sprints={this.state.chipData}
+                                onClick={this.updateActiveSprint}
+                                activeSprint={this.state.sprintId}
+                                currentUser={this.state.currentUser}
+                            />
                             {/* </Paper> */}
                         </Grid>
                     </Grid>
@@ -541,10 +542,16 @@ class Project extends React.Component {
                                     spacing={8}
                                     style={{ padding: 25 }}
                                 >
-                                    <Grid item xs>
+                                    <Grid item xs = {6}>
                                         <SwitchLabel
                                             onChange={this.switchTaskPool}
                                             label="Show Completed Tasks"
+                                        />
+                                    </Grid>
+                                    <Grid item xs style = {{display:"flex", justifyContent:"flex-start", marginTop: 7}}>
+                                        <SimplePopper
+                                            onPoperClick={this.inviteMember}
+                                            message={this.state.inviteCode}
                                         />
                                     </Grid>
                                     <Grid item xs>
@@ -555,8 +562,7 @@ class Project extends React.Component {
                                                 color="secondary"
                                             /> :
                                             ""}
-                                        <button onClick={this.inviteMember}>Invite Code</button>
-                                        {this.state.inviteCode}
+
                                     </Grid>
                                 </Grid>
                                 <Grid
