@@ -25,7 +25,9 @@ const ActiveTasks = (props) => (
             {props.tasks.map((sprint, i) => (
                 <li key={i}>
                     <ListSubheader style={{ backgroundColor: 'whitesmoke' }}>{sprint.sprint}</ListSubheader>
-                    {sprint.tasks.map((task, index) => (
+                    {sprint.tasks.map((task, index) => {
+                        console.log(task.sprintId)
+                        return(
                         <ul>
                         <ListItem key={index}>
                             {/* <Grid container> */}
@@ -33,13 +35,14 @@ const ActiveTasks = (props) => (
                             <Pool
                                 tasks={task}
                                 activetasks={true}
-                                goToProject={props.goToProject}
+                                goToProject={() => props.goToProject(task.sprintId)}
+                                homepage={props.homepage}
                             />
                             {/* </Grid> */}
                             {/* </Grid> */}
                         </ListItem>
                         </ul>
-                ))
+                    )})
                 }
 
                 </li>

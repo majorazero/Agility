@@ -68,13 +68,17 @@ class Homepage extends Component {
       })
   }
 
-  goToProject = (id) => {
-    axios.post("/api/encrypt", {
-      token: "project",
-      id: id.toString()
-    }).then((data) => {
-      window.location.assign(`/project/${data.data}`);
-    });
+  goToProject = (sprintId) => {
+    axios.get(`/api/projectId/sprint/${sprintId}`)
+    .then(res=>{
+      console.log(res.data[0].id)
+        axios.post("/api/encrypt", {
+          token: "project",
+          id: res.data[0].id.toString()
+        }).then((data) => {
+          window.location.assign(`/project/${data.data}`);
+        });
+    })
   }
 
   render() {
@@ -139,7 +143,7 @@ class Homepage extends Component {
                     // style={{ padding: 50 }}
                     >
                       <Grid item xs>
-                        <ActiveTasks tasks={this.state.tasks}  goToProject={this.goToProject} />
+                        <ActiveTasks tasks={this.state.tasks} goToProject={this.goToProject} homepage/>
                       </Grid>
                     </Grid>
                   </Paper>

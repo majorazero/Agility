@@ -56,6 +56,7 @@ const Pool = (props) => {
                 complete={props.complete}
                 activetasks={props.activetasks}
                 goToProject={props.goToProject}
+                homepage={props.homepage}
             />
         </ListItem>
     );

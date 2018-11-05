@@ -40,6 +40,14 @@ module.exports = function(app){
       })
     });
 
+    app.get('/api/projectId/sprint/:sprintId', (req, res)=> {
+      db.sequelize.query(`SELECT projects.id FROM projects INNER JOIN sprints ON sprints.project_id = projects.id AND sprints.id=${req.params.sprintId}`, { type: sequelize.QueryTypes.SELECT}).then(projectId => {
+          res.json(projectId)
+      })
+    });
+
+    
+
 
 
 
