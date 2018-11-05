@@ -25,7 +25,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 const styles = theme => ({
     card: {
         width: "100%",
-        background: 'whitesmoke' 
+        background: 'whitesmoke'
     },
     media: {
         height: 40,
@@ -60,7 +60,7 @@ const theme = createMuiTheme({
     overrides: {
         MuiButton: {
             root: {
-                paddingBottom: 0
+                padding: "8px 12px"
             },
         },
     },
@@ -110,18 +110,14 @@ class RecipeReviewCard extends React.Component {
     }
 
     stackFormat = () => {
-      console.log(this.state.stacks);
       let arr = [];
       if(this.state.stacks !== undefined){
         let stack = JSON.parse(JSON.stringify(this.state.stacks));
-        console.log(stack);
         let format = {
           label1: "Start working on some projects! No stack metrics yet!"
         };
-        console.log(stack,"HELLo",Object.keys(stack).length);
         if(Object.keys(stack).length > 0){
           for(let j = 0; j < 3; j++){
-            console.log(stack);
             let Obj = {};
             let maxComplete = -1;
             let topStack = "";
@@ -133,7 +129,6 @@ class RecipeReviewCard extends React.Component {
                 stackName = i;
               }
             }
-            console.log(topStack);
             Obj[`stackName`] = stackName;
             Obj[`stackComplete`] = `Average Rate of Completion: ${(topStack.amountComplete/topStack.amountAttempted*100).toFixed(2)}%`;
             if(topStack.amountComplete > 0){
@@ -147,7 +142,8 @@ class RecipeReviewCard extends React.Component {
           }
           console.log(arr);
           let format = {
-            label1: "Top 3 Stacks"
+            label1: "Top Stacks",
+            info1: ""
           };
           for(let i = 0; i < 3; i++){
             format[`label${i+2}`] = arr[i].stackName;
@@ -203,10 +199,10 @@ class RecipeReviewCard extends React.Component {
 
                 <MuiThemeProvider theme={theme}>
                     <CardContent>
-                        <Typography variant="h6" gutterBottom>
+                        <Typography variant="h6" gutterBottom style={{ textAlign: "left" }}>
                             {this.state.userFirstName + " " + this.state.userLastName}
                         </Typography>
-                        <Typography variant="subtitle2" gutterBottom>
+                        <Typography variant="subtitle2" gutterBottom style={{ textAlign: "left" }}>
                             {this.state.userEmail}
                         </Typography>
                         {/* <br /> */}
