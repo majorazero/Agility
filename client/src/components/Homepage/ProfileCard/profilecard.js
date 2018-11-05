@@ -122,7 +122,7 @@ class RecipeReviewCard extends React.Component {
           for(let j = 0; j < 3; j++){
             console.log(stack);
             let Obj = {};
-            let maxComplete = 0;
+            let maxComplete = -1;
             let topStack = "";
             let stackName = "";
             for(let i in stack){
@@ -135,7 +135,12 @@ class RecipeReviewCard extends React.Component {
             console.log(topStack);
             Obj[`stackName`] = stackName;
             Obj[`stackComplete`] = `Average Rate of Completion: ${(topStack.amountComplete/topStack.amountAttempted*100).toFixed(2)}%`;
-            Obj[`stackComplex`] = `Average Complexity: ${(topStack.complexitySum/topStack.amountComplete).toFixed(2)}`;
+            if(topStack.amountComplete > 0){
+              Obj[`stackComplex`] = `Average Complexity: ${(topStack.complexitySum/topStack.amountComplete).toFixed(2)}`;
+            }
+            else {
+              Obj[`stackComplex`] = `Average Complexity: 0`;
+            }
             arr.push(Obj);
             stack[stackName] = "";
           }
