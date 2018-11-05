@@ -34,6 +34,7 @@ const styles = theme => ({
         display: 'flex',
         justifyContent: 'center',
         flexWrap: 'wrap',
+        paddingBottom: 10
     },
     chip: {
         margin: theme.spacing.unit,
@@ -45,7 +46,8 @@ function Chips(props) {
     return (
         <div className={classes.root}>
             {props.sprints.map((data, i) => {
-                return (<Chip
+                return (
+                <Chip
                     icon={<Icon />}
                     className={classes.chip}
                     key={data.key}

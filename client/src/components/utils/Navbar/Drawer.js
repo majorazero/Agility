@@ -12,7 +12,14 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import { Link } from "react-router-dom";
 import HomeIcon from '@material-ui/icons/Home';
+import SingleLineGridList from "../../ProjectList/ProjectListTab/ProjectListTab.js";
+import axios from "axios";
+import Assignment from '@material-ui/icons/Assignment';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import ProjectList from "../../ProjectList/ProjectList.js";
+import GridList from '@material-ui/core/GridList';
 
 const styles = {
   list: {
@@ -24,8 +31,18 @@ const styles = {
   menuButton: {
     marginLeft: -12,
     marginRight: 20,
-  },
+  }
 };
+
+const theme = createMuiTheme({
+  overrides: {
+    MuiButton: {
+      root: {
+        height: 2
+      },
+    },
+  },
+});
 
 class TemporaryDrawer extends React.Component {
   state = {
@@ -33,7 +50,39 @@ class TemporaryDrawer extends React.Component {
     left: false,
     bottom: false,
     right: false,
+    name: "",
+    summary: "",
+    projects: [],
+    open: false,
+    direction: "row",
+    justify: "center",
+    alignItems: "center",
+    projects: [],
+    inviteCode: "",
+    message: ""
   };
+
+  onProjectPress = (id) => {
+    axios.post("/api/encrypt", {
+      token: "project",
+      id: id.toString()
+    }).then((data) => {
+      window.location.assign(`/project/${data.data}`);
+    });
+  }
+
+  componentDidMount = () => {
+    this.fetch();
+  }
+
+  fetch = () => {
+    axios.post("/api/projectOfUser", {
+      id: sessionStorage.getItem("id"),
+      token: localStorage.getItem("token")
+    }).then((response) => {
+      this.setState({ projects: response.data });
+    });
+  }
 
   toggleDrawer = (side, open) => () => {
     this.setState({
@@ -46,24 +95,33 @@ class TemporaryDrawer extends React.Component {
 
     const sideList = (
       <div className={classes.list}>
-        <List>
-            <ListItem button key="Profile">
-              <ListItemIcon><HomeIcon /></ListItemIcon>
-              <ListItemText primary="Profile" href="/homepage" />
-            </ListItem>
-            <ListItem button key="Project">
-              <ListItemIcon><HomeIcon /></ListItemIcon>
-              <ListItemText primary="Project" href="/project/:id" />
-            </ListItem>
+        <List style={{ position: 'sticky', height: 46, padding: 8, top: 0, background: 'whitesmoke', zIndex: 1 }}>
+          <ListItem button key="Home" name="home" component={Link} to="/homepage">
+            <ListItemIcon><HomeIcon /></ListItemIcon>
+            <ListItemText primary="Home" />
+          </ListItem>
+          {/* <ListItem button key="Project" name="project" component={Link} to="/project/:id">
+            <ListItemIcon><Assignment /></ListItemIcon>
+            <ListItemText primary="Project" />
+          </ListItem> */}
         </List>
-        <Divider />
+        <Divider style={{ position: 'sticky', top: 'inherit', zIndex: 1 }} />
         <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon></ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
+          {/* <GridList> */}
+          {this.state.projects.map((item) => {
+              return (
+                <MuiThemeProvider theme={theme}>
+                  <SingleLineGridList
+                    key={item.id}
+                    name={item.name}
+                    summary={item.summary}
+                    className={classes.balls}
+                    // style={{ margin: 2, width: 100, height: 100 }}
+                    onProjectPress={() => { this.onProjectPress(item.id) }} />
+                </MuiThemeProvider>
+              )
+            })};
+          {/* </GridList> */}
         </List>
       </div>
     );
@@ -73,9 +131,9 @@ class TemporaryDrawer extends React.Component {
 
 
         {/* <IconButton  > */}
-          <Button className={classes.menuButton} color="inherit" aria-label="Menu" onClick={this.toggleDrawer('left', true)}>
-            <MenuIcon />
-          </Button>
+        <Button className={classes.menuButton} color="inherit" aria-label="Menu" onClick={this.toggleDrawer('left', true)}>
+          <MenuIcon />
+        </Button>
         {/* </IconButton> */}
 
 

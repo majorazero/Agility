@@ -118,7 +118,7 @@ class Homepage extends Component {
               <Grid
                 container
                 spacing={24}
-                style={{ padding: 50 }}
+                style={{ padding: 50,  }}
               >
                 <Grid
                   item
@@ -126,12 +126,12 @@ class Homepage extends Component {
                   style={{ height: 'fit-content' }}
                 >
                   <Paper
-                    style={{ height: "100%" }}
+                    style={{ height: "100%", }}
                   >
                     <Grid
                       container
                       spacing={8}
-                      style={{ padding: 25 }}
+                      style={{ padding: 25, }}
                     >
                       <Grid item xs>
                         <Typography fullWidth variant="h4" gutterBottom>Active Tasks</Typography>
@@ -211,11 +211,13 @@ class Homepage extends Component {
           </Grid>*/}
           <Grid
             container
-            style={{ padding: 50, justifyContent: 'center' }}
+            style={{ padding: 50, justifyContent: 'center', }}
             spacing={8}
           >
             <Grid item xs={12} >
-              <Paper>
+              <Paper
+              style={{ background: 'whitesmoke'  }}
+              >
                 <Grid item xs={12} >
                   <ProjectList />
                 </Grid>
