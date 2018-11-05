@@ -17,9 +17,9 @@ const styles = {
   root: {
     width: "100%",
     backgroundColor: "lightgrey",
-    bottom:"0",
+    bottom: "0",
     // position: "fixed"
-    },
+  },
 };
 
 class SimpleBottomNavigation extends React.Component {
@@ -41,7 +41,7 @@ class SimpleBottomNavigation extends React.Component {
         onChange={this.handleChange}
         showLabels
         className={classes.root}
-        style={{alignItems: "center"}}
+        style={{ alignItems: "center" }}
 
       >
         {/* <BottomNavigationAction label="Recents" value="recents" icon={<RestoreIcon />} /> */}
@@ -49,10 +49,10 @@ class SimpleBottomNavigation extends React.Component {
         {/* <BottomNavigationAction label="Nearby" value="nearby" icon={<LocationOnIcon />} /> */}
         {/* <BottomNavigationAction label="Folder" value="folder" icon={<Icon>folder</Icon>} /> */}
 
-        <BottomNavigationAction label="GitHub" value="nearby" icon={<img src={GitHub} width="30px"/>} />
+        <BottomNavigationAction label="GitHub" value="nearby" icon={<img src={GitHub} width="30px" />} />
+        <BottomNavigationAction label="Copyright 2018 ©" value="nearby" />} />
 
-        <BottomNavigationAction label="Copyright 2018" value="nearby" icon={<img src={GitHub} width="30px"/>} />
-
+{/* icon={<img src={GitHub} width="30px" */}
 
 
       </BottomNavigation>
