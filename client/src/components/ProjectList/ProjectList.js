@@ -112,6 +112,7 @@ class ProjectList extends Component {
 
   handleInviteSubmit = (event) => {
     event.preventDefault();
+    console.log(3);
     axios.post("/api/sprintMembershipWithCode", { sId: this.state.inviteCode, uId: sessionStorage.getItem("id"), token: localStorage.getItem("token") }).then((response) => {
       if (response.data === "Already part of sprint!") {
         console.log(response.data);

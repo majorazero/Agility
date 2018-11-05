@@ -122,81 +122,114 @@ module.exports = function (app) {
     });
 
     app.post("/api/getuser/", (req, res) => {
-        let Obj = {};
-        let simpleId = encrypt.decrypt(req.body.token,req.body.id);
-        db.User.findAll({
-         where: {
-          id: simpleId
-         }
-        }).then(response => {
-          Obj.prof = response[0];
-          //lets also pull some career data in here.
-          db.Task.findAll({
-            where: {
-              assigned_id: simpleId
-            }
-          }).then((tRes) => {
-            Obj.task = tRes;
-            Obj.totalTask = tRes.length;
-            Obj.totalCompletedTask = 0;
-            //for complexity
-            Obj.complexity = 0;
-            for(let i = 0; i < tRes.length; i++){
-              Obj.complexity += tRes[i].complexity;
+      let Obj = {};
+      let simpleId = encrypt.decrypt(req.body.token,req.body.id);
+      db.User.findAll({
+       where: {
+        id: simpleId
+       }
+      }).then(response => {
+        Obj.prof = response[0];
+        //lets also pull some career data in here.
+        db.Task.findAll({
+          where: {
+            assigned_id: simpleId
+          }
+        }).then((tRes) => {
+          console.log("Tasks Response:",tRes);
+          Obj.stacks = {};
+          for(let i = 0; i < tRes.length; i++){
+            if(Obj.stacks[tRes[i].stack] === undefined){
               if(tRes[i].isCompleted === true){
-                Obj.totalCompletedTask++;
+                Obj.stacks[tRes[i].stack] =
+                {
+                  amountAttempted: 1,
+                  amountComplete: 1,
+                  complexitySum: tRes[i].complexity
+                };
               }
-            }
-            Obj.complexity = (Obj.complexity/tRes.length).toFixed(2);
-            if(Obj.complexity <= 1.5){
-              Obj.compSemantics = "Easy";
-            }
-            else if (Obj.complexity <= 2.5){
-              Obj.compSemantics = "Easy-Medium";
-            }
-            else if (Obj.complexity <= 3.5){
-              Obj.compSemantics = "Medium";
-            }
-            else if (Obj.complexity <= 4.5){
-              Obj.compSemantics = "Medium-Hard";
-            }
-            else if (Obj.complexity <= 5){
-              Obj.compSemantics = "Hard";
+              else{
+                Obj.stacks[tRes[i].stack] =
+                {
+                  amountComplete: 0,
+                  complexitySum: 0,
+                  amountAttempted: 1
+                };
+              }
             }
             else{
-              Obj.compSemantics = "Start doing some tasks, see where you at!";
-              Obj.complexity = 0;
+              if(tRes[i].isCompleted === true){
+                Obj.stacks[tRes[i].stack].amountComplete++;
+                Obj.stacks[tRes[i].stack].amountAttempted++;
+                Obj.stacks[tRes[i].stack].complexitySum += tRes[i].complexity;
+              }
+              else{
+                Obj.stacks[tRes[i].stack].amountAttempted++;
+              }
             }
-            db.SprintMembership.findAll({
+          }
+          console.log("OBJECTYES",Obj.stacks);
+          Obj.task = tRes;
+          Obj.totalTask = tRes.length;
+          Obj.totalCompletedTask = 0;
+          //for complexity
+          Obj.complexity = 0;
+          for(let i = 0; i < tRes.length; i++){
+            Obj.complexity += tRes[i].complexity;
+            if(tRes[i].isCompleted === true){
+              Obj.totalCompletedTask++;
+            }
+          }
+          Obj.complexity = (Obj.complexity/tRes.length).toFixed(2);
+          if(Obj.complexity <= 1.5){
+            Obj.compSemantics = "Easy";
+          }
+          else if (Obj.complexity <= 2.5){
+            Obj.compSemantics = "Easy-Medium";
+          }
+          else if (Obj.complexity <= 3.5){
+            Obj.compSemantics = "Medium";
+          }
+          else if (Obj.complexity <= 4.5){
+            Obj.compSemantics = "Medium-Hard";
+          }
+          else if (Obj.complexity <= 5){
+            Obj.compSemantics = "Hard";
+          }
+          else{
+            Obj.compSemantics = "Start doing some tasks, see where you at!";
+            Obj.complexity = 0;
+          }
+          db.SprintMembership.findAll({
+            where: {
+              userId: simpleId
+            },
+            include:[{
+              model: db.Sprint,
+              as: "Sprint"
+            }]
+          }).then((spRes) => {
+            Obj.sprintDat = spRes;
+            Obj.sprintParticipate = spRes.length;
+            Obj.projectContributed = 0;
+            let projectCheckArr = [];
+            for(let i = 0; i < spRes.length; i++){
+              if(!projectCheckArr.includes(spRes[i].Sprint.project_id) === true){
+                projectCheckArr.push(spRes[i].Sprint.project_id);
+                Obj.projectContributed++;
+              }
+            }
+            db.Project.findAll({
               where: {
                 userId: simpleId
-              },
-              include:[{
-                model: db.Sprint,
-                as: "Sprint"
-              }]
-            }).then((spRes) => {
-              Obj.sprintDat = spRes;
-              Obj.sprintParticipate = spRes.length;
-              Obj.projectContributed = 0;
-              let projectCheckArr = [];
-              for(let i = 0; i < spRes.length; i++){
-                if(!projectCheckArr.includes(spRes[i].Sprint.project_id) === true){
-                  projectCheckArr.push(spRes[i].Sprint.project_id);
-                  Obj.projectContributed++;
-                }
               }
-              db.Project.findAll({
-                where: {
-                  userId: simpleId
-                }
-              }).then((pRes) => {
-                Obj.projectCreated = pRes.length;
-                res.json(Obj);
-              });
+            }).then((pRes) => {
+              Obj.projectCreated = pRes.length;
+              res.json(Obj);
             });
           });
-        })
+        });
+      })
     });
 
     app.get("/api/sprintById/:sprintId", (req, res) => {

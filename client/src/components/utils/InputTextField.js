@@ -76,7 +76,7 @@ class InputTextField extends React.Component {
                 <MuiThemeProvider theme={theme}>
                     <Button type="submit" variant="outlined" size="small" color="secondary" className={classes.button}>
                         Submit
-        </Button>
+                      </Button>
                 </MuiThemeProvider>
             </form>
         );
