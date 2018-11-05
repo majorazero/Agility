@@ -101,30 +101,7 @@ class Project extends React.Component {
         SprintTime: 20,
         SprintProgress: 50
     }
-
-    componentDidMount() {
-        const { id } = this.props.match.params;
-        axios.post("/api/projectById", {
-            token: "project",
-            id: id
-        }).then((response) => {
-            this.setState({
-                projName: response.data[0].name,
-                summary: response.data[0].summary,
-                projDueDate: response.data[0].due_date,
-                projectId: response.data[0].id,
-                adminId: response.data[0].userId
-            });
-            //pass project id here
-            this.getMembers(this.state.sprintId);
-            this.getCurrentUserId();
-        }).catch((err) => {
-            window.location.assign("/404");
-        });
-
-        // this.ProgressBar();
-    }
-
+    
     componentDidMount() {
         const { id } = this.props.match.params;
         axios.post("/api/projectById", {
@@ -441,7 +418,7 @@ class Project extends React.Component {
                 this.getTasks();
             })
     }
-    
+
     switchTaskPool = () => {
         if (this.state.showComplete === true) {
             this.setState({ showComplete: false })
