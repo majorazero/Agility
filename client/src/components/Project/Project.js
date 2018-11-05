@@ -465,9 +465,9 @@ class Project extends React.Component {
                         style={{ padding: "50px 50px 25px 50px" }}
                     >
                         <Grid item xs>
-                            {/* <Paper
+                            <Paper
                                 style={{ height: "100%", background: 'whitesmoke' }}
-                            > */}
+                            >
                                 {/* <MuiThemeProvider theme={theme}> */}
 
                                 {(this.state.isAdmin === true) ?
@@ -497,7 +497,7 @@ class Project extends React.Component {
                                     activeSprint={this.state.sprintId}
                                     currentUser={this.state.currentUser}
                                 />
-                            {/* </Paper> */}
+                            </Paper>
                         </Grid>
                     </Grid>
                     <Grid

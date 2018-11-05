@@ -60,7 +60,7 @@ const theme = createMuiTheme({
     overrides: {
         MuiButton: {
             root: {
-                paddingBottom: 0
+                padding: "8px 12px"
             },
         },
     },
@@ -147,7 +147,8 @@ class RecipeReviewCard extends React.Component {
           }
           console.log(arr);
           let format = {
-            label1: "Top 3 Stacks"
+            label1: "Top Stacks",
+            info1: ""
           };
           for(let i = 0; i < 3; i++){
             format[`label${i+2}`] = arr[i].stackName;
@@ -203,10 +204,10 @@ class RecipeReviewCard extends React.Component {
 
                 <MuiThemeProvider theme={theme}>
                     <CardContent>
-                        <Typography variant="h6" gutterBottom>
+                        <Typography variant="h6" gutterBottom style={{ textAlign: "left" }}>
                             {this.state.userFirstName + " " + this.state.userLastName}
                         </Typography>
-                        <Typography variant="subtitle2" gutterBottom>
+                        <Typography variant="subtitle2" gutterBottom style={{ textAlign: "left" }}>
                             {this.state.userEmail}
                         </Typography>
                         {/* <br /> */}
