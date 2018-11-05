@@ -53,6 +53,7 @@ class ProjectList extends Component {
             key={item.id}
             name={item.name}
             summary={item.summary}
+            // style={{ margin: 2, width: 100, height: 100 }}
             onProjectPress={() => { this.onProjectPress(item.id) }} />
         )
 
@@ -129,6 +130,7 @@ class ProjectList extends Component {
     const { direction, justify, alignItems } = this.state;
     return (
       <div
+        className="balls"
         style={{
           position: "relative"
         }}
@@ -142,28 +144,55 @@ class ProjectList extends Component {
         >
           <Paper> */}
         <div
+          className="eat"
           style={{
             display: 'flex',
             flexWrap: 'wrap',
             justifyContent: 'space-around',
             overflow: 'hidden',
             padding: 10,
-            height: "100%"
+            height: "100%",
           }}
         >
           <GridList
             cols={2.5}
             style={{
               flexWrap: 'nowrap',
-              transform: 'translateZ(0)'
+              transform: 'translateZ(0)',
             }}
           >
             {this.populate()}
           </GridList>
         </div>
+
+        <Grid
+          container
+          spacing={8}
+        // style={{ padding: 25 }}
+        >
+          <Grid item xs={10}>
+            <Typography variant="h5" gutterBottom>{this.state.message}</Typography>
+            <InputTextField
+              onSubmit={this.handleInviteSubmit}
+              label="Project Invite Code:"
+              name="inviteCode"
+              onChange={this.handleInviteChange}
+              // style={{
+              //   position: "inherit"
+              // }}
+            />
+          </Grid>
+          <Grid item xs>
+            <ButtonSizes
+              onClick={this.handleOpen}
+              title="Add a Project"
+              color="primary"
+            />
+          </Grid>
+        </Grid>
+
         {/* </Paper>
         </Grid> */}
-
 
         {/* <Grid xs={12}
           container
@@ -226,15 +255,16 @@ class ProjectList extends Component {
           />
         </SimpleModalProjectWrapped>
 
-        <ButtonSizes
+        {/* <ButtonSizes
           onClick={this.handleOpen}
           title="Add a Project"
           color="primary"
-        // style={{
-        //   position: "absolute"
-        // }}
-        />
-        <Grid
+        /> */}
+
+        {/* style={{
+          position: "absolute"
+        }}
+         <Grid
           container
           direction="row"
           justify="flex-end"
@@ -243,9 +273,9 @@ class ProjectList extends Component {
           style={{
             height: 90,
           }}
-        >
-          <Grid item xs={9} />
-          <Grid item xs>
+        > */}
+        {/* <Grid item xs={9} /> */}
+        {/* <Grid item xs>
             <Typography variant="h5" gutterBottom>{this.state.message}</Typography>
 
             <InputTextField
@@ -258,7 +288,7 @@ class ProjectList extends Component {
               }}
             />
           </Grid>
-        </Grid>
+         </Grid> */}
 
         {/* <div className="invCodeDiv">
           <form onSubmit={this.handleInviteSubmit}>
@@ -268,7 +298,7 @@ class ProjectList extends Component {
             <button>Submit</button>
           </form>
         </div> */}
-      </div>
+      </div >
     );
   }
 }

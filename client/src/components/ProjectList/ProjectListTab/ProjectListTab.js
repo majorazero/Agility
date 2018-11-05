@@ -68,11 +68,10 @@ const styles = theme => ({
   },
   gridList: {
     flexWrap: 'nowrap',
-    // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
     transform: 'translateZ(0)',
+    margin: 2
   },
   title: {
-    // height: 200,
     color: theme.palette.primary.light,
   },
   titleBar: {
@@ -102,14 +101,20 @@ function SingleLineGridList(props) {
   const { classes } = props;
 
   return (
-    <GridListTile>
+    <GridListTile
+      style={{
+        height: 200,
+        width: 250
+      }}
+      classes={{ root: classes.gridList }}
+    >
       <img src="assets/images/background.jpg"
         alt={props.name}
         style={{
-          // width: 150,
-          height: 200,
+          height: '100%',
+          width: '100%',
           backgroundSize: 'cover',
-          backgroundPosition: "center center"
+          backgroundPosition: "center center",
         }}
       />
       <GridListTileBar

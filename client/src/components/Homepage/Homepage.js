@@ -8,6 +8,8 @@ import Grid from '@material-ui/core/Grid';
 import ButtonAppBar from "../utils/Navbar/Navbar.js";
 import Paper from '@material-ui/core/Paper';
 import ButtonSizes from "../utils/FAB.js";
+import List from '@material-ui/core/List';
+import Typography from '@material-ui/core/Typography';
 import SimpleBottomNavigation from "../utils/Footer/Footer.js";
 
 //doesn't has to be
@@ -114,11 +116,32 @@ class Homepage extends Component {
                 spacing={24}
                 style={{ padding: 50 }}
               >
-                <Grid item xs={8}>
+                <Grid
+                  item
+                  xs={8}
+                  style={{ height: 'fit-content' }}
+                >
                   <Paper
                     style={{ height: "100%" }}
                   >
-                    <ActiveTasks tasks={this.state.tasks} goToProject={this.goToProject} />
+                    <Grid
+                      container
+                      spacing={8}
+                      style={{ padding: 25 }}
+                    >
+                      <Grid item xs>
+                        <Typography fullWidth variant="h4" gutterBottom>Active Tasks</Typography>
+                      </Grid>
+                    </Grid>
+                    <Grid
+                      container
+                      spacing={8}
+                    // style={{ padding: 50 }}
+                    >
+                      <Grid item xs>
+                        <ActiveTasks tasks={this.state.tasks}  goToProject={this.goToProject} />
+                      </Grid>
+                    </Grid>
                   </Paper>
                 </Grid>
                 <Grid item xs={1} />
@@ -182,9 +205,17 @@ class Homepage extends Component {
               <ProfileCard />
             </Grid>
           </Grid>*/}
-          <Grid container style={{ justifyContent: 'center' }}>
+          <Grid
+            container
+            style={{ padding: 50, justifyContent: 'center' }}
+            spacing={8}
+          >
             <Grid item xs={12} >
-              <ProjectList />
+              <Paper>
+                <Grid item xs={12} >
+                  <ProjectList />
+                </Grid>
+              </Paper>
             </Grid>
           </Grid>
           {/* </Grid> */}
