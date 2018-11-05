@@ -5,8 +5,8 @@ const encrypt = require("./helper/encrypt.js");
 /// Users
 /////////////////
 for(let i = 0; i < 20; i++){
-  let firstName = ["Winstonella", "Lincolnberry", "Randy", "Millyfille", "Nelly", "Sunny", "Yabooboo", "Rickety", "Zachadouche", "Xena", "Dourina", "Ethen", "Andy", "Hooky", "Tiki", "Popper", "Sebarstian", "Fronk","Balls"];
-  let lastName = ["Tire-Fire","Banana-Pants","Bobert","Knickerknacker","No-Beard", "Melon-Baller", "Farts-A-Lot","Balls","Unkindman","Unkindwoman","Fathuman","Mailmanfurter","Hotdoggity","Cricket","Nichael"];
+  let firstName = ["Winstonella", "Lincolnberry", "Rundy", "Millyfille", "Nurlly", "Sunnyish", "Yabooboo", "Rickety", "Zachadouche", "Xenaphile", "Dourina", "Ethenol", "Andy", "Hookerish", "Tiki-tock", "Kripperino", "Sebarstian", "Fronk","Balls","Gunslinger","Moon Moon"];
+  let lastName = ["Tire-Fire","Banana-Pants","Bobertfarter","Knickerknacker","No-Beard", "Melon-Baller", "Farts-A-Lot","Balls","Unkindman","Unkindwoman","Fathuman","Mailmanfurter","Hotdog-diggity","Cricket","Nichaelmuncher","McGee","Poopy-Pants","Trianglenips","No-neck","In-A-Box"];
   db.User.create({
     first_name: firstName[Math.floor(Math.random()*firstName.length)],
     last_name: lastName[Math.floor(Math.random()*lastName.length)],
@@ -30,32 +30,37 @@ setTimeout(()=>{
     name: "The Dummy Project",
     summary: "A project for dummies.",
     userId: 1
-  });
-  db.Project.create({
-    name: "The Itch On MY Back",
-    summary: "We're going to write a back scratching app. Implentation pending.",
-    complete: true,
-    userId: 1
-  });
-  db.Project.create({
-    name: "The Polymer Project",
-    summary: "Dear god why LOL.",
-    userId: 2
-  });
-  db.Project.create({
-    name: "The Booger Project",
-    summary: "A project for collectng boogers using javascript.",
-    userId: 3
-  });
-  db.Project.create({
-    name: "The Infinity Loop",
-    summary: "We like recursions, so we're going to figure out how to run an inifinite amount of them without crashing our computer.",
-    userId: 4
-  });
-  db.Project.create({
-    name: "Algorithmically Rating Butts",
-    summary: "A project for ordering butts in order from moldiest to fuzziest.",
-    userId: 5
+  }).then(()=>{
+    db.Project.create({
+      name: "The Itch On MY Back",
+      summary: "We're going to write a back scratching app. Implentation pending.",
+      complete: true,
+      userId: 1
+    });
+  }).then(()=>{
+    db.Project.create({
+      name: "The Polymer Project",
+      summary: "Dear god why LOL.",
+      userId: 2
+    });
+  }).then(()=>{
+    db.Project.create({
+      name: "The Booger Project",
+      summary: "A project for collectng boogers using javascript.",
+      userId: 3
+    });
+  }).then(()=>{
+    db.Project.create({
+      name: "The Infinity Loop",
+      summary: "We like recursions, so we're going to figure out how to run an inifinite amount of them without crashing our computer.",
+      userId: 4
+    });
+  }).then(()=>{
+    db.Project.create({
+      name: "Algorithmically Rating Butts",
+      summary: "A project for ordering butts in order from moldiest to fuzziest.",
+      userId: 5
+    });
   });
 },600);
 //////////////////
@@ -68,98 +73,110 @@ setTimeout(()=>{
     end_date: "2018-09-14",
     isComplete: true,
     project_id: 1
-  });
-  db.Sprint.create({
-    name: "Eat dummies.",
-    start_date: "2018-09-17",
-    end_date: "2018-09-28",
-    isComplete: true,
-    project_id: 1
-  });
-  db.Sprint.create({
-    name: "Dispose of dummies.",
-    start_date: "2018-10-01",
-    end_date: "2018-10-12",
-    isComplete: true,
-    project_id: 1
-  });
-  db.Sprint.create({
-    name: "Look for new dummies.",
-    start_date: "2018-10-29",
-    end_date: "2018-11-09",
-    isComplete: false,
-    isActive: true,
-    project_id: 1
-  });
-  //5
-  db.Sprint.create({
-    name: "Find itch.",
-    start_date: "2018-10-01",
-    end_date: "2018-10-05",
-    isComplete: true,
-    project_id: 2
-  });
-  db.Sprint.create({
-    name: "Scratch itch.",
-    start_date: "2018-10-08",
-    end_date: "2018-10-12",
-    isComplete: true,
-    project_id: 2
-  });
-  //7
-  db.Sprint.create({
-    name: "Throw it in trash.",
-    start_date: "2018-10-08",
-    end_date: "2018-10-19",
-    isComplete: true,
-    project_id: 3
-  });
-  db.Sprint.create({
-    name: "Install React instead.",
-    start_date: "2018-10-22",
-    end_date: "2018-11-09",
-    isComplete: false,
-    isActive: true,
-    project_id: 3
-  });
-  //9
-  db.Sprint.create({
-    name: "Phase 1: Collecting Boogers.",
-    start_date: "2018-10-22",
-    end_date: "2018-11-09",
-    isComplete: false,
-    isActive: true,
-    project_id: 4
-  });
-  db.Sprint.create({
-    name: "What is the meaning of life.",
-    start_date: "2018-10-22",
-    end_date: "2018-11-09",
-    isComplete: false,
-    isActive: true,
-    project_id: 5
-  });
-  //11
-  db.Sprint.create({
-    name: "Create MVP.",
-    start_date: "2018-10-01",
-    end_date: "2018-10-05",
-    isComplete: true,
-    project_id: 6
-  });
-  db.Sprint.create({
-    name: "Phase 2: Presentation Preparations.",
-    start_date: "2018-10-08",
-    end_date: "2018-10-12",
-    isComplete: true,
-    project_id: 6
-  });
-  db.Sprint.create({
-    name: "Bug Testing and Deployment.",
-    start_date: "2018-10-15",
-    end_date: "2018-10-19",
-    isComplete: true,
-    project_id: 6
+  }).then(()=>{
+    db.Sprint.create({
+      name: "Eat dummies.",
+      start_date: "2018-09-17",
+      end_date: "2018-09-28",
+      isComplete: true,
+      project_id: 1
+    });
+  }).then(()=>{
+    db.Sprint.create({
+      name: "Dispose of dummies.",
+      start_date: "2018-10-01",
+      end_date: "2018-10-12",
+      isComplete: true,
+      project_id: 1
+    });
+  }).then(()=>{
+    db.Sprint.create({
+      name: "Look for new dummies.",
+      start_date: "2018-10-29",
+      end_date: "2018-11-09",
+      isComplete: false,
+      isActive: true,
+      project_id: 1
+    });
+  }).then(()=>{
+    //5
+    db.Sprint.create({
+      name: "Find itch.",
+      start_date: "2018-10-01",
+      end_date: "2018-10-05",
+      isComplete: true,
+      project_id: 2
+    });
+  }).then(()=>{
+    db.Sprint.create({
+      name: "Scratch itch.",
+      start_date: "2018-10-08",
+      end_date: "2018-10-12",
+      isComplete: true,
+      project_id: 2
+    });
+  }).then(()=>{
+    //7
+    db.Sprint.create({
+      name: "Throw it in trash.",
+      start_date: "2018-10-08",
+      end_date: "2018-10-19",
+      isComplete: true,
+      project_id: 3
+    });
+  }).then(()=>{
+    db.Sprint.create({
+      name: "Install React instead.",
+      start_date: "2018-10-22",
+      end_date: "2018-11-09",
+      isComplete: false,
+      isActive: true,
+      project_id: 3
+    });
+  }).then(()=>{
+    //9
+    db.Sprint.create({
+      name: "Phase 1: Collecting Boogers.",
+      start_date: "2018-10-22",
+      end_date: "2018-11-09",
+      isComplete: false,
+      isActive: true,
+      project_id: 4
+    });
+  }).then(()=>{
+    db.Sprint.create({
+      name: "What is the meaning of life.",
+      start_date: "2018-10-22",
+      end_date: "2018-11-09",
+      isComplete: false,
+      isActive: true,
+      project_id: 5
+    });
+  }).then(()=>{
+    //11
+    db.Sprint.create({
+      name: "Create MVP.",
+      start_date: "2018-10-01",
+      end_date: "2018-10-05",
+      isComplete: true,
+      project_id: 6
+    });
+  }).then(()=>{
+    db.Sprint.create({
+      name: "Phase 2: Presentation Preparations.",
+      start_date: "2018-10-08",
+      end_date: "2018-10-12",
+      isComplete: true,
+      project_id: 6
+    });
+  }).then(()=>{
+    db.Sprint.create({
+      name: "Bug Testing and Deployment.",
+      start_date: "2018-10-15",
+      end_date: "2018-10-19",
+      isComplete: true,
+      project_id: 6
+    });
   });
 },750);
 //////////////////
@@ -607,6 +624,82 @@ setTimeout(()=>{
     stack: "React"
   });
   db.Task.create({
+    name: "Locate Itch.",
+    due_date: "2018-11-08",
+    sprint_id: 5,
+    description: "It is so itchy.",
+    complexity: 2,
+    stack: "React"
+  });
+  db.Task.create({
+    name: "Research if removing skin is a possible way to solve this",
+    due_date: "2018-11-08",
+    sprint_id: 5,
+    description: "It is so itchy.",
+    complexity: 4,
+    stack: "CSS",
+    assigned_id: 3
+  });
+  db.Task.create({
+    name: "Consult the psychic",
+    due_date: "2018-11-08",
+    sprint_id: 5,
+    description: "Will there be a future where I'm not itchy.",
+    complexity: 1,
+    stack: "React"
+  });
+  db.Task.create({
+    name: "Consider the futility of your endeavor.",
+    due_date: "2018-11-08",
+    sprint_id: 5,
+    description: "Life has no meaning.",
+    complexity: 5,
+    stack: "HTML",
+    assigned_id: 3
+  });
+  db.Task.create({
+    name: "Where is the back scratcher.",
+    due_date: "2018-11-08",
+    sprint_id: 6,
+    description: "My hands shant suffice.",
+    complexity: 2,
+    stack: "React",
+    assigned_id: 4
+  });
+  db.Task.create({
+    name: "Where is the hand scratcher.",
+    due_date: "2018-11-08",
+    sprint_id: 6,
+    description: "Your hands might suffice.",
+    complexity: 5,
+    stack: "CSS",
+    assigned_id: 4
+  });
+  db.Task.create({
+    name: "Where is the feet scratcher.",
+    due_date: "2018-11-08",
+    sprint_id: 6,
+    description: "I swear this isn't a foot fetish.",
+    complexity: 4,
+    stack: "React"
+  });
+  db.Task.create({
+    name: "Where is the chainsaw.",
+    due_date: "2018-11-08",
+    sprint_id: 6,
+    description: "That escalated quickly.",
+    complexity: 2,
+    stack: "Javascript"
+  });
+  db.Task.create({
+    name: "Where is the spoon.",
+    due_date: "2018-11-08",
+    sprint_id: 6,
+    description: "That de-escalated quickly.",
+    complexity: 2,
+    stack: "HTML"
+  });
+  db.Task.create({
     name: "Someone throw it in the trash already",
     due_date: "2018-11-08",
     sprint_id: 7,
@@ -620,7 +713,8 @@ setTimeout(()=>{
     sprint_id: 7,
     description: "Seems simple enough.",
     complexity: 1,
-    stack: "React"
+    stack: "Javascript",
+    assigned_id: 2
   });
   db.Task.create({
     name: "Jesus christ, someone please.",
@@ -628,7 +722,7 @@ setTimeout(()=>{
     sprint_id: 7,
     description: "Apparently not simple at all.",
     complexity: 5,
-    stack: "React"
+    stack: "Javascript"
   });
   db.Task.create({
     name: "Read up on what React is.",
@@ -644,7 +738,7 @@ setTimeout(()=>{
     sprint_id: 8,
     description: "It's real bad you guys.",
     complexity: 4,
-    stack: "React"
+    stack: "CSS"
   });
   db.Task.create({
     name: "Listen to Michael talk about how Polymer 3 is way better you guys.",
