@@ -7,8 +7,8 @@ import Icon from '@material-ui/core/Icon';
 import RestoreIcon from '@material-ui/icons/Restore';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
-import Home from "./icons/Home.js"
-import GitHub from "./icons/GitHub.js"
+import Home from "./icons/Home.js";
+import GitHub from "./icons/github-icon.svg";
 
 
 // import githubIcon from "../../../../public/assets/images/git-hub-icon.png";
@@ -48,9 +48,10 @@ class SimpleBottomNavigation extends React.Component {
         {/* <BottomNavigationAction label="Favorites" value="favorites" icon={<FavoriteIcon />} /> */}
         {/* <BottomNavigationAction label="Nearby" value="nearby" icon={<LocationOnIcon />} /> */}
         {/* <BottomNavigationAction label="Folder" value="folder" icon={<Icon>folder</Icon>} /> */}
-        <BottomNavigationAction label="GitHub" value="nearby" icon={<GitHub />} />
 
-        <BottomNavigationAction label="Copyright 2018" value="nearby" icon={<Home />} />
+        <BottomNavigationAction label="GitHub" value="nearby" icon={<img src={GitHub} width="30px"/>} />
+
+        <BottomNavigationAction label="Copyright 2018" value="nearby" icon={<img src={GitHub} width="30px"/>} />
 
 
 
