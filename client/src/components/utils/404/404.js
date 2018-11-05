@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import ContainedButtons from "../../utils/Button.js";
 
 
-
 class notFound extends Component{
 
   state = {
@@ -22,7 +21,7 @@ class notFound extends Component{
   render(){
     return (
         <div style={{
-            backgroundImage: `url("/assets/images/404.png")`,
+            backgroundImage: `url("/assets/images/404.jpg")`,
             maxHeight: "100%",
             height: "100vh",
             backgroundPosition: "center",
