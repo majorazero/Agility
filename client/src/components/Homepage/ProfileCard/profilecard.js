@@ -25,6 +25,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 const styles = theme => ({
     card: {
         width: "100%",
+        background: 'whitesmoke' 
     },
     media: {
         height: 40,

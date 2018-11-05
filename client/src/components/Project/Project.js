@@ -41,6 +41,16 @@ const styles = theme => ({
     }
 });
 
+const theme = createMuiTheme({
+    overrides: {
+        MuiButton: {
+            root: {
+                background: 'none'
+            },
+        },
+    },
+});
+
 
 class Project extends React.Component {
 
@@ -93,26 +103,26 @@ class Project extends React.Component {
     }
 
     componentDidMount() {
-      const { id } = this.props.match.params;
-      axios.post("/api/projectById", {
-        token: "project",
-        id: id
-      }).then((response) => {
-        this.setState({
-          projName: response.data[0].name,
-          summary: response.data[0].summary,
-          projDueDate: response.data[0].due_date,
-          projectId: response.data[0].id,
-          adminId: response.data[0].userId
+        const { id } = this.props.match.params;
+        axios.post("/api/projectById", {
+            token: "project",
+            id: id
+        }).then((response) => {
+            this.setState({
+                projName: response.data[0].name,
+                summary: response.data[0].summary,
+                projDueDate: response.data[0].due_date,
+                projectId: response.data[0].id,
+                adminId: response.data[0].userId
+            });
+            //pass project id here
+            this.getMembers(this.state.sprintId);
+            this.getCurrentUserId();
+        }).catch((err) => {
+            window.location.assign("/404");
         });
-        //pass project id here
-        this.getMembers(this.state.sprintId);
-        this.getCurrentUserId();
-      }).catch((err) => {
-        window.location.assign("/404");
-      });
 
-      // this.ProgressBar();
+        // this.ProgressBar();
     }
 
     // ProgressBar = () => {
@@ -145,64 +155,64 @@ class Project extends React.Component {
     }
 
     handleChange = name => event => {
-      this.setState({
-        [name]: event.target.value,
-      });
+        this.setState({
+            [name]: event.target.value,
+        });
     };
 
     getTasks = () => {
-      // let number = this.state.projects
-      // below we'll just place the variable in where we grab the dynamically updated 'project' that we're on depending on user choice
-      axios.get("/api/task/" + this.state.sprintId).then((res) => {
-        let task = res.data;
-        let unassigned = [];
-        let assigned = [];
-        let completed = [];
+        // let number = this.state.projects
+        // below we'll just place the variable in where we grab the dynamically updated 'project' that we're on depending on user choice
+        axios.get("/api/task/" + this.state.sprintId).then((res) => {
+            let task = res.data;
+            let unassigned = [];
+            let assigned = [];
+            let completed = [];
 
-        console.log(task);
+            console.log(task);
 
-        for (let i = 0; i < task.length; i++) {
-            if (task[i].assigned_id === null) {
-                unassigned.push(task[i])
-            }
+            for (let i = 0; i < task.length; i++) {
+                if (task[i].assigned_id === null) {
+                    unassigned.push(task[i])
+                }
 
-            else if (!task[i].isCompleted) {
-                assigned.push(task[i]);
+                else if (!task[i].isCompleted) {
+                    assigned.push(task[i]);
+                }
+                else if (task[i].isCompleted) {
+                    completed.push(task[i])
+                }
             }
-            else if (task[i].isCompleted) {
-                completed.push(task[i])
-            }
-        }
-        this.setState({
-            unassignedTasks: unassigned,
-            assignedTasks: assigned,
-            completedTasks: completed
-        }, () => {
-            console.log(this.state.sprints)
-        })
-      });
+            this.setState({
+                unassignedTasks: unassigned,
+                assignedTasks: assigned,
+                completedTasks: completed
+            }, () => {
+                console.log(this.state.sprints)
+            })
+        });
     };
 
     addTask = (event) => {
-      event.preventDefault();
-      if(this.state.taskComplexity <= 5 && this.state.taskComplexity >= 1){
-        axios.post("/api/task", {
-            name: this.state.taskName,
-            due_date: this.state.taskDue_date,
-            description: this.state.taskDescription,
-            sprint_id: this.state.sprintId,
-            complexity: this.state.taskComplexity,
-            stack: this.state.taskStack
-        }).then(() => {
-            this.setState({
-                taskOpen: false
+        event.preventDefault();
+        if (this.state.taskComplexity <= 5 && this.state.taskComplexity >= 1) {
+            axios.post("/api/task", {
+                name: this.state.taskName,
+                due_date: this.state.taskDue_date,
+                description: this.state.taskDescription,
+                sprint_id: this.state.sprintId,
+                complexity: this.state.taskComplexity,
+                stack: this.state.taskStack
+            }).then(() => {
+                this.setState({
+                    taskOpen: false
+                });
+                this.getTasks();
             });
-            this.getTasks();
-        });
-      }
-      else {
-        console.log("Invalid complexity value!");
-      }
+        }
+        else {
+            console.log("Invalid complexity value!");
+        }
     }
 
     handleOpen = (name) => {
@@ -268,74 +278,74 @@ class Project extends React.Component {
     };
 
     getSprints = (projectId, userId) => {
-      let sprintData = [];
-      axios.get(`/api/sprints/project/${projectId}/user/${userId}`).then((res) => {
-        if(res.data.length > 0){
-        console.log(res.data)
-        let sprints = res.data
-        let today = new Date();
-        let currentSprint = res.data[0].sprintId;
-        let isActive = false;
+        let sprintData = [];
+        axios.get(`/api/sprints/project/${projectId}/user/${userId}`).then((res) => {
+            if (res.data.length > 0) {
+                console.log(res.data)
+                let sprints = res.data
+                let today = new Date();
+                let currentSprint = res.data[0].sprintId;
+                let isActive = false;
 
-        // check for active sprint
-        for (let i = 0; i < sprints.length; i++) {
-          let endDate = new Date(sprints[i].endDate)
-          let startDate = new Date(sprints[i].startDate)
-          console.log(startDate, endDate)
-          sprintData.push({
-            key: i,
-            label: sprints[i].sprintName,
-            id: sprints[i].sprintId
-          });
-          if (sprints[i].isActive) {
-            //verify end date has not passed
-            if (today > endDate) {
+                // check for active sprint
+                for (let i = 0; i < sprints.length; i++) {
+                    let endDate = new Date(sprints[i].endDate)
+                    let startDate = new Date(sprints[i].startDate)
+                    console.log(startDate, endDate)
+                    sprintData.push({
+                        key: i,
+                        label: sprints[i].sprintName,
+                        id: sprints[i].sprintId
+                    });
+                    if (sprints[i].isActive) {
+                        //verify end date has not passed
+                        if (today > endDate) {
 
+                        }
+                        else {
+                            //set currentSprint, set isActive
+                            currentSprint = sprints[i].sprintId
+                            isActive = true
+                        }
+                    }
+                    else if (today >= startDate && today <= endDate) {
+                        currentSprint = sprints[i].sprintId
+                        isActive = true
+                    }
+                }
+                this.setState({
+                    chipData: sprintData,
+                    sprintId: currentSprint,
+                    activeSprintId: currentSprint,
+                    sprints: res.data,
+                    isActive: isActive
+                });
             }
-            else {
-              //set currentSprint, set isActive
-              currentSprint = sprints[i].sprintId
-              isActive = true
-            }
-          }
-          else if (today >= startDate && today <= endDate) {
-            currentSprint = sprints[i].sprintId
-            isActive = true
-          }
-        }
-        this.setState({
-          chipData: sprintData,
-          sprintId: currentSprint,
-          activeSprintId: currentSprint,
-          sprints: res.data,
-          isActive: isActive
+        }).then(() => {
+            this.getTasks();
+            this.getMembers(this.state.sprintId);
         });
-      }
-      }).then(() => {
-          this.getTasks();
-          this.getMembers(this.state.sprintId);
-      });
     };
 
     addSprint = (event) => {
-      event.preventDefault();
+        event.preventDefault();
 
-      axios.post('/api/sprint', {
-        name: this.state.sprintName,
-        start_date: this.state.sprintStart_date,
-        end_date: this.state.sprintEnd_date,
-        project_id: this.state.projectId
-      }).then((res) => {
-        console.log(this.state.currentUser, res.data.id)
-        axios.post(`/api/sprintMembership`, {userId: this.state.currentUser, sprintId: res.data.id})
-        .then(() => {
-          this.setState({
-            sprintOpen: false
-          }, () => {
-            this.getSprints(this.state.projectId,this.state.currentUser);
-          });
-        })
-      });
+        axios.post('/api/sprint', {
+            name: this.state.sprintName,
+            start_date: this.state.sprintStart_date,
+            end_date: this.state.sprintEnd_date,
+            project_id: this.state.projectId
+        }).then((res) => {
+            console.log(this.state.currentUser, res.data.id)
+            axios.post(`/api/sprintMembership`, { userId: this.state.currentUser, sprintId: res.data.id })
+                .then(() => {
+                    this.setState({
+                        sprintOpen: false
+                    }, () => {
+                        this.getSprints(this.state.projectId, this.state.currentUser);
+                    });
+                })
+        });
     }
 
     getMembers = (sprintId) => {
@@ -373,19 +383,19 @@ class Project extends React.Component {
     }
 
     markComplete = (id) => {
-      console.log("WHAT");
-      axios.put(`/api/complete/task/${id}`)
-        .then(() => {
-          this.getTasks();
-        })
+        console.log("WHAT");
+        axios.put(`/api/complete/task/${id}`)
+            .then(() => {
+                this.getTasks();
+            })
     }
 
     reopenTask = (id) => {
         console.log('Reopen Task', id)
         axios.put(`/api/reopen/task/${id}`)
-        .then(() => {
-          this.getTasks();
-        })
+            .then(() => {
+                this.getTasks();
+            })
     }
 
     switchTaskPool = () => {
@@ -400,218 +410,220 @@ class Project extends React.Component {
     render() {
         const { direction, justify, alignItems } = this.state;
         return (
-          <div>
-            <ButtonAppBar />
-            <div
-                className="parallax"
-                style={{
-                    paddingTop: 50,
+            <div>
+                <ButtonAppBar />
+                <div
+                    className="parallax"
+                    style={{
+                        paddingTop: 50,
+                        overflowX: "hidden",
+                        backgroundImage: `url("/assets/images/background.png")`,
+                        resizeMode: 'cover',
+                        height: "-webkit-fill-available"
+                    }} >
 
-                    // possible?
-                    backgroundImage: `url("/assets/images/background.png")`,
-                    resizeMode: 'cover',
-                    height: "1050px"
-                }} >
-
-                <Grid
-                    container
-                    spacing={8}
-                    style={{ padding: 50 }}
-                >
-                  <Grid item xs={12}>
-                    <Paper
-                      style={{ height: "100%", paddingLeft: 10, paddingRight: 10, paddingTop: 3, paddingBottom: 10 }}
+                    <Grid
+                        container
+                        spacing={8}
+                        style={{ padding: "50px 50px 25px 50px" }}
                     >
-                      {<LinearDeterminate whatBar completed={this.state.SprintTime} title={"Sprint Time"} />}
-                      {<LinearDeterminate completed={this.state.SprintProgress} title={"Sprint Progress"} />}
-                    </Paper>
-                  </Grid>
-                </Grid>
-                <Grid
-                  container
-                  spacing={8}
-                  style={{ padding: 50 }}
-                >
-                  <Grid item xs={12}>
-                    <Paper
-                      style={{ height: "100%" }}
-                    >
-                      {/* <MuiThemeProvider theme={theme}> */}
-
-                      {(this.state.isAdmin === true) ?
-                          <ButtonSizes
-                            onClick={() => this.handleOpen('sprintOpen')}
-                            title="Add a Sprint"
-                            color="secondary"
-                            mini
-                          /> :
-                          ""}
-
-                      {/* </MuiThemeProvider> */}
-                      <SimpleModalSprintWrapped
-                        open={this.state.sprintOpen}
-                        onClose={() => this.handleClose('sprintOpen')}
-                        name="Add a New Sprint ..."
-                        onSubmit={this.addSprint}
-                        onChange={this.handleChange}
-                      >
-                        <AddSprintLayout
-                        />
-                      </SimpleModalSprintWrapped>
-                      <Chips
-                        sprints={this.state.chipData}
-                        onClick={this.updateActiveSprint}
-                        activeSprint={this.state.sprintId}
-                        currentUser={this.state.currentUser}
-                      />
-                    </Paper>
-                  </Grid>
-                </Grid>
-                <Grid
-                  container
-                  spacing={24}
-                  style={{ padding: 50 }}
-                >
-                    <Grid item xs={6}>
-                      <Paper>
-                        <Grid
-                          container
-                          spacing={8}
-                          style={{ padding: 25 }}
-                        >
-                          <Grid item xs>
-                            <SwitchLabel
-                              onChange={this.switchTaskPool}
-                              label="Show Completed Tasks"
-                            />
-                          </Grid>
-                          <Grid item xs>
-                            {(this.state.isAdmin === true) ?
-                              <ButtonSizes
-                                onClick={() => this.handleOpen('taskOpen')}
-                                title="Add a Task"
-                                color="secondary"
-                              /> :
-                              ""}
-                          </Grid>
+                        <Grid item xs={12}>
+                            {/* <MuiThemeProvider theme={theme}> */}
+                            {/* <Paper
+                                    style={{ background: 'none', border: 'none', height: "100%", paddingLeft: 10, paddingRight: 10, paddingTop: 3, paddingBottom: 10 }}
+                                > */}
+                            {<LinearDeterminate whatBar completed={this.state.SprintTime} title={"Sprint Time"} />}
+                            {<LinearDeterminate completed={this.state.SprintProgress} title={"Sprint Progress"} />}
+                            {/* </Paper> */}
+                            {/* </MuiThemeProvider> */}
                         </Grid>
-                        <Grid
-                          container
-                          spacing={8}
-                          style={{ padding: 25 }}
-                        >
-                          <List style={{
-                            width: '100%',
-                            maxWidth: '100%',
-                            position: 'relative',
-                            overflow: 'auto',
-                            maxHeight: 300,
-                          }}>
-                            {!this.state.isActive ?
-                              <ul>
-                                {this.state.showComplete ? this.state.completedTasks.map((task) => {
-                                  return (
-                                    <Pool
-                                      key={task.id}
-                                      id={this.key}
-                                      isAdmin={this.state.isAdmin}
-                                      tasks={task}
-                                      onClickDelete={this.deleteTask.bind(this, task)}
-                                      onClickReopen={() => this.reopenTask(task.id)}
-                                      assignedUser={task.assigned_id}
-                                      currentUser={this.state.currentUser}
-                                      complete
+                    </Grid>
+                    <Grid
+                        container
+                        spacing={8}
+                        style={{ padding: "50px 50px 25px 50px" }}
+                    >
+                        <Grid item xs={12}>
+                            <Paper
+                                style={{ height: "100%", background: 'whitesmoke'  }}
+                            >
+                                {/* <MuiThemeProvider theme={theme}> */}
+
+                                {(this.state.isAdmin === true) ?
+                                    <ButtonSizes
+                                        onClick={() => this.handleOpen('sprintOpen')}
+                                        title="Add a Sprint"
+                                        color="secondary"
+                                        mini
+                                    /> :
+                                    ""}
+
+                                {/* </MuiThemeProvider> */}
+                                <SimpleModalSprintWrapped
+                                    open={this.state.sprintOpen}
+                                    onClose={() => this.handleClose('sprintOpen')}
+                                    name="Add a New Sprint ..."
+                                    onSubmit={this.addSprint}
+                                    onChange={this.handleChange}
+                                >
+                                    <AddSprintLayout
                                     />
-                                  );
-                                }) :
-                                <Summary
-                                  members={this.state.members}
-                                  completed={this.state.completedTasks}
-                                  assigned={this.state.assignedTasks}
-                                  unAssigned={this.state.unassignedTasks}
-                                  currentSprint={this.state.sprintId}
-                                  sprints={this.state.sprints} />}
-                            </ul> :
-                              <ul>
-                                  {/* <MuiThemeProvider theme={theme2}> */}
-                                  {/* {(this.state.isAdmin === true) ?
+                                </SimpleModalSprintWrapped>
+                                <Chips
+                                    // style={{ paddingBottom: 10 }}
+                                    sprints={this.state.chipData}
+                                    onClick={this.updateActiveSprint}
+                                    activeSprint={this.state.sprintId}
+                                    currentUser={this.state.currentUser}
+                                />
+                            </Paper>
+                        </Grid>
+                    </Grid>
+                    <Grid
+                        container
+                        spacing={32}
+                        style={{ padding: 50 }}
+                    >
+                        <Grid item xs={6}>
+                            <Paper style={{ background: 'whitesmoke'  }}>
+                                <Grid
+                                    container
+                                    spacing={8}
+                                    style={{ padding: 25 }}
+                                >
+                                    <Grid item xs>
+                                        <SwitchLabel
+                                            onChange={this.switchTaskPool}
+                                            label="Show Completed Tasks"
+                                        />
+                                    </Grid>
+                                    <Grid item xs>
+                                        {(this.state.isAdmin === true) ?
+                                            <ButtonSizes
+                                                onClick={() => this.handleOpen('taskOpen')}
+                                                title="Add a Task"
+                                                color="secondary"
+                                            /> :
+                                            ""}
+                                    </Grid>
+                                </Grid>
+                                <Grid
+                                    container
+                                    spacing={8}
+                                    style={{ padding: 25 }}
+                                >
+                                    <List style={{
+                                        width: '100%',
+                                        maxWidth: '100%',
+                                        position: 'relative',
+                                        overflow: 'auto',
+                                        maxHeight: 300,
+                                    }}>
+                                        {!this.state.isActive ?
+                                            <ul>
+                                                {this.state.showComplete ? this.state.completedTasks.map((task) => {
+                                                    return (
+                                                        <Pool
+                                                            key={task.id}
+                                                            id={this.key}
+                                                            isAdmin={this.state.isAdmin}
+                                                            tasks={task}
+                                                            onClickDelete={this.deleteTask.bind(this, task)}
+                                                            onClickReopen={() => this.reopenTask(task.id)}
+                                                            assignedUser={task.assigned_id}
+                                                            currentUser={this.state.currentUser}
+                                                            complete
+                                                        />
+                                                    );
+                                                }) :
+                                                    <Summary
+                                                        members={this.state.members}
+                                                        completed={this.state.completedTasks}
+                                                        assigned={this.state.assignedTasks}
+                                                        unAssigned={this.state.unassignedTasks}
+                                                        currentSprint={this.state.sprintId}
+                                                        sprints={this.state.sprints} />}
+                                            </ul> :
+                                            <ul>
+                                                {/* <MuiThemeProvider theme={theme2}> */}
+                                                {/* {(this.state.isAdmin === true) ?
                                       <ButtonSizes
                                           onClick={() => this.handleOpen('taskOpen')}
                                           title="Add a Task"
                                           color="secondary"
                                       /> :
                                       ""} */}
-                                  {/* </MuiThemeProvider> */}
-                                  <SimpleModalWrapped
-                                    open={this.state.taskOpen}
-                                    onClose={() => this.handleClose('taskOpen')}
-                                    name="Add a New Task ..."
-                                    onSubmit={this.addTask}
-                                    onChange={this.handleChange}
-                                  >
-                                    <AddTaskLayout
-                                    />
-                                  </SimpleModalWrapped>
+                                                {/* </MuiThemeProvider> */}
+                                                <SimpleModalWrapped
+                                                    open={this.state.taskOpen}
+                                                    onClose={() => this.handleClose('taskOpen')}
+                                                    name="Add a New Task ..."
+                                                    onSubmit={this.addTask}
+                                                    onChange={this.handleChange}
+                                                >
+                                                    <AddTaskLayout
+                                                    />
+                                                </SimpleModalWrapped>
 
-                                  {this.state.showComplete ? this.state.completedTasks.map((task) => {
-                                    return (
-                                      <Pool
-                                        key={task.id}
-                                        id={this.key}
-                                        isAdmin={this.state.isAdmin}
-                                        tasks={task}
-                                        onClickDelete={this.deleteTask.bind(this, task)}
-                                        onClickReopen={() => this.reopenTask(task.id)}
-                                        assignedUser={task.assigned_id}
-                                        assigned={true}
-                                        currentUser={this.state.currentUser}
-                                        complete
-                                      />
-                                    );
-                                  }) : this.state.unassignedTasks.map((task) => {
-                                    return (
-                                      <Pool
-                                        key={task.id}
-                                        id={this.key}
-                                        isAdmin={this.state.isAdmin}
-                                        tasks={task}
-                                        onClickDelete={this.deleteTask.bind(this, task)}
-                                        onClickAdd={this.assignTask.bind(this, task)}
-                                        currentUser={this.state.currentUser}
-                                      />
-                                    );
-                                  })}
-                              </ul>}
-                            </List>
+                                                {this.state.showComplete ? this.state.completedTasks.map((task) => {
+                                                    return (
+                                                        <Pool
+                                                            key={task.id}
+                                                            id={this.key}
+                                                            isAdmin={this.state.isAdmin}
+                                                            tasks={task}
+                                                            onClickDelete={this.deleteTask.bind(this, task)}
+                                                            onClickReopen={() => this.reopenTask(task.id)}
+                                                            assignedUser={task.assigned_id}
+                                                            assigned={true}
+                                                            currentUser={this.state.currentUser}
+                                                            complete
+                                                        />
+                                                    );
+                                                }) : this.state.unassignedTasks.map((task) => {
+                                                    return (
+                                                        <Pool
+                                                            key={task.id}
+                                                            id={this.key}
+                                                            isAdmin={this.state.isAdmin}
+                                                            tasks={task}
+                                                            onClickDelete={this.deleteTask.bind(this, task)}
+                                                            onClickAdd={this.assignTask.bind(this, task)}
+                                                            currentUser={this.state.currentUser}
+                                                        />
+                                                    );
+                                                })}
+                                            </ul>}
+                                    </List>
+                                </Grid>
+                            </Paper>
                         </Grid>
-                      </Paper>
-                    </Grid>
-                    <Grid item xs={6}>
-                      <Paper
-                        style={{ height: 300 }}
-                      >
-                        <Grid
-                        container
-                        spacing={8}
-                        style={{ padding: 25 }}
-                        >
-                          <Grid item xs>
-                            <UserPool
-                              isAdmin={this.state.isAdmin}
-                              currentUser={this.state.currentUser}
-                              sprintId={this.state.sprintId}
-                              members={this.state.members}
-                              tasks={this.state.assignedTasks}
-                              unassign={this.unassignTask}
-                              onClickDelete={this.deleteTask}
-                              onClickComplete={this.markComplete}
-                            />
-                          </Grid>
+                        <Grid item xs={6}>
+                            <Paper
+                                style={{ height: '100%', background: 'whitesmoke' }}
+                            >
+                                <Grid
+                                    container
+                                    spacing={8}
+                                    style={{ padding: 25 }}
+                                >
+                                    <Grid item xs>
+                                        <UserPool
+                                            isAdmin={this.state.isAdmin}
+                                            currentUser={this.state.currentUser}
+                                            sprintId={this.state.sprintId}
+                                            members={this.state.members}
+                                            tasks={this.state.assignedTasks}
+                                            unassign={this.unassignTask}
+                                            onClickDelete={this.deleteTask}
+                                            onClickComplete={this.markComplete}
+                                        />
+                                    </Grid>
+                                </Grid>
+                            </Paper>
                         </Grid>
-                      </Paper>
                     </Grid>
-                </Grid>
-              </div>
+                </div>
 
 
                 {/* <div style={{ paddingTop: "100px" }}>

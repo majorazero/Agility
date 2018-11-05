@@ -43,12 +43,12 @@ const styles = theme => ({
 });
 
 class InputTextField extends React.Component {
-    state = {
-        name: 'Cat in the Hat',
-        age: '',
-        multiline: 'Controlled',
-        currency: 'EUR',
-    };
+    // state = {
+    //     name: 'Cat in the Hat',
+    //     age: '',
+    //     multiline: 'Controlled',
+    //     currency: 'EUR',
+    // };
 
     handleChange = name => event => {
         this.setState({
@@ -74,7 +74,7 @@ class InputTextField extends React.Component {
                     name={this.props.name}
                 />
                 <MuiThemeProvider theme={theme}>
-                    <Button variant="outlined" size="small" color="secondary" className={classes.button}>
+                    <Button type="submit" variant="outlined" size="small" color="secondary" className={classes.button}>
                         Submit
         </Button>
                 </MuiThemeProvider>
