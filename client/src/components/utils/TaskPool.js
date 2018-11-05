@@ -48,27 +48,6 @@ function SimpleExpansionPanel(props) {
               </Typography>
             </Grid>
           </Grid>
-          {/* {(location.pathname === "/homepage") ? null :  */}
-
-          {/* {props.isAdmin ?
-            <ContainedButtons
-              name={props.assigned ? "Unassign" : "Claim"}
-              color="primary"
-              onClick={props.assigned ? props.unAssign : props.onClickAdd}
-            />
-            :
-          (props.assigned && (props.currentUser === props.assignedUser)) ?
-            <ContainedButtons
-              name='Unassign'
-              color="primary"
-              onClick={props.unAssign}
-            />
-            :
-          <ContainedButtons
-            name='Claim'
-            color="primary"
-            onClick={props.onClickAdd}
-          />} */}
           <Grid container
             direction="row"
             justify="flex-end"
@@ -101,22 +80,6 @@ function SimpleExpansionPanel(props) {
                 /></Grid>)
             }
           </Grid>
-
-          {/* {(location.pathname === "/homepage") ? null :  */}
-          {/* {props.isAdmin ?
-          <ContainedButtons
-            name={props.assigned ? "Mark Complete" : "Delete"}
-            color="secondary"
-            onClick={props.assigned ? props.onClickComplete : props.onClickDelete}
-          />
-          :
-          (props.assigned && (props.currentUser === props.assignedUser)) ?
-          <ContainedButtons
-            name={props.assigned ? "Mark Complete" : "Delete"}
-            color="secondary"
-            onClick={props.assigned ? props.onClickComplete : props.onClickDelete}
-          /> : ""} */}
-          {/* } */}
         </ExpansionPanelDetails>
       </Grid>
     </ExpansionPanel>
