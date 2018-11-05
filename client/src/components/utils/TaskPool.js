@@ -72,7 +72,7 @@ function SimpleExpansionPanel(props) {
               />
               :
               (<div><ContainedButtons
-              name={props.complete ? (props.isAdmin ? 'Reopen':null):(props.assigned ? 'Unassign':'Claim') }
+              name={props.complete ? 'Reopen':(props.assigned ? 'Unassign':'Claim') }
               color="primary"
               onClick={props.assigned ? (props.complete ? props.onClickReopen : props.unAssign) : props.onClickAdd}
               hidden = {(props.currentUser === props.assignedUser) ? false:(props.isAdmin ? false: true)}
