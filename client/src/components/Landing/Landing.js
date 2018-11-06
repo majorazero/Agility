@@ -189,7 +189,7 @@ class Landing extends Component {
               spacing={24}
             >
               <Typography variant="h5" gutterBottom color="textSecondary" align="center">
-                We desired to design and build a project management tool that was constructed from the ground up to work successfully within an agile environment. Our mission is to help project managers foster teamwork, promote accountability, and ensure efficiency within the project-management environment.
+                In a time where data is king and drives efficiency and progress, we desired to design and build a data-driven project management tool that was constructed from the ground up to work successfully within an agile environment. Our mission is to help project managers foster teamwork, promote accountability, and ensure efficiency within the project-management environment.
               </Typography>
             </Grid>
           </Grid>
