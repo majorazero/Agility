@@ -233,7 +233,6 @@ class Homepage extends Component {
             </Grid>
           </Grid>
           {/* </Grid> */}
-          <SimpleBottomNavigation />
 
           </div >
       </div >

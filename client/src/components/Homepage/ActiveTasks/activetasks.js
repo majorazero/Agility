@@ -24,7 +24,7 @@ const ActiveTasks = (props) => (
         >
             {props.tasks.map((sprint, i) => (
                 <li key={i}>
-                    <ListSubheader style={{ backgroundColor: 'whitesmoke' }}>{sprint.sprint}</ListSubheader>
+                    <ListSubheader style={{ backgroundColor: 'whitesmoke', color: 'black', fontWeight: 'bold' }}>{sprint.sprint}</ListSubheader>
                     {sprint.tasks.map((task, index) => {
                         console.log(task.sprintId)
                         return(

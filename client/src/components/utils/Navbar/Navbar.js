@@ -12,6 +12,8 @@ import Drawer from './Drawer.js';
 const styles = {
   root: {
     flexGrow: 1,
+    // backgroundColor: 'lightslategray',
+    // opacity: .95
   },
   grow: {
     flexGrow: 1,
@@ -20,6 +22,10 @@ const styles = {
     marginLeft: -12,
     marginRight: 20,
   },
+  balls: {
+    backgroundColor: 'lightslategray',
+    opacity: .95
+  }
 };
 
 
@@ -28,7 +34,7 @@ function ButtonAppBar(props) {
   const { classes } = props;
   return (
     <div className={classes.root}>
-      <AppBar position="fixed" color="primary">
+      <AppBar position="fixed" color="primary" className={classes.balls}>
         <Toolbar>
           <Drawer />
           <Typography to="/" variant="h4" color="inherit" className={classes.grow}>

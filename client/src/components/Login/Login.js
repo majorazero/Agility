@@ -5,6 +5,7 @@ import LoginLayout from "../utils/LoginLayout.js";
 import SimpleBottomNavigation from "../utils/Footer/Footer.js";
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
 class Login extends Component {
   state = {
@@ -52,8 +53,6 @@ class Login extends Component {
           resizeMode: 'cover',
           height: "-webkit-fill-available"
         }} >
-
-
         <Grid container>
           <Grid
             item
@@ -78,6 +77,9 @@ class Login extends Component {
               onSubmit={this.handleSubmit}
               onChange={this.handleChange}
             />
+            <Typography variant="overline" gutterBottom>
+              {this.state.message}
+            </Typography>
           </Grid>
           <Grid container>
             <Grid
