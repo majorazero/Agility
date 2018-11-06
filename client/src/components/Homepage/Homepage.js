@@ -96,7 +96,7 @@ class Homepage extends Component {
         <div
           className="parallax"
           style={{
-            paddingTop: 50,
+            paddingTop: 75,
             overflowX: "hidden",
             // backgroundImage: 'linear-gradient(to bottom right, grey , lightgrey)',
             backgroundImage: `url("/assets/images/homepage3.jpg")`,
@@ -127,7 +127,7 @@ class Homepage extends Component {
               <Grid
                 container
                 spacing={24}
-                style={{ padding: 50, }}
+                style={{ padding: 25, }}
               >
                 <Grid
                   item
@@ -140,9 +140,8 @@ class Homepage extends Component {
                     <Grid
                       container
                       spacing={8}
-                      style={{ padding: 25 }}
                     >
-                      <Grid item xs>
+                      <Grid item xs style={{ padding: '25px 25px 0 25px' }}>
                         <Typography fullWidth variant="h5" gutterBottom>Active Tasks</Typography>
                       </Grid>
                     </Grid>
@@ -219,7 +218,7 @@ class Homepage extends Component {
           </Grid>*/}
           <Grid
             container
-            style={{ padding: 50, justifyContent: 'center', }}
+            style={{ padding: 25, justifyContent: 'center', }}
             spacing={8}
           >
             <Grid item xs={12} >
