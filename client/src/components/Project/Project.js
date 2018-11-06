@@ -499,7 +499,7 @@ class Project extends React.Component {
                                             currentUser={this.state.currentUser}
                                         />
                                     </Grid>
-                                    <div style={{marginRight: 5}}>
+                                    <div style={{ marginRight: 5}}>
                                     {(this.state.isAdmin === true) ?
                                             <ButtonSizes
                                                 onClick={() => this.handleOpen('sprintOpen')}
