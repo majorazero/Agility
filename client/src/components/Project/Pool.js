@@ -7,14 +7,15 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import PropTypes from 'prop-types';
 
-const styles = theme => ({
+const styles = {
     root: {
-        width: '100%',
-        maxWidth: 360,
-        backgroundColor: theme.palette.background.paper,
-        position: 'relative',
-        overflow: 'auto',
-        maxHeight: 300,
+        // width: '100%',
+        // maxWidth: 360,
+        // backgroundColor: theme.palette.background.paper,
+        // position: 'relative',
+        // overflow: 'auto',
+        // maxHeight: 300,
+        padding: 0
     },
     listSection: {
         backgroundColor: 'inherit',
@@ -23,7 +24,10 @@ const styles = theme => ({
         backgroundColor: 'inherit',
         padding: 0,
     },
-});
+    listItem: {
+        padding: 0
+    }
+}
 
 const Pool = (props) => {
     const { classes } = props;
@@ -36,6 +40,9 @@ const Pool = (props) => {
                 display: "table-caption",
                 width: "100%"
             }}
+            classes = {
+                {root: classes.root}
+            }
         >
             <SimpleExpansionPanel
                 currentUser={props.currentUser}
@@ -66,4 +73,9 @@ const Pool = (props) => {
     );
 };
 
-export default Pool;
+Pool.propTypes = {
+    classes: PropTypes.object.isRequired,
+  };
+
+export default withStyles(styles)(Pool);
+

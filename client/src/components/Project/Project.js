@@ -24,14 +24,9 @@ import moment from "moment";
 import ListItem from '@material-ui/core/ListItem';
 import List from '@material-ui/core/List';
 
-const styles = theme => ({
+const styles = {
     root: {
-        width: '100%',
-        maxWidth: 360,
-        backgroundColor: theme.palette.background.paper,
-        position: 'relative',
-        overflow: 'auto',
-        maxHeight: 300,
+        padding: '0px 30px 0px 10px'
     },
     listSection: {
         backgroundColor: 'inherit',
@@ -40,7 +35,7 @@ const styles = theme => ({
         backgroundColor: 'inherit',
         padding: 0,
     }
-});
+}
 
 const theme = createMuiTheme({
     overrides: {
@@ -54,6 +49,7 @@ const theme = createMuiTheme({
 
 
 class Project extends React.Component {
+
     state = {
         //this is the project's personal info
         projName: "",
@@ -439,6 +435,7 @@ class Project extends React.Component {
 
     render() {
         const { direction, justify, alignItems } = this.state;
+        const { classes } = this.props
         return (
             <div>
                 <ButtonAppBar />
@@ -562,7 +559,7 @@ class Project extends React.Component {
                                                     {this.state.showComplete ? this.state.completedTasks.map((task) => {
                                                         return (
                                                             <ul>
-                                                                <ListItem>
+                                                                <ListItem classes={{root: classes.root}}>
                                                                     <Pool
                                                                         key={task.id}
                                                                         id={this.key}
@@ -610,7 +607,7 @@ class Project extends React.Component {
                                                     {this.state.showComplete ? this.state.completedTasks.map((task) => {
                                                         return (
                                                             <ul>
-                                                                <ListItem>
+                                                                <ListItem classes={{root: classes.root}}>
                                                                     <Pool
                                                                         key={task.id}
                                                                         id={this.key}
@@ -629,7 +626,7 @@ class Project extends React.Component {
                                                     }) : this.state.unassignedTasks.map((task) => {
                                                         return (
                                                             <ul>
-                                                                <ListItem>
+                                                                <ListItem classes={{root: classes.root}}>
                                                                     <Pool
                                                                         key={task.id}
                                                                         id={this.key}
@@ -852,4 +849,9 @@ class Project extends React.Component {
     }
 }
 
-export default Project;
+Project.propTypes = {
+    classes: PropTypes.object.isRequired,
+  };
+  
+export default withStyles(styles)(Project);
+
