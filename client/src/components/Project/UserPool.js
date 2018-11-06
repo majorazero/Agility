@@ -9,6 +9,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import Avatary from '../utils/Avatar.js';
+import Divider from '@material-ui/core/Divider';
+import { Typography } from '@material-ui/core';
 
 const styles = {
   gridItem: {
@@ -29,7 +32,7 @@ class UserPool extends Component {
 
     this.state = {
       users: [],
-      tasks: [], 
+      tasks: [],
       extended: null
     };
   }
@@ -42,7 +45,7 @@ class UserPool extends Component {
     if ((prevProps.sprintId !== this.props.sprintId) || (prevProps.tasks !== this.props.tasks) || (prevProps.members !== this.props.members)) {
       this.render();
     }
-      console.log("PROPS",this.props);
+    console.log("PROPS", this.props);
   }
 
   handleChange = panel => (event, expanded) => {
@@ -57,44 +60,47 @@ class UserPool extends Component {
     return (
       <div>
         <List
-            subheader={<li />}
-            style={{
-                width: '100%',
-                maxWidth: '100%',
-                position: 'relative',
-                overflow: 'auto',
-                maxHeight: 300,
-            }}
+          subheader={<li />}
+          style={{
+            width: '100%',
+            maxWidth: '100%',
+            position: 'relative',
+            overflow: 'auto',
+            maxHeight: 300,
+          }}
         >
-            {this.props.members.map((member, i) => (
-                <li key={i}>
-                    <ListSubheader style={{ backgroundColor: 'whitesmoke', color: 'black' }}>{member.User.first_name} {member.User.last_name}</ListSubheader>
-                    {this.props.tasks.filter(task => task.assigned_id === member.User.id).map(fTask => {
-                        return(
-                        <ul>
-                        <ListItem key={fTask.id} classes={{root: classes.root}}>
-                            <Pool
-                                id={this.key}
-                                isAdmin={this.props.isAdmin}
-                                currentUser={this.props.currentUser}
-                                assignedUser={fTask.assigned_id}
-                                tasks={fTask}
-                                onClickDelete={() => this.props.onClickDelete(fTask)}
-                                unAssign={() => this.props.unassign(fTask.id)}
-                                onClickComplete={() => this.props.onClickComplete(fTask.id)}
-                                expanded={expanded === `panel${fTask.id}`} 
-                                onChange={this.handleChange(`panel${fTask.id}`)}
-                                assigned
-                            />
-                        </ListItem>
-                        </ul>
-                    )})
-                }
+          {this.props.members.map((member, i) => (
+            <li key={i}>
+              <Divider />
+              <ListSubheader style={{ backgroundColor: 'whitesmoke', color: 'black', height: 50, display: 'flex', alignItems: 'center' }}><div><Avatary /></div><div style={{ justifyContent: 'flex-end' }}><Typography variant="h6" gutterBottom>{member.User.first_name} {member.User.last_name}</Typography></div></ListSubheader>
+              <Divider />
+              {this.props.tasks.filter(task => task.assigned_id === member.User.id).map(fTask => {
+                return (
+                  <ul>
+                    <ListItem key={fTask.id} classes={{ root: classes.root }}>
+                      <Pool
+                        id={this.key}
+                        isAdmin={this.props.isAdmin}
+                        currentUser={this.props.currentUser}
+                        assignedUser={fTask.assigned_id}
+                        tasks={fTask}
+                        onClickDelete={() => this.props.onClickDelete(fTask)}
+                        unAssign={() => this.props.unassign(fTask.id)}
+                        onClickComplete={() => this.props.onClickComplete(fTask.id)}
+                        expanded={expanded === `panel${fTask.id}`}
+                        onChange={this.handleChange(`panel${fTask.id}`)}
+                        assigned
+                      />
+                    </ListItem>
+                  </ul>
+                )
+              })
+              }
 
-                </li>
-            ))}
+            </li>
+          ))}
         </List>
-    </div>
+      </div>
       // <Grid container spacing={24}
       //   direction="column"
       //   justify="flex-start"

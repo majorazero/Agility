@@ -55,7 +55,7 @@ class Landing extends Component {
       {
         name: "Michael Reza Sanaiha",
         image: "/assets/images/itsmeinasuit.jpeg",
-        summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        summary: "With a passion for the visual arts, Michael brings a valuable perspective to the user experience and design."
       },
       {
         name: "Yair Joseph",
@@ -98,7 +98,7 @@ class Landing extends Component {
               }}
             >
 
-              <Typography component="h2" variant="h1" gutterBottom style={{textShadow: "1px 1px rgb(0, 0, 0, 0.5)"}}>agility.</Typography>
+              <Typography component="h2" variant="h1" gutterBottom style={{ textShadow: "1px 1px rgb(0, 0, 0, 0.5)" }}>agility.</Typography>
 
               <MuiThemeProvider theme={theme}>
                 <ContainedButtons
@@ -137,10 +137,10 @@ class Landing extends Component {
             >
               <Typography variant="h6" gutterBottom color="textSecondary" align="center">
 
-                "Collaboration is challenging. We’re here to make it easier."  - The <span style={{fontStyle: 'italic'}}>agility.</span> Team
+                "Collaboration is challenging. We’re here to make it easier."  - The <span style={{ fontStyle: 'italic' }}>agility.</span> Team
                 <br />
                 <br />
-                <span style={{fontStyle: 'italic'}}>agility.</span> is a project management app that tracks the progress of its individual users with the principal intent of promoting accountability and providing the opportunity to ensure innovation for future projects. This is done by visualizing not only the successes but also the conflicts as they occur throughout the entirety of a given project.  Daunting projects can therefore be effectively analyzed and broken down to allow for a better and overall more streamlined process. The app is specifically designed for project managers, allowing them the ability to assign tasks to project workers and monitor the efficiency of each member assigned a task within a project sprint. Ultimately, we believe this will drive the best collaborative results.
+                <span style={{ fontStyle: 'italic' }}>agility.</span> is a project management app that tracks the progress of its individual users with the principal intent of promoting accountability and providing the opportunity to ensure innovation for future projects. This is done by visualizing not only the successes but also the conflicts as they occur throughout the entirety of a given project.  Daunting projects can therefore be effectively analyzed and broken down to allow for a better and overall more streamlined process. The app is specifically designed for project managers, allowing them the ability to assign tasks to project workers and monitor the efficiency of each member assigned a task within a project sprint. Ultimately, we believe this will drive the best collaborative results.
               </Typography>
             </Grid>
           </Grid>
@@ -150,7 +150,7 @@ class Landing extends Component {
               direction="column"
               justify="center"
               alignItems="stretch"
-              spacing={24}
+              spacing={8}
               style={{
                 // backgroundImage: `url("/assets/images/background.png")`,
                 // resizeMode: 'cover',
@@ -164,11 +164,21 @@ class Landing extends Component {
               }}
             >
 
-              <Typography variant="h3" gutterBottom>
-                <img src="./assets/images/demo1.gif" width="400" />
-                <img src="./assets/images/demo2.gif" width="400" />
-                <img src="./assets/images/demo3.gif" width="400" />
-              </Typography>
+              <Grid item xs={6} style={{ width: 450, height: 450 }}>
+                <img src="./assets/images/demo1.gif" style={{ width: '100%', height: '100%' }} />
+              </Grid>
+              <Grid item xs={6} style={{ width: 450, height: 450 }}>
+                <img src="./assets/images/demo2.gif" style={{ width: '100%', height: '100%' }} />
+              </Grid>
+              {/* <Grid item xs={4} style={{ width: 450, height: 450,  }}>
+                <img src="./assets/images/demo3.gif" style={{ height: '100%', overflow: 'hidden' }} />
+              </Grid> */}
+
+              {/* <Typography variant="h3" gutterBottom>
+                
+                
+                
+              </Typography> */}
 
               {/* <div style={{backgroundImage: `url("/assets/images/down-arrow.png")`}} ></div> */}
             </Grid>
@@ -213,7 +223,7 @@ class Landing extends Component {
               }}
             >
 
-              <Typography variant="h3" gutterBottom style={{textShadow: "1px 1px rgb(0, 0, 0, 0.5)"}}>The Team</Typography>
+              <Typography variant="h3" gutterBottom style={{ textShadow: "1px 1px rgb(0, 0, 0, 0.5)" }}>The Team</Typography>
 
               <Grid container spacing={32}>
                 <Grid item xs={12}>

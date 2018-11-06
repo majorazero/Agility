@@ -479,16 +479,22 @@ class Project extends React.Component {
                                     <Typography fullWidth variant="h5" gutterBottom>Sprints</Typography>
                                 </Grid>
 
+                                {/* <Grid
+                                    container
+                                    spacing={8}
+                                >
+                                    <Grid item xs>
+
+
+                                        
+                                    </Grid>
+                                </Grid> */}
                                 <Grid
                                     container
                                     spacing={8}
                                 >
                                     <Grid item xs>
-                                        {/* <MuiThemeProvider theme={theme}> */}
-
-
-                                        {/* </MuiThemeProvider> */}
-                                        <SimpleModalSprintWrapped
+                                    <SimpleModalSprintWrapped
                                             open={this.state.sprintOpen}
                                             onClose={() => this.handleClose('sprintOpen')}
                                             name="Add a New Sprint ..."
@@ -498,13 +504,6 @@ class Project extends React.Component {
                                             <AddSprintLayout
                                             />
                                         </SimpleModalSprintWrapped>
-                                    </Grid>
-                                </Grid>
-                                <Grid
-                                    container
-                                    spacing={8}
-                                >
-                                    <Grid item xs>
                                         <Chips
                                             // style={{ paddingBottom: 10 }}
                                             sprints={this.state.chipData}
@@ -547,7 +546,7 @@ class Project extends React.Component {
                                 <Grid
                                     container
                                     spacing={8}
-                                    style={{ padding: 25 }}
+                                    style={{ padding: '0 25px 0 25px' }}
                                 >
                                     <Grid item xs={6}>
                                         <SwitchLabel
