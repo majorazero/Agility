@@ -705,7 +705,7 @@ class Project extends React.Component {
                                 {/* <Paper
                                         style={{ background: 'none', border: 'none', height: "100%", paddingLeft: 10, paddingRight: 10, paddingTop: 3, paddingBottom: 10 }}
                                     > */}
-                                {(this.state.isActive) ?       <LinearDeterminate whatBar completed={this.state.SprintTime} title={"Sprint Time"} /> : ""}
+                                {(this.state.isActive) ? <LinearDeterminate whatBar completed={this.state.SprintTime} title={"Sprint Time"} /> : ""}
                                 <LinearDeterminate completed={this.state.SprintProgress} title={"Sprint Progress"} />
                                 {/* </Paper> */}
                                 {/* </MuiThemeProvider> */}

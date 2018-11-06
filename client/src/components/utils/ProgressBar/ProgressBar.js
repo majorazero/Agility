@@ -79,7 +79,7 @@ class LinearDeterminate extends React.Component {
         var whatBar = this.props.whatBar
         return (
             <div className={classes.root}>
-                <h3 style={{ textAlign: "center", color:"white" }}>{this.props.title}</h3>
+                <h3 style={{ textAlign: "center", color:"white",textShadow: "2px 2px black"}}>{this.props.title}</h3>
                 <LinearProgress color={(whatBar) ? "primary" : "secondary"} variant="determinate" value={this.props.completed} />
                 
             </div>
