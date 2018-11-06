@@ -39,7 +39,7 @@ const styles = theme => ({
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    marginTop: theme.spacing.unit * 8,
+    marginTop: theme.spacing.unit * 1,
     display: 'flex',
     flexDirection: 'column',
     justify: "center",
@@ -68,7 +68,7 @@ function AddTaskLayout(props) {
           </FormControl>
           <FormControl margin="normal" required fullWidth>
             <DatePickers
-              label=""
+              label="Due Date"
               id="due_date"
               name="due_date"
               autoComplete="due_date"

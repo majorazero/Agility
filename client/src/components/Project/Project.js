@@ -520,6 +520,7 @@ class Project extends React.Component {
                                                 onClick={() => this.handleOpen('sprintOpen')}
                                                 title="Add a Sprint"
                                                 color="secondary"
+                                                placement="left"
                                                 mini
                                             /> :
                                             ""}
@@ -568,6 +569,7 @@ class Project extends React.Component {
                                                     onClick={() => this.handleOpen('taskOpen')}
                                                     title="Add a Task"
                                                     color="secondary"
+                                                    placement="top"
                                                 /> : null)
                                             : null}
                                     </Grid>
