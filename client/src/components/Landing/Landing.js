@@ -44,8 +44,8 @@ class Landing extends Component {
     creator: [
       {
         name: "Daniel Hsu",
-        image: "/assets/images/dan.png",
-        summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        image: "/assets/images/dan.jpg",
+        summary: "This seemed like a good idea at the time."
       },
       {
         name: "Matt Purpura",
