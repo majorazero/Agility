@@ -539,7 +539,7 @@ class Project extends React.Component {
                             style={{ height: 'fit-content' }}
                         >
                             <Paper
-                                style={{ background: 'whitesmoke', height: '100%' }}
+                                style={{ background: 'whitesmoke', height: '100%', maxHeight: '100%' }}
                             >
                                 <Grid item xs={12} style={{ padding: '25px 25px 0 25px' }}>
                                     <Typography fullWidth variant="h5" gutterBottom>Tasks</Typography>
@@ -686,7 +686,7 @@ class Project extends React.Component {
                         </Grid>
                         <Grid item xs={6} style={{ height: 'fit-content' }}>
                             <Paper
-                                style={{ height: '100%', }}
+                                style={{ height: '100%', maxHeight: '100%' }}
                             >
                                 <Grid item xs={12} style={{ padding: '25px 25px 0 25px' }}>
                                     <Typography fullWidth variant="h5" gutterBottom>Project Users</Typography>

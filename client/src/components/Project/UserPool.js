@@ -68,7 +68,7 @@ class UserPool extends Component {
         >
             {this.props.members.map((member, i) => (
                 <li key={i}>
-                    <ListSubheader style={{ backgroundColor: 'whitesmoke' }}>{member.User.first_name} {member.User.last_name}</ListSubheader>
+                    <ListSubheader style={{ backgroundColor: 'whitesmoke', color: 'black' }}>{member.User.first_name} {member.User.last_name}</ListSubheader>
                     {this.props.tasks.filter(task => task.assigned_id === member.User.id).map(fTask => {
                         return(
                         <ul>
