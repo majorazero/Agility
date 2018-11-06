@@ -5,7 +5,7 @@ const encrypt = require("./helper/encrypt.js");
 /// Users
 /////////////////
 for(let i = 0; i < 20; i++){
-  let firstName = ["Winstonella", "Lincolnberry", "Rundy", "Millyfille", "Nurlly", "Sunnyish", "Yabooboo", "Rickety", "Zachadouche", "Xenaphile", "Dourina", "Ethenol", "Andy", "Hookerish", "Tiki-tock", "Kripperino", "Sebarstian", "Fronk","Balls","Gunslinger","Moon Moon"];
+  let firstName = ["Winstonella", "Lincolnberry", "Rundy", "Millyfille", "Nurlly", "Sunnyish", "Yabooboo", "RicketyDickety", "Zachadouche", "Xenaphile", "Dourina", "Ethenol", "Andy", "Hookerish", "Tiki-tock", "Kripperino", "Sebarstian", "Fronk","Balls","Gunslinger","Moon Moon"];
   let lastName = ["Tire-Fire","Banana-Pants","Bobertfarter","Knickerknacker","No-Beard", "Melon-Baller", "Farts-A-Lot","Balls","Unkindman","Unkindwoman","Fathuman","Mailmanfurter","Hotdog-diggity","Cricket","Nichaelmuncher","McGee","Poopy-Pants","Trianglenips","No-neck","In-A-Box"];
   db.User.create({
     first_name: firstName[Math.floor(Math.random()*firstName.length)],

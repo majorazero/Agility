@@ -23,7 +23,7 @@ import GridList from '@material-ui/core/GridList';
 
 const styles = {
   list: {
-    width: 250,
+    width: 'fit-content',
   },
   fullList: {
     width: 'auto',
@@ -38,7 +38,8 @@ const theme = createMuiTheme({
   overrides: {
     MuiButton: {
       root: {
-        height: 2
+        height: 2,
+        width: '100%'
       },
     },
   },
@@ -120,7 +121,7 @@ class TemporaryDrawer extends React.Component {
                     onProjectPress={() => { this.onProjectPress(item.id) }} />
                 </MuiThemeProvider>
               )
-            })};
+            })}
           {/* </GridList> */}
         </List>
       </div>

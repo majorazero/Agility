@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import { Link } from "react-router-dom";
 import ContainedButtons from "../../utils/Button.js";
-
-
+import Paper from '@material-ui/core/Paper';
+import "./404.css";
 
 class notFound extends Component{
 
@@ -22,33 +22,37 @@ class notFound extends Component{
   render(){
     return (
         <div style={{
-            backgroundImage: `url("/assets/images/404.png")`,
+            backgroundImage: `url("/assets/images/404.jpg")`,
             maxHeight: "100%",
             height: "100vh",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
             backgroundSize:"cover",
-            backgroundColor: "rgb(6, 5, 5,9.5)",
             zIndex: 5,
             display: "flex",
             overflow: "hidden"
         }}>
         <div style={{
-            margin: "500px",
+            margin: "250px",
             zIndex: 10,
         }}>
-          <ContainedButtons
-            size="large"
-            component={Link}
-            to="/"
-            name={this.state.message}
-            color="secondary"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center"
-            }}
-          />
+          <Paper style={{backgroundColor:"rgba(0, 0, 0, 0.1)", color:"white", padding: "40px"}}>
+            <div className="main">404</div>
+            <div id="helperMsg">Looks like you wandered to the wrong work space. Give us a moment to find where you should be. </div>
+
+{/*            <ContainedButtons
+              size="large"
+              component={Link}
+              to="/"
+              name={this.state.message}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center"
+              }}
+            />*/}
+          </Paper>
+
         </div>
       </div>
     );

@@ -41,7 +41,7 @@ class ProjectList extends Component {
   populate = () => {
     if (this.state.projects.length === 0) {
       //maybe ill replace this with something if no projects appeared yet.
-      return <h1>Oops no projects yet.</h1>;
+      return <h1>Start a new project!</h1>;
     }
     else {
       return this.state.projects.map((item) => {

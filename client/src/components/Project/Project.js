@@ -23,6 +23,7 @@ import LinearDeterminate from "../utils/ProgressBar/ProgressBar.js";
 import moment from "moment";
 import ListItem from '@material-ui/core/ListItem';
 import List from '@material-ui/core/List';
+import SimplePopper from '../utils/popovertext.js'
 
 const styles = {
     root: {
@@ -444,27 +445,12 @@ class Project extends React.Component {
                     style={{
                         paddingTop: 50,
                         overflowX: "hidden",
+                        // backgroundImage: 'linear-gradient(to right, grey , lightgrey)',
                         backgroundImage: `url("/assets/images/background.png")`,
                         resizeMode: 'cover',
                         height: "-webkit-fill-available"
                     }} >
 
-                    <Grid
-                        container
-                        spacing={8}
-                        style={{ padding: "50px 50px 25px 50px" }}
-                    >
-                        <Grid item xs={12}>
-                            {/* <MuiThemeProvider theme={theme}> */}
-                            {/* <Paper
-                                    style={{ background: 'none', border: 'none', height: "100%", paddingLeft: 10, paddingRight: 10, paddingTop: 3, paddingBottom: 10 }}
-                                > */}
-                            {<LinearDeterminate whatBar completed={this.state.SprintTime} title={"Sprint Time"} />}
-                            {<LinearDeterminate completed={this.state.SprintProgress} title={"Sprint Progress"} />}
-                            {/* </Paper> */}
-                            {/* </MuiThemeProvider> */}
-                        </Grid>
-                    </Grid>
                     <Grid
                         container
                         spacing={8}
@@ -524,10 +510,16 @@ class Project extends React.Component {
                                     spacing={8}
                                     style={{ padding: 25 }}
                                 >
-                                    <Grid item xs>
+                                    <Grid item xs = {6}>
                                         <SwitchLabel
                                             onChange={this.switchTaskPool}
                                             label="Show Completed Tasks"
+                                        />
+                                    </Grid>
+                                    <Grid item xs style = {{display:"flex", justifyContent:"flex-start", marginTop: 7}}>
+                                        <SimplePopper
+                                            onPoperClick={this.inviteMember}
+                                            message={this.state.inviteCode}
                                         />
                                     </Grid>
                                     <Grid item xs>
@@ -538,8 +530,7 @@ class Project extends React.Component {
                                                 color="secondary"
                                             /> :
                                             ""}
-                                        <button onClick={this.inviteMember}>Invite Code</button>
-                                        {this.state.inviteCode}
+
                                     </Grid>
                                 </Grid>
                                 <Grid
@@ -668,6 +659,22 @@ class Project extends React.Component {
                                     </Grid>
                                 </Grid>
                             </Paper>
+                        </Grid>
+                        <Grid
+                            container
+                            spacing={8}
+                            style={{ padding: "50px 50px 25px 50px" }}
+                        >
+                            <Grid item xs={12}>
+                                {/* <MuiThemeProvider theme={theme}> */}
+                                {/* <Paper
+                                        style={{ background: 'none', border: 'none', height: "100%", paddingLeft: 10, paddingRight: 10, paddingTop: 3, paddingBottom: 10 }}
+                                    > */}
+                                {<LinearDeterminate whatBar completed={this.state.SprintTime} title={"Sprint Time"} />}
+                                {<LinearDeterminate completed={this.state.SprintProgress} title={"Sprint Progress"} />}
+                                {/* </Paper> */}
+                                {/* </MuiThemeProvider> */}
+                            </Grid>
                         </Grid>
                     </Grid>
                 </div>

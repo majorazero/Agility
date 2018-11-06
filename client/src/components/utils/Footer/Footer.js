@@ -7,8 +7,8 @@ import Icon from '@material-ui/core/Icon';
 import RestoreIcon from '@material-ui/icons/Restore';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
-import Home from "./icons/Home.js"
-import GitHub from "./icons/GitHub.js"
+import Home from "./icons/Home.js";
+import GitHub from "./icons/github-icon.svg";
 
 
 // import githubIcon from "../../../../public/assets/images/git-hub-icon.png";
@@ -17,8 +17,9 @@ const styles = {
   root: {
     width: "100%",
     backgroundColor: "lightgrey",
-    bottom:"0"
-    },
+    bottom: "0",
+    // position: "fixed"
+  },
 };
 
 class SimpleBottomNavigation extends React.Component {
@@ -40,15 +41,18 @@ class SimpleBottomNavigation extends React.Component {
         onChange={this.handleChange}
         showLabels
         className={classes.root}
-        style={{alignItems: "center"}}
+        style={{ alignItems: "center" }}
+
       >
         {/* <BottomNavigationAction label="Recents" value="recents" icon={<RestoreIcon />} /> */}
         {/* <BottomNavigationAction label="Favorites" value="favorites" icon={<FavoriteIcon />} /> */}
         {/* <BottomNavigationAction label="Nearby" value="nearby" icon={<LocationOnIcon />} /> */}
         {/* <BottomNavigationAction label="Folder" value="folder" icon={<Icon>folder</Icon>} /> */}
-        <BottomNavigationAction label="Home" href="/" value="nearby" icon={<Home />} />
-        <BottomNavigationAction label="GitHub" href="/" value="nearby" icon={<GitHub />} />
 
+        <BottomNavigationAction label="GitHub" value="nearby" icon={<img src={GitHub} width="30px" />} />
+        <BottomNavigationAction label="Copyright 2018 ©" value="nearby" />} />
+
+{/* icon={<img src={GitHub} width="30px" */}
 
 
       </BottomNavigation>

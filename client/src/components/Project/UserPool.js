@@ -41,6 +41,7 @@ class UserPool extends Component {
     if ((prevProps.sprintId !== this.props.sprintId) || (prevProps.tasks !== this.props.tasks) || (prevProps.members !== this.props.members)) {
       this.render();
     }
+      console.log("PROPS",this.props);
   }
 
   render() {
@@ -67,12 +68,12 @@ class UserPool extends Component {
                             <Pool
                                 id={this.key}
                                 isAdmin={this.props.isAdmin}
-                                currentUser={this.props.currentUser} 
-                                assignedUser={fTask.assigned_id} 
-                                tasks={fTask} 
-                                onClickDelete={() => this.props.onClickDelete(fTask)} 
-                                unAssign={() => this.props.unassign(fTask.id)} 
-                                onClickComplete={() => this.props.onClickComplete(fTask.id)} 
+                                currentUser={this.props.currentUser}
+                                assignedUser={fTask.assigned_id}
+                                tasks={fTask}
+                                onClickDelete={() => this.props.onClickDelete(fTask)}
+                                unAssign={() => this.props.unassign(fTask.id)}
+                                onClickComplete={() => this.props.onClickComplete(fTask.id)}
                                 assigned
                             />
                         </ListItem>
