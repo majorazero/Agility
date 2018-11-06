@@ -53,7 +53,7 @@ class ActiveTasks extends Component {
         >
             {this.props.tasks.map((sprint, i) => (
                 <li key={i}>
-                    <ListSubheader style={{ backgroundColor: 'whitesmoke', marginBottom: 10, marginTop: 5 }}>{sprint.sprint}</ListSubheader>
+                    <ListSubheader style={{ backgroundColor: 'whitesmoke', color: 'black', fontWeight: 'bold', marginBottom: 10, marginTop: 5 }}>{sprint.sprint}</ListSubheader>
                     {sprint.tasks.map((task, index) => {
                         console.log(task.sprintId)
                         return(
