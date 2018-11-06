@@ -315,15 +315,17 @@ class Project extends React.Component {
                 let timeProgress = 0;
                 // check for active sprint
                 for (let i = 0; i < sprints.length; i++) {
-                    let endDate = new Date(sprints[i].endDate)
-                    let startDate = new Date(sprints[i].startDate)
+                    let endDate = new Date(`${sprints[i].endDate}T00:00:00`)
+                    let startDate = new Date(`${sprints[i].startDate}T00:00:00`)
                     let currentDate = new Date();
                     console.log(startDate, endDate, currentDate);
                     console.log(endDate - startDate);
                     sprintData.push({
                         key: i,
                         label: sprints[i].sprintName,
-                        id: sprints[i].sprintId
+                        id: sprints[i].sprintId,
+                        start: `${startDate.getMonth()+1}/${startDate.getDate()}/${startDate.getFullYear()}`,
+                        end: `${endDate.getMonth()+1}/${endDate.getDate()}/${endDate.getFullYear()}`
                     });
                     if (sprints[i].isActive) {
                         //verify end date has not passed
