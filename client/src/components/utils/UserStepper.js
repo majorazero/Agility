@@ -12,7 +12,8 @@ const styles = theme => ({
     root: {
         width: '100%',
         flexGrow: 1,
-        height: 'fit-content'
+        height: 250,
+        overflow: 'auto'
     },
     header: {
         display: 'flex',
@@ -63,6 +64,24 @@ class UserStepper extends React.Component {
         return (
             (this.props.membersCard !== undefined) ?
             <div className={classes.root}>
+             <MobileStepper
+                    steps={maxSteps}
+                    position="static"
+                    activeStep={activeStep}
+                    className={classes.mobileStepper}
+                    nextButton={
+                        <Button size="small" onClick={this.handleNext} disabled={activeStep === maxSteps - 1}>
+                            Next
+                            {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
+                        </Button>
+                    }
+                    backButton={
+                        <Button size="small" onClick={this.handleBack} disabled={activeStep === 0}>
+                            {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
+                            Back
+                        </Button>
+                    }
+                />
                 <Paper square elevation={0} className={classes.header}>
                     <Typography variant="subtitle1" gutterBottom>{this.props.membersCard[activeStep].label1}</Typography>
                 </Paper>
@@ -87,14 +106,14 @@ class UserStepper extends React.Component {
                     nextButton={
                         <Button size="small" onClick={this.handleNext} disabled={activeStep === maxSteps - 1}>
                             Next
-              {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
+                            {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
                         </Button>
                     }
                     backButton={
                         <Button size="small" onClick={this.handleBack} disabled={activeStep === 0}>
                             {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
                             Back
-            </Button>
+                        </Button>
                     }
                 />
             </div> :

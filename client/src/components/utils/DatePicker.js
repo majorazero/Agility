@@ -9,9 +9,9 @@ const styles = theme => ({
     flexWrap: 'wrap',
   },
   textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: 200,
+    // marginLeft: theme.spacing.unit,
+    // marginRight: theme.spacing.unit,
+    width: '100%',
   },
 });
 
@@ -27,9 +27,9 @@ function DatePickers(props) {
         defaultValue={(new Date().getFullYear()) + "-" + (new Date().getMonth() + 1) + "-" + (new Date().getDate())}
         className={classes.textField}
         onChange={props.onChange}
-        // InputLabelProps={{
-        //   shrink: false,
-        // }}
+        InputLabelProps={{
+          shrink: true,
+        }}
       />
   );
 }

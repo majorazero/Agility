@@ -44,12 +44,12 @@ class Landing extends Component {
     creator: [
       {
         name: "Daniel Hsu",
-        // image: ,
+        image: "/assets/images/dan.png",
         summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
       },
       {
         name: "Matt Purpura",
-        // image: ,
+        image: "/assets/images/matt.JPG",
         summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
       },
       {
@@ -59,7 +59,7 @@ class Landing extends Component {
       },
       {
         name: "Yair Joseph",
-        image: "/assets/images/eximage.png",
+        image: "/assets/images/yair.jpg",
         summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
       }
     ]
@@ -98,7 +98,7 @@ class Landing extends Component {
               }}
             >
 
-              <Typography component="h2" variant="h1" gutterBottom>agility.</Typography>
+              <Typography component="h2" variant="h1" gutterBottom style={{textShadow: "1px 1px rgb(0, 0, 0, 0.5)"}}>agility.</Typography>
 
               <MuiThemeProvider theme={theme}>
                 <ContainedButtons
@@ -213,7 +213,7 @@ class Landing extends Component {
               }}
             >
 
-              <Typography variant="h3" gutterBottom>The Team</Typography>
+              <Typography variant="h3" gutterBottom style={{textShadow: "1px 1px rgb(0, 0, 0, 0.5)"}}>The Team</Typography>
 
               <Grid container spacing={32}>
                 <Grid item xs={12}>

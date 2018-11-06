@@ -188,6 +188,7 @@ class ProjectList extends Component {
               onClick={this.handleOpen}
               title="Add a Project"
               color="primary"
+              placement="right"
             />
           </Grid>
         </Grid>
