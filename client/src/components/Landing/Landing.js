@@ -45,7 +45,7 @@ class Landing extends Component {
       {
         name: "Daniel Hsu",
         image: "/assets/images/dan.jpg",
-        summary: "This seemed like a good idea at the time."
+        summary: "Dan opened Trello one day, promptly closed the window and decided to make this instead."
       },
       {
         name: "Matt Purpura",
