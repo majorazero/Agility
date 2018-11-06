@@ -118,6 +118,7 @@ function SingleLineGridList(props) {
         }}
       />
       <GridListTileBar
+      style={{cursor: "pointer"}}
         title={props.name}
         onClick={props.onProjectPress}
         classes={{
