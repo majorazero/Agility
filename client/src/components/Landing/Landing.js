@@ -50,19 +50,19 @@ class Landing extends Component {
       {
         name: "Matt Purpura",
         image: "/assets/images/matt.JPG",
-        summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        summary: "Prior to getting into development, Matt worked in software sales for 4 years and he understands the need for simple, yet powerful tools.   This was a guiding principle in the building of agility.",
         github: "https://github.com/mattpurpura"
       },
       {
         name: "Michael Reza Sanaiha",
         image: "/assets/images/itsmeinasuit.jpeg",
-        summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        summary: "With a passion for the visual arts, Michael brings a valuable perspective to the user experience and design.",
         github: "https://github.com/rezamike"
       },
       {
         name: "Yair Joseph",
         image: "/assets/images/yair.jpg",
-        summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        summary: "I am Yair and I do Yair things. Bababooie.",
         github: "https://github.com/yairjoseph"
       }
     ]
