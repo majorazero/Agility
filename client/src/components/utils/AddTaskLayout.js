@@ -13,6 +13,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 // import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import DatePickers from "./DatePicker.js";
+import TextField from '@material-ui/core/TextField';
 
 const styles = theme => ({
   layout: {
@@ -82,10 +83,12 @@ function AddTaskLayout(props) {
             />
           </FormControl>
           <FormControl margin="normal" required fullWidth>
-            <InputLabel htmlFor="complexity">Complexity (1-5)</InputLabel>
-            <Input id="complexity" name="complexity" autoComplete="complexity" autoFocus
+            {/* <InputLabel htmlFor="complexity">Complexity (1-5)</InputLabel> */}
+            {/* <Input id="complexity" name="complexity" autoComplete="complexity" autoFocus
               onChange={props.onChange("taskComplexity")}
-            />
+            /> */}
+            <TextField type='number' label='Complexity (1-5)' id="complexity" name="complexity" autoComplete="complexity" autoFocus
+              onChange={props.onChange("taskComplexity")} inputProps={{ min: "1", max: "5"}}></TextField>
           </FormControl>
           <FormControl margin="normal" required fullWidth>
             <InputLabel htmlFor="stack">Stack (Javascript, CSS, HTML, React ...)</InputLabel>
