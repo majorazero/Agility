@@ -109,6 +109,7 @@ class Project extends React.Component {
             token: "project",
             id: id
         }).then((response) => {
+            console.log(response)
             this.setState({
                 projName: response.data[0].name,
                 summary: response.data[0].summary,
@@ -526,13 +527,14 @@ class Project extends React.Component {
                                         />
                                     </Grid>
                                     <Grid item xs>
-                                        {(this.state.isAdmin === true) ?
+                                    {this.state.isActive ? 
+                                        ((this.state.isAdmin === true) ?
                                             <ButtonSizes
                                                 onClick={() => this.handleOpen('taskOpen')}
                                                 title="Add a Task"
                                                 color="secondary"
-                                            /> :
-                                            ""}
+                                            /> : null) 
+                                            : null }
 
                                     </Grid>
                                 </Grid>
