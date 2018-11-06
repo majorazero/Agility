@@ -459,7 +459,7 @@ class Project extends React.Component {
                         paddingTop: 50,
                         overflowX: "hidden",
                         // backgroundImage: 'linear-gradient(to right, grey , lightgrey)',
-                        backgroundImage: `url("/assets/images/backgroundBW.jpg")`,
+                        backgroundImage: `url("/assets/images/backgroundBW2.jpg")`,
                         resizeMode: 'cover',
                         height: "-webkit-fill-available"
                     }} >
@@ -571,7 +571,7 @@ class Project extends React.Component {
                                 <Grid
                                     container
                                     spacing={8}
-                                    
+
                                 >
                                     <Grid item xs>
                                         <List style={{
