@@ -31,7 +31,7 @@ const styles = theme => ({
 function ButtonSizes(props) {
   const { classes } = props;
   return (
-    <Tooltip title={props.title} placement="right">
+    <Tooltip title={props.title} placement={props.placement}>
       <Button
         style={getFabStyle()}
         variant="fab"
