@@ -64,8 +64,8 @@ class Homepage extends Component {
               tasks: [task]
             })
           } else {
-            for(let i=0; i<data.length; i++){
-              if(data[i].sprint === task.sprint){
+            for (let i = 0; i < data.length; i++) {
+              if (data[i].sprint === task.sprint) {
                 data[i].tasks.push(task)
               }
             }
@@ -78,15 +78,15 @@ class Homepage extends Component {
 
   goToProject = (sprintId) => {
     axios.get(`/api/projectId/sprint/${sprintId}`)
-    .then(res=>{
-      console.log(res.data[0].id)
+      .then(res => {
+        console.log(res.data[0].id)
         axios.post("/api/encrypt", {
           token: "project",
           id: res.data[0].id.toString()
         }).then((data) => {
           window.location.assign(`/project/${data.data}`);
         });
-    })
+      })
   }
 
   render() {
@@ -127,7 +127,7 @@ class Homepage extends Component {
               <Grid
                 container
                 spacing={24}
-                style={{ padding: 50,  }}
+                style={{ padding: 50, }}
               >
                 <Grid
                   item
@@ -140,7 +140,7 @@ class Homepage extends Component {
                     <Grid
                       container
                       spacing={8}
-                      style={{ padding: 25, }}
+                      style={{ padding: 25 }}
                     >
                       <Grid item xs>
                         <Typography fullWidth variant="h5" gutterBottom>Active Tasks</Typography>
@@ -151,7 +151,7 @@ class Homepage extends Component {
                       spacing={8}
                     >
                       <Grid item xs>
-                        <ActiveTasks tasks={this.state.tasks} goToProject={this.goToProject} homepage/>
+                        <ActiveTasks tasks={this.state.tasks} goToProject={this.goToProject} homepage />
                       </Grid>
                     </Grid>
                   </Paper>
@@ -224,6 +224,9 @@ class Homepage extends Component {
           >
             <Grid item xs={12} >
               <Paper>
+                <Grid item xs={12} style={{ padding: '25px 25px 0 25px' }}>
+                <Typography fullWidth variant="h5" gutterBottom>Projects</Typography>
+                </Grid>
                 <Grid item xs={12} >
                   <ProjectList />
                 </Grid>
@@ -231,7 +234,7 @@ class Homepage extends Component {
             </Grid>
           </Grid>
           {/* </Grid> */}
-          </div >
+        </div >
       </div >
     );
   }
