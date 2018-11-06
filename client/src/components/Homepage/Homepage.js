@@ -55,7 +55,7 @@ class Homepage extends Component {
 
         let data = []
         let sprints = []
-        
+
         incomplete.forEach(task => {
           if (!(sprints.includes(task.sprintId))) {
             sprints.push(task.sprintId)
@@ -99,7 +99,7 @@ class Homepage extends Component {
             paddingTop: 50,
             overflowX: "hidden",
             // backgroundImage: 'linear-gradient(to bottom right, grey , lightgrey)',
-            backgroundImage: `url("/assets/images/background.png")`,
+            backgroundImage: `url("/assets/images/homepage3.jpg")`,
             resizeMode: 'cover',
             height: "-webkit-fill-available"
           }} >

@@ -451,7 +451,7 @@ class Project extends React.Component {
                         paddingTop: 50,
                         overflowX: "hidden",
                         // backgroundImage: 'linear-gradient(to right, grey , lightgrey)',
-                        backgroundImage: `url("/assets/images/background.png")`,
+                        backgroundImage: `url("/assets/images/backgroundBW.jpg")`,
                         resizeMode: 'cover',
                         height: "-webkit-fill-available"
                     }} >
@@ -528,13 +528,13 @@ class Project extends React.Component {
                                         />
                                     </Grid>
                                     <Grid item xs>
-                                    {this.state.isActive ? 
+                                    {this.state.isActive ?
                                         ((this.state.isAdmin === true) ?
                                             <ButtonSizes
                                                 onClick={() => this.handleOpen('taskOpen')}
                                                 title="Add a Task"
                                                 color="secondary"
-                                            /> : null) 
+                                            /> : null)
                                             : null }
 
                                     </Grid>
@@ -865,6 +865,5 @@ class Project extends React.Component {
 Project.propTypes = {
     classes: PropTypes.object.isRequired,
   };
-  
-export default withStyles(styles)(Project);
 
+export default withStyles(styles)(Project);

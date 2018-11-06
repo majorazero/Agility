@@ -49,7 +49,7 @@ class Login extends Component {
         style={{
           // paddingTop: "50px",
           overflowX: "hidden",
-          backgroundImage: `url("/assets/images/background.png")`,
+          backgroundImage: `url("/assets/images/login.jpg")`,
           resizeMode: 'cover',
           height: "-webkit-fill-available"
         }} >
