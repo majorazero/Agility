@@ -166,7 +166,7 @@ class Landing extends Component {
 
               <Typography variant="h3" gutterBottom>
                 <img src="./assets/images/demo1.gif" width="400" />
-                <img src="./assets/images/demo1.gif" width="400" />
+                <img src="./assets/images/demo2.gif" width="400" />
                 <img src="./assets/images/demo1.gif" width="400" />
               </Typography>
 
