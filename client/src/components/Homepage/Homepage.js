@@ -223,9 +223,7 @@ class Homepage extends Component {
             spacing={8}
           >
             <Grid item xs={12} >
-              <Paper
-              style={{ background: 'whitesmoke'  }}
-              >
+              <Paper>
                 <Grid item xs={12} >
                   <ProjectList />
                 </Grid>
