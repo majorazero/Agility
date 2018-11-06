@@ -45,7 +45,7 @@ class Register extends Component {
         style={{
           // paddingTop: "50px",
           overflowX: "hidden",
-          backgroundImage: `url("/assets/images/background.png")`,
+          backgroundImage: `url("/assets/images/background1.png")`,
           resizeMode: 'cover',
           height: "-webkit-fill-available"
         }} >
