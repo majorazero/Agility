@@ -164,7 +164,11 @@ class Landing extends Component {
               }}
             >
 
-              <Typography variant="h3" gutterBottom>See How It Works</Typography>
+              <Typography variant="h3" gutterBottom>
+                <img src="./assets/images/demo1.gif" width="400" />
+                <img src="./assets/images/demo1.gif" width="400" />
+                <img src="./assets/images/demo1.gif" width="400" />
+              </Typography>
 
               {/* <div style={{backgroundImage: `url("/assets/images/down-arrow.png")`}} ></div> */}
             </Grid>
