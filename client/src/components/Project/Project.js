@@ -479,7 +479,7 @@ class Project extends React.Component {
                                 <Grid item xs style={{ padding: '25px 25px 0 25px' }}>
                                     <Typography fullWidth variant="h5" gutterBottom>Sprints</Typography>
                                 </Grid>
-                                
+
                                 <Grid
                                     container
                                     spacing={8}
@@ -540,7 +540,7 @@ class Project extends React.Component {
                             style={{ height: 'fit-content' }}
                         >
                             <Paper
-                                style={{ background: 'whitesmoke', height: '100%' }}
+                                style={{ background: 'whitesmoke', height: '100%', maxHeight: '100%' }}
                             >
                                 <Grid item xs={12} style={{ padding: '25px 25px 0 25px' }}>
                                     <Typography fullWidth variant="h5" gutterBottom>Tasks</Typography>
@@ -687,7 +687,7 @@ class Project extends React.Component {
                         </Grid>
                         <Grid item xs={6} style={{ height: 'fit-content' }}>
                             <Paper
-                                style={{ height: '100%', }}
+                                style={{ height: '100%', maxHeight: '100%' }}
                             >
                                 <Grid item xs={12} style={{ padding: '25px 25px 0 25px' }}>
                                     <Typography fullWidth variant="h5" gutterBottom>Project Users</Typography>
@@ -721,7 +721,7 @@ class Project extends React.Component {
                                 {/* <Paper
                                         style={{ background: 'none', border: 'none', height: "100%", paddingLeft: 10, paddingRight: 10, paddingTop: 3, paddingBottom: 10 }}
                                     > */}
-                                {(this.state.isActive) ? <LinearDeterminate whatBar completed={this.state.SprintTime} title={"Sprint Time"} /> : ""}
+                                {(this.state.isActive) ? <LinearDeterminate whatBar completed={this.state.SprintTime} title={"Sprint Time"} /> : <LinearDeterminate whatBar completed={100} title={"Sprint Time"} />}
                                 <LinearDeterminate completed={this.state.SprintProgress} title={"Sprint Progress"} />
                                 {/* </Paper> */}
                                 {/* </MuiThemeProvider> */}
