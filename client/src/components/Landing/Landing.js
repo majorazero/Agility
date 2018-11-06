@@ -34,7 +34,6 @@ const theme = createMuiTheme({
 
 class Landing extends Component {
 
-
   handleClick = () => {
     window.open("https://github.com/majorazero/project3");
 
@@ -45,22 +44,26 @@ class Landing extends Component {
       {
         name: "Daniel Hsu",
         image: "/assets/images/dan.jpg",
-        summary: "Dan opened Trello one day, promptly closed the window and decided to make this instead."
+        summary: "Dan opened Trello one day, promptly closed the window and decided to make this instead.",
+        github: "https://github.com/majorazero"
       },
       {
         name: "Matt Purpura",
         image: "/assets/images/matt.JPG",
-        summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        github: "https://github.com/mattpurpura"
       },
       {
         name: "Michael Reza Sanaiha",
         image: "/assets/images/itsmeinasuit.jpeg",
-        summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        github: "https://github.com/rezamike"
       },
       {
         name: "Yair Joseph",
         image: "/assets/images/yair.jpg",
-        summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        github: "https://github.com/yairjoseph"
       }
     ]
   }
@@ -219,13 +222,17 @@ class Landing extends Component {
                 <Grid item xs={12}>
                   <Grid container justify="center">
                     {this.state.creator.map((maker) => {
+                      console.log(maker);
                       return (
                         <Grid item style={{ padding: "20px" }}>
                           <MediaCard
                             key={maker.id}
                             id={this.key}
                             maker={maker}
-                          // onClick=?
+                            onClick={()=>{
+                              console.log(maker.github);
+                              window.open(maker.github);
+                            }}
                           />
                         </Grid>
                       );
