@@ -38,7 +38,7 @@ const Pool = (props) => {
                 paddingTop: 5,
                 paddingBottom: 5,
                 display: "table-caption",
-                width: "100%"
+                width: "100%",
             }}
             classes = {
                 {root: classes.root}

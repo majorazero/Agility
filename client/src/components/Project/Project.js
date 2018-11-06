@@ -556,6 +556,7 @@ class Project extends React.Component {
                                 <Grid
                                     container
                                     spacing={8}
+                                    
                                 >
                                     <Grid item xs>
                                         <List style={{

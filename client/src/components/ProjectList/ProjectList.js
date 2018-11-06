@@ -169,7 +169,7 @@ class ProjectList extends Component {
         <Grid
           container
           spacing={8}
-        // style={{ padding: 25 }}
+          style={{ background: 'whitesmoke', margin: 'inherit', width: '-webkit-fill-available' }}
         >
           <Grid item xs={10}>
             <Typography variant="h5" gutterBottom>{this.state.message}</Typography>
@@ -178,9 +178,9 @@ class ProjectList extends Component {
               label="Project Invite Code:"
               name="inviteCode"
               onChange={this.handleInviteChange}
-              // style={{
-              //   position: "inherit"
-              // }}
+            // style={{
+            //   position: "inherit"
+            // }}
             />
           </Grid>
           <Grid item xs>
