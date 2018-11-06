@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import red from '@material-ui/core/colors/red';
 import blue from '@material-ui/core/colors/blue';
 import SvgIcon from '@material-ui/core/SvgIcon';
-// import SvgIcon from './github-icon.svg';
+//import SvgIcon from './github-icon.svg';
 
 
 
@@ -29,6 +29,7 @@ const styles = theme => ({
 });
 
 function HomeIcon(props) {
+  console.log(props);
     return (
         <SvgIcon {...props}>
             <path d="M255.968,5.329C114.624,5.329,0,120.401,0,262.353c0,113.536,73.344,209.856,175.104,243.872
@@ -64,7 +65,7 @@ function SvgIcons(props) {
 
                 component={svgProps => (
                     <svg {...svgProps}>
-                        
+
                     </svg>
                 )}
             />
@@ -77,5 +78,3 @@ SvgIcons.propTypes = {
 };
 
 export default withStyles(styles)(SvgIcons);
-
-

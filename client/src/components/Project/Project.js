@@ -25,14 +25,9 @@ import ListItem from '@material-ui/core/ListItem';
 import List from '@material-ui/core/List';
 import SimplePopper from '../utils/popovertext.js'
 
-const styles = theme => ({
+const styles = {
     root: {
-        width: '100%',
-        maxWidth: 360,
-        backgroundColor: theme.palette.background.paper,
-        position: 'relative',
-        overflow: 'auto',
-        maxHeight: 300,
+        padding: '0px 30px 0px 10px'
     },
     listSection: {
         backgroundColor: 'inherit',
@@ -41,7 +36,7 @@ const styles = theme => ({
         backgroundColor: 'inherit',
         padding: 0,
     }
-});
+}
 
 const theme = createMuiTheme({
     overrides: {
@@ -55,6 +50,7 @@ const theme = createMuiTheme({
 
 
 class Project extends React.Component {
+
     state = {
         //this is the project's personal info
         projName: "",
@@ -109,6 +105,7 @@ class Project extends React.Component {
             token: "project",
             id: id
         }).then((response) => {
+            console.log(response)
             this.setState({
                 projName: response.data[0].name,
                 summary: response.data[0].summary,
@@ -279,6 +276,7 @@ class Project extends React.Component {
     }
 
     updateActiveSprint = (sprintId) => {
+        console.log(this.state.activeSprintId)
         let isActive = false;
         if (this.state.activeSprintId === sprintId) {
             isActive = true;
@@ -310,6 +308,7 @@ class Project extends React.Component {
                 let sprints = res.data
                 let today = new Date();
                 let currentSprint = res.data[0].sprintId;
+                let activeSprint;
                 let isActive = false;
                 let timeProgress = 0;
                 // check for active sprint
@@ -327,17 +326,19 @@ class Project extends React.Component {
                     if (sprints[i].isActive) {
                         //verify end date has not passed
                         if (today > endDate) {
-
+                           isActive = false
                         }
                         else {
                           //set currentSprint, set isActive
-                          currentSprint = sprints[i].sprintId;
+                          activeSprint = sprints[i].sprintId;
+                          currentSprint = activeSprint
                           isActive = true;
                           timeProgress = ((endDate-currentDate)/(endDate-startDate)*100);
                         }
                     }
                     else if (today >= startDate && today <= endDate) {
-                        currentSprint = sprints[i].sprintId;
+                        activeSprint = sprints[i].sprintId;
+                        currentSprint = activeSprint
                         isActive = true;
                           timeProgress = ((endDate-currentDate)/(endDate-startDate)*100);
                     }
@@ -347,7 +348,7 @@ class Project extends React.Component {
                     SprintTime: timeProgress,
                     chipData: sprintData,
                     sprintId: currentSprint,
-                    activeSprintId: currentSprint,
+                    activeSprintId: activeSprint,
                     sprints: res.data,
                     isActive: isActive
                 });
@@ -440,6 +441,7 @@ class Project extends React.Component {
 
     render() {
         const { direction, justify, alignItems } = this.state;
+        const { classes } = this.props
         return (
             <div>
                 <ButtonAppBar />
@@ -526,13 +528,14 @@ class Project extends React.Component {
                                         />
                                     </Grid>
                                     <Grid item xs>
-                                        {(this.state.isAdmin === true) ?
+                                    {this.state.isActive ? 
+                                        ((this.state.isAdmin === true) ?
                                             <ButtonSizes
                                                 onClick={() => this.handleOpen('taskOpen')}
                                                 title="Add a Task"
                                                 color="secondary"
-                                            /> :
-                                            ""}
+                                            /> : null) 
+                                            : null }
 
                                     </Grid>
                                 </Grid>
@@ -553,7 +556,7 @@ class Project extends React.Component {
                                                     {this.state.showComplete ? this.state.completedTasks.map((task) => {
                                                         return (
                                                             <ul>
-                                                                <ListItem>
+                                                                <ListItem classes={{root: classes.root}}>
                                                                     <Pool
                                                                         key={task.id}
                                                                         id={this.key}
@@ -601,7 +604,7 @@ class Project extends React.Component {
                                                     {this.state.showComplete ? this.state.completedTasks.map((task) => {
                                                         return (
                                                             <ul>
-                                                                <ListItem>
+                                                                <ListItem classes={{root: classes.root}}>
                                                                     <Pool
                                                                         key={task.id}
                                                                         id={this.key}
@@ -620,7 +623,7 @@ class Project extends React.Component {
                                                     }) : this.state.unassignedTasks.map((task) => {
                                                         return (
                                                             <ul>
-                                                                <ListItem>
+                                                                <ListItem classes={{root: classes.root}}>
                                                                     <Pool
                                                                         key={task.id}
                                                                         id={this.key}
@@ -859,4 +862,9 @@ class Project extends React.Component {
     }
 }
 
-export default Project;
+Project.propTypes = {
+    classes: PropTypes.object.isRequired,
+  };
+  
+export default withStyles(styles)(Project);
+

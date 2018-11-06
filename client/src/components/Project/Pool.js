@@ -7,14 +7,15 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import PropTypes from 'prop-types';
 
-const styles = theme => ({
+const styles = {
     root: {
-        width: '100%',
-        maxWidth: 360,
-        backgroundColor: theme.palette.background.paper,
-        position: 'relative',
-        overflow: 'auto',
-        maxHeight: 300,
+        // width: '100%',
+        // maxWidth: 360,
+        // backgroundColor: theme.palette.background.paper,
+        // position: 'relative',
+        // overflow: 'auto',
+        // maxHeight: 300,
+        padding: 0
     },
     listSection: {
         backgroundColor: 'inherit',
@@ -23,7 +24,10 @@ const styles = theme => ({
         backgroundColor: 'inherit',
         padding: 0,
     },
-});
+    listItem: {
+        padding: 0
+    }
+}
 
 const Pool = (props) => {
     const { classes } = props;
@@ -36,17 +40,22 @@ const Pool = (props) => {
                 display: "table-caption",
                 width: "100%"
             }}
+            classes = {
+                {root: classes.root}
+            }
         >
             <SimpleExpansionPanel
                 currentUser={props.currentUser}
                 assignedUser={props.assignedUser}
                 name={props.tasks.name}
                 key={props.id}
+                id={props.id}
                 isAdmin={props.isAdmin}
                 description={props.tasks.description}
                 due={props.tasks.due_date}
                 summary={props.tasks.description}
-                difficulty={props.tasks.difficulty}
+                complexity={props.tasks.complexity}
+                stack={props.tasks.stack}
                 onClickDelete={props.onClickDelete}
                 onClickAdd={props.onClickAdd}
                 unAssign={props.unAssign}
@@ -57,9 +66,16 @@ const Pool = (props) => {
                 activetasks={props.activetasks}
                 goToProject={props.goToProject}
                 homepage={props.homepage}
+                expanded={props.expanded}
+                onChange={props.onChange}
             />
         </ListItem>
     );
 };
 
-export default Pool;
+Pool.propTypes = {
+    classes: PropTypes.object.isRequired,
+  };
+
+export default withStyles(styles)(Pool);
+

@@ -1,8 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-// import PropTypes from 'prop-types';
-// import { withStyles } from '@material-ui/core/styles';
-// import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import TaskCard from '../utils/TaskCard/TaskCard';
 import Paper from '@material-ui/core/Paper';
@@ -11,13 +7,18 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
 
-const style = {
+const styles = {
   gridItem: {
     padding: 10
   },
   taskCard: {
     marginTop: 5
+  },
+  root: {
+    padding: '0px 30px 0px 10px'
   }
 }
 
@@ -44,6 +45,7 @@ class UserPool extends Component {
   }
 
   render() {
+    const { classes } = this.props
     return (
       <div>
         <List
@@ -62,7 +64,7 @@ class UserPool extends Component {
                     {this.props.tasks.filter(task => task.assigned_id === member.User.id).map(fTask => {
                         return(
                         <ul>
-                        <ListItem key={fTask.id}>
+                        <ListItem key={fTask.id} classes={{root: classes.root}}>
                             <Pool
                                 id={this.key}
                                 isAdmin={this.props.isAdmin}
@@ -108,4 +110,8 @@ class UserPool extends Component {
   }
 };
 
-export default UserPool;
+UserPool.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(UserPool);
