@@ -24,10 +24,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Avatar from '@material-ui/core/Avatar';
+// import Avatar from '@material-ui/core/Avatar';
 import Chip from '@material-ui/core/Chip';
 import Icon from '@material-ui/icons/TurnedIn';
-import DoneIcon from '@material-ui/icons/Done';
+import Tooltip from '@material-ui/core/Tooltip';
+// import DoneIcon from '@material-ui/icons/Done';
 
 const styles = theme => ({
     root: {
@@ -47,6 +48,7 @@ function Chips(props) {
         <div className={classes.root}>
             {props.sprints.map((data, i) => {
                 return (
+                <Tooltip title={`${data.start} - ${data.end}`} placement="top">
                 <Chip
                     icon={<Icon />}
                     className={classes.chip}
@@ -56,6 +58,7 @@ function Chips(props) {
                     onClick={props.onClick.bind(this, data.id)}
                     color={props.activeSprint === data.id ? 'primary' : "default"}
                 />
+                </Tooltip>
                 )
             })}
         </div>
