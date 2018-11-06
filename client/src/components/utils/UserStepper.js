@@ -61,6 +61,7 @@ class UserStepper extends React.Component {
         const maxSteps = this.props.membersCard.length;
 
         return (
+            (this.props.memberCard !== undefined) ?
             <div className={classes.root}>
                 <Paper square elevation={0} className={classes.header}>
                     <Typography variant="subtitle1" gutterBottom>{this.props.membersCard[activeStep].label1}</Typography>
@@ -96,7 +97,8 @@ class UserStepper extends React.Component {
             </Button>
                     }
                 />
-            </div>
+            </div> :
+            <div>Nothing here.</div>
         );
     }
 }
