@@ -463,7 +463,7 @@ class Project extends React.Component {
                     >
                         <Grid item xs>
                             <Paper
-                                style={{ height: "100%", background: 'whitesmoke' }}
+                                style={{ height: "100%", background: 'rgba(254, 254, 254, 0.6' }}
                             >
                                 <Grid
                                     container
@@ -472,15 +472,7 @@ class Project extends React.Component {
                                     <Grid item xs>
                                         {/* <MuiThemeProvider theme={theme}> */}
 
-                                        {(this.state.isAdmin === true) ?
-                                            <ButtonSizes
-                                                onClick={() => this.handleOpen('sprintOpen')}
-                                                title="Add a Sprint"
-                                                color="secondary"
-                                                mini
-                                            /> :
-                                            ""}
-
+                                      
                                         {/* </MuiThemeProvider> */}
                                         <SimpleModalSprintWrapped
                                             open={this.state.sprintOpen}
@@ -507,6 +499,16 @@ class Project extends React.Component {
                                             currentUser={this.state.currentUser}
                                         />
                                     </Grid>
+                                    <div style={{marginRight: 5}}>
+                                    {(this.state.isAdmin === true) ?
+                                            <ButtonSizes
+                                                onClick={() => this.handleOpen('sprintOpen')}
+                                                title="Add a Sprint"
+                                                color="secondary"
+                                                mini
+                                            /> :
+                                            ""}
+                                            </div>
                                 </Grid>
                             </Paper>
                         </Grid>
