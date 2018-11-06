@@ -275,6 +275,7 @@ class Project extends React.Component {
     }
 
     updateActiveSprint = (sprintId) => {
+        console.log(this.state.activeSprintId)
         let isActive = false;
         if (this.state.activeSprintId === sprintId) {
             isActive = true;
@@ -306,6 +307,7 @@ class Project extends React.Component {
                 let sprints = res.data
                 let today = new Date();
                 let currentSprint = res.data[0].sprintId;
+                let activeSprint;
                 let isActive = false;
                 let timeProgress = 0;
                 // check for active sprint
@@ -323,17 +325,19 @@ class Project extends React.Component {
                     if (sprints[i].isActive) {
                         //verify end date has not passed
                         if (today > endDate) {
-
+                           isActive = false
                         }
                         else {
                           //set currentSprint, set isActive
-                          currentSprint = sprints[i].sprintId;
+                          activeSprint = sprints[i].sprintId;
+                          currentSprint = activeSprint
                           isActive = true;
                           timeProgress = ((endDate-currentDate)/(endDate-startDate)*100);
                         }
                     }
                     else if (today >= startDate && today <= endDate) {
-                        currentSprint = sprints[i].sprintId;
+                        activeSprint = sprints[i].sprintId;
+                        currentSprint = activeSprint
                         isActive = true;
                           timeProgress = ((endDate-currentDate)/(endDate-startDate)*100);
                     }
@@ -343,7 +347,7 @@ class Project extends React.Component {
                     SprintTime: timeProgress,
                     chipData: sprintData,
                     sprintId: currentSprint,
-                    activeSprintId: currentSprint,
+                    activeSprintId: activeSprint,
                     sprints: res.data,
                     isActive: isActive
                 });
