@@ -265,10 +265,10 @@ class RecipeReviewCard extends React.Component {
                 </CardActions>
                 <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
                     <CardContent>
-                      <Paper elevation={0} style={{ padding: 5 }}>
+                      <div style={{textAlign: "center", padding: "0 5px 0 5px" }}>
                         <Progress completed={(this.state.totalCompletedTask/this.state.totalTask*100)}/>
-                        <Typography style={{textAlign: "center"}}>Task Compleition Rate ({(this.state.totalCompletedTask/this.state.totalTask*100).toFixed(2)}%)</Typography>
-                      </Paper>
+                        <Typography variant="subtitle2" gutterBottom>Task Completion Rate ({(this.state.totalCompletedTask/this.state.totalTask*100).toFixed(2)}%)</Typography>
+                      </div>
                         <TextMobileStepper
                             tutorialSteps={this.makeArray()}
                         />
