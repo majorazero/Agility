@@ -224,7 +224,6 @@ class Homepage extends Component {
           >
             <Grid item xs={12} >
               <Paper
-              style={{ background: 'whitesmoke'  }}
               >
                 <Grid item xs={12} >
                   <ProjectList />

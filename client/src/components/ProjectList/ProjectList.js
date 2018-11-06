@@ -169,9 +169,9 @@ class ProjectList extends Component {
         <Grid
           container
           spacing={8}
-        // style={{ padding: 25 }}
+        style={{ background: "whitesmoke", width:"100%", margin: "auto"}}
         >
-          <Grid item xs={10}>
+          <Grid item xs={10} >
             <Typography variant="h5" gutterBottom>{this.state.message}</Typography>
             <InputTextField
               onSubmit={this.handleInviteSubmit}
@@ -183,7 +183,7 @@ class ProjectList extends Component {
               // }}
             />
           </Grid>
-          <Grid item xs>
+          <Grid item xs style ={{marginTop: 30}}>
             <ButtonSizes
               onClick={this.handleOpen}
               title="Add a Project"
