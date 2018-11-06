@@ -443,9 +443,9 @@ class Project extends React.Component {
 
     handleTaskOpen = panel => (event, expanded) => {
         this.setState({
-          expanded: expanded ? panel : false,
+            expanded: expanded ? panel : false,
         });
-      };
+    };
 
     render() {
         const { direction, justify, alignItems, expanded } = this.state;
@@ -456,7 +456,7 @@ class Project extends React.Component {
                 <div
                     className="parallax"
                     style={{
-                        paddingTop: 50,
+                        paddingTop: 75,
                         overflowX: "hidden",
                         // backgroundImage: 'linear-gradient(to right, grey , lightgrey)',
                         backgroundImage: `url("/assets/images/backgroundBW2.jpg")`,
@@ -467,15 +467,16 @@ class Project extends React.Component {
                     <Grid
                         container
                         spacing={8}
-                        style={{ padding: "50px 50px 25px 50px" }}
+                        style={{ padding: 25 }}
                     >
                         <Grid item xs>
                             <Paper
                                 style={{ height: "100%", background: 'whitesmoke' }}
                             >
-                            <Grid item xs={12} style={{ padding: '25px 25px 0 25px' }}>
-                <Typography fullWidth variant="h5" gutterBottom>Sprints</Typography>
-                </Grid>
+                                <Grid item xs style={{ padding: '25px 25px 0 25px' }}>
+                                    <Typography fullWidth variant="h5" gutterBottom>Sprints</Typography>
+                                </Grid>
+                                
                                 <Grid
                                     container
                                     spacing={8}
@@ -510,8 +511,8 @@ class Project extends React.Component {
                                             currentUser={this.state.currentUser}
                                         />
                                     </Grid>
-                                    <div style={{ marginRight: 5}}>
-                                    {(this.state.isAdmin === true) ?
+                                    <div style={{ marginRight: 5 }}>
+                                        {(this.state.isAdmin === true) ?
                                             <ButtonSizes
                                                 onClick={() => this.handleOpen('sprintOpen')}
                                                 title="Add a Sprint"
@@ -519,7 +520,7 @@ class Project extends React.Component {
                                                 mini
                                             /> :
                                             ""}
-                                            </div>
+                                    </div>
                                 </Grid>
                             </Paper>
                         </Grid>
@@ -527,7 +528,7 @@ class Project extends React.Component {
                     <Grid
                         container
                         spacing={32}
-                        style={{ padding: 50 }}
+                        style={{ padding: 25 }}
                     >
                         <Grid
                             item
@@ -537,9 +538,9 @@ class Project extends React.Component {
                             <Paper
                                 style={{ background: 'whitesmoke', height: '100%' }}
                             >
-                            <Grid item xs={12} style={{ padding: '25px 25px 0 25px' }}>
-                <Typography fullWidth variant="h5" gutterBottom>Tasks</Typography>
-                </Grid>
+                                <Grid item xs={12} style={{ padding: '25px 25px 0 25px' }}>
+                                    <Typography fullWidth variant="h5" gutterBottom>Tasks</Typography>
+                                </Grid>
                                 <Grid
                                     container
                                     spacing={8}
@@ -558,14 +559,14 @@ class Project extends React.Component {
                                         />
                                     </Grid>
                                     <Grid item xs>
-                                    {this.state.isActive ?
-                                        ((this.state.isAdmin === true) ?
-                                            <ButtonSizes
-                                                onClick={() => this.handleOpen('taskOpen')}
-                                                title="Add a Task"
-                                                color="secondary"
-                                            /> : null)
-                                        : null}
+                                        {this.state.isActive ?
+                                            ((this.state.isAdmin === true) ?
+                                                <ButtonSizes
+                                                    onClick={() => this.handleOpen('taskOpen')}
+                                                    title="Add a Task"
+                                                    color="secondary"
+                                                /> : null)
+                                            : null}
                                     </Grid>
                                 </Grid>
                                 <Grid
@@ -683,9 +684,9 @@ class Project extends React.Component {
                             <Paper
                                 style={{ height: '100%', }}
                             >
-                            <Grid item xs={12} style={{ padding: '25px 25px 0 25px' }}>
-                <Typography fullWidth variant="h5" gutterBottom>Project Users</Typography>
-                </Grid>
+                                <Grid item xs={12} style={{ padding: '25px 25px 0 25px' }}>
+                                    <Typography fullWidth variant="h5" gutterBottom>Project Users</Typography>
+                                </Grid>
                                 <Grid
                                     container
                                     spacing={8}
@@ -708,7 +709,7 @@ class Project extends React.Component {
                         <Grid
                             container
                             spacing={8}
-                            style={{ padding: "50px 50px 25px 50px" }}
+                            style={{ padding: 25 }}
                         >
                             <Grid item xs={12}>
                                 {/* <MuiThemeProvider theme={theme}> */}
@@ -903,6 +904,6 @@ class Project extends React.Component {
 
 Project.propTypes = {
     classes: PropTypes.object.isRequired,
-  };
+};
 
 export default withStyles(styles)(Project);

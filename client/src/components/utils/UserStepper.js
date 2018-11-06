@@ -98,7 +98,7 @@ class UserStepper extends React.Component {
                     }
                 />
             </div> :
-            <div>Nothing here.</div>
+            <div><Typography variant="subtitle1" gutterBottom>No User Stats Yet</Typography></div>
         );
     }
 }
