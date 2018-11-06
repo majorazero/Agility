@@ -4,7 +4,7 @@ agility. is a project management app that tracks the progress of its individual 
 This is done by visualizing not only the successes but also the conflicts as they occur throughout the entirety of a given project. Daunting projects can therefore be effectively analyzed and broken down to allow for a better and overall more streamlined process. The app is specifically designed for project managers, allowing them the ability to assign tasks to project workers and monitor the efficiency of each member assigned a task within a project sprint. Ultimately, we believe this will drive the best collaborative results.
 
 # Deployment 
-This app is currently [deployed]()! 
+This app is currently [deployed](https://scrum41.herokuapp.com/)! 
 
 # Features
 <b>Login/Register</b>
