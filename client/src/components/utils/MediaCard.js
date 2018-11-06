@@ -25,7 +25,7 @@ const styles = {
 function MediaCard(props) {
   const { classes } = props;
   return (
-    <Card className={classes.card}>
+    <Card onClick = {props.onClick} className={classes.card}>
       <CardActionArea>
         <CardMedia
           className={classes.media}

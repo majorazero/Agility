@@ -34,7 +34,6 @@ const theme = createMuiTheme({
 
 class Landing extends Component {
 
-
   handleClick = () => {
     window.open("https://github.com/majorazero/project3");
 
@@ -44,23 +43,28 @@ class Landing extends Component {
     creator: [
       {
         name: "Daniel Hsu",
-        image: "/assets/images/dan.png",
-        summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        image: "/assets/images/dan.jpg",
+        summary: "Dan opened Trello one day, promptly closed the window and decided to make this instead.",
+        github: "https://github.com/majorazero"
       },
       {
         name: "Matt Purpura",
         image: "/assets/images/matt.JPG",
-        summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        summary: "Prior to getting into development, Matt worked in software sales for 4 years and he understands the need for simple, yet powerful tools.   This was a guiding principle in the building of agility.",
+        github: "https://github.com/mattpurpura"
       },
       {
         name: "Michael Reza Sanaiha",
         image: "/assets/images/itsmeinasuit.jpeg",
-        summary: "With a passion for the visual arts, Michael brings a valuable perspective to the user experience and design."
+
+        summary: "With a passion for the visual arts, Michael brings a valuable perspective to the user experience and design.",
+        github: "https://github.com/rezamike"
       },
       {
         name: "Yair Joseph",
         image: "/assets/images/yair.jpg",
-        summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        summary: "I am Yair and I do Yair things. Bababooie.",
+        github: "https://github.com/yairjoseph"
       }
     ]
   }
@@ -199,7 +203,7 @@ class Landing extends Component {
               spacing={24}
             >
               <Typography variant="h5" gutterBottom color="textSecondary" align="center">
-                We desired to design and build a project management tool that was constructed from the ground up to work successfully within an agile environment. Our mission is to help project managers foster teamwork, promote accountability, and ensure efficiency within the project-management environment.
+                In a time where data is king and drives efficiency and progress, we desired to design and build a data-driven project management tool that was constructed from the ground up to work successfully within an agile environment. Our mission is to help project managers foster teamwork, promote accountability, and ensure efficiency within the project-management environment.
               </Typography>
             </Grid>
           </Grid>
@@ -229,13 +233,17 @@ class Landing extends Component {
                 <Grid item xs={12}>
                   <Grid container justify="center">
                     {this.state.creator.map((maker) => {
+                      console.log(maker);
                       return (
                         <Grid item style={{ padding: "20px" }}>
                           <MediaCard
                             key={maker.id}
                             id={this.key}
                             maker={maker}
-                          // onClick=?
+                            onClick={()=>{
+                              console.log(maker.github);
+                              window.open(maker.github);
+                            }}
                           />
                         </Grid>
                       );
