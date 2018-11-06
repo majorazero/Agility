@@ -29,7 +29,8 @@ class UserPool extends Component {
 
     this.state = {
       users: [],
-      tasks: []
+      tasks: [], 
+      extended: null
     };
   }
 
@@ -44,8 +45,15 @@ class UserPool extends Component {
       console.log("PROPS",this.props);
   }
 
+  handleChange = panel => (event, expanded) => {
+    this.setState({
+      expanded: expanded ? panel : false,
+    });
+  };
+
   render() {
     const { classes } = this.props
+    const { expanded } = this.state
     return (
       <div>
         <List
@@ -74,6 +82,8 @@ class UserPool extends Component {
                                 onClickDelete={() => this.props.onClickDelete(fTask)}
                                 unAssign={() => this.props.unassign(fTask.id)}
                                 onClickComplete={() => this.props.onClickComplete(fTask.id)}
+                                expanded={expanded === `panel${fTask.id}`} 
+                                onChange={this.handleChange(`panel${fTask.id}`)}
                                 assigned
                             />
                         </ListItem>

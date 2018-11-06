@@ -96,7 +96,9 @@ class Project extends React.Component {
 
         //Progress Bar Time
         SprintTime: 0,
-        SprintProgress: 0
+        SprintProgress: 0,
+
+        expanded: null //handles the accordion function for expansion panels
     }
 
     componentDidMount() {
@@ -181,7 +183,7 @@ class Project extends React.Component {
                     completed.push(task[i])
                 }
             }
-            let progressStat = (completed.length/(completed.length+assigned.length+unassigned.length)*100);
+            let progressStat = (completed.length / (completed.length + assigned.length + unassigned.length) * 100);
             this.setState({
                 unassignedTasks: unassigned,
                 assignedTasks: assigned,
@@ -325,21 +327,21 @@ class Project extends React.Component {
                     if (sprints[i].isActive) {
                         //verify end date has not passed
                         if (today > endDate) {
-                           isActive = false
+                            isActive = false
                         }
                         else {
-                          //set currentSprint, set isActive
-                          activeSprint = sprints[i].sprintId;
-                          currentSprint = activeSprint
-                          isActive = true;
-                          timeProgress = ((endDate-currentDate)/(endDate-startDate)*100);
+                            //set currentSprint, set isActive
+                            activeSprint = sprints[i].sprintId;
+                            currentSprint = activeSprint
+                            isActive = true;
+                            timeProgress = ((endDate - currentDate) / (endDate - startDate) * 100);
                         }
                     }
                     else if (today >= startDate && today <= endDate) {
                         activeSprint = sprints[i].sprintId;
                         currentSprint = activeSprint
                         isActive = true;
-                          timeProgress = ((endDate-currentDate)/(endDate-startDate)*100);
+                        timeProgress = ((endDate - currentDate) / (endDate - startDate) * 100);
                     }
                 }
                 console.log(timeProgress);
@@ -438,8 +440,14 @@ class Project extends React.Component {
         }
     }
 
+    handleTaskOpen = panel => (event, expanded) => {
+        this.setState({
+          expanded: expanded ? panel : false,
+        });
+      };
+
     render() {
-        const { direction, justify, alignItems } = this.state;
+        const { direction, justify, alignItems, expanded } = this.state;
         const { classes } = this.props
         return (
             <div>
@@ -462,37 +470,53 @@ class Project extends React.Component {
                     >
                         <Grid item xs>
                             <Paper
-                                style={{ height: "100%", background: 'whitesmoke' }}
+                                style={{ height: "100%", background: 'rgba(254, 254, 254, 0.6' }}
                             >
-                                {/* <MuiThemeProvider theme={theme}> */}
-
-                                {(this.state.isAdmin === true) ?
-                                    <ButtonSizes
-                                        onClick={() => this.handleOpen('sprintOpen')}
-                                        title="Add a Sprint"
-                                        color="secondary"
-                                        mini
-                                    /> :
-                                    ""}
-
-                                {/* </MuiThemeProvider> */}
-                                <SimpleModalSprintWrapped
-                                    open={this.state.sprintOpen}
-                                    onClose={() => this.handleClose('sprintOpen')}
-                                    name="Add a New Sprint ..."
-                                    onSubmit={this.addSprint}
-                                    onChange={this.handleChange}
+                                <Grid
+                                    container
+                                    spacing={8}
                                 >
-                                    <AddSprintLayout
-                                    />
-                                </SimpleModalSprintWrapped>
-                                <Chips
-                                    // style={{ paddingBottom: 10 }}
-                                    sprints={this.state.chipData}
-                                    onClick={this.updateActiveSprint}
-                                    activeSprint={this.state.sprintId}
-                                    currentUser={this.state.currentUser}
-                                />
+                                    <Grid item xs>
+                                        {/* <MuiThemeProvider theme={theme}> */}
+
+
+                                        {/* </MuiThemeProvider> */}
+                                        <SimpleModalSprintWrapped
+                                            open={this.state.sprintOpen}
+                                            onClose={() => this.handleClose('sprintOpen')}
+                                            name="Add a New Sprint ..."
+                                            onSubmit={this.addSprint}
+                                            onChange={this.handleChange}
+                                        >
+                                            <AddSprintLayout
+                                            />
+                                        </SimpleModalSprintWrapped>
+                                    </Grid>
+                                </Grid>
+                                <Grid
+                                    container
+                                    spacing={8}
+                                >
+                                    <Grid item xs>
+                                        <Chips
+                                            // style={{ paddingBottom: 10 }}
+                                            sprints={this.state.chipData}
+                                            onClick={this.updateActiveSprint}
+                                            activeSprint={this.state.sprintId}
+                                            currentUser={this.state.currentUser}
+                                        />
+                                    </Grid>
+                                    <div style={{ marginRight: 5}}>
+                                    {(this.state.isAdmin === true) ?
+                                            <ButtonSizes
+                                                onClick={() => this.handleOpen('sprintOpen')}
+                                                title="Add a Sprint"
+                                                color="secondary"
+                                                mini
+                                            /> :
+                                            ""}
+                                            </div>
+                                </Grid>
                             </Paper>
                         </Grid>
                     </Grid>
@@ -514,13 +538,13 @@ class Project extends React.Component {
                                     spacing={8}
                                     style={{ padding: 25 }}
                                 >
-                                    <Grid item xs = {6}>
+                                    <Grid item xs={6}>
                                         <SwitchLabel
                                             onChange={this.switchTaskPool}
                                             label="Show Completed Tasks"
                                         />
                                     </Grid>
-                                    <Grid item xs style = {{display:"flex", justifyContent:"flex-start", marginTop: 7}}>
+                                    <Grid item xs style={{ display: "flex", justifyContent: "flex-start", marginTop: 7 }}>
                                         <SimplePopper
                                             onPoperClick={this.inviteMember}
                                             message={this.state.inviteCode}
@@ -534,8 +558,7 @@ class Project extends React.Component {
                                                 title="Add a Task"
                                                 color="secondary"
                                             /> : null)
-                                            : null }
-
+                                        : null}
                                     </Grid>
                                 </Grid>
                                 <Grid
@@ -555,7 +578,7 @@ class Project extends React.Component {
                                                     {this.state.showComplete ? this.state.completedTasks.map((task) => {
                                                         return (
                                                             <ul>
-                                                                <ListItem classes={{root: classes.root}}>
+                                                                <ListItem classes={{ root: classes.root }}>
                                                                     <Pool
                                                                         key={task.id}
                                                                         id={this.key}
@@ -565,6 +588,8 @@ class Project extends React.Component {
                                                                         onClickReopen={() => this.reopenTask(task.id)}
                                                                         assignedUser={task.assigned_id}
                                                                         currentUser={this.state.currentUser}
+                                                                        expanded={expanded === `panel${task.id}`}
+                                                                        onChange={this.handleTaskOpen(`panel${task.id}`)}
                                                                         complete
                                                                     />
                                                                 </ListItem>
@@ -603,7 +628,7 @@ class Project extends React.Component {
                                                     {this.state.showComplete ? this.state.completedTasks.map((task) => {
                                                         return (
                                                             <ul>
-                                                                <ListItem classes={{root: classes.root}}>
+                                                                <ListItem classes={{ root: classes.root }}>
                                                                     <Pool
                                                                         key={task.id}
                                                                         id={this.key}
@@ -614,6 +639,8 @@ class Project extends React.Component {
                                                                         assignedUser={task.assigned_id}
                                                                         assigned={true}
                                                                         currentUser={this.state.currentUser}
+                                                                        expanded={expanded === `panel${task.id}`}
+                                                                        onChange={this.handleTaskOpen(`panel${task.id}`)}
                                                                         complete
                                                                     />
                                                                 </ListItem>
@@ -622,7 +649,7 @@ class Project extends React.Component {
                                                     }) : this.state.unassignedTasks.map((task) => {
                                                         return (
                                                             <ul>
-                                                                <ListItem classes={{root: classes.root}}>
+                                                                <ListItem classes={{ root: classes.root }}>
                                                                     <Pool
                                                                         key={task.id}
                                                                         id={this.key}
@@ -631,6 +658,8 @@ class Project extends React.Component {
                                                                         onClickDelete={this.deleteTask.bind(this, task)}
                                                                         onClickAdd={this.assignTask.bind(this, task)}
                                                                         currentUser={this.state.currentUser}
+                                                                        expanded={expanded === `panel${task.id}`}
+                                                                        onChange={this.handleTaskOpen(`panel${task.id}`)}
                                                                     />
                                                                 </ListItem>
                                                             </ul>

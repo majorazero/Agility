@@ -13,7 +13,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 const styles = {
     root: {
-        padding: 0
+        padding: '0px 30px 0px 10px'
     }
 }
 
