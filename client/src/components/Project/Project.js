@@ -276,7 +276,7 @@ class Project extends React.Component {
     }
 
     updateActiveSprint = (sprintId) => {
-        console.log(this.state.activeSprintId)
+        console.log(this.state.sprints)
         let isActive = false;
         if (this.state.activeSprintId === sprintId) {
             isActive = true;
@@ -288,7 +288,6 @@ class Project extends React.Component {
         // }
         this.setState({ sprintId: sprintId, isActive: isActive }, () => {
             this.getTasks();
-            console.log(this.state);
         });
     }
 
@@ -676,8 +675,8 @@ class Project extends React.Component {
                                 {/* <Paper
                                         style={{ background: 'none', border: 'none', height: "100%", paddingLeft: 10, paddingRight: 10, paddingTop: 3, paddingBottom: 10 }}
                                     > */}
-                                {<LinearDeterminate whatBar completed={this.state.SprintTime} title={"Sprint Time"} />}
-                                {<LinearDeterminate completed={this.state.SprintProgress} title={"Sprint Progress"} />}
+                                {(this.state.isActive) ?       <LinearDeterminate whatBar completed={this.state.SprintTime} title={"Sprint Time"} /> : ""}
+                                <LinearDeterminate completed={this.state.SprintProgress} title={"Sprint Progress"} />
                                 {/* </Paper> */}
                                 {/* </MuiThemeProvider> */}
                             </Grid>
