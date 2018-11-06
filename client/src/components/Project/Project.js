@@ -96,7 +96,9 @@ class Project extends React.Component {
 
         //Progress Bar Time
         SprintTime: 0,
-        SprintProgress: 0
+        SprintProgress: 0,
+
+        expanded: null //handles the accordion function for expansion panels
     }
 
     componentDidMount() {
@@ -439,8 +441,14 @@ class Project extends React.Component {
         }
     }
 
+    handleTaskOpen = panel => (event, expanded) => {
+        this.setState({
+          expanded: expanded ? panel : false,
+        });
+      };
+
     render() {
-        const { direction, justify, alignItems } = this.state;
+        const { direction, justify, alignItems, expanded } = this.state;
         const { classes } = this.props
         return (
             <div>
@@ -580,6 +588,8 @@ class Project extends React.Component {
                                                                         onClickReopen={() => this.reopenTask(task.id)}
                                                                         assignedUser={task.assigned_id}
                                                                         currentUser={this.state.currentUser}
+                                                                        expanded={expanded === `panel${task.id}`} 
+                                                                        onChange={this.handleTaskOpen(`panel${task.id}`)}
                                                                         complete
                                                                     />
                                                                 </ListItem>
@@ -629,6 +639,8 @@ class Project extends React.Component {
                                                                         assignedUser={task.assigned_id}
                                                                         assigned={true}
                                                                         currentUser={this.state.currentUser}
+                                                                        expanded={expanded === `panel${task.id}`} 
+                                                                        onChange={this.handleTaskOpen(`panel${task.id}`)}
                                                                         complete
                                                                     />
                                                                 </ListItem>
@@ -646,6 +658,8 @@ class Project extends React.Component {
                                                                         onClickDelete={this.deleteTask.bind(this, task)}
                                                                         onClickAdd={this.assignTask.bind(this, task)}
                                                                         currentUser={this.state.currentUser}
+                                                                        expanded={expanded === `panel${task.id}`} 
+                                                                        onChange={this.handleTaskOpen(`panel${task.id}`)}
                                                                     />
                                                                 </ListItem>
                                                             </ul>
