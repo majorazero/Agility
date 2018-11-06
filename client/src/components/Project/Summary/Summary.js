@@ -36,16 +36,23 @@ const SummaryCard = (props) => {
       }
     }
     console.log(topStack,topStackNum);
-    return(
-    <div>
-      <div>{item.User.first_name} {item.User.last_name}</div>
-      <div>Task Completed: {amtofTaskComplete}</div>
-      <div>Tasks Taken: {amtofTaskTaken}</div>
-      {(amtofTaskComplete === 0) ? "":<div>Avg Complexity: {complexity} (Completed)</div>}
-      {(topStack === "") ? "": <div>Most Taken Stack: {topStack} {(topStackNum/amtofTaskComplete*100).toFixed(2)}%</div>}
-      <div>-----------</div>
-    </div>
-    );
+    // return(
+    //   <div>
+    //     <div>{item.User.first_name} {item.User.last_name}</div>
+    //     <div>Task Completed: {amtofTaskComplete}</div>
+    //     <div>Tasks Taken: {amtofTaskTaken}</div>
+    //     {(amtofTaskComplete === 0) ? "":<div>Avg Complexity: {complexity} (Completed)</div>}
+    //     {(topStack === "") ? "": <div>Most Taken Stack: {topStack} {(topStackNum/amtofTaskComplete*100).toFixed(2)}%</div>}
+    //     <div>-----------</div>
+    //   </div>
+    // );
+    return {
+      label1: `${item.User.first_name} ${item.User.last_name}`,
+      info2: `Task Completed: ${amtofTaskComplete}`,
+      info3: `Task Taken: ${amtofTaskTaken}`,
+      info4: `${(amtofTaskComplete === 0) ? "":`Avg Complexity: ${complexity} (Completed)`}`,
+      info5: `${(topStack === "") ? "": `Most Taken Stack: ${topStack} ${(topStackNum/amtofTaskComplete*100).toFixed(2)}%`}`
+    };
   });
 
   return(
@@ -62,7 +69,7 @@ const SummaryCard = (props) => {
           <div></div>
           <div>-----------</div>
           <div>
-            {membersCard}
+
           </div>
         </div>}
     </div>
