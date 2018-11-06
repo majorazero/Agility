@@ -62,7 +62,7 @@ class UserStepper extends React.Component {
         const maxSteps = this.props.membersCard.length;
 
         return (
-            (this.props.membersCard !== undefined) ?
+            (this.props.membersCard !== undefined && this.props.membersCard.length > 0) ?
             <div className={classes.root}>
              <MobileStepper
                     steps={maxSteps}
