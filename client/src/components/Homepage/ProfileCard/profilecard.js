@@ -146,7 +146,7 @@ class RecipeReviewCard extends React.Component {
           }
           console.log(arr);
           let format = {
-            label1: "Top Stacks",
+            label1: "TOP STACKS:",
             info1: ""
           };
           for(let i = 0; i < 3; i++){

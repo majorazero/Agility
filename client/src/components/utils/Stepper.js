@@ -91,17 +91,17 @@ class TextMobileStepper extends React.Component {
       <div className={classes.root}>
         <Paper square elevation={0} className={classes.balls}>
           <DescIcon style={{fill: 'black'}} />
-          <Typography variant="body1" gutterBottom>{this.props.tutorialSteps[activeStep].label1}</Typography>
-          <Typography variant="body2" gutterBottom>{this.props.tutorialSteps[activeStep].info1}</Typography>
+          <Typography variant="subtitle1" gutterBottom>{this.props.tutorialSteps[activeStep].label1}</Typography>
+          <Typography variant="caption" gutterBottom>{this.props.tutorialSteps[activeStep].info1}</Typography>
           <br />
-          <Typography variant="body1" gutterBottom>{this.props.tutorialSteps[activeStep].label2}</Typography>
-          <Typography variant="body2" gutterBottom>{this.props.tutorialSteps[activeStep].info2}</Typography>
+          <Typography variant="subtitle1" gutterBottom>{this.props.tutorialSteps[activeStep].label2}</Typography>
+          <Typography variant="caption" gutterBottom>{this.props.tutorialSteps[activeStep].info2}</Typography>
           <br />
-          <Typography variant="body1" gutterBottom>{this.props.tutorialSteps[activeStep].label3}</Typography>
-          <Typography variant="body2" gutterBottom>{this.props.tutorialSteps[activeStep].info3}</Typography>
+          <Typography variant="subtitle1" gutterBottom>{this.props.tutorialSteps[activeStep].label3}</Typography>
+          <Typography variant="caption" gutterBottom>{this.props.tutorialSteps[activeStep].info3}</Typography>
           {(this.props.tutorialSteps.length > 2) ? <br /> : null }
-          <Typography variant="body1" gutterBottom>{this.props.tutorialSteps[activeStep].label4}</Typography>
-          <Typography variant="body2" gutterBottom>{this.props.tutorialSteps[activeStep].info4}</Typography>
+          <Typography variant="subtitle1" gutterBottom>{this.props.tutorialSteps[activeStep].label4}</Typography>
+          <Typography variant="caption" gutterBottom>{this.props.tutorialSteps[activeStep].info4}</Typography>
         </Paper>
         <MobileStepper
           style={{
