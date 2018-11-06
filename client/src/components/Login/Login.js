@@ -76,10 +76,8 @@ class Login extends Component {
             <LoginLayout
               onSubmit={this.handleSubmit}
               onChange={this.handleChange}
+              message={this.state.message}
             />
-            <Typography variant="overline" gutterBottom>
-              {this.state.message}
-            </Typography>
           </Grid>
           <Grid container>
             <Grid

@@ -23,6 +23,7 @@ import LinearDeterminate from "../utils/ProgressBar/ProgressBar.js";
 import moment from "moment";
 import ListItem from '@material-ui/core/ListItem';
 import List from '@material-ui/core/List';
+import Typography from '@material-ui/core/Typography';
 import SimplePopper from '../utils/popovertext.js'
 
 const styles = {
@@ -470,8 +471,11 @@ class Project extends React.Component {
                     >
                         <Grid item xs>
                             <Paper
-                                style={{ height: "100%", background: 'rgba(254, 254, 254, 0.6' }}
+                                style={{ height: "100%", background: 'whitesmoke' }}
                             >
+                            <Grid item xs={12} style={{ padding: '25px 25px 0 25px' }}>
+                <Typography fullWidth variant="h5" gutterBottom>Sprints</Typography>
+                </Grid>
                                 <Grid
                                     container
                                     spacing={8}
@@ -533,6 +537,9 @@ class Project extends React.Component {
                             <Paper
                                 style={{ background: 'whitesmoke', height: '100%' }}
                             >
+                            <Grid item xs={12} style={{ padding: '25px 25px 0 25px' }}>
+                <Typography fullWidth variant="h5" gutterBottom>Tasks</Typography>
+                </Grid>
                                 <Grid
                                     container
                                     spacing={8}
@@ -676,6 +683,9 @@ class Project extends React.Component {
                             <Paper
                                 style={{ height: '100%', }}
                             >
+                            <Grid item xs={12} style={{ padding: '25px 25px 0 25px' }}>
+                <Typography fullWidth variant="h5" gutterBottom>Project Users</Typography>
+                </Grid>
                                 <Grid
                                     container
                                     spacing={8}

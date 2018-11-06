@@ -75,6 +75,19 @@ function LoginLayout(props) {
                 onChange={props.onChange("password")}
               />
             </FormControl>
+            <Typography
+              style={{
+                marginTop: 5,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                padding: 5,
+              }}
+              variant="subtitle1"
+              gutterBottom
+            >
+              {props.message}
+            </Typography>
             <Button
               type="submit"
               fullWidth
