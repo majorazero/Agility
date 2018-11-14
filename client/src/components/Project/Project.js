@@ -89,7 +89,7 @@ class Project extends React.Component {
 
         sprintOpen: false,
         sprintName: "",
-        sprintStart_date: "",
+        sprintStart_date: `${new Date().getMonth()+1}/${new Date().getDate()}/${new Date().getFullYear()}`, 
         sprintEnd_date: "",
 
         currentUser: '',
@@ -452,7 +452,7 @@ class Project extends React.Component {
     render() {
         const { direction, justify, alignItems, expanded } = this.state;
         const { classes } = this.props
-        console.log(this.state.taskComplexity)
+        console.log(this.state.sprintStart_date)
         return (
             <div>
                 <ButtonAppBar />
