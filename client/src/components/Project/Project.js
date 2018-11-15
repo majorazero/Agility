@@ -24,7 +24,8 @@ import moment from "moment";
 import ListItem from '@material-ui/core/ListItem';
 import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
-import SimplePopper from '../utils/popovertext.js'
+import SimplePopper from '../utils/popovertext.js';
+import ClippedDrawer from './../utils/Navbar/SprintDrawer.js';
 
 const styles = {
     root: {
@@ -324,8 +325,8 @@ class Project extends React.Component {
                         key: i,
                         label: sprints[i].sprintName,
                         id: sprints[i].sprintId,
-                        start: `${startDate.getMonth()+1}/${startDate.getDate()}/${startDate.getFullYear()}`,
-                        end: `${endDate.getMonth()+1}/${endDate.getDate()}/${endDate.getFullYear()}`
+                        start: `${startDate.getMonth() + 1}/${startDate.getDate()}/${startDate.getFullYear()}`,
+                        end: `${endDate.getMonth() + 1}/${endDate.getDate()}/${endDate.getFullYear()}`
                     });
                     if (sprints[i].isActive) {
                         //verify end date has not passed
@@ -455,10 +456,15 @@ class Project extends React.Component {
         console.log(this.state.taskComplexity)
         return (
             <div>
+
                 <ButtonAppBar />
+
                 <div
                     className="parallax"
                     style={{
+                        display: 'flex',
+                        flexGrow: 1,
+
                         paddingTop: 75,
                         overflowX: "hidden",
                         // backgroundImage: 'linear-gradient(to right, grey , lightgrey)',
@@ -467,7 +473,7 @@ class Project extends React.Component {
                         height: "-webkit-fill-available"
                     }} >
 
-                    <Grid
+                    {/* <Grid
                         container
                         spacing={8}
                         style={{ padding: 25 }}
@@ -479,17 +485,6 @@ class Project extends React.Component {
                                 <Grid item xs style={{ padding: '25px 25px 0 25px' }}>
                                     <Typography fullWidth variant="h5" gutterBottom>Sprints</Typography>
                                 </Grid>
-
-                                {/* <Grid
-                                    container
-                                    spacing={8}
-                                >
-                                    <Grid item xs>
-
-
-                                        
-                                    </Grid>
-                                </Grid> */}
                                 <Grid
                                     container
                                     spacing={8}
@@ -506,7 +501,6 @@ class Project extends React.Component {
                                             />
                                         </SimpleModalSprintWrapped>
                                         <Chips
-                                            // style={{ paddingBottom: 10 }}
                                             sprints={this.state.chipData}
                                             onClick={this.updateActiveSprint}
                                             activeSprint={this.state.sprintId}
@@ -527,7 +521,7 @@ class Project extends React.Component {
                                 </Grid>
                             </Paper>
                         </Grid>
-                    </Grid>
+                    </Grid> */}
                     <Grid
                         container
                         spacing={32}
@@ -727,26 +721,6 @@ class Project extends React.Component {
                             </Grid>
                         </Grid>
                     </Grid>
-                </div>
-
-
-                {/* <div style={{ paddingTop: "100px" }}>
-                    <SprintSelect
-                    sprints={this.state.chipData}
-                    onClick={this.updateActiveSprint}
-                    activeSprint={this.state.sprintId}
-                    currentUser={this.state.currentUser}
-                    />
-                    <ButtonSizes
-                        onClick={() => this.handleOpen('sprintOpen')}
-                        title="Add a Sprint"
-                        color="secondary"
-                        style= {{
-                            position: "absolute!important",
-                            top: "50px!important",
-                            left: "50px!important"
-                        }}
-                    />
                     <SimpleModalSprintWrapped
                         open={this.state.sprintOpen}
                         onClose={() => this.handleClose('sprintOpen')}
@@ -754,153 +728,18 @@ class Project extends React.Component {
                         onSubmit={this.addSprint}
                         onChange={this.handleChange}
                     >
-                        {/* <AddSprintLayout
-                        /> */}
-                {/* </SimpleModalSprintWrapped>
-                    <Grid container>
-                        <h1>{this.state.projName}</h1>
-                        <h2>{this.state.summary}</h2>
-                        <h3>{this.state.projDueDate}</h3>
-                        <Grid item xs={6} style={{ padding: "10px" }}>
-                            <h2>This is pool.</h2>
-                            {/* <LinearDeterminate sprintId={this.state.sprintId}/> */}
-                {/* <div>
-                    {this.state.inviteCode}
-                </div>
-                <button onClick={this.inviteMember}>Invite Code</button>
-
-                <Grid
-
-                    container
-                    spacing={8}
-                    style={{ padding: 25 }}
-                    >
-                      <Grid item xs>
-                        <UserPool
-                          isAdmin={this.state.isAdmin}
-                          currentUser={this.state.currentUser}
-                          sprintId={this.state.sprintId}
-                          members={this.state.members}
-                          tasks={this.state.assignedTasks}
-                          unassign={this.unassignTask}
-                          onClickDelete={this.deleteTask}
-                          onClickComplete={this.markComplete}
+                        <AddSprintLayout
                         />
-                      </Grid>
-                    </Grid>
-                  </Paper>
-                </Grid>
-            </Grid>
-          </div>
-
-          <div>
-             {this.state.inviteCode}
-         </div>
-         <button onClick={this.inviteMember}>Invite Code</button>
-
-            {/* <div style={{ paddingTop: "100px" }}>
-                <SprintSelect
-                sprints={this.state.chipData}
-                onClick={this.updateActiveSprint}
-                activeSprint={this.state.sprintId}
-                currentUser={this.state.currentUser}
-                />
-                <ButtonSizes
-                    onClick={() => this.handleOpen('sprintOpen')}
-                    title="Add a Sprint"
-                    color="secondary"
-                    style= {{
-                        position: "absolute!important",
-                        top: "50px!important",
-                        left: "50px!important"
-                    }}
-                />
-                <SimpleModalSprintWrapped
-                    open={this.state.sprintOpen}
-                    onClose={() => this.handleClose('sprintOpen')}
-                    name="Add a New Sprint ..."
-                    onSubmit={this.addSprint}
-                    onChange={this.handleChange}
-                >
-                    {/* <AddSprintLayout
-                    /> */}
-                {/* </SimpleModalSprintWrapped>
-                <Grid container>
-                    <h1>{this.state.projName}</h1>
-                    <h2>{this.state.summary}</h2>
-                    <h3>{this.state.projDueDate}</h3>
-                    <Grid item xs={6} style={{ padding: "10px" }}>
-                        <h2>This is pool.</h2>
-                        {/* <LinearDeterminate sprintId={this.state.sprintId}/> */}
-                {/* <div>
-                {this.state.inviteCode}
-            </div>
-            <button onClick={this.inviteMember}>Invite Code</button>
-
-            <Grid
-                container
-                alignItems={alignItems}
-                direction={direction}
-                justify={justify}
-            >
-                <ButtonSizes
-                    onClick={() => this.handleOpen('taskOpen')}
-                />
-                <SimpleModalWrapped
-                    open={this.state.taskOpen}
-                    onClose={() => this.handleClose('taskOpen')}
-                    name="Add a New Task ..."
-                    onSubmit={this.addTask}
-                    onChange={this.handleChange}
-                >
-                    <AddTaskLayout
+                    </SimpleModalSprintWrapped>
+                    <ClippedDrawer
+                        balls={() => this.handleOpen('sprintOpen')}
+                        title="ADD SPRINT"
+                        sprints={this.state.chipData}
+                        onClick={this.updateActiveSprint}
+                        activeSprint={this.state.sprintId}
+                        currentUser={this.state.currentUser}
                     />
-                </SimpleModalWrapped>
-                <SwitchLabel
-                    onChange={this.switchTaskPool}
-                ></SwitchLabel>
-                {this.state.showComplete ? this.state.completedTasks.map((task) => {
-                    return (
-                        <Pool
-                            key={task.id}
-                            id={this.key}
-                            tasks={task}
-                            onClickDelete={this.deleteTask.bind(this, task)}
-                        />
-                    );
-                }) : this.state.unassignedTasks.map((task) => {
-                    return (
-                        <Pool
-                            key={task.id}
-                            id={this.key}
-                            tasks={task}
-                            onClickDelete={this.deleteTask.bind(this, task)}
-                            onClickAdd={this.assignTask.bind(this, task)}
-                            style={this.state.showComplete ? { display: 'default' } : { display: 'none' }}
-                        />
-                    );
-                })}
-
-            </Grid>
-
-                    </Grid>
-        <Grid item xs={6} style={{ padding: "10px" }}>
-            <UserPool sprintId={this.state.sprintId} members={this.state.members} tasks={this.state.assignedTasks}
-                unassign={this.unassignTask}
-                onClickDelete={this.deleteTask}
-                onClickComplete={this.markComplete}
-            ></UserPool>
-        </Grid>
-        <br />
-        <div><Link to="/homepage">Back to home page.</Link></div>
-                </Grid >
-
-            </div >
-        <div style={{ position: "fixed", width: "100%", bottom: "0" }}> */}
-
-                {/* </div> * /} */}
-                {/*< SimpleBottomNavigation />*/}
-
+                </div>
             </div>
         );
     }
