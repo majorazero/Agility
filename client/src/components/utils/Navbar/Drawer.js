@@ -96,7 +96,7 @@ class TemporaryDrawer extends React.Component {
 
     const sideList = (
       <div className={classes.list}>
-        <List style={{ position: 'sticky', height: 46, padding: 8, top: 0, background: 'whitesmoke', zIndex: 1 }}>
+        <List style={{ position: 'sticky', height: 46, padding: 8, top: 0,  zIndex: 1 }}>
           <ListItem button key="Home" name="home" component={Link} to="/homepage">
             <ListItemIcon><HomeIcon /></ListItemIcon>
             <ListItemText primary="Home" />
