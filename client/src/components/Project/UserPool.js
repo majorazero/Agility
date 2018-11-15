@@ -66,7 +66,7 @@ class UserPool extends Component {
             maxWidth: '100%',
             position: 'relative',
             overflow: 'auto',
-            maxHeight: 300,
+            // maxHeight: '',
           }}
         >
           {this.props.members.map((member, i) => (
