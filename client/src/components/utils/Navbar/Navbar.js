@@ -8,6 +8,7 @@ import Button from '@material-ui/core/Button';
 // import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Drawer from './Drawer.js';
+import ClippedDrawer from './SprintDrawer.js';
 
 const styles = {
   root: {
@@ -24,7 +25,7 @@ const styles = {
   },
   balls: {
     backgroundColor: 'lightslategray',
-    opacity: .95
+    opacity: .95,
   }
 };
 
