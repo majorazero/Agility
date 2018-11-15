@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {BrowserRouter as Router, Route, Redirect, Switch} from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect, Switch } from "react-router-dom";
 import Login from "./components/Login/Login.js";
 import Landing from "./components/Landing/Landing.js";
 import Homepage from "./components/Homepage/Homepage.js";
@@ -10,8 +10,19 @@ import UserPool from "./components/Project/UserPool";
 import SprintSelect from "./components/Project/SprintSelect";
 import axios from "axios";
 import notFound from "./components/utils/404/404.js";
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 // import ProgressBar from "./components/utils/ProgressBar/ProgressBar";
 import './App.css';
+
+const theme = createMuiTheme({
+  palette: {
+    type: 'dark',
+  },
+  typography: {
+    useNextVariants: true,
+  },
+});
+
 class App extends Component {
 
   state = {
@@ -31,47 +42,49 @@ class App extends Component {
           token: localStorage.getItem("token")
         }).then((response) => {
           sessionStorage.setItem("id", response.data.id);
-          this.setState({loaded:true, loggedIn: true});
+          this.setState({ loaded: true, loggedIn: true });
         });
         //if it does we'll log the user in.
       }
       //if no token exists, they have to login.
-      else{
-        this.setState({loaded: true});
+      else {
+        this.setState({ loaded: true });
       }
     }
     else {
       //you have a session you're logged in
       console.log("Welcome back!");
-      this.setState({loaded:true, loggedIn: true});
+      this.setState({ loaded: true, loggedIn: true });
     }
   }
-//  {(this.location.pathname === "/404")? null:<ButtonAppBar />}
+  //  {(this.location.pathname === "/404")? null:<ButtonAppBar />}
   render() {
-    if(!this.state.loaded){
+    if (!this.state.loaded) {
       return null;
     }
     return (
-      <Router>
-        <div>
-          <Switch>
-            <Route exact path ="/" render={() => (
+      <MuiThemeProvider theme={theme}>
+        <Router>
+          <div>
+            <Switch>
+              <Route exact path="/" render={() => (
                 (this.state.loggedIn !== true) ? (<Landing />) : (<Redirect to="/homepage" />)
               )} />
-            <Route exact path="/homepage" component={Homepage} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/project/:id" component={Project} />
-            {/* <Route exact path='/tasks' component={ActiveTasks} /> */}
-            <Route exact path='/userpool' component={UserPool} />
-            <Route exact path='/sprintselect' component={SprintSelect} />
-            <Route exact path='/404' component={notFound} />
-            <Route component={notFound} />
-          </Switch>
-          {/* <Route exact path='/parallax' component={parallax} /> */}
+              <Route exact path="/homepage" component={Homepage} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/register" component={Register} />
+              <Route exact path="/project/:id" component={Project} />
+              {/* <Route exact path='/tasks' component={ActiveTasks} /> */}
+              <Route exact path='/userpool' component={UserPool} />
+              <Route exact path='/sprintselect' component={SprintSelect} />
+              <Route exact path='/404' component={notFound} />
+              <Route component={notFound} />
+            </Switch>
+            {/* <Route exact path='/parallax' component={parallax} /> */}
 
-        </div>
-      </Router>
+          </div>
+        </Router>
+      </MuiThemeProvider>
     );
   }
 }
