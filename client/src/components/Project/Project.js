@@ -468,9 +468,8 @@ class Project extends React.Component {
                     style={{
                         display: 'flex',
                         flexGrow: 1,
-
+                        backgroundColor: 'dimgray',
                         paddingTop: 75,
-                        overflowX: "hidden",
                         // backgroundImage: 'linear-gradient(to right, grey , lightgrey)',
                         // backgroundImage: `url("/assets/images/backgroundBW2.jpg")`,
                         resizeMode: 'cover',

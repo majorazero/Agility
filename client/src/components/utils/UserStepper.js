@@ -12,7 +12,7 @@ const styles = theme => ({
     root: {
         width: '100%',
         flexGrow: 1,
-        height: 250,
+        // height: 250,
         overflow: 'auto'
     },
     header: {
@@ -98,7 +98,7 @@ class UserStepper extends React.Component {
                     <Typography variant="subtitle2" gutterBottom>{this.props.membersCard[activeStep].label5}</Typography>
                     <Typography variant="caption" gutterBottom>{this.props.membersCard[activeStep].info5}</Typography>
                 </Paper>
-                <MobileStepper
+                {/* <MobileStepper
                     steps={maxSteps}
                     position="static"
                     activeStep={activeStep}
@@ -115,7 +115,7 @@ class UserStepper extends React.Component {
                             Back
                         </Button>
                     }
-                />
+                /> */}
             </div> :
             <div><Typography variant="subtitle1" gutterBottom>No User Stats Yet</Typography></div>
         );
