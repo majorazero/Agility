@@ -108,13 +108,14 @@ function SingleLineGridList(props) {
       }}
       classes={{ root: classes.gridList }}
     >
-      <img src="https://financesonline.com/uploads/2017/12/project-management-featured.jpg"
+      <div 
         alt={props.name}
         style={{
           height: '100%',
           width: '100%',
           backgroundSize: 'cover',
           backgroundPosition: "center center",
+          backgroundImage: 'linear-gradient(to bottom right, slategray, black)'
         }}
       />
       <GridListTileBar

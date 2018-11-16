@@ -11,13 +11,11 @@ import ButtonSizes from "../utils/FAB.js";
 import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import SimpleBottomNavigation from "../utils/Footer/Footer.js";
-
-//doesn't has to be
+import Tab from './../utils/Tab2.js';
 
 class Homepage extends Component {
 
   constructor(props) {
-
     super(props);
 
     this.state = {
@@ -96,15 +94,15 @@ class Homepage extends Component {
         <div
           className="parallax"
           style={{
+            display: 'flex',
+            flexGrow: 1,
+            backgroundColor: 'dimgray',
             paddingTop: 75,
-            overflowX: "hidden",
-            // backgroundImage: 'linear-gradient(to bottom right, grey , lightgrey)',
-            backgroundImage: `url("/assets/images/homepage3.jpg")`,
             resizeMode: 'cover',
             height: "-webkit-fill-available"
           }} >
 
-          <Grid container>
+          {/* <Grid container>
             <Grid
               item
               xs
@@ -118,7 +116,7 @@ class Homepage extends Component {
                 height: "100%",
                 padding: "10px",
                 backgroundPosition: "center",
-                color: "whitesmoke",
+                // color: "whitesmoke",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center"
@@ -162,7 +160,7 @@ class Homepage extends Component {
               </Grid>
 
             </Grid>
-          </Grid>
+          </Grid> */}
           {/* <div>
         // <ButtonAppBar />
         // <div
@@ -216,7 +214,7 @@ class Homepage extends Component {
               <ProfileCard />
             </Grid>
           </Grid>*/}
-          <Grid
+          {/* <Grid
             container
             style={{ padding: 25, justifyContent: 'center', }}
             spacing={8}
@@ -224,15 +222,27 @@ class Homepage extends Component {
             <Grid item xs={12} >
               <Paper>
                 <Grid item xs={12} style={{ padding: '25px 25px 0 25px' }}>
-                <Typography fullWidth variant="h5" gutterBottom>Projects</Typography>
+                  <Typography fullWidth variant="h5" gutterBottom>Projects</Typography>
                 </Grid>
                 <Grid item xs={12} >
                   <ProjectList />
                 </Grid>
               </Paper>
             </Grid>
-          </Grid>
+          </Grid> */}
           {/* </Grid> */}
+<Grid item xs={3} style={{ margin: 25}}>
+            <ProfileCard />
+          </Grid>
+          <Tab
+            justBalls={<ActiveTasks tasks={this.state.tasks} goToProject={this.goToProject} homepage />}
+            justSack={<ProjectList />}
+          // justTaint={}
+            // onClick={}
+          />
+
+          
+
         </div >
       </div >
     );

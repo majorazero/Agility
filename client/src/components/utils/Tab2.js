@@ -30,7 +30,7 @@ const styles = theme => ({
     },
 });
 
-class SimpleTabs extends React.Component {
+class SimpleTabs2 extends React.Component {
 
     constructor(props) {
         super(props)
@@ -58,27 +58,27 @@ class SimpleTabs extends React.Component {
                     textColor="primary"
                     centered
                 >
-                    <Tab label="Tasks" />
-                    <Tab label="User Pool" />
-                    <Tab label="Progress" />
+                    <Tab label="Active Tasks" />
+                    <Tab label="Projects" />
+                    <Tab label="Statistics" />
                 </Tabs>
                 {value === 0 && <TabContainer>
-                    <ListItem style={{ width: 'max-content'}} button onClick={this.props.onClick}>
+                    {/* <ListItem style={{ width: 'max-content'}} button onClick={this.props.onClick}>
                         <ListItemIcon><Add /></ListItemIcon>
                         <ListItemText primary={this.props.title} />
-                    </ListItem>
-                    {this.props.holyBalls}
+                    </ListItem> */}
+                    {this.props.justBalls}
                 </TabContainer>}
-                {value === 1 && <TabContainer>{this.props.holySack}</TabContainer>}
-                {value === 2 && <TabContainer>{this.props.holyTaint}</TabContainer>}
+                {value === 1 && <TabContainer>{this.props.justSack}</TabContainer>}
+                {value === 2 && <TabContainer>{this.props.justTaint}</TabContainer>}
             </Paper>
 
         );
     }
 }
 
-SimpleTabs.propTypes = {
+SimpleTabs2.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(SimpleTabs);
+export default withStyles(styles)(SimpleTabs2);
