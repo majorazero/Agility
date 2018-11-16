@@ -448,8 +448,6 @@ class Project extends React.Component {
                         flexGrow: 1,
                         backgroundColor: 'dimgray',
                         paddingTop: 75,
-                        // backgroundImage: 'linear-gradient(to right, grey , lightgrey)',
-                        // backgroundImage: `url("/assets/images/backgroundBW2.jpg")`,
                         resizeMode: 'cover',
                         height: "-webkit-fill-available"
                     }} >
@@ -746,8 +744,6 @@ class Project extends React.Component {
                                     :
                                     ""}
 
-
-
                                     {this.state.showComplete ? this.state.completedTasks.map((task) => {
                                       return (
                                         <ul>
@@ -815,16 +811,15 @@ class Project extends React.Component {
                         <AddSprintLayout
                         />
                     </SimpleModalSprintWrapped>
-
                     <SimpleModalWrapped
-                      open={this.state.taskOpen}
-                      onClose={() => this.handleClose('taskOpen')}
-                      name="Add a New Task ..."
-                      onSubmit={this.addTask}
-                      onChange={this.handleChange}
+                        open={this.state.taskOpen}
+                        onClose={() => this.handleClose('taskOpen')}
+                        name="Add a New Task ..."
+                        onSubmit={this.addTask}
+                        onChange={this.handleChange}
                     >
-                      <AddTaskLayout
-                      />
+                        <AddTaskLayout
+                        />
                     </SimpleModalWrapped>
 
                     <ClippedDrawer
