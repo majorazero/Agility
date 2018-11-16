@@ -26,8 +26,8 @@ import Progress from "../../utils/ProgressBar/ProgressBar.js";
 
 const styles = theme => ({
     card: {
-        width: "100%",
-        background: 'whitesmoke'
+        width: "100%"
+        // background: 'whitesmoke'
     },
     media: {
         height: 40,
