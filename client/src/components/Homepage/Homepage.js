@@ -11,6 +11,7 @@ import ButtonSizes from "../utils/FAB.js";
 import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import SimpleBottomNavigation from "../utils/Footer/Footer.js";
+import TextMobileStepper from './../utils/Stepper.js';
 import Tab from './../utils/Tab2.js';
 
 class Homepage extends Component {
@@ -21,7 +22,15 @@ class Homepage extends Component {
     this.state = {
       userId: 0,
       tasks: [],
-      sprints: []
+      sprints: [],
+      expanded: false,
+      totalTask: "",
+      totalCompletedTask: "",
+      sprintParticipate: "",
+      projectContributed: "",
+      projectCreated: "",
+      complexity: "",
+      complexitySemantics: ""
     }
   }
 
@@ -32,6 +41,29 @@ class Homepage extends Component {
       window.location.assign("/");
     }
     this.getCurrentUserId();
+
+    axios.post("/api/getuser",
+      {
+        id: sessionStorage.getItem("id"),
+        token: localStorage.getItem("token")
+      }).then((response) => {
+        console.log(response.data);
+        this.setState(
+          {
+            totalTask: response.data.totalTask,
+            totalCompletedTask: response.data.totalCompletedTask,
+            sprintParticipate: response.data.sprintParticipate,
+            projectContributed: response.data.projectContributed,
+            projectCreated:
+              response.data.projectCreated,
+            complexity:
+              response.data.complexity,
+            complexitySemantics:
+              response.data.compSemantics,
+            stacks: response.data.stacks
+          }
+        );
+      });
   }
 
   getCurrentUserId = () => {
@@ -85,6 +117,77 @@ class Homepage extends Component {
           window.location.assign(`/project/${data.data}`);
         });
       })
+  }
+
+  stackFormat = () => {
+    let arr = [];
+    if (this.state.stacks !== undefined) {
+      let stack = JSON.parse(JSON.stringify(this.state.stacks));
+      let format = {
+        label1: "Start working on some projects! No stack metrics yet!"
+      };
+      if (Object.keys(stack).length > 0) {
+        for (let j = 0; j < 3; j++) {
+          let Obj = {};
+          let maxComplete = -1;
+          let topStack = "";
+          let stackName = "";
+          for (let i in stack) {
+            if (stack[i].amountComplete > maxComplete) {
+              maxComplete = stack[i].amountComplete;
+              topStack = stack[i];
+              stackName = i;
+            }
+          }
+          Obj[`stackName`] = stackName;
+          Obj[`stackComplete`] = `Average Rate of Completion: ${(topStack.amountComplete / topStack.amountAttempted * 100).toFixed(2)}%`;
+          if (topStack.amountComplete > 0) {
+            Obj[`stackComplex`] = `Average Complexity: ${(topStack.complexitySum / topStack.amountComplete).toFixed(2)}`;
+          }
+          else {
+            Obj[`stackComplex`] = `Average Complexity: 0`;
+          }
+          arr.push(Obj);
+          stack[stackName] = "";
+        }
+        console.log(arr);
+        let format = {
+          label1: "TOP STACKS:",
+          info1: ""
+        };
+        for (let i = 0; i < 3; i++) {
+          format[`label${i + 2}`] = arr[i].stackName;
+          format[`info${i + 2}`] = `${arr[i].stackComplete} ${arr[i].stackComplex}`;
+        }
+        return format;
+      }
+      return format;
+    }
+  }
+
+  makeArray = () => {
+    var tutorialSteps = [
+      {
+        label1: 'Total Tasks Completed: ',
+        info1: this.state.totalCompletedTask,
+        label2: 'Total Tasks Taken: ',
+        info2: this.state.totalTask,
+        label3: 'Average Task Complexity: ',
+        info3: `${this.state.complexity} (${this.state.complexitySemantics})`
+      },
+      {
+        label1: 'Total Sprints Participated: ',
+        info1: this.state.sprintParticipate,
+        label2: 'Total Projects Contributed: ',
+        info2: this.state.projectContributed,
+        label3: 'Total Projects Created: ',
+        info3: this.state.projectCreated
+      },
+      this.stackFormat()
+    ];
+    return (
+      tutorialSteps
+    );
   }
 
   render() {
@@ -231,17 +334,19 @@ class Homepage extends Component {
             </Grid>
           </Grid> */}
           {/* </Grid> */}
-<Grid item xs={3} style={{ margin: 25}}>
+          <Grid item xs={3} style={{ margin: 25 }}>
             <ProfileCard />
           </Grid>
           <Tab
             justBalls={<ActiveTasks tasks={this.state.tasks} goToProject={this.goToProject} homepage />}
             justSack={<ProjectList />}
-          // justTaint={}
-            // onClick={}
+            justTaint={<TextMobileStepper
+              tutorialSteps={this.makeArray()}
+          />}
+          // onClick={}
           />
 
-          
+
 
         </div >
       </div >

@@ -11,11 +11,14 @@ import Grid from '@material-ui/core/Grid';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
-const styles = {
+const styles = theme => ({
     root: {
-        padding: '0px 30px 0px 10px'
+        padding: '0px 30px 0px 10px',
+    },
+    top: {
+        backgroundColor: theme.palette.background.default,
     }
-}
+})
 
 class ActiveTasks extends Component {
 
@@ -42,18 +45,18 @@ class ActiveTasks extends Component {
     <div>
         <List
             subheader={<li />}
-            style={{
-                width: '100%',
-                maxWidth: '100%',
-                position: 'relative',
-                overflow: 'auto',
-                maxHeight: 300,
-            }}
+            // style={{
+            //     width: '100%',
+            //     maxWidth: '100%',
+            //     position: 'relative',
+            //     overflow: 'auto',
+            //     maxHeight: 300,
+            // }}
            
         >
             {this.props.tasks.map((sprint, i) => (
                 <li key={i}>
-                    <ListSubheader style={{ backgroundColor: 'whitesmoke', color: 'black', fontWeight: 'bold', marginBottom: 10, marginTop: 5 }}>{sprint.sprint}</ListSubheader>
+                    <ListSubheader classes={{root: classes.top}}>{sprint.sprint}</ListSubheader>
                     {sprint.tasks.map((task, index) => {
                         console.log(task.sprintId)
                         return(

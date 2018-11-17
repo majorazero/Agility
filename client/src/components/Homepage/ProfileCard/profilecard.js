@@ -26,7 +26,7 @@ import Progress from "../../utils/ProgressBar/ProgressBar.js";
 
 const styles = theme => ({
     card: {
-        width: "100%"
+        width: '100%',
         // background: 'whitesmoke'
     },
     media: {
@@ -34,7 +34,7 @@ const styles = theme => ({
         paddingBottom: "40%",
         backgroundSize: 'cover',
         backgroundPosition: "center center",
-        margin: 5
+        margin: 10
     },
     actions: {
         display: 'flex',
@@ -76,13 +76,13 @@ class RecipeReviewCard extends React.Component {
       userFirstName: "",
       userLastName: "",
       userEmail: "",
-      totalTask: "",
-      totalCompletedTask: "",
-      sprintParticipate: "",
-      projectContributed: "",
-      projectCreated: "",
-      complexity: "",
-      complexitySemantics: ""
+    //   totalTask: "",
+    //   totalCompletedTask: "",
+    //   sprintParticipate: "",
+    //   projectContributed: "",
+    //   projectCreated: "",
+    //   complexity: "",
+    //   complexitySemantics: ""
     };
 
     componentDidMount() {
@@ -97,92 +97,81 @@ class RecipeReviewCard extends React.Component {
             userFirstName: response.data.prof.first_name,
             userLastName: response.data.prof.last_name,
             userEmail: response.data.prof.email,
-            totalTask: response.data.totalTask,
-            totalCompletedTask: response.data.totalCompletedTask,
-            sprintParticipate: response.data.sprintParticipate,
-            projectContributed: response.data.projectContributed,
-            projectCreated:
-                response.data.projectCreated,
-            complexity:
-                response.data.complexity,
-            complexitySemantics:
-                response.data.compSemantics,
-            stacks: response.data.stacks
           }
         );
       });
     }
 
-    stackFormat = () => {
-      let arr = [];
-      if(this.state.stacks !== undefined){
-        let stack = JSON.parse(JSON.stringify(this.state.stacks));
-        let format = {
-          label1: "Start working on some projects! No stack metrics yet!"
-        };
-        if(Object.keys(stack).length > 0){
-          for(let j = 0; j < 3; j++){
-            let Obj = {};
-            let maxComplete = -1;
-            let topStack = "";
-            let stackName = "";
-            for(let i in stack){
-              if(stack[i].amountComplete > maxComplete){
-                maxComplete = stack[i].amountComplete;
-                topStack = stack[i];
-                stackName = i;
-              }
-            }
-            Obj[`stackName`] = stackName;
-            Obj[`stackComplete`] = `Average Rate of Completion: ${(topStack.amountComplete/topStack.amountAttempted*100).toFixed(2)}%`;
-            if(topStack.amountComplete > 0){
-              Obj[`stackComplex`] = `Average Complexity: ${(topStack.complexitySum/topStack.amountComplete).toFixed(2)}`;
-            }
-            else {
-              Obj[`stackComplex`] = `Average Complexity: 0`;
-            }
-            arr.push(Obj);
-            stack[stackName] = "";
-          }
-          console.log(arr);
-          let format = {
-            label1: "TOP STACKS:",
-            info1: ""
-          };
-          for(let i = 0; i < 3; i++){
-            format[`label${i+2}`] = arr[i].stackName;
-            format[`info${i+2}`] = `${arr[i].stackComplete} ${arr[i].stackComplex}`;
-          }
-          return format;
-        }
-        return format;
-      }
-    }
+    // stackFormat = () => {
+    //   let arr = [];
+    //   if(this.state.stacks !== undefined){
+    //     let stack = JSON.parse(JSON.stringify(this.state.stacks));
+    //     let format = {
+    //       label1: "Start working on some projects! No stack metrics yet!"
+    //     };
+    //     if(Object.keys(stack).length > 0){
+    //       for(let j = 0; j < 3; j++){
+    //         let Obj = {};
+    //         let maxComplete = -1;
+    //         let topStack = "";
+    //         let stackName = "";
+    //         for(let i in stack){
+    //           if(stack[i].amountComplete > maxComplete){
+    //             maxComplete = stack[i].amountComplete;
+    //             topStack = stack[i];
+    //             stackName = i;
+    //           }
+    //         }
+    //         Obj[`stackName`] = stackName;
+    //         Obj[`stackComplete`] = `Average Rate of Completion: ${(topStack.amountComplete/topStack.amountAttempted*100).toFixed(2)}%`;
+    //         if(topStack.amountComplete > 0){
+    //           Obj[`stackComplex`] = `Average Complexity: ${(topStack.complexitySum/topStack.amountComplete).toFixed(2)}`;
+    //         }
+    //         else {
+    //           Obj[`stackComplex`] = `Average Complexity: 0`;
+    //         }
+    //         arr.push(Obj);
+    //         stack[stackName] = "";
+    //       }
+    //       console.log(arr);
+    //       let format = {
+    //         label1: "TOP STACKS:",
+    //         info1: ""
+    //       };
+    //       for(let i = 0; i < 3; i++){
+    //         format[`label${i+2}`] = arr[i].stackName;
+    //         format[`info${i+2}`] = `${arr[i].stackComplete} ${arr[i].stackComplex}`;
+    //       }
+    //       return format;
+    //     }
+    //     return format;
+    //   }
+    // }
 
-    makeArray = () => {
-      var tutorialSteps = [
-        {
-          label1: 'Total Tasks Completed: ',
-          info1: this.state.totalCompletedTask,
-          label2: 'Total Tasks Taken: ',
-          info2: this.state.totalTask,
-          label3: 'Average Task Complexity: ',
-          info3: `${this.state.complexity} (${this.state.complexitySemantics})`
-        },
-        {
-          label1: 'Total Sprints Participated: ',
-          info1: this.state.sprintParticipate,
-          label2: 'Total Projects Contributed: ',
-          info2: this.state.projectContributed,
-          label3: 'Total Projects Created: ',
-          info3: this.state.projectCreated
-        },
-        this.stackFormat()
-      ];
-      return (
-        tutorialSteps
-      );
-    }
+    // makeArray = () => {
+    //   var tutorialSteps = [
+    //     {
+    //       label1: 'Total Tasks Completed: ',
+    //       info1: this.state.totalCompletedTask,
+    //       label2: 'Total Tasks Taken: ',
+    //       info2: this.state.totalTask,
+    //       label3: 'Average Task Complexity: ',
+    //       info3: `${this.state.complexity} (${this.state.complexitySemantics})`
+    //     },
+    //     {
+    //       label1: 'Total Sprints Participated: ',
+    //       info1: this.state.sprintParticipate,
+    //       label2: 'Total Projects Contributed: ',
+    //       info2: this.state.projectContributed,
+    //       label3: 'Total Projects Created: ',
+    //       info3: this.state.projectCreated
+    //     },
+    //     this.stackFormat()
+    //   ];
+    //   return (
+    //     tutorialSteps
+    //   );
+    // }
 
 
     handleExpandClick = () => {
@@ -203,10 +192,10 @@ class RecipeReviewCard extends React.Component {
 
                 <MuiThemeProvider theme={theme}>
                     <CardContent>
-                        <Typography variant="h6" gutterBottom style={{ textAlign: "left" }}>
+                        <Typography variant="h6" gutterBottom style={{ textAlign: "left", color: 'whitesmoke' }}>
                             {this.state.userFirstName + " " + this.state.userLastName}
                         </Typography>
-                        <Typography variant="subtitle2" gutterBottom style={{ textAlign: "left" }}>
+                        <Typography variant="subtitle2" gutterBottom style={{ textAlign: "left", color: 'whitesmoke' }}>
                             {this.state.userEmail}
                         </Typography>
                         {/* <br /> */}
@@ -248,7 +237,7 @@ class RecipeReviewCard extends React.Component {
                     </CardContent>
                 </MuiThemeProvider>
 
-                <CardActions className={classes.actions} disableActionSpacing>
+                {/* <CardActions className={classes.actions} disableActionSpacing>
                     <Typography variant="subtitle1" gutterBottom style={{ textAlign: "left" }}>
                         Career History
                     </Typography>
@@ -262,8 +251,8 @@ class RecipeReviewCard extends React.Component {
                     >
                         <ExpandMoreIcon />
                     </IconButton>
-                </CardActions>
-                <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
+                </CardActions> */}
+                {/* <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
                     <CardContent>
                       <div style={{textAlign: "center", padding: "0 5px 0 5px" }}>
                         <Progress completed={(this.state.totalCompletedTask/this.state.totalTask*100)}/>
@@ -273,7 +262,7 @@ class RecipeReviewCard extends React.Component {
                             tutorialSteps={this.makeArray()}
                         />
                     </CardContent>
-                </Collapse>
+                </Collapse> */}
             </Card>
         );
     }
