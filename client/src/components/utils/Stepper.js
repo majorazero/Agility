@@ -9,34 +9,6 @@ import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import DescIcon from '@material-ui/icons/Description';
 
-// const tutorialSteps = [
-//   {
-//     label: 'San Francisco – Oakland Bay Bridge, United States',
-//     imgPath:
-//       'https://images.unsplash.com/photo-1537944434965-cf4679d1a598?auto=format&fit=crop&w=400&h=250&q=60',
-//   },
-//   {
-//     label: 'Bird',
-//     imgPath:
-//       'https://images.unsplash.com/photo-1538032746644-0212e812a9e7?auto=format&fit=crop&w=400&h=250&q=60',
-//   },
-//   {
-//     label: 'Bali, Indonesia',
-//     imgPath:
-//       'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=400&h=250&q=80',
-//   },
-//   {
-//     label: 'NeONBRAND Digital Marketing, Las Vegas, United States',
-//     imgPath:
-//       'https://images.unsplash.com/photo-1518732714860-b62714ce0c59?auto=format&fit=crop&w=400&h=250&q=60',
-//   },
-//   {
-//     label: 'Goč, Serbia',
-//     imgPath:
-//       'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60',
-//   },
-// ];
-
 const styles = theme => ({
   root: {
     flexGrow: 1,
@@ -45,14 +17,14 @@ const styles = theme => ({
   header: {
     display: 'flex',
     alignItems: 'center',
-    height: 50,
+    // height: 50,
     paddingLeft: theme.spacing.unit * 4,
     backgroundColor: theme.palette.background.default,
   },
   balls: {
-    backgroundColor: "white",
-    height: '100%',
-    width: "auto",
+    // backgroundColor: "white",
+    // height: '100%',
+    width: '100%',
     padding: 5
   },
 });
@@ -89,21 +61,7 @@ class TextMobileStepper extends React.Component {
 
     return (
       <div className={classes.root}>
-        <Paper square elevation={0} className={classes.balls}>
-          <DescIcon style={{fill: 'black'}} />
-          <Typography variant="subtitle1" gutterBottom>{this.props.tutorialSteps[activeStep].label1}</Typography>
-          <Typography variant="caption" gutterBottom>{this.props.tutorialSteps[activeStep].info1}</Typography>
-          <br />
-          <Typography variant="subtitle1" gutterBottom>{this.props.tutorialSteps[activeStep].label2}</Typography>
-          <Typography variant="caption" gutterBottom>{this.props.tutorialSteps[activeStep].info2}</Typography>
-          <br />
-          <Typography variant="subtitle1" gutterBottom>{this.props.tutorialSteps[activeStep].label3}</Typography>
-          <Typography variant="caption" gutterBottom>{this.props.tutorialSteps[activeStep].info3}</Typography>
-          {(this.props.tutorialSteps.length > 2) ? <br /> : null }
-          <Typography variant="subtitle1" gutterBottom>{this.props.tutorialSteps[activeStep].label4}</Typography>
-          <Typography variant="caption" gutterBottom>{this.props.tutorialSteps[activeStep].info4}</Typography>
-        </Paper>
-        <MobileStepper
+      <MobileStepper
           style={{
             padding: 5
           }}
@@ -124,6 +82,20 @@ class TextMobileStepper extends React.Component {
             </Button>
           }
         />
+        <Paper square elevation={0} className={classes.balls}>
+          <DescIcon style={{fill: 'black'}} />
+          <Typography variant="subtitle1" gutterBottom>{this.props.tutorialSteps[activeStep].label1}</Typography>
+          <Typography variant="caption" gutterBottom>{this.props.tutorialSteps[activeStep].info1}</Typography>
+          <br />
+          <Typography variant="subtitle1" gutterBottom>{this.props.tutorialSteps[activeStep].label2}</Typography>
+          <Typography variant="caption" gutterBottom>{this.props.tutorialSteps[activeStep].info2}</Typography>
+          <br />
+          <Typography variant="subtitle1" gutterBottom>{this.props.tutorialSteps[activeStep].label3}</Typography>
+          <Typography variant="caption" gutterBottom>{this.props.tutorialSteps[activeStep].info3}</Typography>
+          {(this.props.tutorialSteps.length > 2) ? <br /> : null }
+          <Typography variant="subtitle1" gutterBottom>{this.props.tutorialSteps[activeStep].label4}</Typography>
+          <Typography variant="caption" gutterBottom>{this.props.tutorialSteps[activeStep].info4}</Typography>
+        </Paper>
       </div>
     );
   }
