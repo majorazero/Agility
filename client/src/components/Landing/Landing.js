@@ -23,7 +23,7 @@ const theme = createMuiTheme({
         background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
         borderRadius: 3,
         border: 0,
-        color: 'white',
+        // color: 'white',
         height: 48,
         padding: '0 30px',
         boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
@@ -95,14 +95,14 @@ class Landing extends Component {
                 height: "650px",
                 padding: "10px",
                 backgroundPosition: "center",
-                color: "whitesmoke",
+                // color: "whitesmoke",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
               }}
             >
 
-              <Typography component="h2" variant="h1" gutterBottom style={{ textShadow: "1px 1px rgb(0, 0, 0, 0.5)" }}>agility.</Typography>
+              <Typography component="h2" variant="h1" gutterBottom>agility.</Typography>
 
               <MuiThemeProvider theme={theme}>
                 <ContainedButtons
@@ -132,9 +132,9 @@ class Landing extends Component {
               justify="center"
               alignItems="stretch"
               style={{
-                padding: "25px 50px 25px 50px",
-                height: "125%",
-                background: "whitesmoke",
+                padding: 50,
+                height: "100%",
+                background: 'dimgray',
                 position: "relative"
               }}
               spacing={24}
@@ -161,7 +161,7 @@ class Landing extends Component {
                 height: "650px",
                 padding: "10px",
                 backgroundPosition: "center",
-                color: "whitesmoke",
+                // color: "whitesmoke",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -195,9 +195,9 @@ class Landing extends Component {
               justify="center"
               alignItems="stretch"
               style={{
-                padding: "25px 50px 25px 50px",
-                height: "125%",
-                background: "whitesmoke",
+                padding: 50,
+                height: "100%",
+                background: 'dimgray',
                 position: "relative"
               }}
               spacing={24}
@@ -220,22 +220,22 @@ class Landing extends Component {
                 height: "750px",
                 paddingTop: "50px",
                 backgroundPosition: "center",
-                color: "whitesmoke",
+                // color: "whitesmoke",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
               }}
             >
 
-              <Typography variant="h3" gutterBottom style={{ textShadow: "1px 1px rgb(0, 0, 0, 0.5)" }}>The Team</Typography>
+              <Typography variant="h3" gutterBottom>The Team</Typography>
 
               <Grid container spacing={32}>
                 <Grid item xs={12}>
-                  <Grid container justify="center">
+                  <Grid container justify="center" align='center'>
                     {this.state.creator.map((maker) => {
                       console.log(maker);
                       return (
-                        <Grid item style={{ padding: "20px" }}>
+                        <Grid item style={{ padding: 20 }}>
                           <MediaCard
                             key={maker.id}
                             id={this.key}

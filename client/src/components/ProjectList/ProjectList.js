@@ -9,6 +9,7 @@ import ButtonSizes from "../utils/FAB.js";
 import GridList from '@material-ui/core/GridList';
 import MouseOverPopover from '../utils/popover.js';
 import InputTextField from "../utils/InputTextField.js";
+import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 
 class ProjectList extends Component {
@@ -147,29 +148,32 @@ class ProjectList extends Component {
         <div
           className="eat"
           style={{
-            display: 'flex',
             flexWrap: 'wrap',
             justifyContent: 'space-around',
             overflow: 'hidden',
             padding: 10,
             height: "100%",
+            width: '100%'
           }}
         >
-          <GridList
-            cols={2.5}
-            style={{
-              flexWrap: 'nowrap',
-              transform: 'translateZ(0)',
-            }}
-          >
+          <List>
             {this.populate()}
-          </GridList>
+          </List>
+          <Grid item>
+            <Typography variant="h5" gutterBottom>{this.state.message}</Typography>
+            <InputTextField
+              onSubmit={this.handleInviteSubmit}
+              label="Project Invite Code:"
+              name="inviteCode"
+              onChange={this.handleInviteChange}
+            />
+          </Grid>
         </div>
 
-        <Grid
+        {/* <Grid
           container
           spacing={8}
-          style={{ background: 'whitesmoke', margin: 'inherit', width: '-webkit-fill-available' }}
+          // style={{ background: 'whitesmoke', margin: 'inherit', width: '-webkit-fill-available' }}
         >
           <Grid item xs={10} >
             <Typography variant="h5" gutterBottom>{this.state.message}</Typography>
@@ -178,9 +182,6 @@ class ProjectList extends Component {
               label="Project Invite Code:"
               name="inviteCode"
               onChange={this.handleInviteChange}
-            // style={{
-            //   position: "inherit"
-            // }}
             />
           </Grid>
           <Grid item xs style ={{marginTop: 30}}>
@@ -191,7 +192,7 @@ class ProjectList extends Component {
               placement="right"
             />
           </Grid>
-        </Grid>
+        </Grid> */}
 
         {/* </Paper>
         </Grid> */}
