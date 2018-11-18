@@ -11,6 +11,9 @@ import MouseOverPopover from '../utils/popover.js';
 import InputTextField from "../utils/InputTextField.js";
 import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import Add from '@material-ui/icons/Add';
 
 class ProjectList extends Component {
   state = {
@@ -158,6 +161,10 @@ class ProjectList extends Component {
             width: '100%'
           }}
         >
+          <ListItem style={{ width: '50%' }} button onClick={this.handleOpen}>
+            <ListItemIcon><Add /></ListItemIcon>
+            <ListItemText primary='ADD PROJECT' />
+          </ListItem>
           <List>
             {this.populate()}
           </List>
