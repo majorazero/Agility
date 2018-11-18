@@ -57,84 +57,83 @@ import IconButton from '@material-ui/core/IconButton';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 // import tileData from './tileData';
 import Icon from '@material-ui/core/Icon';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import ListItemText from '@material-ui/core/ListItemText';
 
 const styles = theme => ({
   root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-    overflow: 'hidden',
+    flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
-  },
-  gridList: {
-    flexWrap: 'nowrap',
-    transform: 'translateZ(0)',
-    margin: 2
+    backgroundSize: 'cover',
+    // backgroundPosition: "center center",
+    boxShadow: '0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12)',
+    backgroundImage: 'linear-gradient(to bottom right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)'
   },
   title: {
-    color: "whitesmoke",
+    margin: 5,
   },
-  titleBar: {
-    background:
-      'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
-  }
 });
 
-/**
- * The example data is structured as follows:
- *
- * import image from 'path/to/image.jpg';
- * [etc...]
- *
- * const tileData = [
- *   {
- *     img: image,
- *     title: 'Image',
- *     author: 'author',
- *   },
- *   {
- *     [etc...]
- *   },
- * ];
- */
 function SingleLineGridList(props) {
   const { classes } = props;
 
   return (
-    <GridListTile
-      style={{
-        height: 150,
-        width: 250
-      }}
-      classes={{ root: classes.gridList }}
+    // <GridListTile
+    //   style={{
+    //     height: 150,
+    //     width: 250
+    //   }}
+    //   classes={{ root: classes.gridList }}
+    // >
+    <div
+      alt={props.name}
+    // classes={{root: classes.root}}
     >
-      <div 
-        alt={props.name}
-        style={{
-          height: '100%',
-          width: '100%',
-          backgroundSize: 'cover',
-          backgroundPosition: "center center",
-          backgroundImage: 'linear-gradient(to bottom right, slategray, black)'
-        }}
-      />
-      <GridListTileBar
-      style={{cursor: "pointer"}}
-        title={props.name}
-        onClick={props.onProjectPress}
-        classes={{
-          root: classes.titleBar,
-          title: classes.title,
-        }}
-        actionIcon={
-          <IconButton>
-            <Icon className={classes.title}>
-              how_to_vote
-            </Icon>
-          </IconButton>
-        }
-      />
-    </GridListTile>
+      <List style={{ padding: 0, margin: 5}}>
+        <ListItem
+          classes={{ root: classes.root }}
+        >
+          <ListItemText
+            style={{ cursor: "pointer" }}
+            classes={{
+              root: classes.titleBar,
+              title: classes.title,
+            }}
+
+            primary={props.name}
+            secondary={'poopenheimer'}
+          />
+          <ListItemSecondaryAction>
+            <IconButton aria-label="Choose Project" onClick={props.onProjectPress}>
+              <Icon className={classes.title}>
+                how_to_vote
+                    </Icon>
+            </IconButton>
+          </ListItemSecondaryAction>
+        </ListItem>
+      </List>
+    </div>
+    //   <GridListTileBar
+    //   style={{cursor: "pointer"}}
+    //     title={props.name}
+    //     onClick={props.onProjectPress}
+    //     classes={{
+    //       root: classes.titleBar,
+    //       title: classes.title,
+    //     }}
+    //     actionIcon={
+    //       <IconButton>
+    //         <Icon className={classes.title}>
+    //           how_to_vote
+    //         </Icon>
+    //       </IconButton>
+    //     }
+    //   />
+    // </GridListTile>
   );
 }
 

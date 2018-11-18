@@ -21,7 +21,7 @@ const styles = {
     marginTop: 5
   },
   root: {
-    padding: '0px 30px 0px 10px'
+    // padding: '0px 30px 0px 10px'
   }
 }
 
@@ -63,7 +63,6 @@ class UserPool extends Component {
           subheader={<li />}
           style={{
             width: '100%',
-            maxWidth: '100%',
             position: 'relative',
             overflow: 'auto',
             // maxHeight: '',
@@ -71,9 +70,9 @@ class UserPool extends Component {
         >
           {this.props.members.map((member, i) => (
             <li key={i}>
-              <Divider />
-              <ListSubheader style={{ backgroundColor: 'whitesmoke', color: 'black', height: 50, display: 'flex', alignItems: 'center' }}><div><Avatary /></div><div style={{ justifyContent: 'flex-end' }}><Typography variant="h6" gutterBottom>{member.User.first_name} {member.User.last_name}</Typography></div></ListSubheader>
-              <Divider />
+              {/* <Divider /> */}
+              <ListSubheader style={{ height: 50, display: 'flex', alignItems: 'center', margin: 5, background: '#303030' }}><div><Avatary /></div><div style={{ justifyContent: 'flex-end' }}><Typography variant="h6" gutterBottom>{member.User.first_name} {member.User.last_name}</Typography></div></ListSubheader>
+              {/* <Divider /> */}
               {this.props.tasks.filter(task => task.assigned_id === member.User.id).map(fTask => {
                 return (
                   <ul>
