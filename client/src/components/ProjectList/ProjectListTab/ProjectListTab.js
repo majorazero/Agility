@@ -96,10 +96,6 @@ function SingleLineGridList(props) {
     // classes={{root: classes.root}}
     >
       <List style={{ padding: 0, margin: 5 }}>
-        <ListItem style={{ width: '50%' }} button onClick={props.onClick}>
-          <ListItemIcon><Add /></ListItemIcon>
-          <ListItemText primary={props.title} />
-        </ListItem>
         <ListItem
           classes={{ root: classes.root }}
         >
