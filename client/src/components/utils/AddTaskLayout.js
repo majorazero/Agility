@@ -96,7 +96,7 @@ function AddTaskLayout(props) {
               onChange={props.onChange("taskStack")}
             />
           </FormControl>
-          <Button
+          {/* <Button
             type="submit"
             fullWidth
             variant="contained"
@@ -104,7 +104,7 @@ function AddTaskLayout(props) {
             className={classes.submit}
           >
             Submit
-            </Button>
+            </Button> */}
         </form>
       </main>
     </div>

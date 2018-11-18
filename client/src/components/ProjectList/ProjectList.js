@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Grid, Paper } from "@material-ui/core";
+import { Grid, Paper, ListItem } from "@material-ui/core";
 import axios from "axios";
 import SingleLineGridList from "./ProjectListTab/ProjectListTab.js";
 import SimpleModalProjectWrapped from "../utils/ModalProject.js";
@@ -45,20 +45,22 @@ class ProjectList extends Component {
       return <h1>Start a new project!</h1>;
     }
     else {
-      return this.state.projects.map((item) => {
-        return (
-          // <Grid item xs
-          //   style={{ padding: 5, width: 150 }}
-          // >
-          <SingleLineGridList
-            key={item.id}
-            name={item.name}
-            summary={item.summary}
-            // style={{ margin: 2, width: 100, height: 100 }}
-            onProjectPress={() => { this.onProjectPress(item.id) }} />
-        )
-
-      });
+      return (
+        <div>
+          {this.state.projects.map((item) => {
+            return (
+              <SingleLineGridList
+                onClick={this.handleOpen}
+                title='ADD PROJECT'
+                key={item.id}
+                name={item.name}
+                summary={item.summary}
+                // style={{ margin: 2, width: 100, height: 100 }}
+                onProjectPress={() => { this.onProjectPress(item.id) }} />
+            )
+          })}
+        </div>
+      )
     }
   }
 

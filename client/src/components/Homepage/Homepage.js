@@ -13,6 +13,8 @@ import Typography from '@material-ui/core/Typography';
 import SimpleBottomNavigation from "../utils/Footer/Footer.js";
 import TextMobileStepper from './../utils/Stepper.js';
 import Tab from './../utils/Tab2.js';
+import SimpleModalProjectWrapped from "../utils/ModalProject.js";
+import AddProjectLayout from "../utils/AddProjectLayout.js";
 
 class Homepage extends Component {
 
@@ -342,10 +344,21 @@ class Homepage extends Component {
             justSack={<ProjectList />}
             justTaint={<TextMobileStepper
               tutorialSteps={this.makeArray()}
-          />}
+            />}
           // onClick={}
           />
 
+          {/* <SimpleModalProjectWrapped
+            open={this.state.open}
+            onClose={this.handleClose}
+            name="Add a New Project ..."
+            onSubmit={this.handleSubmit}
+            onChange={this.handleChange}
+          >
+
+            <AddProjectLayout
+            />
+          </SimpleModalProjectWrapped> */}
 
 
         </div >
