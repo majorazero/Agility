@@ -89,15 +89,6 @@ function AddSprintLayout(props) {
               onChange={props.onChange("sprintEnd_date")}
             />
           </FormControl>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Submit
-            </Button>
         </form>
       </main>
     </div>

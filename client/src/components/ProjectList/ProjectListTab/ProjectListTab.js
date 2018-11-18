@@ -63,6 +63,8 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
+import Add from '@material-ui/icons/Add';
+
 
 const styles = theme => ({
   root: {
@@ -93,26 +95,32 @@ function SingleLineGridList(props) {
       alt={props.name}
     // classes={{root: classes.root}}
     >
-      <List style={{ padding: 0, margin: 5}}>
+      <List style={{ padding: 0, margin: 5 }}>
+        <ListItem style={{ width: '50%' }} button onClick={props.onClick}>
+          <ListItemIcon><Add /></ListItemIcon>
+          <ListItemText primary={props.title} />
+        </ListItem>
         <ListItem
           classes={{ root: classes.root }}
         >
           <ListItemText
+            button
             style={{ cursor: "pointer" }}
             classes={{
               root: classes.titleBar,
               title: classes.title,
             }}
-
+            aria-label="Choose Project"
+            onClick={props.onProjectPress}
             primary={props.name}
-            secondary={'poopenheimer'}
+            secondary={props.summary}
           />
           <ListItemSecondaryAction>
-            <IconButton aria-label="Choose Project" onClick={props.onProjectPress}>
-              <Icon className={classes.title}>
-                how_to_vote
+            {/* <IconButton aria-label="Choose Project" onClick={props.onProjectPress}> */}
+            <Icon className={classes.title}>
+              how_to_vote
                     </Icon>
-            </IconButton>
+            {/* </IconButton> */}
           </ListItemSecondaryAction>
         </ListItem>
       </List>

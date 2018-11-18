@@ -89,7 +89,7 @@ function AddProjectLayout(props) {
             onChange={props.onChange("summary")}
             />
           </FormControl>
-          <Button
+          {/* <Button
             type="submit"
             fullWidth
             variant="contained"
@@ -97,7 +97,7 @@ function AddProjectLayout(props) {
             className={classes.submit}
           >
             Submit
-            </Button>
+            </Button> */}
         </form>
       </main>
     </div>
