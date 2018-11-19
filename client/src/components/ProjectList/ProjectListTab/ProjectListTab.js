@@ -84,21 +84,9 @@ function SingleLineGridList(props) {
   const { classes } = props;
 
   return (
-    // <GridListTile
-    //   style={{
-    //     height: 150,
-    //     width: 250
-    //   }}
-    //   classes={{ root: classes.gridList }}
-    // >
-    <div
-      alt={props.name}
-    // classes={{root: classes.root}}
-    >
+    <div alt={props.name}>
       <List style={{ padding: 0, margin: 5 }}>
-        <ListItem
-          classes={{ root: classes.root }}
-        >
+        <ListItem classes={{ root: classes.root }}>
           <ListItemText
             button
             style={{ cursor: "pointer" }}
@@ -112,32 +100,13 @@ function SingleLineGridList(props) {
             secondary={props.summary}
           />
           <ListItemSecondaryAction>
-            {/* <IconButton aria-label="Choose Project" onClick={props.onProjectPress}> */}
             <Icon className={classes.title}>
               how_to_vote
                     </Icon>
-            {/* </IconButton> */}
           </ListItemSecondaryAction>
         </ListItem>
       </List>
     </div>
-    //   <GridListTileBar
-    //   style={{cursor: "pointer"}}
-    //     title={props.name}
-    //     onClick={props.onProjectPress}
-    //     classes={{
-    //       root: classes.titleBar,
-    //       title: classes.title,
-    //     }}
-    //     actionIcon={
-    //       <IconButton>
-    //         <Icon className={classes.title}>
-    //           how_to_vote
-    //         </Icon>
-    //       </IconButton>
-    //     }
-    //   />
-    // </GridListTile>
   );
 }
 
