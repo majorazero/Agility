@@ -63,10 +63,6 @@ class SimpleTabs extends React.Component {
                     <Tab label="Progress" />
                 </Tabs>
                 {value === 0 && <TabContainer>
-                    <ListItem style={{ width: '50%'}} button onClick={this.props.onClick}>
-                        <ListItemIcon><Add /></ListItemIcon>
-                        <ListItemText primary={this.props.title} />
-                    </ListItem>
                     {this.props.holyBalls}
                 </TabContainer>}
                 {value === 1 && <TabContainer>{this.props.holySack}</TabContainer>}
