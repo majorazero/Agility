@@ -64,10 +64,7 @@ class SimpleTabs2 extends React.Component {
                 </Tabs>
                 {value === 0 && <TabContainer>{this.props.justBalls}</TabContainer>}
                 {value === 1 && <TabContainer>
-                    <ListItem style={{ width: '50%'}} button onClick={this.props.onClick}>
-                        <ListItemIcon><Add /></ListItemIcon>
-                        <ListItemText primary={this.props.title} />
-                    </ListItem>
+        
                 {this.props.justSack}
                 </TabContainer>}
                 {value === 2 && <TabContainer>{this.props.justTaint}</TabContainer>}

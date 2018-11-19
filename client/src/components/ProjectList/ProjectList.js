@@ -161,11 +161,11 @@ class ProjectList extends Component {
             width: '100%'
           }}
         >
-          {/* <ListItem style={{ width: '50%' }} button onClick={this.handleOpen}>
-            <ListItemIcon><Add /></ListItemIcon>
-            <ListItemText primary='ADD PROJECT' />
-          </ListItem> */}
           <List>
+             <ListItem style={{ width: '50%' }} button onClick={this.handleOpen}>
+              <ListItemIcon><Add /></ListItemIcon>
+              <ListItemText primary='ADD PROJECT' />
+            </ListItem>
             {this.populate()}
           </List>
           <Grid item>
