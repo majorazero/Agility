@@ -91,8 +91,7 @@ class ProjectList extends Component {
     })
   }
 
-  handleSubmit = (event) => {
-    event.preventDefault();
+  handleSubmit = () => {
     //we'll create a project now.
     axios.post("/api/project", {
       name: this.state.name,
