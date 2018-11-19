@@ -35,8 +35,8 @@ const Pool = (props) => {
     return (
         <ListItem
             style={{
-                paddingTop: 5,
-                paddingBottom: 5,
+                // paddingTop: 5,
+                // paddingBottom: 5,
                 display: "table-caption",
                 width: "100%",
             }}
