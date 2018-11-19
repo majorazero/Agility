@@ -368,25 +368,23 @@ class Project extends React.Component {
         });
     };
 
-    addSprint = (event) => {
-        event.preventDefault();
-
-        axios.post('/api/sprint', {
-            name: this.state.sprintName,
-            start_date: this.state.sprintStart_date,
-            end_date: this.state.sprintEnd_date,
-            project_id: this.state.projectId
-        }).then((res) => {
-            console.log(this.state.currentUser, res.data.id)
-            axios.post(`/api/sprintMembership`, { userId: this.state.currentUser, sprintId: res.data.id })
-                .then(() => {
-                    this.setState({
-                        sprintOpen: false
-                    }, () => {
-                        this.getSprints(this.state.projectId, this.state.currentUser);
-                    });
-                })
-        });
+    addSprint = () => {
+      axios.post('/api/sprint', {
+        name: this.state.sprintName,
+        start_date: this.state.sprintStart_date,
+        end_date: this.state.sprintEnd_date,
+        project_id: this.state.projectId
+      }).then((res) => {
+        console.log(this.state.currentUser, res.data.id)
+        axios.post(`/api/sprintMembership`, { userId: this.state.currentUser, sprintId: res.data.id })
+        .then(() => {
+          this.setState({
+            sprintOpen: false
+          }, () => {
+            this.getSprints(this.state.projectId, this.state.currentUser);
+          });
+        })
+      });
     }
 
     getMembers = (sprintId) => {
@@ -833,18 +831,18 @@ class Project extends React.Component {
                         onSubmit={this.addSprint}
                         onChange={this.handleChange}
                     >
-                        <AddSprintLayout
-                        />
+                      <AddSprintLayout
+                      />
                     </SimpleModalSprintWrapped>
                     <SimpleModalWrapped
-                        open={this.state.taskOpen}
-                        onClose={() => this.handleClose('taskOpen')}
-                        name="Add a New Task ..."
-                        onSubmit={this.addTask}
-                        onChange={this.handleChange}
+                      open={this.state.taskOpen}
+                      onClose={() => this.handleClose('taskOpen')}
+                      name="Add a New Task ..."
+                      onSubmit={this.addTask}
+                      onChange={this.handleChange}
                     >
-                        <AddTaskLayout
-                        />
+                      <AddTaskLayout
+                      />
                     </SimpleModalWrapped>
 
                     <ClippedDrawer
