@@ -223,8 +223,8 @@ class Project extends React.Component {
         }
     }
 
-    addTask = (event) => {
-        event.preventDefault();
+    addTask = () => {
+      console.log('adding task');
         if (this.state.taskComplexity <= 5 && this.state.taskComplexity >= 1) {
             axios.post("/api/task", {
                 name: this.state.taskName,
