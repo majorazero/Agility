@@ -51,6 +51,7 @@ class SimpleTabs extends React.Component {
 
         return (
             <Paper className={classes.root}>
+              {this.props.holyTaint}
                 <Tabs
                     value={this.state.value}
                     onChange={this.handleChange}
@@ -59,14 +60,17 @@ class SimpleTabs extends React.Component {
                     centered
                 >
                     <Tab label="Tasks" />
-                    <Tab label="User Pool" />
+                    // <Tab label="User Pool" />
                     <Tab label="Progress" />
                 </Tabs>
                 {value === 0 && <TabContainer>
+                  <ListItem>
                     {this.props.holyBalls}
+                    {this.props.holySack}
+                  </ListItem>
                 </TabContainer>}
-                {value === 1 && <TabContainer>{this.props.holySack}</TabContainer>}
-                {value === 2 && <TabContainer>{this.props.holyTaint}</TabContainer>}
+                // {value === 1 && <TabContainer>{this.props.holySack}</TabContainer>}
+                // {value === 1 && <TabContainer>{this.props.holyTaint}</TabContainer>}
             </Paper>
 
         );
