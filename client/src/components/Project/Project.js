@@ -651,7 +651,6 @@ class Project extends React.Component {
                           maxWidth: '100%',
                           position: 'relative',
                           overflow: 'auto',
-                          maxHeight: 300,
                         }}>
                           {!this.state.isActive ?
                             <li>
