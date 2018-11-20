@@ -20,16 +20,16 @@ import { ListItemText } from '@material-ui/core';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 
 const styles = {
-    root: {
-      padding: '0px 30px 0px 10px'
-    },
-    listSection: {
-      backgroundColor: 'inherit',
-    },
-    ul: {
-      backgroundColor: 'inherit',
-      padding: 0,
-    }
+  root: {
+    padding: '0px 30px 0px 10px'
+  },
+  listSection: {
+    backgroundColor: 'inherit',
+  },
+  ul: {
+    backgroundColor: 'inherit',
+    padding: 0,
+  }
 }
 
 
