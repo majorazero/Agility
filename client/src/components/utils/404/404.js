@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-import { Link } from "react-router-dom";
-import ContainedButtons from "../../utils/Button.js";
 import Paper from '@material-ui/core/Paper';
 import "./404.css";
 

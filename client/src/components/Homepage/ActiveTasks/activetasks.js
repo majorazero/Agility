@@ -70,7 +70,7 @@ import Pool from '../../Project/Pool';
 //                                 goToProject={() => this.props.goToProject(task.sprintId)}
 //                                 homepage={this.props.homepage}
 //                                 id={task.id}
-//                                 expanded={expanded === `panel${task.id}`} 
+//                                 expanded={expanded === `panel${task.id}`}
 //                                 onChange={this.handleChange(`panel${task.id}`)}
 //                             />
 //                             {/* </Grid> */}
@@ -101,9 +101,9 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
+//import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
-import { SSL_OP_MSIE_SSLV2_RSA_PADDING } from 'constants';
+//import { SSL_OP_MSIE_SSLV2_RSA_PADDING } from 'constants';
 
 const styles = theme => ({
     root: {

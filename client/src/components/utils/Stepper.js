@@ -57,8 +57,6 @@ class TextMobileStepper extends React.Component {
     const { activeStep } = this.state;
     const maxSteps = this.props.tutorialSteps.length;
 
-    console.log(this.props.tutorialSteps[activeStep])
-
     return (
       <div className={classes.root}>
       <MobileStepper
