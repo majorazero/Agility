@@ -684,7 +684,7 @@ class Project extends React.Component {
                                   sprints={this.state.sprints} />}
                           </li> :
                           <li> {(this.state.isAdmin === true) ?
-                              <ListItem button onClick={() => this.handleOpen('taskOpen')} title="ADD TASK">
+                              <ListItem button style={{width: '50%'}} onClick={() => this.handleOpen('taskOpen')} title="ADD TASK">
                                 <ListItemIcon><Add /></ListItemIcon>
                                 <ListItemText primary='ADD TASK' />
                               </ListItem>
