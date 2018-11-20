@@ -1,10 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
+import Add from '@material-ui/icons/Add';
+import { ListItemText } from '@material-ui/core';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
 
 function TabContainer(props) {
     return (
@@ -61,7 +66,7 @@ class SimpleTabs extends React.Component {
                     {this.props.holyBalls}
                 </TabContainer>}
                 {value === 1 && <TabContainer>{this.props.holySack}</TabContainer>}
-                {value === 2 && <TabContainer>{this.props.holyTaint}</TabContainer>}
+                {value === 2 && <TabContainer>{this.props.holyTaint}{this.props.holyHole}</TabContainer>}
             </Paper>
 
         );
