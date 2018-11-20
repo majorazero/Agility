@@ -7,7 +7,7 @@
 // import Typography from '@material-ui/core/Typography';
 // import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ContainedButtons from "./Button.js";
-import Grid from '@material-ui/core/Grid';
+//import Grid from '@material-ui/core/Grid';
 
 // const styles = theme => ({
 //   root: {
@@ -163,7 +163,7 @@ class ControlledExpansionPanels extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const { expanded } = this.state;
+    //const { expanded } = this.state;
 
     return (
       <div className={classes.root}>

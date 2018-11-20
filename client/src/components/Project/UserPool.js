@@ -1,16 +1,11 @@
 import React, { Component } from 'react';
-import Grid from '@material-ui/core/Grid';
-import TaskCard from '../utils/TaskCard/TaskCard';
-import Paper from '@material-ui/core/Paper';
 import Pool from "./Pool.js"
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Avatary from '../utils/Avatar.js';
-import Divider from '@material-ui/core/Divider';
 import { Typography } from '@material-ui/core';
 
 const styles = {

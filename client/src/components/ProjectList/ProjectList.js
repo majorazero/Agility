@@ -1,13 +1,9 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { Grid, Paper, ListItem } from "@material-ui/core";
+import { Grid, ListItem } from "@material-ui/core";
 import axios from "axios";
 import SingleLineGridList from "./ProjectListTab/ProjectListTab.js";
 import SimpleModalProjectWrapped from "../utils/ModalProject.js";
 import AddProjectLayout from "../utils/AddProjectLayout.js";
-import ButtonSizes from "../utils/FAB.js";
-import GridList from '@material-ui/core/GridList';
-import MouseOverPopover from '../utils/popover.js';
 import InputTextField from "../utils/InputTextField.js";
 import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
@@ -24,7 +20,6 @@ class ProjectList extends Component {
     direction: "row",
     justify: "center",
     alignItems: "center",
-    projects: [],
     inviteCode: "",
     message: ""
   }
@@ -80,8 +75,6 @@ class ProjectList extends Component {
   handleChange = name => event => {
     this.setState({
       [name]: event.target.value
-    }, () => {
-      console.log(this.state);
     });
   };
 
@@ -111,16 +104,13 @@ class ProjectList extends Component {
   }
 
   handleClose = () => {
-    console.log(1);
     this.setState({ open: false });
   };
 
   handleInviteSubmit = (event) => {
     event.preventDefault();
-    console.log(3);
     axios.post("/api/sprintMembershipWithCode", { sId: this.state.inviteCode, uId: sessionStorage.getItem("id"), token: localStorage.getItem("token") }).then((response) => {
       if (response.data === "Already part of sprint!") {
-        console.log(response.data);
         this.setState({ message: response.data });
       }
       else {
@@ -133,7 +123,6 @@ class ProjectList extends Component {
   }
 
   render() {
-    const { direction, justify, alignItems } = this.state;
     return (
       <div
         className="balls"
@@ -261,7 +250,6 @@ class ProjectList extends Component {
           onSubmit={this.handleSubmit}
           onChange={this.handleChange}
         >
-
           <AddProjectLayout
           />
         </SimpleModalProjectWrapped>

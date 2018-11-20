@@ -1,10 +1,7 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import RegisterLayout from "../utils/RegisterLayout.js"
 import Grid from '@material-ui/core/Grid';
-import SimpleBottomNavigation from "../utils/Footer/Footer.js";
-import Button from '@material-ui/core/Button';
 
 class Register extends Component {
   state = {

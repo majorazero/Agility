@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import ContainedButtons from "../utils/Button.js";
 import './landing.css';
@@ -169,19 +167,19 @@ class Landing extends Component {
             >
 
               <Grid item xs={6} style={{ width: 450, height: 450 }}>
-                <img src="./assets/images/demo1.gif" style={{ width: '100%', height: '100%' }} />
+                <img alt="demo gif 1" src="./assets/images/demo1.gif" style={{ width: '100%', height: '100%' }} />
               </Grid>
               <Grid item xs={6} style={{ width: 450, height: 450 }}>
-                <img src="./assets/images/demo2.gif" style={{ width: '100%', height: '100%' }} />
+                <img alt="demo gif 2" src="./assets/images/demo2.gif" style={{ width: '100%', height: '100%' }} />
               </Grid>
               {/* <Grid item xs={4} style={{ width: 450, height: 450,  }}>
                 <img src="./assets/images/demo3.gif" style={{ height: '100%', overflow: 'hidden' }} />
               </Grid> */}
 
               {/* <Typography variant="h3" gutterBottom>
-                
-                
-                
+
+
+
               </Typography> */}
 
               {/* <div style={{backgroundImage: `url("/assets/images/down-arrow.png")`}} ></div> */}

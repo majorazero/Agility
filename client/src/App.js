@@ -5,13 +5,11 @@ import Landing from "./components/Landing/Landing.js";
 import Homepage from "./components/Homepage/Homepage.js";
 import Register from "./components/Register/Register.js";
 import Project from "./components/Project/Project.js";
-// import ActiveTasks from "./components/ActiveTasks/activetasks";
 import UserPool from "./components/Project/UserPool";
 import SprintSelect from "./components/Project/SprintSelect";
 import axios from "axios";
 import notFound from "./components/utils/404/404.js";
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-// import ProgressBar from "./components/utils/ProgressBar/ProgressBar";
 import './App.css';
 
 const theme = createMuiTheme({
@@ -34,10 +32,8 @@ class App extends Component {
     //obviously we'll have to be updated once i get the database going.
     //if sessionStorage doesn't exist
     if (sessionStorage.getItem("id") === null) {
-      console.log("no session storage!");
       //we check if token exist, it does
       if (localStorage.getItem("token") !== null) {
-        console.log("checking database if token exists");
         axios.post("/api/tokenLogin", {
           token: localStorage.getItem("token")
         }).then((response) => {
@@ -53,7 +49,6 @@ class App extends Component {
     }
     else {
       //you have a session you're logged in
-      console.log("Welcome back!");
       this.setState({ loaded: true, loggedIn: true });
     }
   }
