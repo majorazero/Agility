@@ -747,12 +747,33 @@ class Project extends React.Component {
                           onClickComplete={this.markComplete}
                         />}
 
-                        holyTaint={<div><LinearDeterminate whatBar completed={100} title={""} /><LinearDeterminate completed={this.state.SprintProgress} title={""} /></div>}
                         holyInvite={<SimplePopper
                           onPoperClick={this.inviteMember}
                           message={this.state.inviteCode}
                       />}
 
+                        holyTaint={<LinearDeterminate completed={this.state.SprintProgress} title={"Sprint Progress"} />}
+                        completedTab={this.state.completedTasks.map((task) => {
+                          return (
+                            <ul>
+                              <ListItem classes={{ root: classes.root }}>
+                                <Pool
+                                  key={task.id}
+                                  id={this.key}
+                                  isAdmin={this.state.isAdmin}
+                                  tasks={task}
+                                  onClickDelete={this.deleteTask.bind(this, task)}
+                                  onClickReopen={() => this.reopenTask(task.id)}
+                                  assignedUser={task.assigned_id}
+                                  currentUser={this.state.currentUser}
+                                  expanded={expanded === `panel${task.id}`}
+                                  onChange={this.handleTaskOpen(`panel${task.id}`)}
+                                  complete
+                                />
+                              </ListItem>
+                            </ul>
+                          );
+                        })}
                         onClick={() => this.handleOpen('taskOpen')}
                         title='ADD TASK'
                     />
