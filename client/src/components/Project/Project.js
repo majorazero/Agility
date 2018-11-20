@@ -18,6 +18,8 @@ import Tab from './../utils/Tab.js';
 import Add from '@material-ui/icons/Add';
 import { ListItemText } from '@material-ui/core';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
+import SimpleTooltips from './../utils/popover';
+import SimplePopper from './../utils/popovertext';
 
 const styles = {
     root: {
@@ -477,7 +479,7 @@ class Project extends React.Component {
                                         />
                                     </Grid>
                                     <Grid item xs style={{ display: "flex", justifyContent: "flex-start", marginTop: 7 }}>
-                                        <SimplePopper
+                                        <SimpleTooltips
                                             onPoperClick={this.inviteMember}
                                             message={this.state.inviteCode}
                                         />
@@ -744,6 +746,11 @@ class Project extends React.Component {
                           onClickDelete={this.deleteTask}
                           onClickComplete={this.markComplete}
                         />}
+
+                        holyInvite={<SimplePopper
+                          onPoperClick={this.inviteMember}
+                          message={this.state.inviteCode}
+                      />}
 
                         holyTaint={<LinearDeterminate completed={this.state.SprintProgress} title={"Sprint Progress"} />}
                         completedTab={this.state.completedTasks.map((task) => {
