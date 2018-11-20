@@ -680,7 +680,8 @@ class Project extends React.Component {
                                 assigned={this.state.assignedTasks}
                                 unAssigned={this.state.unassignedTasks}
                                 currentSprint={this.state.sprintId}
-                                sprints={this.state.sprints} />}
+                                sprints={this.state.sprints}
+                              />}
                         </li> :
                         <li> {(this.state.isAdmin === true) ?
                             <ListItem button onClick={() => this.handleOpen('taskOpen')} title="ADD TASK">
