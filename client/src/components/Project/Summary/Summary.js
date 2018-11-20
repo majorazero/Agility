@@ -1,14 +1,11 @@
 import React from "react";
-import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import { Grid } from "@material-ui/core";
 import Divider from '@material-ui/core/Divider';
-import { withStyles } from '@material-ui/core/styles';
 import UserStepper from '../../utils/UserStepper.js';
 
 const SummaryCard = (props) => {
   console.log(props);
-  let sprintComplexity = 0;
   let membersCard = props.members.map((item) => {
     let amtofTaskTaken = 0;
     let amtofTaskComplete = 0;

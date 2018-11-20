@@ -52,7 +52,6 @@ class TemporaryDrawer extends React.Component {
     direction: 'row',
     justify: 'center',
     alignItems: 'center',
-    projects: [],
     inviteCode: '',
     message: ''
   };

@@ -1,20 +1,12 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import ProjectList from "../ProjectList/ProjectList.js";
 import axios from "axios";
 import ProfileCard from "./ProfileCard/profilecard.js";
 import ActiveTasks from "./ActiveTasks/activetasks";
 import Grid from '@material-ui/core/Grid';
 import ButtonAppBar from "../utils/Navbar/Navbar.js";
-import Paper from '@material-ui/core/Paper';
-import ButtonSizes from "../utils/FAB.js";
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
-import SimpleBottomNavigation from "../utils/Footer/Footer.js";
 import TextMobileStepper from './../utils/Stepper.js';
 import Tab from './../utils/Tab2.js';
-import SimpleModalProjectWrapped from "../utils/ModalProject.js";
-import AddProjectLayout from "../utils/AddProjectLayout.js";
 
 class Homepage extends Component {
 

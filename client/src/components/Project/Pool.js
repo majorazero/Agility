@@ -1,10 +1,7 @@
 import React from "react";
 import SimpleExpansionPanel from "../utils/TaskPool.js";
 import { withStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListSubheader from '@material-ui/core/ListSubheader';
 import PropTypes from 'prop-types';
 
 const styles = {
@@ -78,4 +75,3 @@ Pool.propTypes = {
   };
 
 export default withStyles(styles)(Pool);
-

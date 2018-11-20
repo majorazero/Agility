@@ -1,30 +1,18 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import Pool from "./Pool.js";
-import { Grid } from "@material-ui/core";
-import ButtonSizes from "../utils/FAB.js";
 import SimpleModalWrapped from "../utils/Modal";
 import AddTaskLayout from "../utils/AddTaskLayout.js";
-import Chips from './SprintSelect';
 import UserPool from './UserPool';
 import ButtonAppBar from "../utils/Navbar/Navbar.js";
 import AddSprintLayout from "../utils/AddSprintLayout.js";
 import SimpleModalSprintWrapped from '../utils/ModalSprint';
-import SimpleBottomNavigation from "../utils/Footer/Footer.js";
-import Paper from '@material-ui/core/Paper';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import SwitchLabel from '../utils/Switch';
 import Summary from "./Summary/Summary.js";
 import LinearDeterminate from "../utils/ProgressBar/ProgressBar.js";
-import moment from "moment";
 import ListItem from '@material-ui/core/ListItem';
 import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
-import SimplePopper from '../utils/popovertext.js';
 import ClippedDrawer from './../utils/Navbar/SprintDrawer.js';
 import Tab from './../utils/Tab.js';
 import Add from '@material-ui/icons/Add';
@@ -44,15 +32,6 @@ const styles = {
     }
 }
 
-const theme = createMuiTheme({
-    overrides: {
-        MuiButton: {
-            root: {
-                background: 'none'
-            },
-        },
-    },
-});
 
 
 class Project extends React.Component {
@@ -454,7 +433,7 @@ class Project extends React.Component {
     };
 
     render() {
-        const { direction, justify, alignItems, expanded } = this.state;
+        const { expanded } = this.state;
         const { classes } = this.props
         console.log(this.state.sprintStart_date)
         return (
