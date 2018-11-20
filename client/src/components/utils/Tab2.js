@@ -49,8 +49,8 @@ class SimpleTabs2 extends React.Component {
                 <Tabs
                     value={this.state.value}
                     onChange={this.handleChange}
-                    indicatorColor="primary"
-                    textColor="primary"
+                    indicatorColor="secondary"
+                    textColor="secondary"
                     centered
                 >
                     <Tab label="Active Tasks" />
