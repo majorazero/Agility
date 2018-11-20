@@ -61,10 +61,12 @@ const styles = theme => ({
   root: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
-    backgroundSize: 'cover',
+    width: '100%',
+    cursor: 'pointer'
+    // backgroundSize: 'cover',
     // backgroundPosition: "center center",
-    boxShadow: '0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12)',
-    backgroundImage: 'linear-gradient(to bottom right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)'
+    // boxShadow: '0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12)',
+    // backgroundImage: 'linear-gradient(to bottom right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)'
   },
   title: {
     margin: 5,
@@ -80,7 +82,6 @@ function SingleLineGridList(props) {
         <ListItem classes={{ root: classes.root }}>
           <ListItemText
             button
-            style={{ cursor: "pointer" }}
             classes={{
               root: classes.titleBar,
               title: classes.title,
@@ -90,11 +91,7 @@ function SingleLineGridList(props) {
             primary={props.name}
             secondary={props.summary}
           />
-          <ListItemSecondaryAction>
-            <Icon className={classes.title}>
-              how_to_vote
-                    </Icon>
-          </ListItemSecondaryAction>
+          <Icon>how_to_vote</Icon>
         </ListItem>
       </List>
     </div>
