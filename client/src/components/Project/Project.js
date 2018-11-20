@@ -255,7 +255,7 @@ class Project extends React.Component {
           let timeProgress = 0;
           // check for active sprint
           for (let i = 0; i < sprints.length; i++) {
-            let endDate = new Date(`${sprints[i].endDate}T00:00:00`)
+            let endDate = new Date(`${sprints[i].endDate}T23:59:59`)
             let startDate = new Date(`${sprints[i].startDate}T00:00:00`)
             let currentDate = new Date();
             sprintData.push({
