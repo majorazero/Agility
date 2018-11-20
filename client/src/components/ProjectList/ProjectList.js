@@ -75,8 +75,6 @@ class ProjectList extends Component {
   handleChange = name => event => {
     this.setState({
       [name]: event.target.value
-    }, () => {
-      console.log(this.state);
     });
   };
 
@@ -106,16 +104,13 @@ class ProjectList extends Component {
   }
 
   handleClose = () => {
-    console.log(1);
     this.setState({ open: false });
   };
 
   handleInviteSubmit = (event) => {
     event.preventDefault();
-    console.log(3);
     axios.post("/api/sprintMembershipWithCode", { sId: this.state.inviteCode, uId: sessionStorage.getItem("id"), token: localStorage.getItem("token") }).then((response) => {
       if (response.data === "Already part of sprint!") {
-        console.log(response.data);
         this.setState({ message: response.data });
       }
       else {
@@ -128,7 +123,6 @@ class ProjectList extends Component {
   }
 
   render() {
-//    const { direction, justify, alignItems } = this.state;
     return (
       <div
         className="balls"
@@ -256,7 +250,6 @@ class ProjectList extends Component {
           onSubmit={this.handleSubmit}
           onChange={this.handleChange}
         >
-
           <AddProjectLayout
           />
         </SimpleModalProjectWrapped>

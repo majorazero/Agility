@@ -47,12 +47,15 @@ function ClippedDrawer(props) {
         }}
         anchor="right"
       >
-        <List>
-          <ListItem button onClick={props.balls}>
-            <ListItemIcon><Add /></ListItemIcon>
-            <ListItemText primary={props.title} />
-          </ListItem>
-        </List>
+        {props.isAdmin ?
+          <List>
+            <ListItem button onClick={props.balls}>
+              <ListItemIcon><Add /></ListItemIcon>
+              <ListItemText primary={props.title} />
+            </ListItem>
+          </List>
+          :""}
+
         <Divider />
         <List>
           {props.sprints.map((data, i) => (

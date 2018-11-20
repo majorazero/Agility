@@ -87,64 +87,62 @@ class Project extends React.Component {
     }
 
     componentDidMount() {
-        const { id } = this.props.match.params;
-        axios.post("/api/projectById", {
-            token: "project",
-            id: id
-        }).then((response) => {
-            this.setState({
-                projName: response.data[0].name,
-                summary: response.data[0].summary,
-                projDueDate: response.data[0].due_date,
-                projectId: response.data[0].id,
-                adminId: response.data[0].userId
-            });
-            // let today = new Date.now();
-            // console.log(today);
-            //pass project id here
-            this.getMembers(this.state.sprintId);
-            this.getCurrentUserId();
-        }).catch((err) => {
-            window.location.assign("/404");
+      const { id } = this.props.match.params;
+      axios.post("/api/projectById", {
+        token: "project",
+        id: id
+      }).then((response) => {
+        this.setState({
+          projName: response.data[0].name,
+          summary: response.data[0].summary,
+          projDueDate: response.data[0].due_date,
+          projectId: response.data[0].id,
+          adminId: response.data[0].userId
         });
-        // this.ProgressBar();
+
+        //pass project id here
+        this.getMembers(this.state.sprintId);
+        this.getCurrentUserId();
+      }).catch((err) => {
+        window.location.assign("/404");
+      });
     }
 
     handleChange = name => event => {
-        this.setState({
-            [name]: event.target.value,
-        });
+      this.setState({
+        [name]: event.target.value,
+      });
     };
 
     getTasks = () => {
-        // let number = this.state.projects
-        // below we'll just place the variable in where we grab the dynamically updated 'project' that we're on depending on user choice
-        axios.get("/api/task/" + this.state.sprintId).then((res) => {
-            let task = res.data;
-            let unassigned = [];
-            let assigned = [];
-            let completed = [];
+      // let number = this.state.projects
+      // below we'll just place the variable in where we grab the dynamically updated 'project' that we're on depending on user choice
+      axios.get("/api/task/" + this.state.sprintId).then((res) => {
+        let task = res.data;
+        let unassigned = [];
+        let assigned = [];
+        let completed = [];
 
-            for (let i = 0; i < task.length; i++) {
-                if (task[i].assigned_id === null) {
-                    unassigned.push(task[i])
-                }
+        for (let i = 0; i < task.length; i++) {
+          if (task[i].assigned_id === null) {
+            unassigned.push(task[i])
+          }
 
-                else if (!task[i].isCompleted) {
-                    assigned.push(task[i]);
-                }
-                else if (task[i].isCompleted) {
-                    completed.push(task[i])
-                }
-            }
-            let progressStat = (completed.length / (completed.length + assigned.length + unassigned.length) * 100);
-            this.setState({
-                unassignedTasks: unassigned,
-                assignedTasks: assigned,
-                completedTasks: completed,
-                SprintProgress: progressStat
-            });
+          else if (!task[i].isCompleted) {
+            assigned.push(task[i]);
+          }
+          else if (task[i].isCompleted) {
+            completed.push(task[i])
+          }
+        }
+        let progressStat = (completed.length / (completed.length + assigned.length + unassigned.length) * 100);
+        this.setState({
+          unassignedTasks: unassigned,
+          assignedTasks: assigned,
+          completedTasks: completed,
+          SprintProgress: progressStat
         });
+      });
     };
 
     addTask = (event) => {
@@ -295,8 +293,8 @@ class Project extends React.Component {
           });
         }
       }).then(() => {
-          this.getTasks();
-          this.getMembers(this.state.sprintId);
+        this.getTasks();
+        this.getMembers(this.state.sprintId);
       });
     };
 
@@ -325,61 +323,62 @@ class Project extends React.Component {
     }
 
     getCurrentUserId = () => {
-        axios.post("/api/userByDecrypt", {
-            id: sessionStorage.getItem("id"),
-            token: localStorage.getItem("token")
-        }).then(res => {
-            let isAdmin = false;
-            if (res.data.id === this.state.adminId) {
-                isAdmin = true;
-            }
-            this.setState({ currentUser: res.data.id, isAdmin: isAdmin },
-                () => {
-                    this.getSprints(this.state.projectId, this.state.currentUser)
-                })
-        })
+      axios.post("/api/userByDecrypt", {
+        id: sessionStorage.getItem("id"),
+        token: localStorage.getItem("token")
+      }).then(res => {
+        let isAdmin = false;
+        if (res.data.id === this.state.adminId) {
+          isAdmin = true;
+        }
+        this.setState({ currentUser: res.data.id, isAdmin: isAdmin },
+          () => {
+            this.getSprints(this.state.projectId, this.state.currentUser)
+          }
+        );
+      });
     }
 
 
     inviteMember = () => {
-        //we'll pass the sprint id as an encrypted id
-        axios.post("/api/encrypt", {
-            id: this.state.sprintId.toString(),
-            token: "invite"
-        }).then((response) => {
-            this.setState({ inviteCode: response.data });
-        });
+      //we'll pass the sprint id as an encrypted id
+      axios.post("/api/encrypt", {
+        id: this.state.sprintId.toString(),
+        token: "invite"
+      }).then((response) => {
+        this.setState({ inviteCode: response.data });
+      });
     }
 
     markComplete = (id) => {
-        console.log("WHAT");
-        axios.put(`/api/complete/task/${id}`)
-            .then(() => {
-                this.getTasks();
-            })
+      axios.put(`/api/complete/task/${id}`)
+        .then(() => {
+          this.getTasks();
+        }
+      )
     }
 
     reopenTask = (id) => {
-        console.log('Reopen Task', id)
-        axios.put(`/api/reopen/task/${id}`)
-            .then(() => {
-                this.getTasks();
-            })
+      axios.put(`/api/reopen/task/${id}`)
+        .then(() => {
+          this.getTasks();
+        }
+      )
     }
 
     switchTaskPool = () => {
-        if (this.state.showComplete === true) {
-            this.setState({ showComplete: false })
-        }
-        else {
-            this.setState({ showComplete: true })
-        }
+      if (this.state.showComplete === true) {
+        this.setState({ showComplete: false })
+      }
+      else {
+        this.setState({ showComplete: true })
+      }
     }
 
     handleTaskOpen = panel => (event, expanded) => {
-        this.setState({
-            expanded: expanded ? panel : false,
-        });
+      this.setState({
+        expanded: expanded ? panel : false,
+      });
     };
 
     render() {
@@ -775,12 +774,13 @@ class Project extends React.Component {
                     </SimpleModalWrapped>
 
                     <ClippedDrawer
-                        balls={() => this.handleOpen('sprintOpen')}
-                        title="ADD SPRINT"
-                        sprints={this.state.chipData}
-                        onClick={this.updateActiveSprint}
-                        activeSprint={this.state.sprintId}
-                        currentUser={this.state.currentUser}
+                      balls={() => this.handleOpen('sprintOpen')}
+                      title="ADD SPRINT"
+                      isAdmin={this.state.isAdmin}
+                      sprints={this.state.chipData}
+                      onClick={this.updateActiveSprint}
+                      activeSprint={this.state.sprintId}
+                      currentUser={this.state.currentUser}
                     />
                 </div>
             </div>
