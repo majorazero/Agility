@@ -21,14 +21,14 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 
 const styles = {
     root: {
-        padding: '0px 30px 0px 10px'
+      padding: '0px 30px 0px 10px'
     },
     listSection: {
-        backgroundColor: 'inherit',
+      backgroundColor: 'inherit',
     },
     ul: {
-        backgroundColor: 'inherit',
-        padding: 0,
+      backgroundColor: 'inherit',
+      padding: 0,
     }
 }
 
@@ -145,25 +145,25 @@ class Project extends React.Component {
   };
 
   addTask = (event) => {
-      event.preventDefault();
-      if (this.state.taskComplexity <= 5 && this.state.taskComplexity >= 1) {
-          axios.post("/api/task", {
-              name: this.state.taskName,
-              due_date: this.state.taskDue_date,
-              description: this.state.taskDescription,
-              sprint_id: this.state.sprintId,
-              complexity: this.state.taskComplexity,
-              stack: this.state.taskStack
-          }).then(() => {
-              this.setState({
-                  taskOpen: false
-              });
-              this.getTasks();
-          });
-      }
-      else {
-          console.log("Invalid complexity value!");
-      }
+    event.preventDefault();
+    if (this.state.taskComplexity <= 5 && this.state.taskComplexity >= 1) {
+      axios.post("/api/task", {
+        name: this.state.taskName,
+        due_date: this.state.taskDue_date,
+        description: this.state.taskDescription,
+        sprint_id: this.state.sprintId,
+        complexity: this.state.taskComplexity,
+        stack: this.state.taskStack
+      }).then(() => {
+        this.setState({
+          taskOpen: false
+        });
+        this.getTasks();
+      });
+    }
+    else {
+      console.log("Invalid complexity value!");
+    }
   }
 
   addTask = () => {
@@ -196,22 +196,20 @@ class Project extends React.Component {
   }
 
   handleClose = (name) => {
-      this.setState({ [name]: false });
+    this.setState({ [name]: false });
   };
 
   deleteTask = (task) => {
-      axios.delete("/api/task/by/" + task.id).then(() => {
-          this.getTasks();
-      });
+    axios.delete("/api/task/by/" + task.id).then(() => {
+      this.getTasks();
+    });
   }
 
   assignTask = (task) => {
     axios.post("/api/decrypt", { token: localStorage.getItem("token"), id: sessionStorage.getItem("id") }).then((response) => {
       let user = response.data;
       axios.put("/api/task/by/" + task.id + "/" + user).then((res) => {
-          // console.log(res.data);
-          this.getTasks();
-          //window.location.reload();
+        this.getTasks();
       })
     });
   }
@@ -225,7 +223,7 @@ class Project extends React.Component {
   updateActiveSprint = (sprintId) => {
     let isActive = false;
     if (this.state.activeSprintId === sprintId) {
-        isActive = true;
+      isActive = true;
     }
     this.setState({ sprintId: sprintId, isActive: isActive }, () => {
       this.getTasks();
@@ -403,46 +401,46 @@ class Project extends React.Component {
                   style={{ padding: 25 }}
               >
                   <Grid item xs>
-                      <Paper
-                        style={{ height: "100%", background: 'whitesmoke' }}
+                    <Paper
+                      style={{ height: "100%", background: 'whitesmoke' }}
+                    >
+                      <Grid item xs style={{ padding: '25px 25px 0 25px' }}>
+                        <Typography fullWidth variant="h5" gutterBottom>Sprints</Typography>
+                      </Grid>
+                      <Grid
+                        container
+                        spacing={8}
                       >
-                          <Grid item xs style={{ padding: '25px 25px 0 25px' }}>
-                            <Typography fullWidth variant="h5" gutterBottom>Sprints</Typography>
+                        <Grid item xs>
+                        <SimpleModalSprintWrapped
+                              open={this.state.sprintOpen}
+                              onClose={() => this.handleClose('sprintOpen')}
+                              name="Add a New Sprint ..."
+                              onSubmit={this.addSprint}
+                              onChange={this.handleChange}
+                            >
+                              <AddSprintLayout
+                              />
+                            </SimpleModalSprintWrapped>
+                            <Chips
+                              sprints={this.state.chipData}
+                              onClick={this.updateActiveSprint}
+                              activeSprint={this.state.sprintId}
+                              currentUser={this.state.currentUser}
+                            />
                           </Grid>
-                          <Grid
-                            container
-                            spacing={8}
-                          >
-                              <Grid item xs>
-                              <SimpleModalSprintWrapped
-                                    open={this.state.sprintOpen}
-                                    onClose={() => this.handleClose('sprintOpen')}
-                                    name="Add a New Sprint ..."
-                                    onSubmit={this.addSprint}
-                                    onChange={this.handleChange}
-                                  >
-                                    <AddSprintLayout
-                                    />
-                                  </SimpleModalSprintWrapped>
-                                  <Chips
-                                    sprints={this.state.chipData}
-                                    onClick={this.updateActiveSprint}
-                                    activeSprint={this.state.sprintId}
-                                    currentUser={this.state.currentUser}
-                                  />
-                              </Grid>
-                              <div style={{ marginRight: 5 }}>
-                                {(this.state.isAdmin === true) ?
-                                  <ButtonSizes
-                                    onClick={() => this.handleOpen('sprintOpen')}
-                                    title="Add a Sprint"
-                                    color="secondary"
-                                    placement="left"
-                                    mini
-                                  /> :
-                                  ""}
-                              </div>
-                          </Grid>
+                          <div style={{ marginRight: 5 }}>
+                            {(this.state.isAdmin === true) ?
+                              <ButtonSizes
+                                onClick={() => this.handleOpen('sprintOpen')}
+                                title="Add a Sprint"
+                                color="secondary"
+                                placement="left"
+                                mini
+                              /> :
+                              ""}
+                          </div>
+                        </Grid>
                       </Paper>
                   </Grid>
               </Grid> */}
