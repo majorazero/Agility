@@ -295,7 +295,8 @@ class Project extends React.Component {
         //   }
         // }
         this.setState({ sprintId: sprintId, isActive: isActive }, () => {
-            this.getTasks();
+          this.getTasks();
+          this.getMembers(this.state.sprintId);
         });
     }
 
