@@ -49,7 +49,7 @@ class Project extends React.Component {
 
         inviteCode: "",
 
-        isActive: "",
+        isActive: true,
         activeSprintId: '',
 
         unassignedTasks: [],
