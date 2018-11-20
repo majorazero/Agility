@@ -818,7 +818,8 @@ class Project extends React.Component {
                           onClickComplete={this.markComplete}
                         />}
 
-                        holyTaint={<LinearDeterminate completed={this.state.SprintProgress} title={"Sprint Progress"} />}
+                        holyTaint={<LinearDeterminate whatBar completed={100} title={"Sprint Time"} />}
+                        holyHole={<LinearDeterminate completed={this.state.SprintProgress} title={"Sprint Progress"} />}
 
                         onClick={() => this.handleOpen('taskOpen')}
                         title='ADD TASK'
