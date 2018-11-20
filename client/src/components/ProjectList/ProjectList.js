@@ -53,13 +53,13 @@ class ProjectList extends Component {
           {this.state.projects.map((item) => {
             return (
               <SingleLineGridList
-                onClick={this.handleOpen}
-                title='ADD PROJECT'
-                key={item.id}
-                name={item.name}
-                summary={item.summary}
-                // style={{ margin: 2, width: 100, height: 100 }}
-                onProjectPress={() => { this.onProjectPress(item.id) }} />
+              onClick={this.handleOpen}
+              title='ADD PROJECT'
+              key={item.id}
+              name={item.name}
+              summary={item.summary}
+              // style={{ margin: 2, width: 100, height: 100 }}
+              onProjectPress={() => { this.onProjectPress(item.id) }} />
             )
           })}
         </div>
