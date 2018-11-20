@@ -39,38 +39,38 @@ function ClippedDrawer(props) {
     const { classes } = props;
 
     return (
-        <Drawer
-            className={classes.drawer}
-            variant="permanent"
-            classes={{
-                paper: classes.drawerPaper,
-            }}
-            anchor="right"
-        >
-            <List>
-                <ListItem button onClick={props.balls}>
-                    <ListItemIcon><Add /></ListItemIcon>
-                    <ListItemText primary={props.title} />
-                </ListItem>
-            </List>
-            <Divider />
-            <List>
-                {props.sprints.map((data, i) => (
-                    <Tooltip title={`${data.start} - ${data.end}`} placement='left'>
-                        <ListItem
-                            button
-                            key={data.key}
-                            onClick={props.onClick.bind(this, data.id)}
-                            color={props.activeSprint === data.id ? 'primary' : "default"}
-                            id={data.id}
-                        >
-                            <ListItemIcon></ListItemIcon>
-                            <ListItemText primary={data.label} />
-                        </ListItem>
-                    </Tooltip>
-                ))}
-            </List>
-        </Drawer>
+      <Drawer
+        className={classes.drawer}
+        variant="permanent"
+        classes={{
+            paper: classes.drawerPaper,
+        }}
+        anchor="right"
+      >
+        <List>
+          <ListItem button onClick={props.balls}>
+            <ListItemIcon><Add /></ListItemIcon>
+            <ListItemText primary={props.title} />
+          </ListItem>
+        </List>
+        <Divider />
+        <List>
+          {props.sprints.map((data, i) => (
+            <Tooltip title={`${data.start} - ${data.end}`} placement='left'>
+              <ListItem
+                button
+                key={data.key}
+                onClick={props.onClick.bind(this, data.id)}
+                color={props.activeSprint === data.id ? 'primary' : "default"}
+                id={data.id}
+              >
+                <ListItemIcon></ListItemIcon>
+                <ListItemText primary={data.label} />
+              </ListItem>
+            </Tooltip>
+          ))}
+        </List>
+      </Drawer>
     );
 }
 

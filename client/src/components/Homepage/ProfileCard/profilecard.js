@@ -77,7 +77,6 @@ class RecipeReviewCard extends React.Component {
         id: sessionStorage.getItem("id"),
         token: localStorage.getItem("token")
       }).then((response) => {
-        console.log(response.data);
         this.setState(
           {
             userFirstName: response.data.prof.first_name,

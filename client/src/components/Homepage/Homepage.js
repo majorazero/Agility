@@ -30,7 +30,6 @@ class Homepage extends Component {
 
   componentDidMount = () => {
     if (sessionStorage.getItem("id") === null) {
-      console.log("You're not logged in!");
       //we might want to change this to a 404
       window.location.assign("/");
     }
@@ -41,7 +40,6 @@ class Homepage extends Component {
         id: sessionStorage.getItem("id"),
         token: localStorage.getItem("token")
       }).then((response) => {
-        console.log(response.data);
         this.setState(
           {
             totalTask: response.data.totalTask,
@@ -65,7 +63,6 @@ class Homepage extends Component {
       id: sessionStorage.getItem("id"),
       token: localStorage.getItem("token")
     }).then(res => {
-      console.log(res.data)
       this.setState({ userId: res.data }, () => {
         this.getTasks(this.state.userId)
       })
@@ -95,7 +92,6 @@ class Homepage extends Component {
             }
           }
         })
-        console.log(data)
         this.setState({ tasks: data })
       })
   }
@@ -103,7 +99,6 @@ class Homepage extends Component {
   goToProject = (sprintId) => {
     axios.get(`/api/projectId/sprint/${sprintId}`)
       .then(res => {
-        console.log(res.data[0].id)
         axios.post("/api/encrypt", {
           token: "project",
           id: res.data[0].id.toString()
@@ -144,7 +139,6 @@ class Homepage extends Component {
           arr.push(Obj);
           stack[stackName] = "";
         }
-        console.log(arr);
         let format = {
           label1: "TOP STACKS:",
           info1: ""

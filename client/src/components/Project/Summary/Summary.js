@@ -5,7 +5,6 @@ import Divider from '@material-ui/core/Divider';
 import UserStepper from '../../utils/UserStepper.js';
 
 const SummaryCard = (props) => {
-  console.log(props);
   let membersCard = props.members.map((item) => {
     let amtofTaskTaken = 0;
     let amtofTaskComplete = 0;
@@ -38,17 +37,6 @@ const SummaryCard = (props) => {
         topStack = i;
       }
     }
-    console.log(topStack, topStackNum);
-    // return(
-    //   <div>
-    //     <div>{item.User.first_name} {item.User.last_name}</div>
-    //     <div>Task Completed: {amtofTaskComplete}</div>
-    //     <div>Tasks Taken: {amtofTaskTaken}</div>
-    //     {(amtofTaskComplete === 0) ? "":<div>Avg Complexity: {complexity} (Completed)</div>}
-    //     {(topStack === "") ? "": <div>Most Taken Stack: {topStack} {(topStackNum/amtofTaskComplete*100).toFixed(2)}%</div>}
-    //     <div>-----------</div>
-    //   </div>
-    // );
     return {
       label1: `${item.User.first_name} ${item.User.last_name}`,
       label2: "Task Completed:",

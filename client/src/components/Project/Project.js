@@ -92,7 +92,6 @@ class Project extends React.Component {
             token: "project",
             id: id
         }).then((response) => {
-            console.log(response)
             this.setState({
                 projName: response.data[0].name,
                 summary: response.data[0].summary,
@@ -110,34 +109,6 @@ class Project extends React.Component {
         });
         // this.ProgressBar();
     }
-    // ProgressBar = () => {
-
-    //     // axios.get("/api/sprintById/" + this.state.sprintId).then((res) => {
-    //         // console.log(res)
-    //         let startDate = res.data[0].start_date;
-    //         let endDate = res.data[0].end_date;
-    //         var momentStart = moment(startDate).valueOf()
-    //         var momentEnd = moment(endDate).valueOf()
-    //         var difference = momentEnd - momentStart
-    //         var currentTime = moment(Date.now()).valueOf()
-    //         console.log(currentTime)
-
-    //         var timeHasPassed =  currentTime - momentStart;
-
-    //         var timeLeft = timeHasPassed - currentTime;
-
-    //         this.setState({timeHasPassed})
-    //         this.setState({timeLeft})
-
-
-    //         console.log(timeHasPassed)
-    //         console.log(timeLeft)
-    //     // })
-    // }
-
-    updateComplete = () => {
-
-    }
 
     handleChange = name => event => {
         this.setState({
@@ -153,8 +124,6 @@ class Project extends React.Component {
             let unassigned = [];
             let assigned = [];
             let completed = [];
-
-            console.log(task);
 
             for (let i = 0; i < task.length; i++) {
                 if (task[i].assigned_id === null) {
@@ -174,9 +143,7 @@ class Project extends React.Component {
                 assignedTasks: assigned,
                 completedTasks: completed,
                 SprintProgress: progressStat
-            }, () => {
-                console.log(this.state.sprints)
-            })
+            });
         });
     };
 
@@ -203,34 +170,32 @@ class Project extends React.Component {
     }
 
     addTask = () => {
-      console.log('adding task');
-        if (this.state.taskComplexity <= 5 && this.state.taskComplexity >= 1) {
-            axios.post("/api/task", {
-                name: this.state.taskName,
-                due_date: this.state.taskDue_date,
-                description: this.state.taskDescription,
-                sprint_id: this.state.sprintId,
-                complexity: this.state.taskComplexity,
-                stack: this.state.taskStack
-            }).then(() => {
-                this.setState({
-                    taskOpen: false
-                });
-                this.getTasks();
-            });
-        }
-        else {
-            console.log("Invalid complexity value!");
-        }
+      if (this.state.taskComplexity <= 5 && this.state.taskComplexity >= 1) {
+        axios.post("/api/task", {
+          name: this.state.taskName,
+          due_date: this.state.taskDue_date,
+          description: this.state.taskDescription,
+          sprint_id: this.state.sprintId,
+          complexity: this.state.taskComplexity,
+          stack: this.state.taskStack
+        }).then(() => {
+          this.setState({
+            taskOpen: false
+          });
+          this.getTasks();
+        });
+      }
+      else {
+        console.log("Invalid complexity value!");
+      }
     }
 
     handleOpen = (name) => {
-        console.log(name)
-        this.setState({
-            [name]: true
-        }, () => {
-            console.log(this.state.taskOpen)
-        })
+      this.setState({
+        [name]: true
+      }, () => {
+        console.log(this.state.taskOpen)
+      })
     }
 
     handleClose = (name) => {
@@ -244,108 +209,95 @@ class Project extends React.Component {
     }
 
     assignTask = (task) => {
-        console.log("assign task")
-        axios.post("/api/decrypt", { token: localStorage.getItem("token"), id: sessionStorage.getItem("id") }).then((response) => {
-            let user = response.data;
-            axios.put("/api/task/by/" + task.id + "/" + user).then((res) => {
-                // console.log(res.data);
-                this.getTasks();
-                //window.location.reload();
-            })
-        });
+      axios.post("/api/decrypt", { token: localStorage.getItem("token"), id: sessionStorage.getItem("id") }).then((response) => {
+        let user = response.data;
+        axios.put("/api/task/by/" + task.id + "/" + user).then((res) => {
+            // console.log(res.data);
+            this.getTasks();
+            //window.location.reload();
+        })
+      });
     }
 
     unassignTask = (id) => {
-        console.log('unassign task')
-        axios.put("/api/task/unassign", { id: id }).then((response) => {
-            this.getTasks();
-        });
+      axios.put("/api/task/unassign", { id: id }).then((response) => {
+        this.getTasks();
+      });
     }
 
     updateActiveSprint = (sprintId) => {
-        console.log(this.state.sprints)
-        let isActive = false;
-        if (this.state.activeSprintId === sprintId) {
-            isActive = true;
-        }
-        // for(let i = 0; i < this.state.sprints.length; i++){
-        //   if((this.state.sprints[i].sprintId === sprintId) && this.state.sprints[i].isActive === 1){
-        //     isActive = true;
-        //   }
-        // }
-        this.setState({ sprintId: sprintId, isActive: isActive }, () => {
-          this.getTasks();
-          this.getMembers(this.state.sprintId);
-        });
+      let isActive = false;
+      if (this.state.activeSprintId === sprintId) {
+          isActive = true;
+      }
+      this.setState({ sprintId: sprintId, isActive: isActive }, () => {
+        this.getTasks();
+        this.getMembers(this.state.sprintId);
+      });
     }
 
     defaultVal = () => {
-        let today = new Date().split("T");
-
-        this.setState({
-            due_date: today
-        });
+      let today = new Date().split("T");
+      this.setState({
+          due_date: today
+      });
     };
 
     getSprints = (projectId, userId) => {
-        let sprintData = [];
-        axios.get(`/api/sprints/project/${projectId}/user/${userId}`).then((res) => {
-            if (res.data.length > 0) {
-                console.log(res.data)
-                let sprints = res.data
-                let today = new Date();
-                let currentSprint = res.data[0].sprintId;
-                let activeSprint;
-                let isActive = false;
-                let timeProgress = 0;
-                // check for active sprint
-                for (let i = 0; i < sprints.length; i++) {
-                    let endDate = new Date(`${sprints[i].endDate}T00:00:00`)
-                    let startDate = new Date(`${sprints[i].startDate}T00:00:00`)
-                    let currentDate = new Date();
-                    console.log(startDate, endDate, currentDate);
-                    console.log(endDate - startDate);
-                    sprintData.push({
-                        key: i,
-                        label: sprints[i].sprintName,
-                        id: sprints[i].sprintId,
-                        start: `${startDate.getMonth() + 1}/${startDate.getDate()}/${startDate.getFullYear()}`,
-                        end: `${endDate.getMonth() + 1}/${endDate.getDate()}/${endDate.getFullYear()}`
-                    });
-                    if (sprints[i].isActive) {
-                        //verify end date has not passed
-                        if (today > endDate) {
-                            isActive = false
-                        }
-                        else {
-                            //set currentSprint, set isActive
-                            activeSprint = sprints[i].sprintId;
-                            currentSprint = activeSprint
-                            isActive = true;
-                            timeProgress = ((endDate - currentDate) / (endDate - startDate) * 100);
-                        }
-                    }
-                    else if (today >= startDate && today <= endDate) {
-                        activeSprint = sprints[i].sprintId;
-                        currentSprint = activeSprint
-                        isActive = true;
-                        timeProgress = ((endDate - currentDate) / (endDate - startDate) * 100);
-                    }
-                }
-                console.log(timeProgress);
-                this.setState({
-                    SprintTime: timeProgress,
-                    chipData: sprintData,
-                    sprintId: currentSprint,
-                    activeSprintId: activeSprint,
-                    sprints: res.data,
-                    isActive: isActive
-                });
+      let sprintData = [];
+      axios.get(`/api/sprints/project/${projectId}/user/${userId}`).then((res) => {
+        if (res.data.length > 0) {
+          let sprints = res.data
+          let today = new Date();
+          let currentSprint = res.data[0].sprintId;
+          let activeSprint;
+          let isActive = false;
+          let timeProgress = 0;
+          // check for active sprint
+          for (let i = 0; i < sprints.length; i++) {
+            let endDate = new Date(`${sprints[i].endDate}T00:00:00`)
+            let startDate = new Date(`${sprints[i].startDate}T00:00:00`)
+            let currentDate = new Date();
+            sprintData.push({
+              key: i,
+              label: sprints[i].sprintName,
+              id: sprints[i].sprintId,
+              start: `${startDate.getMonth() + 1}/${startDate.getDate()}/${startDate.getFullYear()}`,
+              end: `${endDate.getMonth() + 1}/${endDate.getDate()}/${endDate.getFullYear()}`
+            });
+            if (sprints[i].isActive) {
+              //verify end date has not passed
+              if (today > endDate) {
+                isActive = false
+              }
+              else {
+                //set currentSprint, set isActive
+                activeSprint = sprints[i].sprintId;
+                currentSprint = activeSprint
+                isActive = true;
+                timeProgress = ((endDate - currentDate) / (endDate - startDate) * 100);
+              }
             }
-        }).then(() => {
-            this.getTasks();
-            this.getMembers(this.state.sprintId);
-        });
+            else if (today >= startDate && today <= endDate) {
+              activeSprint = sprints[i].sprintId;
+              currentSprint = activeSprint
+              isActive = true;
+              timeProgress = ((endDate - currentDate) / (endDate - startDate) * 100);
+            }
+          }
+          this.setState({
+            SprintTime: timeProgress,
+            chipData: sprintData,
+            sprintId: currentSprint,
+            activeSprintId: activeSprint,
+            sprints: res.data,
+            isActive: isActive
+          });
+        }
+      }).then(() => {
+          this.getTasks();
+          this.getMembers(this.state.sprintId);
+      });
     };
 
     addSprint = () => {
@@ -355,7 +307,6 @@ class Project extends React.Component {
         end_date: this.state.sprintEnd_date,
         project_id: this.state.projectId
       }).then((res) => {
-        console.log(this.state.currentUser, res.data.id)
         axios.post(`/api/sprintMembership`, { userId: this.state.currentUser, sprintId: res.data.id })
         .then(() => {
           this.setState({
@@ -368,10 +319,9 @@ class Project extends React.Component {
     }
 
     getMembers = (sprintId) => {
-        axios.post('/api/allMemberInSprint', { sprintId: sprintId }).then(res => {
-            console.log("Members:", res.data);
-            this.setState({ members: res.data });
-        })
+      axios.post('/api/allMemberInSprint', { sprintId: sprintId }).then(res => {
+        this.setState({ members: res.data });
+      })
     }
 
     getCurrentUserId = () => {
@@ -434,8 +384,7 @@ class Project extends React.Component {
 
     render() {
         const { expanded } = this.state;
-        const { classes } = this.props
-        console.log(this.state.sprintStart_date)
+        const { classes } = this.props;
         return (
             <div>
 
