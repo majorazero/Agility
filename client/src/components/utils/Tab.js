@@ -54,19 +54,21 @@ class SimpleTabs extends React.Component {
                 <Tabs
                     value={this.state.value}
                     onChange={this.handleChange}
-                    indicatorColor="primary"
-                    textColor="primary"
+                    indicatorColor="secondary"
+                    textColor="secondary"
                     centered
                 >
-                    <Tab label="Tasks" />
-                    <Tab label="User Pool" />
+                    <Tab label="Open Tasks" />
+                    <Tab label="In Progress" />
+                    <Tab label='Complete'/>
                     <Tab label="Progress" />
                 </Tabs>
                 {value === 0 && <TabContainer>
                     {this.props.holyBalls}
                 </TabContainer>}
                 {value === 1 && <TabContainer>{this.props.holySack}</TabContainer>}
-                {value === 2 && <TabContainer>{this.props.holyTaint}{this.props.holyHole}</TabContainer>}
+                {value === 2 && <TabContainer>{this.props.completedTab}</TabContainer>}
+                {value === 3 && <TabContainer>{this.props.holyTaint}</TabContainer>}
             </Paper>
 
         );
