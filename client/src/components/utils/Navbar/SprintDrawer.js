@@ -64,7 +64,8 @@ function ClippedDrawer(props) {
                 button
                 key={data.key}
                 onClick={props.onClick.bind(this, data.id)}
-                color={props.activeSprint === data.id ? 'primary' : "default"}
+                // color={props.activeSprint === data.id ? 'primary' : "default"}
+                selected={props.activeSprint === data.id}
                 id={data.id}
               >
                 <ListItemIcon></ListItemIcon>
