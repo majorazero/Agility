@@ -292,7 +292,7 @@ class Project extends React.Component {
             activeSprintId: activeSprint,
             sprints: res.data,
             isActive: isActive
-          });
+          }, () => console.log(this.state.sprints));
         }
       }).then(() => {
         this.getTasks();
@@ -301,21 +301,36 @@ class Project extends React.Component {
     };
 
     addSprint = () => {
-      axios.post('/api/sprint', {
-        name: this.state.sprintName,
-        start_date: this.state.sprintStart_date,
-        end_date: this.state.sprintEnd_date,
-        project_id: this.state.projectId
-      }).then((res) => {
-        axios.post(`/api/sprintMembership`, { userId: this.state.currentUser, sprintId: res.data.id })
-        .then(() => {
-          this.setState({
-            sprintOpen: false
-          }, () => {
-            this.getSprints(this.state.projectId, this.state.currentUser);
-          });
-        })
-      });
+      let overlap = false;
+      let newSprintStart = new Date(`${this.state.sprintStart_date}T00:00:00`)
+      let newSprintEnd = new Date(`${this.state.sprintStart_date}T23:59:59`)
+
+      for(let i=0; i < this.state.sprints.length; i++){
+        let start = new Date(`${this.state.sprints[i].startDate}T00:00:00`)
+        console.log(start)
+        let end = new Date(`${this.state.sprints[i].endDate}T23:59:59`)
+        if(newSprintStart > start && newSprintStart < end){
+          overlap = true
+        }
+      }
+      console.log(overlap);
+      if(overlap === false){
+        axios.post('/api/sprint', {
+          name: this.state.sprintName,
+          start_date: this.state.sprintStart_date,
+          end_date: this.state.sprintEnd_date,
+          project_id: this.state.projectId
+        }).then((res) => {
+          axios.post(`/api/sprintMembership`, { userId: this.state.currentUser, sprintId: res.data.id })
+          .then(() => {
+            this.setState({
+              sprintOpen: false
+            }, () => {
+              this.getSprints(this.state.projectId, this.state.currentUser);
+            });
+          })
+        });
+      }
     }
 
     getMembers = (sprintId) => {
