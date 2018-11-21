@@ -17,7 +17,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 const styles = {
   list: {
-    width: '100%',
+    width: 400,
   },
   fullList: {
     width: 'auto',
@@ -25,19 +25,10 @@ const styles = {
   menuButton: {
     marginLeft: -12,
     marginRight: 20,
-  }
+  },
 };
 
-const theme = createMuiTheme({
-  overrides: {
-    MuiButton: {
-      root: {
-        height: 2,
-        width: '100%'
-      },
-    },
-  },
-});
+
 
 class TemporaryDrawer extends React.Component {
   state = {
@@ -85,29 +76,26 @@ class TemporaryDrawer extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, children, className, ...other } = this.props;
 
     const sideList = (
       <div className={classes.list}>
-        <List style={{ position: 'sticky', height: 46, padding: 8, top: 0, zIndex: 1 }}>
+        <List>
           <ListItem button key="Home" name="home" component={Link} to='/homepage'>
             <ListItemIcon><HomeIcon /></ListItemIcon>
             <ListItemText primary='Home' />
           </ListItem>
         </List>
-        <Divider style={{ position: 'sticky', top: 'inherit', zIndex: 1 }} />
+        <Divider style={{ position: 'sticky', top: 'inherit' }} />
         <List>
           {this.state.projects.map((item) => {
             return (
-              <MuiThemeProvider theme={theme}>
-                <SingleLineGridList
-                  key={item.id}
-                  name={item.name}
-                  summary={item.summary}
-                  className={classes.balls}
-                  // style={{ margin: 2, width: 100, height: 100 }}
-                  onProjectPress={() => { this.onProjectPress(item.id) }} />
-              </MuiThemeProvider>
+              <SingleLineGridList
+                key={item.id}
+                name={item.name}
+                summary={item.summary}
+                className={classes.balls}
+                onProjectPress={() => { this.onProjectPress(item.id) }} />
             )
           })}
         </List>
