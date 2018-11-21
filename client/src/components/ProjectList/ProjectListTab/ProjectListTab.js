@@ -60,15 +60,16 @@ import ListItemText from '@material-ui/core/ListItemText';
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
     width: '100%',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    color: 'whitesmoke',
     // backgroundSize: 'cover',
     // backgroundPosition: "center center",
-    // boxShadow: '0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12)',
-    // backgroundImage: 'linear-gradient(to bottom right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)'
+    boxShadow: '0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12)',
+    backgroundImage: 'linear-gradient(to bottom right, rgba(0,0,0,0) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0.7) 100%)'
   },
   title: {
+    color: 'whitesmoke',
     margin: 5,
   },
 });
@@ -79,18 +80,18 @@ function SingleLineGridList(props) {
   return (
     <div alt={props.name}>
       <List style={{ padding: 0, margin: 5 }}>
-        <ListItem classes={{ root: classes.root }}>
+        <ListItem classes={{ root: classes.root }} hover>
+
           <ListItemText
+            focusVisible
             button
-            classes={{
-              root: classes.titleBar,
-              title: classes.title,
-            }}
+            classes={{ title: classes.title }}
             aria-label="Choose Project"
             onClick={props.onProjectPress}
             primary={props.name}
             secondary={props.summary}
           />
+          
           <Icon>how_to_vote</Icon>
         </ListItem>
       </List>
