@@ -67,7 +67,7 @@ class SimpleTabs extends React.Component {
                 {value === 0 && <TabContainer>{this.props.holyBalls}</TabContainer>}
                 {value === 1 && <TabContainer>{this.props.holySack}</TabContainer>}
                 {value === 2 && <TabContainer>{this.props.completedTab}</TabContainer>}
-                {value === 3 && <TabContainer>{this.props.holyTaint}</TabContainer>}
+                {value === 3 && <TabContainer>{this.props.holyTaint}<br />{this.props.holyTaint2}</TabContainer>}
             </Paper>
 
         );

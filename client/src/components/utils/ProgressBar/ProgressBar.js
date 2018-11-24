@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import LinearProgress from '@material-ui/core/LinearProgress';
+import { Typography } from '@material-ui/core';
 
 const styles = {
     root: {
@@ -27,7 +28,7 @@ class LinearDeterminate extends React.Component {
     var whatBar = this.props.whatBar
     return (
       <div className={classes.root}>
-        <h3 style={{ textAlign: "center", color:"white",textShadow: "2px 2px black"}}>{this.props.title}</h3>
+        <Typography>{this.props.title}</Typography>
         <LinearProgress color={(whatBar) ? "primary" : "secondary"} variant="determinate" value={this.props.completed} />
       </div>
     );
