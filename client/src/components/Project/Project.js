@@ -768,6 +768,7 @@ class Project extends React.Component {
                       />}
 
                         holyTaint={<LinearDeterminate completed={this.state.SprintProgress} title={"Sprint Progress"} />}
+                        holyTaint2={<LinearDeterminate whatBar completed={this.state.SprintTime} title={"Sprint Time"} />}
                         completedTab={this.state.completedTasks.map((task) => {
                           return (
                             <ul>
