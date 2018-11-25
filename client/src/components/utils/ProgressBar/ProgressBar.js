@@ -7,6 +7,7 @@ import { Typography } from '@material-ui/core';
 const styles = {
     root: {
         flexGrow: 1,
+        margin: '0 50px 0 50px'
     },
 };
 
@@ -28,8 +29,9 @@ class LinearDeterminate extends React.Component {
     var whatBar = this.props.whatBar
     return (
       <div className={classes.root}>
-        <Typography>{this.props.title}</Typography>
+        <Typography>{this.props.title1}</Typography>
         <LinearProgress color={(whatBar) ? "primary" : "secondary"} variant="determinate" value={this.props.completed} />
+        <Typography>{this.props.title2}</Typography>
       </div>
     );
   }
