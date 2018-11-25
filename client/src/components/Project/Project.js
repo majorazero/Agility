@@ -63,7 +63,7 @@ class Project extends React.Component {
 
     taskOpen: false,
     taskName: "",
-    taskDue_date: "",
+    taskDue_date: `${new Date().getMonth() + 1}/${new Date().getDate()}/${new Date().getFullYear()}`,
     taskDescription: "",
     taskComplexity: "",
     taskStack: "",
@@ -142,28 +142,6 @@ class Project extends React.Component {
       });
     });
   };
-
-  addTask = (event) => {
-      event.preventDefault();
-      if (this.state.taskComplexity <= 5 && this.state.taskComplexity >= 1) {
-          axios.post("/api/task", {
-              name: this.state.taskName,
-              due_date: this.state.taskDue_date,
-              description: this.state.taskDescription,
-              sprint_id: this.state.sprintId,
-              complexity: this.state.taskComplexity,
-              stack: this.state.taskStack
-          }).then(() => {
-              this.setState({
-                  taskOpen: false
-              });
-              this.getTasks();
-          });
-      }
-      else {
-          console.log("Invalid complexity value!");
-      }
-  }
 
   addTask = () => {
     if (this.state.taskComplexity <= 5 && this.state.taskComplexity >= 1) {
