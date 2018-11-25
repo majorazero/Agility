@@ -35,12 +35,9 @@ class Register extends Component {
 
   render() {
     return (
-      /* <h1 style={{textAlign:"center"}}>Register!</h1> */
-      /* <small>{this.state.message}</small> */
       <div
         className="parallax"
         style={{
-          // paddingTop: "50px",
           overflowX: "hidden",
           backgroundImage: `url("/assets/images/login.jpg")`,
           resizeMode: 'cover',
@@ -56,8 +53,6 @@ class Register extends Component {
             alignItems="stretch"
             spacing={24}
             style={{
-              // backgroundImage: `url("/assets/images/background.png")`,
-              // resizeMode: 'cover',
               height: "100%",
               padding: "10px",
               backgroundPosition: "center",
@@ -67,50 +62,13 @@ class Register extends Component {
               justifyContent: "center"
             }}
           >
-            {/* <Grid
-              container
-              direction="column"
-              justify="center"
-              alignItems="stretch"
-              spacing={24}
-              style={{
-                // backgroundImage: `url("/assets/images/background.png")`,
-                // resizeMode: 'cover',
-                height: "100%",
-                padding: "10px",
-                backgroundPosition: "center",
-                color: "whitesmoke",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            > */}
             <RegisterLayout
               onChange={this.handleChange}
               onSubmit={this.handleSubmit}
               message={this.state.message}
             />
-            {/* <form type="submit" onSubmit={this.handleSubmit}>
-          <h2>First Name:</h2>
-          <input type="text" name="fName" onChange={this.handleChange}/>
-          <h2>Last Name:</h2>
-          <input type="text" name="lName" onChange={this.handleChange}/>
-          <h2>Email:</h2>
-          <input type="email" name="email" onChange={this.handleChange}/>
-          <h2>Password:</h2>
-          <input type="password" name="password" onChange={this.handleChange}/>
-          <div>
-            <button>Submit</button>
-          </div>
-        </form> */}
-            {/* <div style={{ textAlign: "center", marginTop: "5px" }}> */}
           </Grid>
-
-          {/* </div> */}
         </Grid>
-        {/* <div style={{ position: "fixed", width: "100%", bottom: "0" }}>
-          <SimpleBottomNavigation />
-        </div> */}
       </div >
     );
   }
