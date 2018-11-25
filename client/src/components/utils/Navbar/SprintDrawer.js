@@ -13,73 +13,72 @@ import Add from '@material-ui/icons/Add';
 const drawerWidth = 240;
 
 const styles = theme => ({
-    root: {
-        display: 'flex',
-    },
-    appBar: {
-        zIndex: theme.zIndex.drawer + 1,
-    },
-    drawer: {
-        width: drawerWidth,
-        flexShrink: 0,
-    },
-    drawerPaper: {
-        width: drawerWidth,
-        top: 64,
-        height: '-webkit-fill-available'
-    },
-    content: {
-        flexGrow: 1,
-        padding: theme.spacing.unit * 3,
-    },
-    toolbar: theme.mixins.toolbar,
+  root: {
+    display: 'flex',
+  },
+  appBar: {
+    zIndex: theme.zIndex.drawer + 1,
+  },
+  drawer: {
+  width: drawerWidth,
+  flexShrink: 0,
+  },
+  drawerPaper: {
+    width: drawerWidth,
+    top: 64,
+    height: '-webkit-fill-available'
+  },
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing.unit * 3,
+  },
+  toolbar: theme.mixins.toolbar,
 });
 
 function ClippedDrawer(props) {
-    const { classes } = props;
-
-    return (
-      <Drawer
-        className={classes.drawer}
-        variant="permanent"
-        classes={{
-            paper: classes.drawerPaper,
-        }}
-        anchor="right"
-      >
-        {props.isAdmin ?
-          <List>
-            <ListItem button onClick={props.balls}>
-              <ListItemIcon><Add /></ListItemIcon>
-              <ListItemText primary={props.title} />
-            </ListItem>
-          </List>
-          :""}
-
-        <Divider />
+  const { classes } = props;
+  return (
+    <Drawer
+      className={classes.drawer}
+      variant="permanent"
+      classes={{
+        paper: classes.drawerPaper,
+      }}
+      anchor="right"
+    >
+      {props.isAdmin ?
         <List>
-          {props.sprints.map((data, i) => (
-            <Tooltip title={`${data.start} - ${data.end}`} placement='left'>
-              <ListItem
-                button
-                key={data.key}
-                onClick={props.onClick.bind(this, data.id)}
-                // color={props.activeSprint === data.id ? 'primary' : "default"}
-                selected={props.activeSprint === data.id}
-                id={data.id}
-              >
-                <ListItemIcon></ListItemIcon>
-                <ListItemText primary={data.label} />
-              </ListItem>
-            </Tooltip>
-          ))}
+          <ListItem button onClick={props.balls}>
+            <ListItemIcon><Add /></ListItemIcon>
+            <ListItemText primary={props.title} />
+          </ListItem>
         </List>
-      </Drawer>
-    );
+        :""}
+
+      <Divider />
+      <List>
+        {props.sprints.map((data, i) => (
+          <Tooltip title={`${data.start} - ${data.end}`} placement='left'>
+            <ListItem
+              button
+              key={data.key}
+              onClick={props.onClick.bind(this, data.id)}
+              // color={props.activeSprint === data.id ? 'primary' : "default"}
+              selected={props.activeSprint === data.id}
+              id={data.id}
+            >
+              <ListItemIcon></ListItemIcon>
+              <ListItemText primary={data.label} />
+            </ListItem>
+          </Tooltip>
+        ))}
+      </List>
+    </Drawer>
+  );
 }
 
 ClippedDrawer.propTypes = {
-    classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(ClippedDrawer);
