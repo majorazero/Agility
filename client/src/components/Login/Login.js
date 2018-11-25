@@ -38,6 +38,9 @@ class Login extends Component {
   }
   render() {
     return (
+
+      /* <h1 style={{textAlign: "center"}}>This is a login page.</h1> */
+      /* <small>{this.state.message}</small> */
       <div
         className="parallax"
         style={{
@@ -56,6 +59,8 @@ class Login extends Component {
             alignItems="stretch"
             spacing={24}
             style={{
+              // backgroundImage: `url("/assets/images/background.png")`,
+              // resizeMode: 'cover',
               height: "100%",
               padding: "10px",
               backgroundPosition: "center",
@@ -80,6 +85,8 @@ class Login extends Component {
               alignItems="stretch"
               spacing={24}
               style={{
+                // backgroundImage: `url("/assets/images/background.png")`,
+                // resizeMode: 'cover',
                 height: "100%",
                 padding: "10px",
                 backgroundPosition: "center",
@@ -91,10 +98,14 @@ class Login extends Component {
             >
               <Button variant="contained" href="/">
                 Back To Landing Page
-              </Button>
+      </Button>
+              {/* <div style={{ textAlign: "center", marginTop: "20px" }}>
+                <div><Link to="/">Back to landing page.</Link></div>
+              </div> */}
             </Grid>
           </Grid>
         </Grid>
+        {/* <div style={{position:"fixed", width:"100%", bottom:"0"}}> <SimpleBottomNavigation /> </div>        */}
       </div>
     );
   }

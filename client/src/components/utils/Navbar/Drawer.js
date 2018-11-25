@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 import HomeIcon from '@material-ui/icons/Home';
 import SingleLineGridList from "../../ProjectList/ProjectListTab/ProjectListTab.js";
 import axios from "axios";
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 const styles = {
   list: {
@@ -26,6 +27,8 @@ const styles = {
     marginRight: 20,
   },
 };
+
+
 
 class TemporaryDrawer extends React.Component {
   state = {
@@ -73,7 +76,7 @@ class TemporaryDrawer extends React.Component {
   };
 
   render() {
-    const { classes} = this.props;
+    const { classes, children, className, ...other } = this.props;
 
     const sideList = (
       <div className={classes.list}>

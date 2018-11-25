@@ -7,13 +7,21 @@ import './landing.css';
 import Typography from '@material-ui/core/Typography';
 import MediaCard from "../utils/MediaCard.js";
 
+
+
+//import Image from "/assets/images/profileimg.png";
+
 const theme = createMuiTheme({
   overrides: {
+    // Name of the component ⚛️ / style sheet
     MuiButton: {
+      // Name of the rule
       root: {
+        // Some CSS
         background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
         borderRadius: 3,
         border: 0,
+        // color: 'white',
         height: 48,
         padding: '0 30px',
         boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
@@ -80,9 +88,12 @@ class Landing extends Component {
               alignItems="stretch"
               spacing={24}
               style={{
+                // backgroundImage: `url("/assets/images/background.png")`,
+                // resizeMode: 'cover',
                 height: "650px",
                 padding: "10px",
                 backgroundPosition: "center",
+                // color: "whitesmoke",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -107,6 +118,8 @@ class Landing extends Component {
                   color="primary"
                 />
               </MuiThemeProvider>
+
+              {/* <div style={{backgroundImage: `url("/assets/images/down-arrow.png")`}} ></div> */}
             </Grid>
           </Grid>
           <Grid item alignItems="center" xs={12}>
@@ -141,9 +154,12 @@ class Landing extends Component {
               alignItems="stretch"
               spacing={8}
               style={{
+                // backgroundImage: `url("/assets/images/background.png")`,
+                // resizeMode: 'cover',
                 height: "650px",
                 padding: "10px",
                 backgroundPosition: "center",
+                // color: "whitesmoke",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -156,6 +172,17 @@ class Landing extends Component {
               <Grid item xs={6} style={{ width: 450, height: 450 }}>
                 <img alt="demo gif 2" src="./assets/images/demo2.gif" style={{ width: '100%', height: '100%' }} />
               </Grid>
+              {/* <Grid item xs={4} style={{ width: 450, height: 450,  }}>
+                <img src="./assets/images/demo3.gif" style={{ height: '100%', overflow: 'hidden' }} />
+              </Grid> */}
+
+              {/* <Typography variant="h3" gutterBottom>
+
+
+
+              </Typography> */}
+
+              {/* <div style={{backgroundImage: `url("/assets/images/down-arrow.png")`}} ></div> */}
             </Grid>
           </Grid>
           <Grid item alignItems="center" xs={12}>
@@ -186,9 +213,12 @@ class Landing extends Component {
               alignItems="stretch"
               spacing={24}
               style={{
+                // backgroundImage: `url("/assets/images/background.png")`,
+                // resizeMode: 'cover',
                 height: "750px",
                 paddingTop: "50px",
                 backgroundPosition: "center",
+                // color: "whitesmoke",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -219,6 +249,7 @@ class Landing extends Component {
                   </Grid>
                 </Grid>
               </Grid>
+              {/* <div style={{backgroundImage: `url("/assets/images/down-arrow.png")`}} ></div> */}
             </Grid>
           </Grid>
         </Grid>
@@ -226,5 +257,6 @@ class Landing extends Component {
     );
   }
 }
+
 
 export default Landing;

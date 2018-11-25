@@ -6,7 +6,6 @@ import Button from '@material-ui/core/Button';
 const styles = theme => ({
   button: {
     margin: theme.spacing.unit,
-    width: 125
   },
   input: {
     display: 'none',
@@ -16,20 +15,23 @@ const styles = theme => ({
 function ContainedButtons(props) {
   const classes = props.classes;
   return (
-    <Button
-      size={props.size}
-      variant="contained"
-      color={props.color}
-      className={classes.button}
-      to={props.to}
-      component={props.component}
-      onClick={props.onClick}
-      target={props.target}
-      style={props.hidden ? { display: 'none' } : { display: "" }}
-    >
-      {props.name}
+    <div>
 
-    </Button>
+      <Button
+        size={props.size}
+        variant="contained"
+        color={props.color}
+        className={classes.button}
+        to={props.to}
+        component={props.component}
+        onClick={props.onClick}
+        target={props.target}
+        style={props.hidden ? {display: 'none'} : {display: ""}} 
+      >
+        {props.name}
+
+      </Button>
+    </div>
   );
 }
 

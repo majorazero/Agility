@@ -60,6 +60,16 @@ function AddProjectLayout(props) {
             onChange={props.onChange("name")}
             />
           </FormControl>
+        {/*  <FormControl margin="normal" required fullWidth>
+            <DatePickers
+              label="Due Date"
+              id="due_date"
+              name="due_date"
+              autoComplete="due_date"
+              autoFocus
+              onChange={props.onChange("due_date")}
+            />
+          </FormControl> */}
           <FormControl margin="normal" required fullWidth>
             <InputLabel htmlFor="summary">Description</InputLabel>
             <Input
@@ -70,6 +80,15 @@ function AddProjectLayout(props) {
             onChange={props.onChange("summary")}
             />
           </FormControl>
+          {/* <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+          >
+            Submit
+            </Button> */}
         </form>
       </main>
     </div>

@@ -9,6 +9,8 @@ const styles = theme => ({
     flexWrap: 'wrap',
   },
   textField: {
+    // marginLeft: theme.spacing.unit,
+    // marginRight: theme.spacing.unit,
     width: '100%',
   },
 });
@@ -20,7 +22,7 @@ function DatePickers(props) {
       <TextField
         id={props.id}
         label={props.label}
-        name={props.name}
+        name={props.name} 
         type="date"
         defaultValue={(new Date().getFullYear()) + "-" + (new Date().getMonth() + 1) + "-" + (new Date().getDate())}
         className={classes.textField}

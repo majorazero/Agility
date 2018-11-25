@@ -71,41 +71,41 @@ class Homepage extends Component {
 
   getTasks = (currentUserId) => {
     axios.get(`/api/sprints/tasks/user/${currentUserId}`)
-    .then(res => {
-      let incomplete = res.data.filter(task => !task.isCompleted)
+      .then(res => {
+        let incomplete = res.data.filter(task => !task.isCompleted)
 
-      let data = []
-      let sprints = []
+        let data = []
+        let sprints = []
 
-      incomplete.forEach(task => {
-        if (!(sprints.includes(task.sprintId))) {
-          sprints.push(task.sprintId)
-          data.push({
-            sprint: task.sprint,
-            tasks: [task]
-          })
-        } else {
-          for (let i = 0; i < data.length; i++) {
-            if (data[i].sprint === task.sprint) {
-              data[i].tasks.push(task)
+        incomplete.forEach(task => {
+          if (!(sprints.includes(task.sprintId))) {
+            sprints.push(task.sprintId)
+            data.push({
+              sprint: task.sprint,
+              tasks: [task]
+            })
+          } else {
+            for (let i = 0; i < data.length; i++) {
+              if (data[i].sprint === task.sprint) {
+                data[i].tasks.push(task)
+              }
             }
           }
-        }
+        })
+        this.setState({ tasks: data })
       })
-      this.setState({ tasks: data })
-    })
   }
 
   goToProject = (sprintId) => {
     axios.get(`/api/projectId/sprint/${sprintId}`)
-    .then(res => {
-      axios.post("/api/encrypt", {
-        token: "project",
-        id: res.data[0].id.toString()
-      }).then((data) => {
-        window.location.assign(`/project/${data.data}`);
-      });
-    })
+      .then(res => {
+        axios.post("/api/encrypt", {
+          token: "project",
+          id: res.data[0].id.toString()
+        }).then((data) => {
+          window.location.assign(`/project/${data.data}`);
+        });
+      })
   }
 
   stackFormat = () => {
@@ -193,6 +193,135 @@ class Homepage extends Component {
             height: "-webkit-fill-available"
           }} >
 
+          {/* <Grid container>
+            <Grid
+              item
+              xs
+              direction="column"
+              justify="center"
+              alignItems="stretch"
+              spacing={24}
+              style={{
+                // backgroundImage: `url("/assets/images/background.png")`,
+                // resizeMode: 'cover',
+                height: "100%",
+                padding: "10px",
+                backgroundPosition: "center",
+                // color: "whitesmoke",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center"
+              }}
+            >
+              <Grid
+                container
+                spacing={24}
+                style={{ padding: 25, }}
+              >
+                <Grid
+                  item
+                  xs={8}
+                  style={{ height: 'fit-content' }}
+                >
+                  <Paper
+                    style={{ height: "100%", }}
+                  >
+                    <Grid
+                      container
+                      spacing={8}
+                    >
+                      <Grid item xs style={{ padding: '25px 25px 0 25px' }}>
+                        <Typography fullWidth variant="h5" gutterBottom>Active Tasks</Typography>
+                      </Grid>
+                    </Grid>
+                    <Grid
+                      container
+                      spacing={8}
+                    >
+                      <Grid item xs>
+                        <ActiveTasks tasks={this.state.tasks} goToProject={this.goToProject} homepage />
+                      </Grid>
+                    </Grid>
+                  </Paper>
+                </Grid>
+                <Grid item xs={1} />
+                <Grid item xs={3}>
+                  <ProfileCard />
+                </Grid>
+              </Grid>
+
+            </Grid>
+          </Grid> */}
+          {/* <div>
+        // <ButtonAppBar />
+        // <div
+        //   className="parallax"
+        //   style={{
+        //     paddingTop: "50px",
+
+        //     // possible?
+        //     backgroundImage: `url("/assets/images/background.png")`,
+        //     resizeMode: 'cover',
+        //     height: "100%"
+        //   }} >
+        //   <Grid
+        //     container
+        //     spacing={8}
+        //     style={{ padding: "50px" }}
+        //   >
+        //     <Grid item xs={8}>
+        //       <Paper
+        //         style={{ height: "100%" }}
+        //       >
+        //         <ActiveTasks tasks={this.state.tasks} />
+        //       </Paper>
+        //     </Grid>
+        //     <Grid item xs={1} />
+        //     <Grid item xs={3}>
+        //       <ProfileCard />
+        //     </Grid>
+        //   </Grid>
+
+          {/* <Grid
+            container
+            spacing={8}
+            style={{ padding: "50px" }}
+          >
+            <Grid item xs={12}>
+              <Paper */}
+          {/* // style={{ height: 100 }}
+              >
+                <ProjectList />
+              </Paper>
+            </Grid>
+          </Grid> */}
+
+          {/* <Grid container spacing={8} style={{ marginTop: 100 }}>
+          <Grid container item xs={12} style={{ marginLeft: 100 }}>
+            <Grid item xs={4} style={{ maxHeight: 375, overflow: "auto", marginLeft: 35, marginRight: 140 }}>
+              <ActiveTasks />
+            </Grid>
+            <Grid item xs={4} style={{ justifyContent: "left" }}>
+              <ProfileCard />
+            </Grid>
+          </Grid>*/}
+          {/* <Grid
+            container
+            style={{ padding: 25, justifyContent: 'center', }}
+            spacing={8}
+          >
+            <Grid item xs={12} >
+              <Paper>
+                <Grid item xs={12} style={{ padding: '25px 25px 0 25px' }}>
+                  <Typography fullWidth variant="h5" gutterBottom>Projects</Typography>
+                </Grid>
+                <Grid item xs={12} >
+                  <ProjectList />
+                </Grid>
+              </Paper>
+            </Grid>
+          </Grid> */}
+          {/* </Grid> */}
           <Grid item xs={3} style={{ margin: 25 }}>
             <ProfileCard />
           </Grid>
@@ -202,7 +331,22 @@ class Homepage extends Component {
             justTaint={<TextMobileStepper
               tutorialSteps={this.makeArray()}
             />}
+          // onClick={}
           />
+
+          {/* <SimpleModalProjectWrapped
+            open={this.state.open}
+            onClose={this.handleClose}
+            name="Add a New Project ..."
+            onSubmit={this.handleSubmit}
+            onChange={this.handleChange}
+          >
+
+            <AddProjectLayout
+            />
+          </SimpleModalProjectWrapped> */}
+
+
         </div >
       </div >
     );

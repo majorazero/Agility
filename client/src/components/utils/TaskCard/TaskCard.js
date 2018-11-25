@@ -26,26 +26,26 @@ const styles = {
 
 
 function TaskCard(props){
-  // const { classes } = props;
-  const bull = <span className={styles.bullet}>•</span>;
-    return(
-      <Card style={styles.card}>
-        <CardContent>
-          <Typography variant={props.titleSize}>
-            {props.title}
-          </Typography>
-          <Typography variant={props.subtitleSize}>
-            Complexity: {props.difficulty} {bull} Due: {props.dueDate}
-          </Typography>
-          <Typography>
-            <button onClick={props.unAssign}>Unassign</button>
-          </Typography>
-          <Typography variant='subtitle1'>
-            {props.summary}
-          </Typography>
-        </CardContent>
-      </Card>
-    )
+    // const { classes } = props;
+    const bull = <span className={styles.bullet}>•</span>;
+        return(
+          <Card style={styles.card}>
+            <CardContent>
+              <Typography variant={props.titleSize}>
+                  {props.title}
+              </Typography>
+              <Typography variant={props.subtitleSize}>
+                  Complexity: {props.difficulty} {bull} Due: {props.dueDate}
+              </Typography>
+              <Typography>
+                <button onClick={props.unAssign}>Unassign</button>
+              </Typography>
+              <Typography variant='subtitle1'>
+                  {props.summary}
+              </Typography>
+            </CardContent>
+          </Card>
+        )
 };
 
 export default TaskCard;

@@ -52,7 +52,7 @@ class App extends Component {
       this.setState({ loaded: true, loggedIn: true });
     }
   }
-
+  //  {(this.location.pathname === "/404")? null:<ButtonAppBar />}
   render() {
     if (!this.state.loaded) {
       return null;
@@ -69,11 +69,13 @@ class App extends Component {
               <Route exact path="/login" component={Login} />
               <Route exact path="/register" component={Register} />
               <Route exact path="/project/:id" component={Project} />
+              {/* <Route exact path='/tasks' component={ActiveTasks} /> */}
               <Route exact path='/userpool' component={UserPool} />
               <Route exact path='/sprintselect' component={SprintSelect} />
               <Route exact path='/404' component={notFound} />
               <Route component={notFound} />
             </Switch>
+            {/* <Route exact path='/parallax' component={parallax} /> */}
 
           </div>
         </Router>

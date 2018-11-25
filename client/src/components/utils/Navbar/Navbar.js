@@ -10,6 +10,8 @@ import Drawer from './Drawer.js';
 const styles = {
   root: {
     flexGrow: 1,
+    // backgroundColor: 'lightslategray',
+    // opacity: .95
   },
   grow: {
     flexGrow: 1,

@@ -39,6 +39,7 @@ const styles = theme => ({
     alignItems: 'center',
     padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
     width: 'auto', // Fix IE 11 issue.
+    // marginTop: theme.spacing.unit,
   },
   submit: {
     marginTop: theme.spacing.unit * 3,
@@ -75,6 +76,10 @@ function AddTaskLayout(props) {
             />
           </FormControl>
           <FormControl margin="normal" required fullWidth>
+            {/* <InputLabel htmlFor="complexity">Complexity (1-5)</InputLabel> */}
+            {/* <Input id="complexity" name="complexity" autoComplete="complexity" autoFocus
+              onChange={props.onChange("taskComplexity")}
+            /> */}
             <TextField type='number' label='Complexity (1-5)' id="complexity" name="complexity" autoComplete="complexity" autoFocus
               onChange={props.onChange("taskComplexity")} inputProps={{ min: "1", max: "5"}}></TextField>
           </FormControl>
@@ -84,6 +89,15 @@ function AddTaskLayout(props) {
               onChange={props.onChange("taskStack")}
             />
           </FormControl>
+          {/* <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+          >
+            Submit
+            </Button> */}
         </form>
       </main>
     </div>

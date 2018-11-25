@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+// import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
+// import DeleteIcon from '@material-ui/icons/Delete';
 import Tooltip from '@material-ui/core/Tooltip';
 
 function getFabStyle() {
@@ -33,7 +35,7 @@ function ButtonSizes(props) {
       <Button
         style={getFabStyle()}
         variant="fab"
-        // onMouseOver={this.variant="extendedFab"}
+        // onMouseOver={this.variant="extendedFab"} 
         color={props.color}
         className={classes.button}
         onClick={props.onClick}
