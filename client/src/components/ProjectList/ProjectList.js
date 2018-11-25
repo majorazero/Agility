@@ -39,7 +39,6 @@ class ProjectList extends Component {
 
   populate = () => {
     if (this.state.projects.length === 0) {
-      //maybe ill replace this with something if no projects appeared yet.
       return <h1>Start a new project!</h1>;
     }
     else {
@@ -85,7 +84,6 @@ class ProjectList extends Component {
   }
 
   handleSubmit = () => {
-    //we'll create a project now.
     axios.post("/api/project", {
       name: this.state.name,
       summary: this.state.summary,
@@ -130,14 +128,6 @@ class ProjectList extends Component {
           position: "relative"
         }}
       >
-
-        {/* <Grid container
-          spacing={16}
-          alignItems={alignItems}
-          direction={direction}
-          justify={justify}
-        >
-          <Paper> */}
         <div
           className="eat"
           style={{
@@ -167,82 +157,6 @@ class ProjectList extends Component {
           </Grid>
         </div>
 
-        {/* <Grid
-          container
-          spacing={8}
-          // style={{ background: 'whitesmoke', margin: 'inherit', width: '-webkit-fill-available' }}
-        >
-          <Grid item xs={10} >
-            <Typography variant="h5" gutterBottom>{this.state.message}</Typography>
-            <InputTextField
-              onSubmit={this.handleInviteSubmit}
-              label="Project Invite Code:"
-              name="inviteCode"
-              onChange={this.handleInviteChange}
-            />
-          </Grid>
-          <Grid item xs style ={{marginTop: 30}}>
-            <ButtonSizes
-              onClick={this.handleOpen}
-              title="Add a Project"
-              color="primary"
-              placement="right"
-            />
-          </Grid>
-        </Grid> */}
-
-        {/* </Paper>
-        </Grid> */}
-
-        {/* <Grid xs={12}
-          container
-
-          style={{ marginBottom: 20 }}
-        >
-          <SimpleModalProjectWrapped
-            open={this.state.open}
-            onClose={this.handleClose}
-            name="Add a New Project ..."
-            onSubmit={this.handleSubmit}
-            onChange={this.handleChange}
-          >
-
-            <AddProjectLayout
-            />
-          </SimpleModalProjectWrapped>
-          <div className="projList" >
-            <Grid item xs={12}>
-              <div style={{
-                boxShadow: "4px 4px 5px 1px rgb(23, 23, 23, 0.5)",
-                border: "10px solid lightgray",
-                borderRadius: "20px",
-                paddingTop: "7px",
-                paddingBottom: "7px",
-                paddingLeft: "6px",
-                paddingRight: "6px",
-                display: 'flex',
-                flexWrap: 'wrap',
-                justifyContent: 'space-around',
-                maxWidth: 900,
-                overflow: 'hidden',
-                // width: "1200px"
-                marginTop: 20,
-
-              }}>
-                <GridList style={{
-                  flexWrap: 'nowrap',
-                  transform: 'translateZ(0)',
-                  width: "100%"
-                }}>
-                  {this.populate()}
-                </GridList>
-              </div>
-            </Grid>
-            <ButtonSizes
-              onClick={this.handleOpen}
-            />
-            <h2>Join Sprint with Invite Code</h2> */}
-
         <SimpleModalProjectWrapped
           open={this.state.open}
           onClose={this.handleClose}
@@ -250,54 +164,10 @@ class ProjectList extends Component {
           onSubmit={this.handleSubmit}
           onChange={this.handleChange}
         >
-          <AddProjectLayout
-          />
+        <AddProjectLayout
+        />
         </SimpleModalProjectWrapped>
-
-        {/* <ButtonSizes
-          onClick={this.handleOpen}
-          title="Add a Project"
-          color="primary"
-        /> */}
-
-        {/* style={{
-          position: "absolute"
-        }}
-         <Grid
-          container
-          direction="row"
-          justify="flex-end"
-          alignItems="flex-start"
-          spacing={8}
-          style={{
-            height: 90,
-          }}
-        > */}
-        {/* <Grid item xs={9} /> */}
-        {/* <Grid item xs>
-            <Typography variant="h5" gutterBottom>{this.state.message}</Typography>
-
-            <InputTextField
-              onSubmit={this.handleInviteSubmit}
-              label="Project Invite Code:"
-              name="inviteCode"
-              onChange={this.handleInviteChange}
-              style={{
-                position: "inherit"
-              }}
-            />
-          </Grid>
-         </Grid> */}
-
-        {/* <div className="invCodeDiv">
-          <form onSubmit={this.handleInviteSubmit}>
-            <small>{this.state.message}</small>
-            <h3>Invite Code:</h3>
-            <input type="text" name="inviteCode" onChange={this.handleInviteChange} />
-            <button>Submit</button>
-          </form>
-        </div> */}
-      </div >
+      </div>
     );
   }
 }
