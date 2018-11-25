@@ -17,13 +17,10 @@ const styles = theme => ({
   header: {
     display: 'flex',
     alignItems: 'center',
-    // height: 50,
     paddingLeft: theme.spacing.unit * 4,
     backgroundColor: theme.palette.background.default,
   },
   balls: {
-    // backgroundColor: "white",
-    // height: '100%',
     width: '100%',
     padding: 5
   },

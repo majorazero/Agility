@@ -13,7 +13,7 @@ const styles = {
 
 class LinearDeterminate extends React.Component {
   componentWillUnmount() {
-      clearInterval(this.timer);
+    clearInterval(this.timer);
   }
 
   progress = () => {
