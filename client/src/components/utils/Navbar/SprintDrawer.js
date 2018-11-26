@@ -15,18 +15,19 @@ const drawerWidth = 240;
 const styles = theme => ({
   root: {
     display: 'flex',
+    overflow: 'auto',
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
   },
   drawer: {
-  width: drawerWidth,
-  flexShrink: 0,
+    width: drawerWidth,
+    flexShrink: 0,
+    marginTop: -10
   },
   drawerPaper: {
     width: drawerWidth,
-    top: 64,
-    height: '-webkit-fill-available'
+    position: 'relative',
   },
   content: {
     flexGrow: 1,
@@ -53,7 +54,7 @@ function ClippedDrawer(props) {
             <ListItemText primary={props.title} />
           </ListItem>
         </List>
-        :""}
+        : ""}
 
       <Divider />
       <List>

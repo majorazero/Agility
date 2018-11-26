@@ -138,7 +138,6 @@ class ProjectList extends Component {
             justifyContent: 'space-around',
             overflow: 'hidden',
             padding: 10,
-            height: "100%",
             width: '100%'
           }}
         >
