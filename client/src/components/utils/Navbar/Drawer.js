@@ -41,7 +41,8 @@ class TemporaryDrawer extends React.Component {
     justify: 'center',
     alignItems: 'center',
     inviteCode: '',
-    message: ''
+    message: '',
+    currentUser: ""
   };
 
   onProjectPress = (id) => {
@@ -62,7 +63,8 @@ class TemporaryDrawer extends React.Component {
       id: sessionStorage.getItem("id"),
       token: localStorage.getItem("token")
     }).then((response) => {
-      this.setState({ projects: response.data });
+      this.setState({ projects: response.data.projects ,
+                      currentUser: response.data.currentUser});
     });
   }
 
@@ -74,7 +76,6 @@ class TemporaryDrawer extends React.Component {
 
   render() {
     const { classes} = this.props;
-
     const sideList = (
       <div className={classes.list}>
         <List>
@@ -92,6 +93,7 @@ class TemporaryDrawer extends React.Component {
                 name={item.name}
                 summary={item.summary}
                 className={classes.balls}
+                isAdmin={(item.userId === parseInt(this.state.currentUser)) ? true : false}
                 onProjectPress={() => { this.onProjectPress(item.id) }} />
             )
           })}

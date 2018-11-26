@@ -21,7 +21,8 @@ class ProjectList extends Component {
     justify: "center",
     alignItems: "center",
     inviteCode: "",
-    message: ""
+    message: "",
+    currentUser: ""
   }
 
   componentDidMount = () => {
@@ -33,7 +34,9 @@ class ProjectList extends Component {
       id: sessionStorage.getItem("id"),
       token: localStorage.getItem("token")
     }).then((response) => {
-      this.setState({ projects: response.data });
+      console.log(response.data);
+      this.setState({ projects: response.data.projects,
+                      currentUser: response.data.currentUser});
     });
   }
 
@@ -52,6 +55,7 @@ class ProjectList extends Component {
               key={item.id}
               name={item.name}
               summary={item.summary}
+              isAdmin={(item.userId === parseInt(this.state.currentUser)) ? true : false}
               onProjectPress={() => { this.onProjectPress(item.id) }} />
             )
           })}
