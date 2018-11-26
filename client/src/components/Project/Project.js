@@ -292,7 +292,8 @@ class Project extends React.Component {
           if (sprints[i].isActive) {
             //verify end date has not passed
             if (today > endDate) {
-              isActive = false
+              //console.log("hit me");
+              //isActive = false;
             }
             else {
               //set currentSprint, set isActive
@@ -439,6 +440,15 @@ class Project extends React.Component {
               height: "-webkit-fill-available"
             }} >
               <Tab
+                isActive={this.state.isActive}
+                summaryTab={<Summary
+                  members={this.state.members}
+                  completed={this.state.completedTasks}
+                  assigned={this.state.assignedTasks}
+                  unAssigned={this.state.unassignedTasks}
+                  currentSprint={this.state.sprintId}
+                  sprints={this.state.sprints}
+                  />}
                 holyBalls={<List style={{
                   width: '100%',
                   maxWidth: '100%',
@@ -447,7 +457,7 @@ class Project extends React.Component {
                 }}>
                   {!this.state.isActive ?
                     <li>
-                      {this.state.showComplete ? this.state.completedTasks.map((task) => {
+                      {this.state.completedTasks.map((task) => {
                         return (
                           <ul>
                             <ListItem classes={{ root: classes.root }}>
@@ -467,15 +477,7 @@ class Project extends React.Component {
                             </ListItem>
                           </ul>
                         );
-                      }) :
-                      <Summary
-                        members={this.state.members}
-                        completed={this.state.completedTasks}
-                        assigned={this.state.assignedTasks}
-                        unAssigned={this.state.unassignedTasks}
-                        currentSprint={this.state.sprintId}
-                        sprints={this.state.sprints}
-                        />}
+                      })}
                   </li> :
                   <li> {(this.state.isAdmin === true) ?
                       <ListItem button style={{width: '50%'}} onClick={() => this.handleOpen('taskOpen')} title="ADD TASK">

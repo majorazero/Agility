@@ -8,7 +8,13 @@ import Paper from '@material-ui/core/Paper';
 
 function TabContainer(props) {
   return (
-    <Typography component="div" style={{ padding: 8 * 3 }}>
+    <Typography
+            component="div"
+            style={{
+                padding: 8 * 3,
+                position: 'relative',
+            }}
+        >
       {props.children}
     </Typography>
   );
@@ -21,7 +27,9 @@ TabContainer.propTypes = {
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    margin: 25
+    margin: 25,
+    overflow: 'auto'
+    
   },
 });
 
@@ -35,12 +43,14 @@ class SimpleTabs2 extends React.Component {
   handleChange = (event, value) => {
       this.setState({ value });
   };
+  
   render() {
     const { classes } = this.props;
     const { value } = this.state;
     return (
       <Paper className={classes.root}>
         <Tabs
+          style={{marginTop: 10}}
           value={this.state.value}
           onChange={this.handleChange}
           indicatorColor="secondary"
