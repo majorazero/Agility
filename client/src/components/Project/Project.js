@@ -63,7 +63,7 @@ class Project extends React.Component {
 
     taskOpen: false,
     taskName: "",
-    taskDue_date: `${new Date().getMonth() + 1}/${new Date().getDate()}/${new Date().getFullYear()}`,
+    taskDue_date: `${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`,
     taskDescription: "",
     taskComplexity: "",
     taskStack: "",
@@ -116,6 +116,7 @@ class Project extends React.Component {
   }
 
   handleChange = name => event => {
+    console.log("changing")
     this.setState({
       [name]: event.target.value,
     });
@@ -201,8 +202,6 @@ class Project extends React.Component {
       currentTaskComplexity: complexity,
       currentTaskStack: stack,
       [name]: true
-    }, () => {
-      console.log(this.state.currentTaskId)
     })
   }
 
@@ -246,7 +245,6 @@ class Project extends React.Component {
     if (this.state.activeSprintId === sprintId) {
       isActive = true;
     }
-    console.log(timeProgress)
 
     if(timeProgress < 0){
       timeProgress = 0;
@@ -591,12 +589,15 @@ class Project extends React.Component {
       onClose={() => this.handleClose('taskOpen')}
       name="Add a New Task ..."
       onSubmit={this.addTask}
-      onChange={this.handleChange}>
+      onChange={this.handleChange}
+      defaultDueDate={this.state.taskDue_date}
+      >
 
     <AddTaskLayout/>
 
     </SimpleModalWrapped>
 
+{/* edit task modal */}
     <SimpleModalWrapped
       open={this.state.editTaskOpen}
       onClose={() => this.handleClose('editTaskOpen')}
@@ -610,16 +611,7 @@ class Project extends React.Component {
       taskStack = {this.state.currentTaskStack}
       edit
       >
-
-
-    <AddTaskLayout
-      name= {this.state.currentTaskName}
-      due_date= {this.state.currentTaskDueDate}
-      description = {this.state.currentTaskDescription}
-      complexity = {this.state.currentTaskComplexity}
-      stack = {this.state.currentTaskStack}
-    />
-
+    <AddTaskLayout/>
     </SimpleModalWrapped>
 
     <ClippedDrawer
