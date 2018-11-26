@@ -70,7 +70,7 @@ class ControlledExpansionPanels extends React.Component {
                 name={this.props.complete ? (this.props.isAdmin ? 'Reopen' : null) : (this.props.assigned ? 'Unassign' : 'Claim')}
                 color="primary"
                 size="small"
-                onClick={this.props.assigned ? (this.props.complete ? this.props.onClickReopen : this.props.unAssign) : this.props.onClickAdd}
+                onClick={this.props.complete ? (this.props.isAdmin ? this.props.onClickReopen : null) : (this.props.assigned ? this.props.unAssign : this.props.onClickAdd)}
                 hidden={(this.props.currentUser === this.props.assignedUser) ? false : (this.props.isAdmin ? false : true)}
               />
                 <ContainedButtons

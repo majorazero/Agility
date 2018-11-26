@@ -22,14 +22,14 @@ import SimplePopper from './../utils/popovertext';
 
 const styles = {
   root: {
-      padding: '0px 30px 0px 10px'
+    padding: '0px 30px 0px 10px'
   },
   listSection: {
-      backgroundColor: 'inherit',
+    backgroundColor: 'inherit',
   },
   ul: {
-      backgroundColor: 'inherit',
-      padding: 0,
+    backgroundColor: 'inherit',
+    padding: 0,
   }
 }
 
@@ -230,7 +230,7 @@ class Project extends React.Component {
   defaultVal = () => {
     let today = new Date().split("T");
     this.setState({
-        due_date: today
+      due_date: today
     });
   };
 
@@ -541,10 +541,10 @@ class Project extends React.Component {
       onClose={() => this.handleClose('sprintOpen')}
       name="Add a New Sprint ..."
       onSubmit={this.addSprint}
-      onChange={this.handleChange}
-    >
-      <AddSprintLayout
-      />
+      onChange={this.handleChange}>
+
+      <AddSprintLayout/>
+
     </SimpleModalSprintWrapped>
 
     <SimpleModalWrapped
@@ -552,10 +552,10 @@ class Project extends React.Component {
       onClose={() => this.handleClose('taskOpen')}
       name="Add a New Task ..."
       onSubmit={this.addTask}
-      onChange={this.handleChange}
-    >
-      <AddTaskLayout
-      />
+      onChange={this.handleChange}>
+
+    <AddTaskLayout/>
+
     </SimpleModalWrapped>
 
     <ClippedDrawer
