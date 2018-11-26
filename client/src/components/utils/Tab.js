@@ -9,7 +9,7 @@ import ListItem from '@material-ui/core/ListItem';
 
 function TabContainer(props) {
   return (
-    <Typography component="div" style={{ padding: 8 * 3 }}>
+    <Typography component="div" style={{ padding: 8 * 3, position: 'relative', overflow: 'auto', maxHeight: 384 }}>
       {props.children}
     </Typography>
   );
