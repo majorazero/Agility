@@ -161,6 +161,7 @@ class Project extends React.Component {
     if (this.state.taskName === ""){
       console.log("Task needs a name!");
       this.setState({errorTaskMess: "Task needs a name!", errorTaskCode: 1});
+      setTimeout(()=>this.setState({errorTaskCode: -1}),2000);
     }
     else if (this.state.taskDescription === ""){
       console.log("Task needs a description");
