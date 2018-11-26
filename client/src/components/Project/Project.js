@@ -423,6 +423,7 @@ class Project extends React.Component {
         expanded: expanded ? panel : false,
       });
     };
+    
     render() {
       const { expanded } = this.state;
       const { classes } = this.props;

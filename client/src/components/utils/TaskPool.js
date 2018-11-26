@@ -19,7 +19,7 @@ const styles = theme => ({
   },
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
-    color: theme.palette.text.secondary,
+    // color: theme.palette.text.secondary,
     marginLeft: '5%'
   },
 });
@@ -51,7 +51,8 @@ class ControlledExpansionPanels extends React.Component {
         <ExpansionPanel expanded={this.props.expanded} onChange={this.props.onChange} key={this.props.id}>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
             <Typography className={classes.heading}>{this.props.name}</Typography>
-            <Typography className={classes.secondaryHeading}>{this.props.due} | {this.props.stack}</Typography>
+            <Typography color='secondary' className={classes.secondaryHeading}>{this.props.due}</Typography>
+            <Typography color='inherit' className={classes.secondaryHeading}>{this.props.stack}</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <Typography style={{ width: '-webkit-fill-available' }}>
