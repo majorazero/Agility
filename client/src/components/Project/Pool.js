@@ -22,6 +22,7 @@ const styles = {
 
 const Pool = (props) => {
   const { classes } = props;
+  // console.log(props.tasks);
   return (
     <ListItem
       style={{
@@ -56,6 +57,7 @@ const Pool = (props) => {
         homepage={props.homepage}
         expanded={props.expanded}
         onChange={props.onChange}
+        edit={props.edit}
       />
     </ListItem>
   );

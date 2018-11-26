@@ -1,7 +1,4 @@
-
 import ContainedButtons from "./Button.js";
-
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -22,13 +19,9 @@ const styles = theme => ({
   },
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
-    color: theme.palette.text.secondary,
+    // color: theme.palette.text.secondary,
     marginLeft: '5%'
   },
-  button: {
-    display: 'flex',
-    float: 'right'
-  }
 });
 
 class ControlledExpansionPanels extends React.Component {
@@ -58,7 +51,8 @@ class ControlledExpansionPanels extends React.Component {
         <ExpansionPanel expanded={this.props.expanded} onChange={this.props.onChange} key={this.props.id}>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
             <Typography className={classes.heading}>{this.props.name}</Typography>
-            <Typography className={classes.secondaryHeading}>{this.props.due} | {this.props.stack}</Typography>
+            <Typography color='secondary' className={classes.secondaryHeading}>{this.props.due}</Typography>
+            <Typography color='inherit' className={classes.secondaryHeading}>{this.props.stack}</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <Typography style={{ width: '-webkit-fill-available' }}>
@@ -77,9 +71,8 @@ class ControlledExpansionPanels extends React.Component {
                 name={this.props.complete ? (this.props.isAdmin ? 'Reopen' : null) : (this.props.assigned ? 'Unassign' : 'Claim')}
                 color="primary"
                 size="small"
-                onClick={this.props.assigned ? (this.props.complete ? this.props.onClickReopen : this.props.unAssign) : this.props.onClickAdd}
+                onClick={this.props.complete ? (this.props.isAdmin ? this.props.onClickReopen : null) : (this.props.assigned ? this.props.unAssign : this.props.onClickAdd)}
                 hidden={(this.props.currentUser === this.props.assignedUser) ? false : (this.props.isAdmin ? false : true)}
-              // hidden={this.props.complete ? (this.props.isAdmin ? (this.props.currentUser === this.props.assignedUser ? false:true):true) : false}
               />
                 <ContainedButtons
                   name={this.props.assigned ? 'Mark Complete' : this.props.isAdmin ? 'Delete' : null}
@@ -89,6 +82,13 @@ class ControlledExpansionPanels extends React.Component {
                   hidden={this.props.complete ? true : (this.props.currentUser === this.props.assignedUser) ? false : (this.props.isAdmin ? false : true)}
                 /></div>)
             }
+            <ContainedButtons
+                size="small"
+                name='Edit'
+                color='primary'
+                onClick={this.props.edit}
+                // hidden={this.props.activetasks ? false : true}
+              />
           </ExpansionPanelDetails>
         </ExpansionPanel>
       </div>

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Paper from '@material-ui/core/Paper';
-import "./404.css";
+import { Typography } from '@material-ui/core';
 
 class notFound extends Component{
 
@@ -21,24 +21,28 @@ class notFound extends Component{
     return (
       <div style={{
         backgroundImage: `url("/assets/images/404.jpg")`,
-        maxHeight: "100%",
         height: "100vh",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
         backgroundSize:"cover",
-        zIndex: 5,
-        display: "flex",
-        overflow: "hidden"
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
       }}>
-      <div style={{
-        margin: "250px",
-        zIndex: 10,
-      }}>
-        <Paper style={{backgroundColor:"rgba(0, 0, 0, 0.1)", color:"white", padding: "40px"}}>
-          <div className="main">404</div>
-          <div id="helperMsg">Looks like you wandered to the wrong work space. Give us a moment to find where you should be. </div>
+        <Paper
+        style={{
+          height: 'fit-content',
+          width: 450,
+          padding: 25,
+          opacity: .9,
+          display: 'flex',
+          justifyContent: 'center',
+          flexDirection: 'column'
+        }}
+        >
+          <Typography variant='h2' gutterBottom>404</Typography>
+          <Typography variant='h6' gutterBottom>Looks like you wandered to the wrong work space. Give us a moment to find where you should be.</Typography>
         </Paper>
-      </div>
     </div>
     );
   }

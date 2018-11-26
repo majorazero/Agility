@@ -55,7 +55,8 @@ function AddTaskLayout(props) {
           <FormControl margin="normal" required fullWidth>
             <InputLabel htmlFor="name">Task Name</InputLabel>
             <Input id="name" name="name" autoComplete="name" autoFocus
-              onChange={props.onChange("taskName")}
+              onChange={props.edit ? props.onChange('currentTaskName'):props.onChange("taskName")}
+              value={props.name}
             />
           </FormControl>
           <FormControl margin="normal" required fullWidth>
@@ -65,23 +66,29 @@ function AddTaskLayout(props) {
               name="due_date"
               autoComplete="due_date"
               autoFocus
-              onChange={props.onChange("taskDue_date")}
+              onChange={props.edit ? props.onChange('currentTaskDueDate'):props.onChange("taskDue_date")}
+              edit={props.edit ? true:false}
+              due_date={props.due_date}
             />
           </FormControl>
           <FormControl margin="normal" required fullWidth>
             <InputLabel htmlFor="description">Description</InputLabel>
             <Input id="description" name="description" autoComplete="description" autoFocus
-              onChange={props.onChange("taskDescription")}
+              onChange={props.edit ? props.onChange("currentTaskDescription"):props.onChange("taskDescription")}
+              value={props.description}
             />
           </FormControl>
           <FormControl margin="normal" required fullWidth>
             <TextField type='number' label='Complexity (1-5)' id="complexity" name="complexity" autoComplete="complexity" autoFocus
-              onChange={props.onChange("taskComplexity")} inputProps={{ min: "1", max: "5"}}></TextField>
+              onChange={props.edit ? props.onChange('currentTaskComplexity'):props.onChange("taskComplexity")} inputProps={{ min: "1", max: "5"}}
+              value={props.complexity}
+              ></TextField>
           </FormControl>
           <FormControl margin="normal" required fullWidth>
             <InputLabel htmlFor="stack">Stack (Javascript, CSS, HTML, React ...)</InputLabel>
             <Input id="stack" name="stack" autoComplete="stack" autoFocus
-              onChange={props.onChange("taskStack")}
+              onChange={props.edit ? props.onChange('currentTaskStack'):props.onChange("taskStack")}
+              value={props.stack}
             />
           </FormControl>
         </form>

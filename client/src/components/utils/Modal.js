@@ -46,10 +46,16 @@ class AlertDialogSlide extends React.Component {
           <DialogContent>
             <AddTaskLayout
               onChange={this.props.onChange}
+              name= {this.props.taskName}
+              due_date= {this.props.taskDue_date}
+              description = {this.props.taskDescription}
+              complexity = {this.props.taskComplexity}
+              stack = {this.props.taskStack}
+              edit = {this.props.edit ? true : false}
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
+            <Button onClick={this.handleClose} color="secondary">
               Submit
             </Button>
           </DialogActions>

@@ -5,6 +5,7 @@ import Icon from '@material-ui/core/Icon';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import { Typography } from '@material-ui/core';
 
 
 const styles = theme => ({
@@ -24,7 +25,6 @@ const styles = theme => ({
 
 function SingleLineGridList(props) {
   const { classes } = props;
-
   return (
     <div alt={props.name}>
       <List style={{ padding: 0, margin: 5 }}>
@@ -40,7 +40,7 @@ function SingleLineGridList(props) {
             secondary={props.summary}
           />
 
-          <Icon>how_to_vote</Icon>
+          {props.isAdmin ? <Typography color='secondary'>ADMIN</Typography> : null}
         </ListItem>
       </List>
     </div>

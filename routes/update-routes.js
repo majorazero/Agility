@@ -58,6 +58,22 @@ module.exports = function(app) {
       });
     });
 
+    app.put("/api/edit/task/:taskId", (req, res) => {
+      db.Task.update({
+        name: req.body.name, 
+        due_date: req.body.due_date, 
+        description: req.body.description, 
+        complexity: req.body.complexity, 
+        stack: req.body.stack
+      },{
+        where: {
+          id: req.params.taskId
+        }
+      }).then((data) => {
+        res.json(data);
+      })
+    })
+
     app.put('/api/sprint/active/:sprintId', (req, res) => {
       db.Sprint.update({
         isActive: req.body}, {

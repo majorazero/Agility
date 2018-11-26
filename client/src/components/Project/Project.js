@@ -21,16 +21,16 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import SimplePopper from './../utils/popovertext';
 
 const styles = {
-    root: {
-        padding: '0px 30px 0px 10px'
-    },
-    listSection: {
-        backgroundColor: 'inherit',
-    },
-    ul: {
-        backgroundColor: 'inherit',
-        padding: 0,
-    }
+  root: {
+    padding: '0px 30px 0px 10px'
+  },
+  listSection: {
+    backgroundColor: 'inherit',
+  },
+  ul: {
+    backgroundColor: 'inherit',
+    padding: 0,
+  }
 }
 
 class Project extends React.Component {
@@ -63,7 +63,7 @@ class Project extends React.Component {
 
     taskOpen: false,
     taskName: "",
-    taskDue_date: "",
+    taskDue_date: `${new Date().getMonth() + 1}/${new Date().getDate()}/${new Date().getFullYear()}`,
     taskDescription: "",
     taskComplexity: "",
     taskStack: "",
@@ -71,7 +71,7 @@ class Project extends React.Component {
 
     sprintOpen: false,
     sprintName: "",
-    sprintStart_date: `${new Date().getMonth() + 1}/${new Date().getDate()}/${new Date().getFullYear()}`,
+    sprintStart_date: `${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`,
     sprintEnd_date: "",
 
     currentUser: '',
@@ -80,6 +80,15 @@ class Project extends React.Component {
     //Progress Bar Time
     SprintTime: 0,
     SprintProgress: 0,
+
+    //editing tasks
+    editTaskOpen: false,
+    currentTaskId: '',
+    currentTaskName: '',
+    currentTaskDueDate: '',
+    currentTaskDescription: '',
+    currentTaskComplexity: '',
+    currentTaskStack: '',
 
     expanded: null //handles the accordion function for expansion panels
   }
@@ -134,6 +143,9 @@ class Project extends React.Component {
         }
       }
       let progressStat = (completed.length / (completed.length + assigned.length + unassigned.length) * 100);
+      if (completed.length + assigned.length + unassigned.length === 0){
+        progressStat = 0;
+      }
       this.setState({
         unassignedTasks: unassigned,
         assignedTasks: assigned,
@@ -142,28 +154,6 @@ class Project extends React.Component {
       });
     });
   };
-
-  addTask = (event) => {
-      event.preventDefault();
-      if (this.state.taskComplexity <= 5 && this.state.taskComplexity >= 1) {
-          axios.post("/api/task", {
-              name: this.state.taskName,
-              due_date: this.state.taskDue_date,
-              description: this.state.taskDescription,
-              sprint_id: this.state.sprintId,
-              complexity: this.state.taskComplexity,
-              stack: this.state.taskStack
-          }).then(() => {
-              this.setState({
-                  taskOpen: false
-              });
-              this.getTasks();
-          });
-      }
-      else {
-          console.log("Invalid complexity value!");
-      }
-  }
 
   addTask = () => {
     if (this.state.taskComplexity <= 5 && this.state.taskComplexity >= 1) {
@@ -186,31 +176,51 @@ class Project extends React.Component {
     }
   }
 
-  handleOpen = (name) => {
+  editTask = (id) => {
+    console.log(this.state.taskName, this.state.taskDue_date, this.state.taskDescription, this.state.taskComplexity, this.state.taskStack)
+    axios.put(`/api/edit/task/${id}`, {
+      name: this.state.currentTaskName,
+      due_date: this.state.currentTaskDueDate,
+      description: this.state.currentTaskDescription,
+      complexity: this.state.currentTaskComplexity,
+      stack: this.state.currentTaskStack
+    }).then(() => {
+      this.getTasks();
+      this.setState({
+        editTaskOpen: false
+      })
+    })
+  }
+
+  handleOpen = (name, taskId, taskName, description, due_date, complexity, stack) => {
     this.setState({
+      currentTaskId: taskId,
+      currentTaskName: taskName,
+      currentTaskDescription: description,
+      currentTaskDueDate: due_date,
+      currentTaskComplexity: complexity,
+      currentTaskStack: stack,
       [name]: true
     }, () => {
-      console.log(this.state.taskOpen)
+      console.log(this.state.currentTaskId)
     })
   }
 
   handleClose = (name) => {
-      this.setState({ [name]: false });
+    this.setState({ [name]: false });
   };
 
   deleteTask = (task) => {
-      axios.delete("/api/task/by/" + task.id).then(() => {
-          this.getTasks();
-      });
+    axios.delete("/api/task/by/" + task.id).then(() => {
+      this.getTasks();
+    });
   }
 
   assignTask = (task) => {
     axios.post("/api/decrypt", { token: localStorage.getItem("token"), id: sessionStorage.getItem("id") }).then((response) => {
       let user = response.data;
       axios.put("/api/task/by/" + task.id + "/" + user).then((res) => {
-          // console.log(res.data);
-          this.getTasks();
-          //window.location.reload();
+        this.getTasks();
       })
     });
   }
@@ -222,11 +232,29 @@ class Project extends React.Component {
   }
 
   updateActiveSprint = (sprintId) => {
-    let isActive = false;
-    if (this.state.activeSprintId === sprintId) {
-        isActive = true;
+    let currentSprint;
+    for(let i = 0; i < this.state.sprints.length; i++){
+      if(this.state.sprints[i].sprintId === sprintId){
+        currentSprint = this.state.sprints[i];
+      }
     }
-    this.setState({ sprintId: sprintId, isActive: isActive }, () => {
+    let isActive = false;
+    let endDate = new Date(`${currentSprint.endDate}T23:59:59`);
+    let startDate = new Date(`${currentSprint.startDate}T00:00:00`);
+    let currentDate = new Date();
+    let timeProgress = ((currentDate - startDate) / (endDate - startDate) * 100);
+    if (this.state.activeSprintId === sprintId) {
+      isActive = true;
+    }
+    console.log(timeProgress)
+
+    if(timeProgress < 0){
+      timeProgress = 0;
+    }
+    else if (timeProgress > 100){
+      timeProgress = 100;
+    }
+    this.setState({ sprintId: sprintId, isActive: isActive, SprintTime: timeProgress }, () => {
       this.getTasks();
       this.getMembers(this.state.sprintId);
     });
@@ -235,7 +263,7 @@ class Project extends React.Component {
   defaultVal = () => {
     let today = new Date().split("T");
     this.setState({
-        due_date: today
+      due_date: today
     });
   };
 
@@ -264,23 +292,25 @@ class Project extends React.Component {
           if (sprints[i].isActive) {
             //verify end date has not passed
             if (today > endDate) {
-              isActive = false
+              //console.log("hit me");
+              //isActive = false;
             }
             else {
               //set currentSprint, set isActive
               activeSprint = sprints[i].sprintId;
               currentSprint = activeSprint
               isActive = true;
-              timeProgress = ((endDate - currentDate) / (endDate - startDate) * 100);
+              timeProgress = ((currentDate - startDate) / (endDate - startDate) * 100);
             }
           }
           else if (today >= startDate && today <= endDate) {
             activeSprint = sprints[i].sprintId;
             currentSprint = activeSprint
             isActive = true;
-            timeProgress = ((endDate - currentDate) / (endDate - startDate) * 100);
+            timeProgress = ((currentDate - startDate) / (endDate - startDate) * 100);
           }
         }
+        console.log(timeProgress);
         this.setState({
           SprintTime: timeProgress,
           chipData: sprintData,
@@ -299,12 +329,13 @@ class Project extends React.Component {
   addSprint = () => {
     let overlap = false;
     let newSprintStart = new Date(`${this.state.sprintStart_date}T00:00:00`);
+    console.log(this.state.sprintStart_date)
 
     for(let i=0; i < this.state.sprints.length; i++){
       let start = new Date(`${this.state.sprints[i].startDate}T00:00:00`)
-      console.log(start)
+      console.log(this.state.sprints[i].startDate)
       let end = new Date(`${this.state.sprints[i].endDate}T23:59:59`)
-      if(newSprintStart > start && newSprintStart < end){
+      if(newSprintStart >= start && newSprintStart <= end){
         overlap = true
       }
     }
@@ -387,198 +418,222 @@ class Project extends React.Component {
     }
   }
 
-     handleTaskOpen = panel => (event, expanded) => {
+    handleTaskOpen = panel => (event, expanded) => {
       this.setState({
         expanded: expanded ? panel : false,
       });
     };
-
+    
     render() {
-        const { expanded } = this.state;
-        const { classes } = this.props;
-        return (
-            <div>
+      const { expanded } = this.state;
+      const { classes } = this.props;
+      return (
+        <div>
+          <ButtonAppBar />
+          <div
+            className="parallax"
+            style={{
+              display: 'flex',
+              flexGrow: 1,
+              backgroundColor: 'dimgray',
+              paddingTop: 75,
+              resizeMode: 'cover',
+              height: "-webkit-fill-available"
+            }} >
+              <Tab
+                isActive={this.state.isActive}
+                summaryTab={<Summary
+                  members={this.state.members}
+                  completed={this.state.completedTasks}
+                  assigned={this.state.assignedTasks}
+                  unAssigned={this.state.unassignedTasks}
+                  currentSprint={this.state.sprintId}
+                  sprints={this.state.sprints}
+                  />}
+                taskPool={<List style={{
+                  width: '100%',
+                  maxWidth: '100%',
+                  position: 'relative',
+                  overflow: 'auto',
+                }}>
+                  {!this.state.isActive ?
+                    <li>
+                      {this.state.unassignedTasks.map((task) => {
+                        return (
+                          <ul>
+                            <ListItem classes={{ root: classes.root }}>
+                              <Pool
+                                key={task.id}
+                                id={this.key}
+                                isAdmin={this.state.isAdmin}
+                                tasks={task}
+                                onClickDelete={this.deleteTask.bind(this, task)}
+                                onClickAdd={this.assignTask.bind(this, task)}
+                                currentUser={this.state.currentUser}
+                                expanded={expanded === `panel${task.id}`}
+                                onChange={this.handleTaskOpen(`panel${task.id}`)}
+                                edit={() => this.handleOpen('editTaskOpen', task.id, task.name, task.description, task.due_date, task.complexity, task.stack)}
+                              />
+                            </ListItem>
+                          </ul>
+                        );
+                      })}
+                  </li> :
+                  <li>
+                    {(this.state.isAdmin === true) ?
+                      <ListItem button style={{width: '50%'}} onClick={() => this.handleOpen('taskOpen')} title="ADD TASK">
+                        <ListItemIcon><Add /></ListItemIcon>
+                        <ListItemText primary='ADD TASK' />
+                      </ListItem>
+                      :
+                      ""}
+                      {this.state.showComplete ? this.state.completedTasks.map((task) => {
+                        return (
+                          <ul>
+                            <ListItem classes={{ root: classes.root }}>
+                              <Pool
+                                key={task.id}
+                                id={this.key}
+                                isAdmin={this.state.isAdmin}
+                                tasks={task}
+                                onClickDelete={this.deleteTask.bind(this, task)}
+                                onClickReopen={() => this.reopenTask(task.id)}
+                                assignedUser={task.assigned_id}
+                                assigned={true}
+                                currentUser={this.state.currentUser}
+                                expanded={expanded === `panel${task.id}`}
+                                onChange={this.handleTaskOpen(`panel${task.id}`)}
+                                complete
+                              />
+                            </ListItem>
+                          </ul>
+                        );
+                      }) : this.state.unassignedTasks.map((task) => {
+                        return (
+                          <ul>
+                            <ListItem classes={{ root: classes.root }}>
+                              <Pool
+                                key={task.id}
+                                id={this.key}
+                                isAdmin={this.state.isAdmin}
+                                tasks={task}
+                                onClickDelete={this.deleteTask.bind(this, task)}
+                                onClickAdd={this.assignTask.bind(this, task)}
+                                currentUser={this.state.currentUser}
+                                expanded={expanded === `panel${task.id}`}
+                                onChange={this.handleTaskOpen(`panel${task.id}`)}
+                                edit={() => this.handleOpen('editTaskOpen', task.id, task.name, task.description, task.due_date, task.complexity, task.stack)}
+                              />
+                            </ListItem>
+                          </ul>
+                        );
+                      })}
+                  </li>}
+                </List>}
 
-                <ButtonAppBar />
+                userPool={<UserPool
+                  isAdmin={this.state.isAdmin}
+                  currentUser={this.state.currentUser}
+                  sprintId={this.state.sprintId}
+                  members={this.state.members}
+                  tasks={this.state.assignedTasks}
+                  unassign={this.unassignTask}
+                  onClickDelete={this.deleteTask}
+                  onClickComplete={this.markComplete}
+                  />}
 
-                <div
-                    className="parallax"
-                    style={{
-                        display: 'flex',
-                        flexGrow: 1,
-                        backgroundColor: 'dimgray',
-                        paddingTop: 75,
-                        resizeMode: 'cover',
-                        height: "-webkit-fill-available"
-                    }} >
+                inviteCode={<SimplePopper
+                  onPoperClick={this.inviteMember}
+                  message={this.state.inviteCode}
+                  />}
 
-                   
-
-                    <Tab
-                        holyBalls={<List style={{
-                          width: '100%',
-                          maxWidth: '100%',
-                          position: 'relative',
-                          overflow: 'auto',
-                        }}>
-                          {!this.state.isActive ?
-                            <li>
-                              {this.state.showComplete ? this.state.completedTasks.map((task) => {
-                                return (
-                                  <ul>
-                                    <ListItem classes={{ root: classes.root }}>
-                                      <Pool
-                                        key={task.id}
-                                        id={this.key}
-                                        isAdmin={this.state.isAdmin}
-                                        tasks={task}
-                                        onClickDelete={this.deleteTask.bind(this, task)}
-                                        onClickReopen={() => this.reopenTask(task.id)}
-                                        assignedUser={task.assigned_id}
-                                        currentUser={this.state.currentUser}
-                                        expanded={expanded === `panel${task.id}`}
-                                        onChange={this.handleTaskOpen(`panel${task.id}`)}
-                                        complete
-                                      />
-                                    </ListItem>
-                                  </ul>
-                                );
-                              }) :
-                                <Summary
-                                  members={this.state.members}
-                                  completed={this.state.completedTasks}
-                                  assigned={this.state.assignedTasks}
-                                  unAssigned={this.state.unassignedTasks}
-                                  currentSprint={this.state.sprintId}
-                                  sprints={this.state.sprints} />}
-                          </li> :
-                          <li> {(this.state.isAdmin === true) ?
-                              <ListItem button style={{width: '50%'}} onClick={() => this.handleOpen('taskOpen')} title="ADD TASK">
-                                <ListItemIcon><Add /></ListItemIcon>
-                                <ListItemText primary='ADD TASK' />
-                              </ListItem>
-                              :
-                              ""}
-
-                              {this.state.showComplete ? this.state.completedTasks.map((task) => {
-                                return (
-                                  <ul>
-                                    <ListItem classes={{ root: classes.root }}>
-                                      <Pool
-                                        key={task.id}
-                                        id={this.key}
-                                        isAdmin={this.state.isAdmin}
-                                        tasks={task}
-                                        onClickDelete={this.deleteTask.bind(this, task)}
-                                        onClickReopen={() => this.reopenTask(task.id)}
-                                        assignedUser={task.assigned_id}
-                                        assigned={true}
-                                        currentUser={this.state.currentUser}
-                                        expanded={expanded === `panel${task.id}`}
-                                        onChange={this.handleTaskOpen(`panel${task.id}`)}
-                                        complete
-                                      />
-                                    </ListItem>
-                                  </ul>
-                                );
-                              }) : this.state.unassignedTasks.map((task) => {
-                                return (
-                                  <ul>
-                                    <ListItem classes={{ root: classes.root }}>
-                                      <Pool
-                                        key={task.id}
-                                        id={this.key}
-                                        isAdmin={this.state.isAdmin}
-                                        tasks={task}
-                                        onClickDelete={this.deleteTask.bind(this, task)}
-                                        onClickAdd={this.assignTask.bind(this, task)}
-                                        currentUser={this.state.currentUser}
-                                        expanded={expanded === `panel${task.id}`}
-                                        onChange={this.handleTaskOpen(`panel${task.id}`)}
-                                      />
-                                    </ListItem>
-                                  </ul>
-                                );
-                              })}
-                            </li>}
-                        </List>}
-
-                        holySack={<UserPool
+                sprintProgress={<LinearDeterminate completed={this.state.SprintProgress} title1={`Sprint Progress ${this.state.completedTasks.length}/${this.state.unassignedTasks.length + this.state.assignedTasks.length + this.state.completedTasks.length  }  ${(this.state.completedTasks.length/(this.state.unassignedTasks.length + this.state.assignedTasks.length + this.state.completedTasks.length)*100).toFixed(2)}%`} />}
+                sprintTime={<LinearDeterminate whatBar completed={this.state.SprintTime} title2={`Sprint Time`} />}
+                completedTab={this.state.completedTasks.map((task) => {
+                  return (
+                    <ul>
+                      <ListItem classes={{ root: classes.root }}>
+                        <Pool
+                          key={task.id}
+                          id={this.key}
                           isAdmin={this.state.isAdmin}
+                          tasks={task}
+                          onClickDelete={this.deleteTask.bind(this, task)}
+                          onClickReopen={() => this.reopenTask(task.id)}
+                          assignedUser={task.assigned_id}
                           currentUser={this.state.currentUser}
-                          sprintId={this.state.sprintId}
-                          members={this.state.members}
-                          tasks={this.state.assignedTasks}
-                          unassign={this.unassignTask}
-                          onClickDelete={this.deleteTask}
-                          onClickComplete={this.markComplete}
-                        />}
+                          expanded={expanded === `panel${task.id}`}
+                          onChange={this.handleTaskOpen(`panel${task.id}`)}
 
-                        holyInvite={<SimplePopper
-                          onPoperClick={this.inviteMember}
-                          message={this.state.inviteCode}
-                      />}
+                          complete
+                        />
+                      </ListItem>
+                    </ul>
+                  );
+                })}
+                onClick={() => this.handleOpen('taskOpen')}
+                title='ADD TASK'
+              />
 
-                        holyTaint={<LinearDeterminate completed={this.state.SprintProgress} title1={"Sprint Progress"} />}
-                        holyTaint2={<LinearDeterminate whatBar completed={this.state.SprintTime} title2={"Sprint Time"} />}
-                        completedTab={this.state.completedTasks.map((task) => {
-                          return (
-                            <ul>
-                              <ListItem classes={{ root: classes.root }}>
-                                <Pool
-                                  key={task.id}
-                                  id={this.key}
-                                  isAdmin={this.state.isAdmin}
-                                  tasks={task}
-                                  onClickDelete={this.deleteTask.bind(this, task)}
-                                  onClickReopen={() => this.reopenTask(task.id)}
-                                  assignedUser={task.assigned_id}
-                                  currentUser={this.state.currentUser}
-                                  expanded={expanded === `panel${task.id}`}
-                                  onChange={this.handleTaskOpen(`panel${task.id}`)}
-                                  complete
-                                />
-                              </ListItem>
-                            </ul>
-                          );
-                        })}
-                        onClick={() => this.handleOpen('taskOpen')}
-                        title='ADD TASK'
-                    />
+    <SimpleModalSprintWrapped
+      open={this.state.sprintOpen}
+      onClose={() => this.handleClose('sprintOpen')}
+      name="Add a New Sprint ..."
+      onSubmit={this.addSprint}
+      onChange={this.handleChange}>
 
-        <SimpleModalSprintWrapped
-          open={this.state.sprintOpen}
-          onClose={() => this.handleClose('sprintOpen')}
-          name="Add a New Sprint ..."
-          onSubmit={this.addSprint}
-          onChange={this.handleChange}
-        >
-          <AddSprintLayout
-          />
-        </SimpleModalSprintWrapped>
-        <SimpleModalWrapped
-          open={this.state.taskOpen}
-          onClose={() => this.handleClose('taskOpen')}
-          name="Add a New Task ..."
-          onSubmit={this.addTask}
-          onChange={this.handleChange}
-        >
-          <AddTaskLayout
-          />
-        </SimpleModalWrapped>
+      <AddSprintLayout/>
 
-        <ClippedDrawer
-          balls={() => this.handleOpen('sprintOpen')}
-          title="ADD SPRINT"
-          isAdmin={this.state.isAdmin}
-          sprints={this.state.chipData}
-          onClick={this.updateActiveSprint}
-          activeSprint={this.state.sprintId}
-          currentUser={this.state.currentUser}
-        />
-        </div>
-      </div>
-    );
+    </SimpleModalSprintWrapped>
+
+    <SimpleModalWrapped
+      open={this.state.taskOpen}
+      onClose={() => this.handleClose('taskOpen')}
+      name="Add a New Task ..."
+      onSubmit={this.addTask}
+      onChange={this.handleChange}>
+
+    <AddTaskLayout/>
+
+    </SimpleModalWrapped>
+
+    <SimpleModalWrapped
+      open={this.state.editTaskOpen}
+      onClose={() => this.handleClose('editTaskOpen')}
+      name="Edit Task..."
+      onSubmit={() => this.editTask(this.state.currentTaskId)}
+      onChange={this.handleChange}
+      taskName= {this.state.currentTaskName}
+      taskDue_date= {this.state.currentTaskDueDate}
+      taskDescription = {this.state.currentTaskDescription}
+      taskComplexity = {this.state.currentTaskComplexity}
+      taskStack = {this.state.currentTaskStack}
+      edit
+      >
+
+
+    <AddTaskLayout
+      name= {this.state.currentTaskName}
+      due_date= {this.state.currentTaskDueDate}
+      description = {this.state.currentTaskDescription}
+      complexity = {this.state.currentTaskComplexity}
+      stack = {this.state.currentTaskStack}
+    />
+
+    </SimpleModalWrapped>
+
+    <ClippedDrawer
+      balls={() => this.handleOpen('sprintOpen')}
+      title="ADD SPRINT"
+      isAdmin={this.state.isAdmin}
+      sprints={this.state.chipData}
+      onClick={this.updateActiveSprint}
+      activeSprint={this.state.sprintId}
+      currentUser={this.state.currentUser}
+    />
+    </div>
+  </div>
+  );
   }
 }
 

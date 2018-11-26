@@ -29,31 +29,34 @@ module.exports = function (app) {
     });
 
     app.post("/api/projectOfUser", (req, res) => {
-        db.Project.findAll(
-            { where: { userId: encrypt.decrypt(req.body.token, req.body.id) } }
-        ).then((data) => {
-            console.log(encrypt.decrypt(req.body.token, req.body.id));
-            db.sequelize.query(`SELECT DISTINCT Projects.name, Projects.id, Projects.due_date, Projects.complete, Projects.completed_date, Projects.summary, Projects.userId FROM Users INNER JOIN SprintMemberships ON SprintMemberships.userId = Users.id AND Users.id = ${encrypt.decrypt(req.body.token, req.body.id)} INNER JOIN Sprints ON Sprints.id = SprintMemberships.sprintId INNER JOIN Projects ON Sprints.project_id = Projects.id`, { type: sequelize.QueryTypes.SELECT }).then(dbSprintUser => {
-                let aggregate = JSON.parse(JSON.stringify(data));
-                console.log(aggregate);
-                for (let i = 0; i < dbSprintUser.length; i++) {
-                    if (aggregate.length === 0) {
-                        aggregate.push(dbSprintUser[i]);
-                    }
-                    else {
-                        for (let j = 0; j < aggregate.length; j++) {
-                            if (dbSprintUser[i].id === aggregate[j].id) {
-                                break;
-                            }
-                            if (j === aggregate.length - 1) {
-                                aggregate.push(dbSprintUser[i]);
-                            }
-                        }
-                    }
+      let userId = encrypt.decrypt(req.body.token, req.body.id);
+      db.Project.findAll(
+        { where: { userId: userId } }
+      ).then((data) => {
+        db.sequelize.query(`SELECT DISTINCT Projects.name, Projects.id, Projects.due_date, Projects.complete, Projects.completed_date, Projects.summary, Projects.userId FROM Users INNER JOIN SprintMemberships ON SprintMemberships.userId = Users.id AND Users.id = ${userId} INNER JOIN Sprints ON Sprints.id = SprintMemberships.sprintId INNER JOIN Projects ON Sprints.project_id = Projects.id`, { type: sequelize.QueryTypes.SELECT }).then(dbSprintUser => {
+          let aggregate = JSON.parse(JSON.stringify(data));
+          console.log(aggregate);
+          for (let i = 0; i < dbSprintUser.length; i++) {
+            if (aggregate.length === 0) {
+              aggregate.push(dbSprintUser[i]);
+            }
+            else {
+              for (let j = 0; j < aggregate.length; j++) {
+                if (dbSprintUser[i].id === aggregate[j].id) {
+                  break;
                 }
-                res.json(aggregate);
-            });
+                if (j === aggregate.length - 1) {
+                  aggregate.push(dbSprintUser[i]);
+                }
+              }
+            }
+          }
+          let object = {};
+          object.currentUser = userId;
+          object.projects = aggregate;
+          res.json(object);
         });
+      });
     });
 
     app.post("/api/projectById", (req, res) => {
