@@ -24,7 +24,6 @@ const styles = theme => ({
 
 function SingleLineGridList(props) {
   const { classes } = props;
-
   return (
     <div alt={props.name}>
       <List style={{ padding: 0, margin: 5 }}>
