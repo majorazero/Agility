@@ -1,7 +1,4 @@
-
 import ContainedButtons from "./Button.js";
-
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -25,10 +22,6 @@ const styles = theme => ({
     color: theme.palette.text.secondary,
     marginLeft: '5%'
   },
-  button: {
-    display: 'flex',
-    float: 'right'
-  }
 });
 
 class ControlledExpansionPanels extends React.Component {
@@ -79,7 +72,6 @@ class ControlledExpansionPanels extends React.Component {
                 size="small"
                 onClick={this.props.assigned ? (this.props.complete ? this.props.onClickReopen : this.props.unAssign) : this.props.onClickAdd}
                 hidden={(this.props.currentUser === this.props.assignedUser) ? false : (this.props.isAdmin ? false : true)}
-              // hidden={this.props.complete ? (this.props.isAdmin ? (this.props.currentUser === this.props.assignedUser ? false:true):true) : false}
               />
                 <ContainedButtons
                   name={this.props.assigned ? 'Mark Complete' : this.props.isAdmin ? 'Delete' : null}

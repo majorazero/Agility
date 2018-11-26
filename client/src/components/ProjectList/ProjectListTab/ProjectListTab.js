@@ -40,7 +40,7 @@ function SingleLineGridList(props) {
             secondary={props.summary}
           />
 
-          <Typography color='secondary'>ADMIN</Typography>
+          {props.isAdmin ? <Typography color='secondary'>ADMIN</Typography> : null}
         </ListItem>
       </List>
     </div>
