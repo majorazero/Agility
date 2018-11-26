@@ -49,7 +49,7 @@ class AlertDialogSlide extends React.Component {
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
+            <Button onClick={this.handleClose} color="secondary">
               Submit
             </Button>
           </DialogActions>

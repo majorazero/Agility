@@ -71,41 +71,41 @@ class Homepage extends Component {
 
   getTasks = (currentUserId) => {
     axios.get(`/api/sprints/tasks/user/${currentUserId}`)
-    .then(res => {
-      let incomplete = res.data.filter(task => !task.isCompleted)
+      .then(res => {
+        let incomplete = res.data.filter(task => !task.isCompleted)
 
-      let data = []
-      let sprints = []
+        let data = []
+        let sprints = []
 
-      incomplete.forEach(task => {
-        if (!(sprints.includes(task.sprintId))) {
-          sprints.push(task.sprintId)
-          data.push({
-            sprint: task.sprint,
-            tasks: [task]
-          })
-        } else {
-          for (let i = 0; i < data.length; i++) {
-            if (data[i].sprint === task.sprint) {
-              data[i].tasks.push(task)
+        incomplete.forEach(task => {
+          if (!(sprints.includes(task.sprintId))) {
+            sprints.push(task.sprintId)
+            data.push({
+              sprint: task.sprint,
+              tasks: [task]
+            })
+          } else {
+            for (let i = 0; i < data.length; i++) {
+              if (data[i].sprint === task.sprint) {
+                data[i].tasks.push(task)
+              }
             }
           }
-        }
+        })
+        this.setState({ tasks: data })
       })
-      this.setState({ tasks: data })
-    })
   }
 
   goToProject = (sprintId) => {
     axios.get(`/api/projectId/sprint/${sprintId}`)
-    .then(res => {
-      axios.post("/api/encrypt", {
-        token: "project",
-        id: res.data[0].id.toString()
-      }).then((data) => {
-        window.location.assign(`/project/${data.data}`);
-      });
-    })
+      .then(res => {
+        axios.post("/api/encrypt", {
+          token: "project",
+          id: res.data[0].id.toString()
+        }).then((data) => {
+          window.location.assign(`/project/${data.data}`);
+        });
+      })
   }
 
   stackFormat = () => {
