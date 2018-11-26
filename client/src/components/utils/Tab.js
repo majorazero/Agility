@@ -52,8 +52,8 @@ class SimpleTabs extends React.Component {
     const { value } = this.state;
    return (
       <Paper className={classes.root}>
-      <ListItem style={{ margin: '10px 0 10px 0' }}>{this.props.holyInvite}</ListItem>
-      {this.props.holyTaint}{this.props.holyTaint2}
+      <ListItem style={{ margin: '10px 0 10px 0' }}>{this.props.inviteCode}</ListItem>
+      {this.props.sprintProgress}{this.props.sprintTime}
         <Tabs
           value={this.state.value}
           onChange={this.handleChange}
@@ -66,8 +66,8 @@ class SimpleTabs extends React.Component {
           <Tab label='Complete'/>
           <Tab label='Summary' />
         </Tabs>
-        {value === 0 && <TabContainer>{this.props.holyBalls}</TabContainer>}
-        {value === 1 && <TabContainer>{this.props.holySack}</TabContainer>}
+        {value === 0 && <TabContainer>{this.props.taskPool}</TabContainer>}
+        {value === 1 && <TabContainer>{this.props.userPool}</TabContainer>}
         {value === 2 && <TabContainer>{this.props.completedTab}</TabContainer>}
         {value === 3 && <TabContainer>{this.props.summaryTab}</TabContainer>}
       </Paper>

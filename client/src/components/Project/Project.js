@@ -449,7 +449,7 @@ class Project extends React.Component {
                   currentSprint={this.state.sprintId}
                   sprints={this.state.sprints}
                   />}
-                holyBalls={<List style={{
+                taskPool={<List style={{
                   width: '100%',
                   maxWidth: '100%',
                   position: 'relative',
@@ -530,7 +530,7 @@ class Project extends React.Component {
                   </li>}
                 </List>}
 
-                holySack={<UserPool
+                userPool={<UserPool
                   isAdmin={this.state.isAdmin}
                   currentUser={this.state.currentUser}
                   sprintId={this.state.sprintId}
@@ -541,13 +541,13 @@ class Project extends React.Component {
                   onClickComplete={this.markComplete}
                   />}
 
-                holyInvite={<SimplePopper
+                inviteCode={<SimplePopper
                   onPoperClick={this.inviteMember}
                   message={this.state.inviteCode}
                   />}
 
-                holyTaint={<LinearDeterminate completed={this.state.SprintProgress} title1={`Sprint Progress ${this.state.completedTasks.length}/${this.state.unassignedTasks.length + this.state.assignedTasks.length + this.state.completedTasks.length  }  ${(this.state.completedTasks.length/(this.state.unassignedTasks.length + this.state.assignedTasks.length + this.state.completedTasks.length)*100).toFixed(2)}%`} />}
-                holyTaint2={<LinearDeterminate whatBar completed={this.state.SprintTime} title2={`Sprint Time`} />}
+                sprintProgress={<LinearDeterminate completed={this.state.SprintProgress} title1={`Sprint Progress ${this.state.completedTasks.length}/${this.state.unassignedTasks.length + this.state.assignedTasks.length + this.state.completedTasks.length  }  ${(this.state.completedTasks.length/(this.state.unassignedTasks.length + this.state.assignedTasks.length + this.state.completedTasks.length)*100).toFixed(2)}%`} />}
+                sprintTime={<LinearDeterminate whatBar completed={this.state.SprintTime} title2={`Sprint Time`} />}
                 completedTab={this.state.completedTasks.map((task) => {
                   return (
                     <ul>
