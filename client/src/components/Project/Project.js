@@ -198,7 +198,6 @@ class Project extends React.Component {
   }
 
   updateActiveSprint = (sprintId) => {
-    //console.log(this.state.sprints,sprintId);
     let currentSprint;
     for(let i = 0; i < this.state.sprints.length; i++){
       if(this.state.sprints[i].sprintId === sprintId){
@@ -507,8 +506,8 @@ class Project extends React.Component {
                   message={this.state.inviteCode}
                   />}
 
-                holyTaint={<LinearDeterminate completed={this.state.SprintProgress} title1={"Sprint Progress"} />}
-                holyTaint2={<LinearDeterminate whatBar completed={this.state.SprintTime} title2={"Sprint Time"} />}
+                holyTaint={<LinearDeterminate completed={this.state.SprintProgress} title1={`Sprint Progress ${this.state.completedTasks.length}/${this.state.unassignedTasks.length + this.state.assignedTasks.length + this.state.completedTasks.length  }  ${(this.state.completedTasks.length/(this.state.unassignedTasks.length + this.state.assignedTasks.length + this.state.completedTasks.length)*100).toFixed(2)}%`} />}
+                holyTaint2={<LinearDeterminate whatBar completed={this.state.SprintTime} title2={`Sprint Time`} />}
                 completedTab={this.state.completedTasks.map((task) => {
                   return (
                     <ul>
