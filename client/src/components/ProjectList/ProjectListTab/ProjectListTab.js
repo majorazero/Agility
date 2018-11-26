@@ -5,6 +5,7 @@ import Icon from '@material-ui/core/Icon';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import { Typography } from '@material-ui/core';
 
 
 const styles = theme => ({
@@ -40,7 +41,7 @@ function SingleLineGridList(props) {
             secondary={props.summary}
           />
 
-          <Icon>how_to_vote</Icon>
+          <Typography color='secondary'>ADMIN</Typography>
         </ListItem>
       </List>
     </div>

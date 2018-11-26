@@ -52,10 +52,7 @@ class SimpleTabs2 extends React.Component {
           <Tab label="Statistics" />
         </Tabs>
         {value === 0 && <TabContainer>{this.props.justBalls}</TabContainer>}
-        {value === 1 && <TabContainer>
-
-        {this.props.justSack}
-        </TabContainer>}
+        {value === 1 && <TabContainer>{this.props.justSack}</TabContainer>}
         {value === 2 && <TabContainer>{this.props.justTaint}</TabContainer>}
       </Paper>
     );
