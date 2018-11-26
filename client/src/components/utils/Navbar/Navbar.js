@@ -6,6 +6,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Drawer from './Drawer.js';
+import { Link } from "react-router-dom";
 
 const styles = {
   root: {
@@ -33,7 +34,14 @@ function ButtonAppBar(props) {
       <AppBar position="fixed" color="primary" className={classes.balls}>
         <Toolbar>
           <Drawer />
-          <Typography to="/" variant="h4" color="inherit" className={classes.grow}>
+          <Typography
+            style={{ textDecoration: 'none'}}
+            component={Link}
+            to='/homepage'
+            variant="h4"
+            color="inherit"
+            className={classes.grow}
+          >
             agility.
           </Typography>
           {sessionStorage.getItem("id") ? null : <Button href="/register" color="inherit">Sign Up</Button>}
