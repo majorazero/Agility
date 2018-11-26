@@ -197,9 +197,9 @@ class Homepage extends Component {
             <ProfileCard />
           </Grid>
           <Tab
-            justBalls={<ActiveTasks tasks={this.state.tasks} goToProject={this.goToProject} homepage />}
-            justSack={<ProjectList />}
-            justTaint={<TextMobileStepper
+            activeTasks={<ActiveTasks tasks={this.state.tasks} goToProject={this.goToProject} homepage />}
+            projectList={<ProjectList />}
+            userSummary={<TextMobileStepper
               tutorialSteps={this.makeArray()}
             />}
           />
