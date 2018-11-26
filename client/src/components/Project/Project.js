@@ -21,16 +21,16 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import SimplePopper from './../utils/popovertext';
 
 const styles = {
-    root: {
-        padding: '0px 30px 0px 10px'
-    },
-    listSection: {
-        backgroundColor: 'inherit',
-    },
-    ul: {
-        backgroundColor: 'inherit',
-        padding: 0,
-    }
+  root: {
+      padding: '0px 30px 0px 10px'
+  },
+  listSection: {
+      backgroundColor: 'inherit',
+  },
+  ul: {
+      backgroundColor: 'inherit',
+      padding: 0,
+  }
 }
 
 class Project extends React.Component {
@@ -208,15 +208,15 @@ class Project extends React.Component {
     let endDate = new Date(`${currentSprint.endDate}T23:59:59`);
     let startDate = new Date(`${currentSprint.startDate}T00:00:00`);
     let currentDate = new Date();
-    let timeProgress = ((endDate - currentDate) / (endDate - startDate) * 100);
+    let timeProgress = ((currentDate - startDate) / (endDate - startDate) * 100);
     if (this.state.activeSprintId === sprintId) {
       isActive = true;
     }
     if(timeProgress < 0){
-      timeProgress = 100;
+      timeProgress = 0;
     }
     else if (timeProgress > 100){
-      timeProgress = 0;
+      timeProgress = 100;
     }
     this.setState({ sprintId: sprintId, isActive: isActive, SprintTime: timeProgress }, () => {
       this.getTasks();
@@ -263,14 +263,14 @@ class Project extends React.Component {
               activeSprint = sprints[i].sprintId;
               currentSprint = activeSprint
               isActive = true;
-              timeProgress = ((endDate - currentDate) / (endDate - startDate) * 100);
+              timeProgress = ((currentDate - startDate) / (endDate - startDate) * 100);
             }
           }
           else if (today >= startDate && today <= endDate) {
             activeSprint = sprints[i].sprintId;
             currentSprint = activeSprint
             isActive = true;
-            timeProgress = ((endDate - currentDate) / (endDate - startDate) * 100);
+            timeProgress = ((currentDate - startDate) / (endDate - startDate) * 100);
           }
         }
         console.log(timeProgress);
