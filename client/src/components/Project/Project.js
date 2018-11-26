@@ -85,9 +85,9 @@ class Project extends React.Component {
     editTaskOpen: false,
     currentTaskId: '',
     currentTaskName: '',
-    currentTaskDueDate: '', 
-    currentTaskDescription: '', 
-    currentTaskComplexity: '', 
+    currentTaskDueDate: '',
+    currentTaskDescription: '',
+    currentTaskComplexity: '',
     currentTaskStack: '',
 
     expanded: null //handles the accordion function for expansion panels
@@ -180,7 +180,7 @@ class Project extends React.Component {
     console.log(this.state.taskName, this.state.taskDue_date, this.state.taskDescription, this.state.taskComplexity, this.state.taskStack)
     axios.put(`/api/edit/task/${id}`, {
       name: this.state.currentTaskName,
-      due_date: this.state.currentTaskDueDate, 
+      due_date: this.state.currentTaskDueDate,
       description: this.state.currentTaskDescription,
       complexity: this.state.currentTaskComplexity,
       stack: this.state.currentTaskStack
@@ -194,12 +194,12 @@ class Project extends React.Component {
 
   handleOpen = (name, taskId, taskName, description, due_date, complexity, stack) => {
     this.setState({
-      currentTaskId: taskId, 
+      currentTaskId: taskId,
       currentTaskName: taskName,
-      currentTaskDescription: description, 
-      currentTaskDueDate: due_date, 
-      currentTaskComplexity: complexity, 
-      currentTaskStack: stack, 
+      currentTaskDescription: description,
+      currentTaskDueDate: due_date,
+      currentTaskComplexity: complexity,
+      currentTaskStack: stack,
       [name]: true
     }, () => {
       console.log(this.state.currentTaskId)
@@ -457,7 +457,7 @@ class Project extends React.Component {
                 }}>
                   {!this.state.isActive ?
                     <li>
-                      {this.state.completedTasks.map((task) => {
+                      {this.state.unassignedTasks.map((task) => {
                         return (
                           <ul>
                             <ListItem classes={{ root: classes.root }}>
@@ -467,19 +467,19 @@ class Project extends React.Component {
                                 isAdmin={this.state.isAdmin}
                                 tasks={task}
                                 onClickDelete={this.deleteTask.bind(this, task)}
-                                onClickReopen={() => this.reopenTask(task.id)}
-                                assignedUser={task.assigned_id}
+                                onClickAdd={this.assignTask.bind(this, task)}
                                 currentUser={this.state.currentUser}
                                 expanded={expanded === `panel${task.id}`}
                                 onChange={this.handleTaskOpen(`panel${task.id}`)}
-                                complete
+                                edit={() => this.handleOpen('editTaskOpen', task.id, task.name, task.description, task.due_date, task.complexity, task.stack)}
                               />
                             </ListItem>
                           </ul>
                         );
                       })}
                   </li> :
-                  <li> {(this.state.isAdmin === true) ?
+                  <li>
+                    {(this.state.isAdmin === true) ?
                       <ListItem button style={{width: '50%'}} onClick={() => this.handleOpen('taskOpen')} title="ADD TASK">
                         <ListItemIcon><Add /></ListItemIcon>
                         <ListItemText primary='ADD TASK' />
@@ -527,7 +527,7 @@ class Project extends React.Component {
                           </ul>
                         );
                       })}
-                    </li>}
+                  </li>}
                 </List>}
 
                 userPool={<UserPool
@@ -563,7 +563,7 @@ class Project extends React.Component {
                           currentUser={this.state.currentUser}
                           expanded={expanded === `panel${task.id}`}
                           onChange={this.handleTaskOpen(`panel${task.id}`)}
-                          
+
                           complete
                         />
                       </ListItem>
@@ -609,9 +609,9 @@ class Project extends React.Component {
       taskStack = {this.state.currentTaskStack}
       edit
       >
-      
 
-    <AddTaskLayout 
+
+    <AddTaskLayout
       name= {this.state.currentTaskName}
       due_date= {this.state.currentTaskDueDate}
       description = {this.state.currentTaskDescription}
