@@ -21,16 +21,16 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import SimplePopper from './../utils/popovertext';
 
 const styles = {
-    root: {
-        padding: '0px 30px 0px 10px'
-    },
-    listSection: {
-        backgroundColor: 'inherit',
-    },
-    ul: {
-        backgroundColor: 'inherit',
-        padding: 0,
-    }
+  root: {
+    padding: '0px 30px 0px 10px'
+  },
+  listSection: {
+    backgroundColor: 'inherit',
+  },
+  ul: {
+    backgroundColor: 'inherit',
+    padding: 0,
+  }
 }
 
 class Project extends React.Component {
@@ -134,6 +134,9 @@ class Project extends React.Component {
         }
       }
       let progressStat = (completed.length / (completed.length + assigned.length + unassigned.length) * 100);
+      if (completed.length + assigned.length + unassigned.length === 0){
+        progressStat = 0;
+      }
       this.setState({
         unassignedTasks: unassigned,
         assignedTasks: assigned,
@@ -215,10 +218,10 @@ class Project extends React.Component {
     console.log(timeProgress)
 
     if(timeProgress < 0){
-      timeProgress = 100;
+      timeProgress = 0;
     }
     else if (timeProgress > 100){
-      timeProgress = 0;
+      timeProgress = 100;
     }
     this.setState({ sprintId: sprintId, isActive: isActive, SprintTime: timeProgress }, () => {
       this.getTasks();
@@ -229,7 +232,7 @@ class Project extends React.Component {
   defaultVal = () => {
     let today = new Date().split("T");
     this.setState({
-        due_date: today
+      due_date: today
     });
   };
 
@@ -265,14 +268,14 @@ class Project extends React.Component {
               activeSprint = sprints[i].sprintId;
               currentSprint = activeSprint
               isActive = true;
-              timeProgress = ((endDate - currentDate) / (endDate - startDate) * 100);
+              timeProgress = ((currentDate - startDate) / (endDate - startDate) * 100);
             }
           }
           else if (today >= startDate && today <= endDate) {
             activeSprint = sprints[i].sprintId;
             currentSprint = activeSprint
             isActive = true;
-            timeProgress = ((endDate - currentDate) / (endDate - startDate) * 100);
+            timeProgress = ((currentDate - startDate) / (endDate - startDate) * 100);
           }
         }
         console.log(timeProgress);
@@ -541,10 +544,10 @@ class Project extends React.Component {
       onClose={() => this.handleClose('sprintOpen')}
       name="Add a New Sprint ..."
       onSubmit={this.addSprint}
-      onChange={this.handleChange}
-    >
-      <AddSprintLayout
-      />
+      onChange={this.handleChange}>
+
+      <AddSprintLayout/>
+
     </SimpleModalSprintWrapped>
 
     <SimpleModalWrapped
@@ -552,10 +555,10 @@ class Project extends React.Component {
       onClose={() => this.handleClose('taskOpen')}
       name="Add a New Task ..."
       onSubmit={this.addTask}
-      onChange={this.handleChange}
-    >
-      <AddTaskLayout
-      />
+      onChange={this.handleChange}>
+
+    <AddTaskLayout/>
+
     </SimpleModalWrapped>
 
     <ClippedDrawer
