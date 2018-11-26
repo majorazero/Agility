@@ -67,6 +67,8 @@ class Project extends React.Component {
     taskDescription: "",
     taskComplexity: -1,
     taskStack: "",
+    errorTaskMess: "",
+    errorTaskCode: -1,
     chipData: [],
 
     sprintOpen: false,
@@ -158,6 +160,7 @@ class Project extends React.Component {
   addTask = () => {
     if (this.state.taskName === ""){
       console.log("Task needs a name!");
+      this.setState({errorTaskMess: "Task needs a name!", errorTaskCode: 1});
     }
     else if (this.state.taskDescription === ""){
       console.log("Task needs a description");
@@ -601,10 +604,10 @@ class Project extends React.Component {
       onClose={() => this.handleClose('taskOpen')}
       name="Add a New Task ..."
       onSubmit={this.addTask}
-      onChange={this.handleChange}>
-
-    <AddTaskLayout/>
-
+      onChange={this.handleChange}
+      errorTaskMess={this.state.errorTaskMess}
+      errorTaskCode={this.state.errorTaskCode}
+      >
     </SimpleModalWrapped>
 
     <SimpleModalWrapped
@@ -618,17 +621,10 @@ class Project extends React.Component {
       taskDescription = {this.state.currentTaskDescription}
       taskComplexity = {this.state.currentTaskComplexity}
       taskStack = {this.state.currentTaskStack}
+      errorTaskMess={this.state.errorTaskMess}
+      errorTaskCode={this.state.errorTaskCode}
       edit
       >
-
-
-    <AddTaskLayout
-      name= {this.state.currentTaskName}
-      due_date= {this.state.currentTaskDueDate}
-      description = {this.state.currentTaskDescription}
-      complexity = {this.state.currentTaskComplexity}
-      stack = {this.state.currentTaskStack}
-    />
 
     </SimpleModalWrapped>
 
