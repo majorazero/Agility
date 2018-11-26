@@ -46,7 +46,11 @@ module.exports = function(app){
       })
     });
 
-
+    // app.post('/api/edit/task/:taskId', (req, res)=> {
+    //   db.seqeuelize.query(`UPDATE tasks SET name=${req.body.name}, due_date=${req.body.due_date}, description=${req.body.description}, complexity=${req.body.complexity}, stack=${req.body.stack} WHERE id=${req.params.taskId}`, { type: sequelize.QueryTypes.UPDATE}).then(updatedtask => {
+    //     res.json(updatedtask)
+    //   })
+    // })
 
 
 
