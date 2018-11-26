@@ -173,22 +173,20 @@ class Project extends React.Component {
   }
 
   handleClose = (name) => {
-      this.setState({ [name]: false });
+    this.setState({ [name]: false });
   };
 
   deleteTask = (task) => {
-      axios.delete("/api/task/by/" + task.id).then(() => {
-          this.getTasks();
-      });
+    axios.delete("/api/task/by/" + task.id).then(() => {
+      this.getTasks();
+    });
   }
 
   assignTask = (task) => {
     axios.post("/api/decrypt", { token: localStorage.getItem("token"), id: sessionStorage.getItem("id") }).then((response) => {
       let user = response.data;
       axios.put("/api/task/by/" + task.id + "/" + user).then((res) => {
-          // console.log(res.data);
-          this.getTasks();
-          //window.location.reload();
+        this.getTasks();
       })
     });
   }
@@ -200,11 +198,28 @@ class Project extends React.Component {
   }
 
   updateActiveSprint = (sprintId) => {
-    let isActive = false;
-    if (this.state.activeSprintId === sprintId) {
-        isActive = true;
+    //console.log(this.state.sprints,sprintId);
+    let currentSprint;
+    for(let i = 0; i < this.state.sprints.length; i++){
+      if(this.state.sprints[i].sprintId === sprintId){
+        currentSprint = this.state.sprints[i];
+      }
     }
-    this.setState({ sprintId: sprintId, isActive: isActive }, () => {
+    let isActive = false;
+    let endDate = new Date(`${currentSprint.endDate}T23:59:59`);
+    let startDate = new Date(`${currentSprint.startDate}T00:00:00`);
+    let currentDate = new Date();
+    let timeProgress = ((endDate - currentDate) / (endDate - startDate) * 100);
+    if (this.state.activeSprintId === sprintId) {
+      isActive = true;
+    }
+    if(timeProgress < 0){
+      timeProgress = 100;
+    }
+    else if (timeProgress > 100){
+      timeProgress = 0;
+    }
+    this.setState({ sprintId: sprintId, isActive: isActive, SprintTime: timeProgress }, () => {
       this.getTasks();
       this.getMembers(this.state.sprintId);
     });
@@ -259,6 +274,7 @@ class Project extends React.Component {
             timeProgress = ((endDate - currentDate) / (endDate - startDate) * 100);
           }
         }
+        console.log(timeProgress);
         this.setState({
           SprintTime: timeProgress,
           chipData: sprintData,
