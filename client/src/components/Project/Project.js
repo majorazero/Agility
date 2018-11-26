@@ -166,12 +166,18 @@ class Project extends React.Component {
     }
     else if (this.state.taskDescription === ""){
       console.log("Task needs a description");
+      this.setState({errorTaskMess: "Task needs a description!", errorTaskCode: 2});
+      setTimeout(()=>this.setState({errorTaskCode: -1}),2000);
     }
     else if (this.state.taskComplexity > 5 || this.state.taskComplexity < 1) {
       console.log("Invalid complexity value!");
+      this.setState({errorTaskMess: "Invalid complexity value!", errorTaskCode: 3});
+      setTimeout(()=>this.setState({errorTaskCode: -1}),2000);
     }
     else if (this.state.taskStack === ""){
       console.log("Input a stack requirement!");
+      this.setState({errorTaskMess: "Input a stack requirement!", errorTaskCode: 4});
+      setTimeout(()=>this.setState({errorTaskCode: -1}),2000);
     }
     else {
       console.log("Task Added!");
