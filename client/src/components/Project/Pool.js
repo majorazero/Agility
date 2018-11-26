@@ -22,6 +22,7 @@ const styles = {
 
 const Pool = (props) => {
   const { classes } = props;
+  console.log(props.tasks);
   return (
     <ListItem
       style={{
