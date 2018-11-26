@@ -365,7 +365,7 @@ class Project extends React.Component {
     }
   }
 
-     handleTaskOpen = panel => (event, expanded) => {
+    handleTaskOpen = panel => (event, expanded) => {
       this.setState({
         expanded: expanded ? panel : false,
       });
@@ -416,13 +416,14 @@ class Project extends React.Component {
                           </ul>
                         );
                       }) :
-                        <Summary
-                          members={this.state.members}
-                          completed={this.state.completedTasks}
-                          assigned={this.state.assignedTasks}
-                          unAssigned={this.state.unassignedTasks}
-                          currentSprint={this.state.sprintId}
-                          sprints={this.state.sprints} />}
+                      <Summary
+                        members={this.state.members}
+                        completed={this.state.completedTasks}
+                        assigned={this.state.assignedTasks}
+                        unAssigned={this.state.unassignedTasks}
+                        currentSprint={this.state.sprintId}
+                        sprints={this.state.sprints}
+                        />}
                   </li> :
                   <li> {(this.state.isAdmin === true) ?
                       <ListItem button style={{width: '50%'}} onClick={() => this.handleOpen('taskOpen')} title="ADD TASK">
@@ -431,7 +432,6 @@ class Project extends React.Component {
                       </ListItem>
                       :
                       ""}
-
                       {this.state.showComplete ? this.state.completedTasks.map((task) => {
                         return (
                           <ul>
@@ -528,6 +528,7 @@ class Project extends React.Component {
       <AddSprintLayout
       />
     </SimpleModalSprintWrapped>
+
     <SimpleModalWrapped
       open={this.state.taskOpen}
       onClose={() => this.handleClose('taskOpen')}
@@ -549,7 +550,7 @@ class Project extends React.Component {
       currentUser={this.state.currentUser}
     />
     </div>
-    </div>
+  </div>
   );
   }
 }

@@ -52,7 +52,6 @@ class ProjectList extends Component {
               key={item.id}
               name={item.name}
               summary={item.summary}
-              // style={{ margin: 2, width: 100, height: 100 }}
               onProjectPress={() => { this.onProjectPress(item.id) }} />
             )
           })}
