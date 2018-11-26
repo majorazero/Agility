@@ -52,6 +52,7 @@ class AlertDialogSlide extends React.Component {
               complexity = {this.props.taskComplexity}
               stack = {this.props.taskStack}
               edit = {this.props.edit ? true : false}
+              defaultDueDate = {this.props.defaultDueDate}
             />
           </DialogContent>
           <DialogActions>
