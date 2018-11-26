@@ -134,6 +134,9 @@ class Project extends React.Component {
         }
       }
       let progressStat = (completed.length / (completed.length + assigned.length + unassigned.length) * 100);
+      if (completed.length + assigned.length + unassigned.length === 0){
+        progressStat = 0;
+      }
       this.setState({
         unassignedTasks: unassigned,
         assignedTasks: assigned,
