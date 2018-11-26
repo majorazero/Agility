@@ -71,7 +71,7 @@ class Project extends React.Component {
 
     sprintOpen: false,
     sprintName: "",
-    sprintStart_date: `${new Date().getMonth() + 1}/${new Date().getDate()}/${new Date().getFullYear()}`,
+    sprintStart_date: `${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`,
     sprintEnd_date: "",
 
     currentUser: '',
@@ -208,10 +208,12 @@ class Project extends React.Component {
     let endDate = new Date(`${currentSprint.endDate}T23:59:59`);
     let startDate = new Date(`${currentSprint.startDate}T00:00:00`);
     let currentDate = new Date();
-    let timeProgress = ((endDate - currentDate) / (endDate - startDate) * 100);
+    let timeProgress = ((currentDate - startDate) / (endDate - startDate) * 100);
     if (this.state.activeSprintId === sprintId) {
       isActive = true;
     }
+    console.log(timeProgress)
+
     if(timeProgress < 0){
       timeProgress = 100;
     }
@@ -292,12 +294,13 @@ class Project extends React.Component {
   addSprint = () => {
     let overlap = false;
     let newSprintStart = new Date(`${this.state.sprintStart_date}T00:00:00`);
+    console.log(this.state.sprintStart_date)
 
     for(let i=0; i < this.state.sprints.length; i++){
       let start = new Date(`${this.state.sprints[i].startDate}T00:00:00`)
-      console.log(start)
+      console.log(this.state.sprints[i].startDate)
       let end = new Date(`${this.state.sprints[i].endDate}T23:59:59`)
-      if(newSprintStart > start && newSprintStart < end){
+      if(newSprintStart >= start && newSprintStart <= end){
         overlap = true
       }
     }
