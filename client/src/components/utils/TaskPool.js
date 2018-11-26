@@ -61,12 +61,11 @@ class ControlledExpansionPanels extends React.Component {
             <Typography className={classes.secondaryHeading}>{this.props.due} | {this.props.stack}</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
-            <Typography>
+            <Typography style={{ width: '-webkit-fill-available' }}>
               {this.props.description}
             </Typography>
             {this.props.homepage ?
               (<ContainedButtons
-                className={classes.button}
                 size="small"
                 name='View Project'
                 color='primary'
@@ -74,8 +73,7 @@ class ControlledExpansionPanels extends React.Component {
                 hidden={this.props.activetasks ? false : true}
               />)
               :
-              (<div><ContainedButtons
-                className={classes.button}
+              (<div style={{ display: 'flex', alignItems: 'flex-end', flexDirection: 'column'}}><ContainedButtons
                 name={this.props.complete ? (this.props.isAdmin ? 'Reopen' : null) : (this.props.assigned ? 'Unassign' : 'Claim')}
                 color="primary"
                 size="small"
@@ -84,7 +82,6 @@ class ControlledExpansionPanels extends React.Component {
               // hidden={this.props.complete ? (this.props.isAdmin ? (this.props.currentUser === this.props.assignedUser ? false:true):true) : false}
               />
                 <ContainedButtons
-                  className={classes.button}
                   name={this.props.assigned ? 'Mark Complete' : this.props.isAdmin ? 'Delete' : null}
                   color='secondary'
                   size="small"
