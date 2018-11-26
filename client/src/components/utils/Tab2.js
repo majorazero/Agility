@@ -8,7 +8,13 @@ import Paper from '@material-ui/core/Paper';
 
 function TabContainer(props) {
   return (
-    <Typography component="div" style={{ padding: 8 * 3 }}>
+    <Typography
+            component="div"
+            style={{
+                padding: 8 * 3,
+                position: 'relative',
+            }}
+        >
       {props.children}
     </Typography>
   );
@@ -21,7 +27,8 @@ TabContainer.propTypes = {
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    margin: 25
+    margin: 25,
+    overflow: 'auto'
   },
 });
 

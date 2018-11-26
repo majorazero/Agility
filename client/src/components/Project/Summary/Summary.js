@@ -53,7 +53,8 @@ const SummaryCard = (props) => {
   return (
     <div style={{
       padding: '5px 25px 25px 25px',
-      width: 'inherit'
+      width: 'inherit',
+      height: '100%'
     }}>
       {(props.currentSprint === -1) ?
         <div>

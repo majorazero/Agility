@@ -8,42 +8,48 @@ import Paper from '@material-ui/core/Paper';
 import ListItem from '@material-ui/core/ListItem';
 
 function TabContainer(props) {
-  return (
-    <Typography component="div" style={{ padding: 8 * 3, position: 'relative', overflow: 'auto', maxHeight: 384 }}>
-      {props.children}
-    </Typography>
-  );
+    return (
+        <Typography
+            component="div"
+            style={{
+                padding: 8 * 3,
+                position: 'relative'
+            }}
+        >
+            {props.children}
+        </Typography>
+    );
 }
 
 TabContainer.propTypes = {
-  children: PropTypes.node.isRequired,
+    children: PropTypes.node.isRequired,
 };
 
 const styles = theme => ({
-  root: {
-    flexGrow: 1,
-    margin: 25
-  },
+    root: {
+        flexGrow: 1,
+        margin: 25,
+        overflow: 'auto'
+    },
 });
 
 class SimpleTabs extends React.Component {
-  constructor(props) {
-    super(props)
+    constructor(props) {
+        super(props)
 
-    this.state = {
-      value: 0,
+        this.state = {
+            value: 0,
+        };
+    }
+
+
+    handleChange = (event, value) => {
+        this.setState({ value });
     };
-  }
-
-
-  handleChange = (event, value) => {
-    this.setState({ value });
-  };
 
   render() {
     const { classes } = this.props;
     const { value } = this.state;
-    console.log(this.props.isActive);
    return (
       <Paper className={classes.root}>
       <ListItem style={{ margin: '10px 0 10px 0' }}>{this.props.holyInvite}</ListItem>
@@ -70,7 +76,7 @@ class SimpleTabs extends React.Component {
 }
 
 SimpleTabs.propTypes = {
-  classes: PropTypes.object.isRequired,
+    classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(SimpleTabs);
