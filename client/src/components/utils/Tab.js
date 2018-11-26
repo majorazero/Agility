@@ -43,28 +43,28 @@ class SimpleTabs extends React.Component {
   render() {
     const { classes } = this.props;
     const { value } = this.state;
-
+    console.log(this.props.isActive);
    return (
-            <Paper className={classes.root}>
-            <ListItem style={{ margin: '10px 0 10px 0' }}>{this.props.holyInvite}</ListItem>
-            {this.props.holyTaint}{this.props.holyTaint2}
-                <Tabs
-                    value={this.state.value}
-                    onChange={this.handleChange}
-                    indicatorColor="secondary"
-                    textColor="secondary"
-                    centered
-                >
-                    <Tab label="Open Tasks" />
-                    <Tab label="In Progress" />
-                    <Tab label='Complete'/>
-                    <Tab label='Summary' />
-                </Tabs>
-                {value === 0 && <TabContainer>{this.props.holyBalls}</TabContainer>}
-                {value === 1 && <TabContainer>{this.props.holySack}</TabContainer>}
-                {value === 2 && <TabContainer>{this.props.completedTab}</TabContainer>}
-                {value === 3 && <TabContainer></TabContainer>}
-            </Paper>
+      <Paper className={classes.root}>
+      <ListItem style={{ margin: '10px 0 10px 0' }}>{this.props.holyInvite}</ListItem>
+      {this.props.holyTaint}{this.props.holyTaint2}
+        <Tabs
+          value={this.state.value}
+          onChange={this.handleChange}
+          indicatorColor="secondary"
+          textColor="secondary"
+          centered
+        >
+          <Tab label={this.props.isActive ? 'Open Tasks':'Incomplete Tasks'} />
+          <Tab label="In Progress" />
+          <Tab label='Complete'/>
+          <Tab label='Summary' />
+        </Tabs>
+        {value === 0 && <TabContainer>{this.props.holyBalls}</TabContainer>}
+        {value === 1 && <TabContainer>{this.props.holySack}</TabContainer>}
+        {value === 2 && <TabContainer>{this.props.completedTab}</TabContainer>}
+        {value === 3 && <TabContainer>{this.props.summaryTab}</TabContainer>}
+      </Paper>
     );
   }
 }
