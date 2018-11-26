@@ -54,6 +54,7 @@ class AlertDialogSlide extends React.Component {
               edit = {this.props.edit ? true : false}
               errorTaskMess={this.props.errorTaskMess}
               errorTaskCode={this.props.errorTaskCode}
+              defaultDueDate = {this.props.defaultDueDate}
             />
           </DialogContent>
           <DialogActions>

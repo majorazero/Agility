@@ -63,7 +63,7 @@ class Project extends React.Component {
 
     taskOpen: false,
     taskName: "",
-    taskDue_date: `${new Date().getMonth() + 1}/${new Date().getDate()}/${new Date().getFullYear()}`,
+    taskDue_date: `${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`,
     taskDescription: "",
     taskComplexity: -1,
     taskStack: "",
@@ -118,6 +118,7 @@ class Project extends React.Component {
   }
 
   handleChange = name => event => {
+    console.log("changing")
     this.setState({
       [name]: event.target.value,
     });
@@ -215,8 +216,6 @@ class Project extends React.Component {
       currentTaskComplexity: complexity,
       currentTaskStack: stack,
       [name]: true
-    }, () => {
-      console.log(this.state.currentTaskId)
     })
   }
 
@@ -260,7 +259,6 @@ class Project extends React.Component {
     if (this.state.activeSprintId === sprintId) {
       isActive = true;
     }
-    console.log(timeProgress)
 
     if(timeProgress < 0){
       timeProgress = 0;
@@ -608,9 +606,11 @@ class Project extends React.Component {
       onChange={this.handleChange}
       errorTaskMess={this.state.errorTaskMess}
       errorTaskCode={this.state.errorTaskCode}
+      defaultDueDate={this.state.taskDue_date}
       >
     </SimpleModalWrapped>
 
+{/* edit task modal */}
     <SimpleModalWrapped
       open={this.state.editTaskOpen}
       onClose={() => this.handleClose('editTaskOpen')}
