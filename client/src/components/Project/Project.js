@@ -65,7 +65,7 @@ class Project extends React.Component {
     taskName: "",
     taskDue_date: `${new Date().getMonth() + 1}/${new Date().getDate()}/${new Date().getFullYear()}`,
     taskDescription: "",
-    taskComplexity: "",
+    taskComplexity: -1,
     taskStack: "",
     chipData: [],
 
@@ -156,23 +156,33 @@ class Project extends React.Component {
   };
 
   addTask = () => {
-    if (this.state.taskComplexity <= 5 && this.state.taskComplexity >= 1) {
-      axios.post("/api/task", {
-        name: this.state.taskName,
-        due_date: this.state.taskDue_date,
-        description: this.state.taskDescription,
-        sprint_id: this.state.sprintId,
-        complexity: this.state.taskComplexity,
-        stack: this.state.taskStack
-      }).then(() => {
-        this.setState({
-          taskOpen: false
-        });
-        this.getTasks();
-      });
+    if (this.state.taskName === ""){
+      console.log("Task needs a name!");
+    }
+    else if (this.state.taskDescription === ""){
+      console.log("Task needs a description");
+    }
+    else if (this.state.taskComplexity > 5 || this.state.taskComplexity < 1) {
+      console.log("Invalid complexity value!");
+    }
+    else if (this.state.taskStack === ""){
+      console.log("Input a stack requirement!");
     }
     else {
-      console.log("Invalid complexity value!");
+      console.log("Task Added!");
+      // axios.post("/api/task", {
+      //   name: this.state.taskName,
+      //   due_date: this.state.taskDue_date,
+      //   description: this.state.taskDescription,
+      //   sprint_id: this.state.sprintId,
+      //   complexity: this.state.taskComplexity,
+      //   stack: this.state.taskStack
+      // }).then(() => {
+      //   this.setState({
+      //     taskOpen: false
+      //   });
+      //   this.getTasks();
+      // });
     }
   }
 
@@ -423,7 +433,7 @@ class Project extends React.Component {
         expanded: expanded ? panel : false,
       });
     };
-    
+
     render() {
       const { expanded } = this.state;
       const { classes } = this.props;
