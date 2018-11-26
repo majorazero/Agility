@@ -81,6 +81,15 @@ class Project extends React.Component {
     SprintTime: 0,
     SprintProgress: 0,
 
+    //editing tasks
+    editTaskOpen: false,
+    currentTaskId: '',
+    currentTaskName: '',
+    currentTaskDueDate: '', 
+    currentTaskDescription: '', 
+    currentTaskComplexity: '', 
+    currentTaskStack: '',
+
     expanded: null //handles the accordion function for expansion panels
   }
 
@@ -167,11 +176,33 @@ class Project extends React.Component {
     }
   }
 
-  handleOpen = (name) => {
+  editTask = (id) => {
+    console.log(this.state.taskName, this.state.taskDue_date, this.state.taskDescription, this.state.taskComplexity, this.state.taskStack)
+    axios.put(`/api/edit/task/${id}`, {
+      name: this.state.currentTaskName,
+      due_date: this.state.currentTaskDueDate, 
+      description: this.state.currentTaskDescription,
+      complexity: this.state.currentTaskComplexity,
+      stack: this.state.currentTaskStack
+    }).then(() => {
+      this.getTasks();
+      this.setState({
+        editTaskOpen: false
+      })
+    })
+  }
+
+  handleOpen = (name, taskId, taskName, description, due_date, complexity, stack) => {
     this.setState({
+      currentTaskId: taskId, 
+      currentTaskName: taskName,
+      currentTaskDescription: description, 
+      currentTaskDueDate: due_date, 
+      currentTaskComplexity: complexity, 
+      currentTaskStack: stack, 
       [name]: true
     }, () => {
-      console.log(this.state.taskOpen)
+      console.log(this.state.currentTaskId)
     })
   }
 
@@ -488,6 +519,7 @@ class Project extends React.Component {
                                 currentUser={this.state.currentUser}
                                 expanded={expanded === `panel${task.id}`}
                                 onChange={this.handleTaskOpen(`panel${task.id}`)}
+                                edit={() => this.handleOpen('editTaskOpen', task.id, task.name, task.description, task.due_date, task.complexity, task.stack)}
                               />
                             </ListItem>
                           </ul>
@@ -529,6 +561,7 @@ class Project extends React.Component {
                           currentUser={this.state.currentUser}
                           expanded={expanded === `panel${task.id}`}
                           onChange={this.handleTaskOpen(`panel${task.id}`)}
+                          
                           complete
                         />
                       </ListItem>
@@ -558,6 +591,31 @@ class Project extends React.Component {
       onChange={this.handleChange}>
 
     <AddTaskLayout/>
+
+    </SimpleModalWrapped>
+
+    <SimpleModalWrapped
+      open={this.state.editTaskOpen}
+      onClose={() => this.handleClose('editTaskOpen')}
+      name="Edit Task..."
+      onSubmit={() => this.editTask(this.state.currentTaskId)}
+      onChange={this.handleChange}
+      taskName= {this.state.currentTaskName}
+      taskDue_date= {this.state.currentTaskDueDate}
+      taskDescription = {this.state.currentTaskDescription}
+      taskComplexity = {this.state.currentTaskComplexity}
+      taskStack = {this.state.currentTaskStack}
+      edit
+      >
+      
+
+    <AddTaskLayout 
+      name= {this.state.currentTaskName}
+      due_date= {this.state.currentTaskDueDate}
+      description = {this.state.currentTaskDescription}
+      complexity = {this.state.currentTaskComplexity}
+      stack = {this.state.currentTaskStack}
+    />
 
     </SimpleModalWrapped>
 
