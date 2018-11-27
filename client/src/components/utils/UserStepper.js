@@ -17,7 +17,7 @@ const styles = theme => ({
   header: {
     display: 'flex',
     alignItems: 'center',
-    height: 50,
+    // height: 50,
     backgroundColor: theme.palette.background.default,
     justifyContent: 'center'
   },
@@ -27,9 +27,9 @@ const styles = theme => ({
     display: 'block',
     padding: 5
   },
-  mobileStepper: {
-    height: 20
-  }
+  // mobileStepper: {
+  //   height: 20
+  // }
 });
 
 class UserStepper extends React.Component {
@@ -63,6 +63,9 @@ class UserStepper extends React.Component {
       (this.props.membersCard !== undefined && this.props.membersCard.length > 0) ?
       <div className={classes.root}>
        <MobileStepper
+       style={{
+        padding: 5
+      }}
           steps={maxSteps}
           position="static"
           activeStep={activeStep}

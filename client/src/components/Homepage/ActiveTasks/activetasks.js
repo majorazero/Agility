@@ -5,6 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListSubheader from '@material-ui/core/ListSubheader';
+import { Typography } from '@material-ui/core';
 
 const styles = theme => ({
     root: {
@@ -50,8 +51,7 @@ class ActiveTasks extends Component {
         {!this.props.loaded ? "" :
           (this.props.tasks.length === 0 ?
 
-          <h1>No active tasks!</h1>
-
+          <Typography gutterBottom variant='h4'>No active tasks!</Typography>
           :  this.props.tasks.map((sprint, i) => (
           <li key={i} className={classes.listSection}>
             <ul className={classes.ul}>
