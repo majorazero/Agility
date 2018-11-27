@@ -13,7 +13,7 @@ import Add from '@material-ui/icons/Add';
 import AlertSnackbar from './../utils/Snackbar.js';
 
 class ProjectList extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
 
     this.state = {
@@ -111,18 +111,21 @@ class ProjectList extends Component {
           }}
         >
           <List>
-            <ListItem style={{ width: '50%' }} button onClick={this.handleOpen}>
-              <ListItemIcon><Add /></ListItemIcon>
-              <ListItemText primary='ADD PROJECT' />
-            </ListItem>
-            <ListItem style={{ width: '50%' }} item>
-              <InputTextField
-                onSubmit={this.props.handleInviteSubmit}
-                label="Sprint Invite Code:"
-                name="inviteCode"
-                onChange={this.props.handleInviteChange}
-              />
-          </ListItem>
+            <List style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
+              <ListItem style={{ width: '50%' }} button onClick={this.handleOpen}>
+                <ListItemIcon><Add /></ListItemIcon>
+                <ListItemText primary='ADD PROJECT' />
+              </ListItem>
+              <ListItem style={{width: '50%' }} item>
+                <InputTextField
+                  onSubmit={this.props.handleInviteSubmit}
+                  label="Sprint Invite Code:"
+                  name="inviteCode"
+                  onChange={this.props.handleInviteChange}
+                />
+
+              </ListItem>
+            </List>
             {this.populate()}
           </List>
         </div>
