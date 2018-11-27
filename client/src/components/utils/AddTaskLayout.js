@@ -47,7 +47,6 @@ const styles = theme => ({
 
 function AddTaskLayout(props) {
   const { classes } = props;
-  console.log(props);
   return (
     <div>
       <CssBaseline />
