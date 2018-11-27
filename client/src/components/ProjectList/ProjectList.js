@@ -47,7 +47,7 @@ class ProjectList extends Component {
 
   populate = () => {
     if (this.state.projects.length === 0) {
-      return <h1>Start a new project!</h1>;
+      return <Typography gutterBottom variant='h4'>Start a new project!</Typography>;
     }
     else {
       return (
