@@ -2,7 +2,6 @@ import React from "react";
 import axios from "axios";
 import Pool from "./Pool.js";
 import SimpleModalWrapped from "../utils/Modal";
-import AddTaskLayout from "../utils/AddTaskLayout.js";
 import UserPool from './UserPool';
 import ButtonAppBar from "../utils/Navbar/Navbar.js";
 import AddSprintLayout from "../utils/AddSprintLayout.js";

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Grid, ListItem } from "@material-ui/core";
+import { ListItem } from "@material-ui/core";
 import axios from "axios";
 import SingleLineGridList from "./ProjectListTab/ProjectListTab.js";
 import SimpleModalProjectWrapped from "../utils/ModalProject.js";

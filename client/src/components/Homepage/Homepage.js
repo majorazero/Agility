@@ -76,7 +76,6 @@ class Homepage extends Component {
       id: sessionStorage.getItem("id"),
       token: localStorage.getItem("token")
     }).then((response) => {
-      console.log(response.data);
       this.setState({
         projects: response.data.projects,
         currentUser: response.data.currentUser
@@ -89,7 +88,6 @@ class Homepage extends Component {
       id: sessionStorage.getItem("id"),
       token: localStorage.getItem("token")
     }).then(res => {
-      console.log(res.data)
       this.setState({ userId: res.data }, () => {
         this.getTasks(this.state.userId)
       })
