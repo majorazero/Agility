@@ -58,6 +58,7 @@ const Pool = (props) => {
         expanded={props.expanded}
         onChange={props.onChange}
         edit={props.edit}
+        futureSprint={props.futureSprint}
       />
     </ListItem>
   );

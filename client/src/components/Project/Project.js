@@ -47,6 +47,7 @@ class Project extends React.Component {
 
     isActive: true,
     activeSprintId: '',
+    futureSprint: false,
 
     unassignedTasks: [],
     assignedTasks: [],
@@ -118,7 +119,6 @@ class Project extends React.Component {
   }
 
   handleChange = name => event => {
-    console.log("changing")
     this.setState({
       [name]: event.target.value,
     });
@@ -198,7 +198,6 @@ class Project extends React.Component {
   }
 
   editTask = (id) => {
-    console.log(this.state.taskName, this.state.taskDue_date, this.state.taskDescription, this.state.taskComplexity, this.state.taskStack)
     axios.put(`/api/edit/task/${id}`, {
       name: this.state.currentTaskName,
       due_date: this.state.currentTaskDueDate,
@@ -252,6 +251,7 @@ class Project extends React.Component {
 
   updateActiveSprint = (sprintId) => {
     let currentSprint;
+    let futureSprint = false;
     for(let i = 0; i < this.state.sprints.length; i++){
       if(this.state.sprints[i].sprintId === sprintId){
         currentSprint = this.state.sprints[i];
@@ -260,10 +260,14 @@ class Project extends React.Component {
     let isActive = false;
     let endDate = new Date(`${currentSprint.endDate}T23:59:59`);
     let startDate = new Date(`${currentSprint.startDate}T00:00:00`);
+    let today = new Date();
     let currentDate = new Date();
     let timeProgress = ((currentDate - startDate) / (endDate - startDate) * 100);
     if (this.state.activeSprintId === sprintId) {
       isActive = true;
+    }
+    else if (startDate > today){
+      futureSprint = true;
     }
 
     if(timeProgress < 0){
@@ -272,7 +276,7 @@ class Project extends React.Component {
     else if (timeProgress > 100){
       timeProgress = 100;
     }
-    this.setState({ sprintId: sprintId, isActive: isActive, SprintTime: timeProgress }, () => {
+    this.setState({ sprintId: sprintId, isActive: isActive, SprintTime: timeProgress, futureSprint: futureSprint }, () => {
       this.getTasks();
       this.getMembers(this.state.sprintId);
     });
@@ -460,6 +464,7 @@ class Project extends React.Component {
             }} >
               <Tab
                 isActive={this.state.isActive}
+                futureSprint={this.state.futureSprint}
                 summaryTab={<Summary
                   members={this.state.members}
                   completed={this.state.completedTasks}
@@ -474,7 +479,7 @@ class Project extends React.Component {
                   position: 'relative',
                   overflow: 'auto',
                 }}>
-                  {!this.state.isActive ?
+                  {(!this.state.isActive && !this.state.futureSprint) ?
                     <li>
                       {this.state.unassignedTasks.map((task) => {
                         return (
@@ -558,6 +563,7 @@ class Project extends React.Component {
                   unassign={this.unassignTask}
                   onClickDelete={this.deleteTask}
                   onClickComplete={this.markComplete}
+                  futureSprint = {this.state.futureSprint}
                   />}
 
                 inviteCode={<SimplePopper
