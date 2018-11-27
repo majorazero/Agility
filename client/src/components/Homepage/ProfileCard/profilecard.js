@@ -56,27 +56,8 @@ const theme = createMuiTheme({
 
 class RecipeReviewCard extends React.Component {
   state = {
-    expanded: false,
-    userFirstName: "",
-    userLastName: "",
-    userEmail: "",
+    expanded: false
   };
-
-  componentDidMount() {
-    axios.post("/api/getuser",
-    {
-      id: sessionStorage.getItem("id"),
-      token: localStorage.getItem("token")
-    }).then((response) => {
-      this.setState(
-        {
-          userFirstName: response.data.prof.first_name,
-          userLastName: response.data.prof.last_name,
-          userEmail: response.data.prof.email,
-        }
-      );
-    });
-  }
 
   handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));
@@ -96,10 +77,10 @@ class RecipeReviewCard extends React.Component {
         <MuiThemeProvider theme={theme}>
           <CardContent>
             <Typography variant="h6" gutterBottom style={{ textAlign: "left", color: 'whitesmoke' }}>
-              {this.state.userFirstName + " " + this.state.userLastName}
+              {this.props.userFirstName + " " + this.props.userLastName}
             </Typography>
             <Typography variant="subtitle2" gutterBottom style={{ textAlign: "left", color: 'whitesmoke' }}>
-              {this.state.userEmail}
+              {this.props.userEmail}
             </Typography>
           </CardContent>
         </MuiThemeProvider>
