@@ -566,6 +566,8 @@ class Project extends React.Component {
               onClickComplete={this.markComplete}
               futureSprint={this.state.futureSprint}
             />}
+            
+            projectName={this.state.projName}
 
             inviteCode={<SimplePopper
               onPoperClick={this.inviteMember}
