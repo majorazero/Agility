@@ -355,6 +355,7 @@ class Project extends React.Component {
 
   addSprint = () => {
     let overlap = false;
+    let overlappingSprint;
     let newSprintStart = new Date(`${this.state.sprintStart_date}T00:00:00`);
     console.log(this.state.sprintStart_date)
 
@@ -364,9 +365,9 @@ class Project extends React.Component {
       let end = new Date(`${this.state.sprints[i].endDate}T23:59:59`)
       if (newSprintStart >= start && newSprintStart <= end) {
         overlap = true
+        overlappingSprint = this.state.sprints[i].sprintName
       }
     }
-    console.log(overlap);
     if (overlap === false) {
       axios.post('/api/sprint', {
         name: this.state.sprintName,
@@ -383,6 +384,9 @@ class Project extends React.Component {
             });
           })
       });
+    }
+    else {
+      console.log(`${overlappingSprint} overlaps with this! Fix your dates!`)
     }
   }
 
