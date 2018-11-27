@@ -115,16 +115,16 @@ class ProjectList extends Component {
               <ListItemIcon><Add /></ListItemIcon>
               <ListItemText primary='ADD PROJECT' />
             </ListItem>
+            <ListItem style={{ width: '50%' }} item>
+              <InputTextField
+                onSubmit={this.props.handleInviteSubmit}
+                label="Sprint Invite Code:"
+                name="inviteCode"
+                onChange={this.props.handleInviteChange}
+              />
+          </ListItem>
             {this.populate()}
           </List>
-          <Grid item>
-            <InputTextField
-              onSubmit={this.props.handleInviteSubmit}
-              label="Sprint Invite Code:"
-              name="inviteCode"
-              onChange={this.props.handleInviteChange}
-            />
-          </Grid>
         </div>
 
         <SimpleModalProjectWrapped
