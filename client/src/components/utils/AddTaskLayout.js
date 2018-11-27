@@ -59,6 +59,7 @@ function AddTaskLayout(props) {
               value={props.name}
             />
           </FormControl>
+            {props.errorTaskCode === 1 ? props.errorTaskMess : ""}
           <FormControl margin="normal" required fullWidth>
             <DatePickers
               label="Due Date"
@@ -69,6 +70,7 @@ function AddTaskLayout(props) {
               onChange={props.edit ? props.onChange('currentTaskDueDate'):props.onChange("taskDue_date")}
               edit={props.edit ? true:false}
               due_date={props.due_date}
+              defaultDueDate = {props.defaultDueDate}
             />
           </FormControl>
           <FormControl margin="normal" required fullWidth>

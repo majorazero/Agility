@@ -79,6 +79,7 @@ class UserPool extends Component {
                         onClickComplete={() => this.props.onClickComplete(fTask.id)}
                         expanded={expanded === `panel${fTask.id}`}
                         onChange={this.handleChange(`panel${fTask.id}`)}
+                        futureSprint={this.props.futureSprint}
                         assigned
                       />
                     </ListItem>

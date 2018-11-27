@@ -75,7 +75,7 @@ class ControlledExpansionPanels extends React.Component {
                 hidden={(this.props.currentUser === this.props.assignedUser) ? false : (this.props.isAdmin ? false : true)}
               />
                 <ContainedButtons
-                  name={this.props.assigned ? 'Mark Complete' : this.props.isAdmin ? 'Delete' : null}
+                  name={(this.props.assigned && !this.props.futureSprint) ? 'Mark Complete' : this.props.isAdmin ? 'Delete' : null}
                   color='secondary'
                   size="small"
                   onClick={this.props.assigned ? this.props.onClickComplete : this.props.onClickDelete}
@@ -87,7 +87,7 @@ class ControlledExpansionPanels extends React.Component {
                 name='Edit'
                 color='primary'
                 onClick={this.props.edit}
-                // hidden={this.props.activetasks ? false : true}
+                hidden={this.props.complete ? true : false}
               />
           </ExpansionPanelDetails>
         </ExpansionPanel>

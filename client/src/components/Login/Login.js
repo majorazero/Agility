@@ -3,12 +3,14 @@ import axios from "axios";
 import LoginLayout from "../utils/LoginLayout.js";
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
+import AlertSnackbar from './../utils/Snackbar.js';
 
 class Login extends Component {
   state = {
     email: "",
     password: "",
-    message: ""
+    message: "",
+    showsnack: false
   }
 
   handleChange = name => event => {
@@ -22,10 +24,12 @@ class Login extends Component {
 
     axios.post("/api/login", this.state).then((res) => {
       if (res.data === "User does not exist.") {
-        this.setState({ message: res.data });
+        this.setState({ showsnack: true, message: res.data });
+        setTimeout(() => { this.setState({ showsnack: false }) }, 3000);
       }
       else if (res.data === "Wrong password!") {
-        this.setState({ message: res.data });
+        this.setState({ showsnack: true, message: res.data });
+        setTimeout(() => { this.setState({ showsnack: false }) }, 3000);
       }
       else {
         console.log(res.data);
@@ -68,8 +72,12 @@ class Login extends Component {
             <LoginLayout
               onSubmit={this.handleSubmit}
               onChange={this.handleChange}
-              message={this.state.message}
             />
+            {this.state.showsnack ? <AlertSnackbar
+              open={this.state.showsnack}
+              variant='error'
+              message={this.state.message}
+            /> : null}
           </Grid>
           <Grid container>
             <Grid
