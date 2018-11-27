@@ -6,6 +6,9 @@ import ContainedButtons from "../utils/Button.js";
 import './landing.css';
 import Typography from '@material-ui/core/Typography';
 import MediaCard from "../utils/MediaCard.js";
+import LandingDrawer from "../utils/LandingDrawer.js";
+import Drawer from '@material-ui/core/Drawer';
+import { MenuItem, Paper } from "@material-ui/core";
 
 const theme = createMuiTheme({
   overrides: {
@@ -149,13 +152,15 @@ class Landing extends Component {
                 justifyContent: "center",
               }}
             >
+              <Grid>
+                <Paper>
+                  {/* <LandingDrawer /> */}
+                  <Drawer variant='temporary'>
+                  BALLS
+                  </Drawer>
+                </Paper>
+              </Grid>
 
-              <Grid item xs={6} style={{ width: 450, height: 450 }}>
-                <img alt="demo gif 1" src="./assets/images/demo1.gif" style={{ width: '100%', height: '100%' }} />
-              </Grid>
-              <Grid item xs={6} style={{ width: 450, height: 450 }}>
-                <img alt="demo gif 2" src="./assets/images/demo2.gif" style={{ width: '100%', height: '100%' }} />
-              </Grid>
             </Grid>
           </Grid>
           <Grid item alignItems="center" xs={12}>
@@ -208,7 +213,7 @@ class Landing extends Component {
                             key={maker.id}
                             id={this.key}
                             maker={maker}
-                            onClick={()=>{
+                            onClick={() => {
                               console.log(maker.github);
                               window.open(maker.github);
                             }}

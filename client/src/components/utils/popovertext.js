@@ -68,10 +68,10 @@ class SimplePopper extends React.Component {
             onClose={this.handleClose}
             anchorOrigin={{
               vertical: 'bottom',
-              horizontal: 'left',
+              horizontal: 'right',
             }}
             transformOrigin={{
-              vertical: 'bottom',
+              vertical: 'top',
               horizontal: 'right',
             }}
           >
