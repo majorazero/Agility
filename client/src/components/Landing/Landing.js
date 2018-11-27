@@ -56,7 +56,7 @@ class Landing extends Component {
       {
         name: "Yair Joseph",
         image: "/assets/images/yair.jpg",
-        summary: "I am Yair and I do Yair things. Bababooie.",
+        summary: "The root of my passion for design and structure come from my past of serving in special forces and being a photographer.  As a developer I can now express this passion by creating ideas of other and my own.",
         github: "https://github.com/yairjoseph"
       }
     ]
