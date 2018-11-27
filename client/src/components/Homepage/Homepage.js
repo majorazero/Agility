@@ -30,6 +30,8 @@ class Homepage extends Component {
       projects: [],
       currentUser: "",
       loaded: false,
+      summaryLoaded: false,
+      projectLoaded: false,
       userFirstName: "",
       userLastName: "",
       userEmail: ""
@@ -63,7 +65,8 @@ class Homepage extends Component {
             stacks: response.data.stacks,
             userFirstName: response.data.prof.first_name,
             userLastName: response.data.prof.last_name,
-            userEmail: response.data.prof.email
+            userEmail: response.data.prof.email,
+            summaryLoaded: true
           }
         );
       }).then(()=>{
@@ -78,7 +81,8 @@ class Homepage extends Component {
     }).then((response) => {
       this.setState({
         projects: response.data.projects,
-        currentUser: response.data.currentUser
+        currentUser: response.data.currentUser,
+        projectLoaded: true
       });
     });
   }
@@ -255,7 +259,7 @@ class Homepage extends Component {
             activeTasks={<ActiveTasks
               loaded={this.state.loaded}
               tasks={this.state.tasks} goToProject={this.goToProject} homepage />}
-            projectList={
+            projectList={ this.state.projectLoaded ?
               <ProjectList
                 fetch={()=>{this.fetch()}}
                 projects={this.state.projects}
@@ -263,11 +267,11 @@ class Homepage extends Component {
                 showsnack={this.state.showsnack}
                 handleInviteSubmit={this.handleInviteSubmit}
                 handleInviteChange={this.handleInviteChange}
-              />
+              /> : ""
             }
-            userSummary={<TextMobileStepper
+            userSummary={this.state.summaryLoaded ? <TextMobileStepper
             tutorialSteps={this.makeArray()}
-            />}
+            /> : ""}
           />
         </div >
       </div >
