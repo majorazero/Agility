@@ -563,6 +563,7 @@ class Project extends React.Component {
                   unassign={this.unassignTask}
                   onClickDelete={this.deleteTask}
                   onClickComplete={this.markComplete}
+                  futureSprint = {this.state.futureSprint}
                   />}
 
                 inviteCode={<SimplePopper
