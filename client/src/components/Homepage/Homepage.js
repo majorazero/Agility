@@ -209,7 +209,6 @@ class Homepage extends Component {
   }
 
   handleInviteChange = (event) => {
-    console.log(this.state);
     this.setState({
       [event.target.name]: event.target.value
     })
@@ -225,6 +224,8 @@ class Homepage extends Component {
       else {
         this.fetch();
       }
+    }).catch(()=>{
+      console.log("Invalid invite code!");
     });
   }
 
