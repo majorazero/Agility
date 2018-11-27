@@ -7,6 +7,7 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Grid from '@material-ui/core/Grid';
 
 const styles = theme => ({
   root: {
@@ -59,7 +60,7 @@ class ControlledExpansionPanels extends React.Component {
               {this.props.description}
             </Typography>
           {this.props.location === 'open tasks' ? 
-            <div>
+            <Grid container direction='row'>
               <ContainedButtons
                 size="small"
                 name='Delete'
@@ -81,7 +82,7 @@ class ControlledExpansionPanels extends React.Component {
                 onClick={this.props.edit}
                 hidden={this.props.isAdmin ? false:true}
               /> 
-            </div>
+            </Grid>
              : null}
           {this.props.location === 'in progress' ? 
             <div>
