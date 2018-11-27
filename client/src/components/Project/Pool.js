@@ -34,6 +34,7 @@ const Pool = (props) => {
       }
     >
       <SimpleExpansionPanel
+        location = {props.location}
         currentUser={props.currentUser}
         assignedUser={props.assignedUser}
         name={props.tasks.name}

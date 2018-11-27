@@ -514,6 +514,7 @@ class Project extends React.Component {
                             expanded={expanded === `panel${task.id}`}
                             onChange={this.handleTaskOpen(`panel${task.id}`)}
                             edit={() => this.handleOpen('editTaskOpen', task.id, task.name, task.description, task.due_date, task.complexity, task.stack)}
+                            location='open tasks'
                           />
                         </ListItem>
                       </ul>
@@ -544,6 +545,7 @@ class Project extends React.Component {
                             currentUser={this.state.currentUser}
                             expanded={expanded === `panel${task.id}`}
                             onChange={this.handleTaskOpen(`panel${task.id}`)}
+                            location='complete'
                             complete
                           />
                         </ListItem>
@@ -564,6 +566,7 @@ class Project extends React.Component {
                             expanded={expanded === `panel${task.id}`}
                             onChange={this.handleTaskOpen(`panel${task.id}`)}
                             edit={() => this.handleOpen('editTaskOpen', task.id, task.name, task.description, task.due_date, task.complexity, task.stack)}
+                            location='open tasks'
                           />
                         </ListItem>
                       </ul>
@@ -608,7 +611,7 @@ class Project extends React.Component {
                       currentUser={this.state.currentUser}
                       expanded={expanded === `panel${task.id}`}
                       onChange={this.handleTaskOpen(`panel${task.id}`)}
-
+                      location='complete'
                       complete
                     />
                   </ListItem>

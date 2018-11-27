@@ -81,6 +81,7 @@ class UserPool extends Component {
                         onChange={this.handleChange(`panel${fTask.id}`)}
                         futureSprint={this.props.futureSprint}
                         assigned
+                        location='in progress'
                       />
                     </ListItem>
                   </ul>
