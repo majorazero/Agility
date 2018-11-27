@@ -12,7 +12,8 @@ import DescIcon from '@material-ui/icons/Description';
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    padding: 5
+    padding: 5,
+    display: 'flex',
   },
   header: {
     display: 'flex',
@@ -21,8 +22,9 @@ const styles = theme => ({
     backgroundColor: theme.palette.background.default,
   },
   balls: {
-    width: '100%',
-    padding: 5
+    padding: 15,
+    height: '-webkit-fill-available',
+    width: '-webkit-fill-available'
   },
 });
 
@@ -37,17 +39,17 @@ class TextMobileStepper extends React.Component {
   }
 
 
-  handleNext = () => {
-    this.setState(prevState => ({
-      activeStep: prevState.activeStep + 1,
-    }));
-  };
+  // handleNext = () => {
+  //   this.setState(prevState => ({
+  //     activeStep: prevState.activeStep + 1,
+  //   }));
+  // };
 
-  handleBack = () => {
-    this.setState(prevState => ({
-      activeStep: prevState.activeStep - 1,
-    }));
-  };
+  // handleBack = () => {
+  //   this.setState(prevState => ({
+  //     activeStep: prevState.activeStep - 1,
+  //   }));
+  // };
 
   render() {
     const { classes, theme } = this.props;
@@ -56,7 +58,7 @@ class TextMobileStepper extends React.Component {
 
     return (
       <div className={classes.root}>
-      <MobileStepper
+        {/* <MobileStepper
           style={{
             padding: 5
           }}
@@ -76,20 +78,56 @@ class TextMobileStepper extends React.Component {
               Back
             </Button>
           }
-        />
-        <Paper square elevation={0} className={classes.balls}>
-          <DescIcon style={{fill: 'black'}} />
-          <Typography variant="subtitle1" gutterBottom>{this.props.tutorialSteps[activeStep].label1}</Typography>
-          <Typography variant="caption" gutterBottom>{this.props.tutorialSteps[activeStep].info1}</Typography>
-          <br />
-          <Typography variant="subtitle1" gutterBottom>{this.props.tutorialSteps[activeStep].label2}</Typography>
-          <Typography variant="caption" gutterBottom>{this.props.tutorialSteps[activeStep].info2}</Typography>
-          <br />
-          <Typography variant="subtitle1" gutterBottom>{this.props.tutorialSteps[activeStep].label3}</Typography>
-          <Typography variant="caption" gutterBottom>{this.props.tutorialSteps[activeStep].info3}</Typography>
-          {(this.props.tutorialSteps.length > 2) ? <br /> : null }
-          <Typography variant="subtitle1" gutterBottom>{this.props.tutorialSteps[activeStep].label4}</Typography>
-          <Typography variant="caption" gutterBottom>{this.props.tutorialSteps[activeStep].info4}</Typography>
+        /> */}
+        <Paper className={classes.balls}>
+          <div
+            style={{
+              width: 'fit-content',
+              height: 'fit-content',
+            }}
+          >
+            <DescIcon style={{ fill: 'black' }} />
+            <Typography variant="subtitle1" gutterBottom>{this.props.tutorialSteps[0].label1}</Typography>
+            <Typography variant="caption" gutterBottom>{this.props.tutorialSteps[0].info1}</Typography>
+            <Typography variant="subtitle1" gutterBottom>{this.props.tutorialSteps[0].label2}</Typography>
+            <Typography variant="caption" gutterBottom>{this.props.tutorialSteps[0].info2}</Typography>
+            <Typography variant="subtitle1" gutterBottom>{this.props.tutorialSteps[0].label3}</Typography>
+            <Typography variant="caption" gutterBottom>{this.props.tutorialSteps[0].info3}</Typography>
+          </div>
+          <div
+            style={{
+              width: 'fit-content',
+              height: 'fit-content',
+            }}
+          >
+            <DescIcon style={{ fill: 'black' }} />
+            <Typography variant="subtitle1" gutterBottom>{this.props.tutorialSteps[1].label1}</Typography>
+            <Typography variant="caption" gutterBottom>{this.props.tutorialSteps[1].info1}</Typography>
+            <Typography variant="subtitle1" gutterBottom>{this.props.tutorialSteps[1].label2}</Typography>
+            <Typography variant="caption" gutterBottom>{this.props.tutorialSteps[1].info2}</Typography>
+            <Typography variant="subtitle1" gutterBottom>{this.props.tutorialSteps[1].label3}</Typography>
+            <Typography variant="caption" gutterBottom>{this.props.tutorialSteps[1].info3}</Typography>
+          </div>
+          <div
+            style={{
+              width: 'fit-content',
+              height: 'fit-content',
+              position: 'absolute',
+              justifyContent: 'flex-end',
+              alignItems: 'center',
+            }}
+          >
+            <DescIcon style={{ fill: 'black' }} />
+            {(this.props.tutorialSteps.length > 2) ? <br /> : null}
+            <Typography variant="subtitle1" gutterBottom>{this.props.tutorialSteps[2].label1}</Typography>
+            <Typography variant="caption" gutterBottom>{this.props.tutorialSteps[2].info1}</Typography>
+            <Typography variant="subtitle1" gutterBottom>{this.props.tutorialSteps[2].label2}</Typography>
+            <Typography variant="caption" gutterBottom>{this.props.tutorialSteps[2].info2}</Typography>
+            <Typography variant="subtitle1" gutterBottom>{this.props.tutorialSteps[2].label3}</Typography>
+            <Typography variant="caption" gutterBottom>{this.props.tutorialSteps[2].info3}</Typography>
+            <Typography variant="subtitle1" gutterBottom>{this.props.tutorialSteps[2].label4}</Typography>
+            <Typography variant="caption" gutterBottom>{this.props.tutorialSteps[2].info4}</Typography>
+          </div>
         </Paper>
       </div>
     );

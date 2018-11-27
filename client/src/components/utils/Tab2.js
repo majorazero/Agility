@@ -50,7 +50,7 @@ class SimpleTabs2 extends React.Component {
     return (
       <Paper className={classes.root}>
         <Tabs
-          style={{marginTop: 10}}
+          style={{paddingTop: 10, position: 'sticky', top: 0, backgroundColor: '#424242', zIndex: 10}}
           value={this.state.value}
           onChange={this.handleChange}
           indicatorColor="secondary"

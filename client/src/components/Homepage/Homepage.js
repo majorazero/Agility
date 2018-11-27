@@ -175,8 +175,10 @@ class Homepage extends Component {
           format[`label${i + 2}`] = arr[i].stackName;
           format[`info${i + 2}`] = `${arr[i].stackComplete} ${arr[i].stackComplex}`;
         }
+        console.log(format);
         return format;
       }
+      console.log(format);
       return format;
     }
   }
