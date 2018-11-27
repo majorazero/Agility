@@ -24,7 +24,15 @@ class Homepage extends Component {
       projectContributed: "",
       projectCreated: "",
       complexity: "",
-      complexitySemantics: ""
+      complexitySemantics: "",
+      inviteCode: "",
+      showsnack: false,
+      projects: [],
+      currentUser: "",
+      loaded: false,
+      userFirstName: "",
+      userLastName: "",
+      userEmail: ""
     }
   }
 
@@ -52,10 +60,28 @@ class Homepage extends Component {
               response.data.complexity,
             complexitySemantics:
               response.data.compSemantics,
-            stacks: response.data.stacks
+            stacks: response.data.stacks,
+            userFirstName: response.data.prof.first_name,
+            userLastName: response.data.prof.last_name,
+            userEmail: response.data.prof.email
           }
         );
+      }).then(()=>{
+        this.fetch();
       });
+  }
+
+  fetch = () => {
+    axios.post("/api/projectOfUser", {
+      id: sessionStorage.getItem("id"),
+      token: localStorage.getItem("token")
+    }).then((response) => {
+      console.log(response.data);
+      this.setState({
+        projects: response.data.projects,
+        currentUser: response.data.currentUser
+      });
+    });
   }
 
   getCurrentUserId = () => {
@@ -71,7 +97,6 @@ class Homepage extends Component {
   }
 
   getTasks = (currentUserId) => {
-    console.log('getTasks')
     axios.get(`/api/sprints/tasks/user/${currentUserId}`)
       .then(res => {
         let incomplete = res.data.filter(task => !task.isCompleted)
@@ -95,8 +120,9 @@ class Homepage extends Component {
             }
           }
         })
-        this.setState({ tasks: data })
-      })
+        this.setState({ tasks: data, loaded: true })
+      }
+    )
   }
 
   goToProject = (sprintId) => {
@@ -108,7 +134,8 @@ class Homepage extends Component {
         }).then((data) => {
           window.location.assign(`/project/${data.data}`);
         });
-      })
+      }
+    )
   }
 
   stackFormat = () => {
@@ -183,6 +210,27 @@ class Homepage extends Component {
     );
   }
 
+  handleInviteChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+  }
+
+  handleInviteSubmit = (event) => {
+    event.preventDefault();
+    axios.post("/api/sprintMembershipWithCode", { sId: this.state.inviteCode, uId: sessionStorage.getItem("id"), token: localStorage.getItem("token") }).then((response) => {
+      if (response.data === "Already part of sprint!") {
+          this.setState({ showsnack: true });
+          setTimeout(() => { this.setState({showsnack: false }) }, 3000);
+      }
+      else {
+        this.fetch();
+      }
+    }).catch(()=>{
+      console.log("Invalid invite code!");
+    });
+  }
+
   render() {
     return (
       <div>
@@ -199,13 +247,28 @@ class Homepage extends Component {
           }} >
 
           <Grid item xs={3} style={{ margin: 25 }}>
-            <ProfileCard />
+            <ProfileCard
+              userFirstName= {this.state.userFirstName}
+              userLastName= {this.state.userLastName}
+              userEmail= {this.state.userEmail}
+              />
           </Grid>
           <Tab
-            activeTasks={<ActiveTasks tasks={this.state.tasks} goToProject={this.goToProject} homepage />}
-            projectList={<ProjectList />}
+            activeTasks={<ActiveTasks
+              loaded={this.state.loaded}
+              tasks={this.state.tasks} goToProject={this.goToProject} homepage />}
+            projectList={
+              <ProjectList
+                fetch={()=>{this.fetch()}}
+                projects={this.state.projects}
+                currentUser={this.state.currentUser}
+                showsnack={this.state.showsnack}
+                handleInviteSubmit={this.handleInviteSubmit}
+                handleInviteChange={this.handleInviteChange}
+              />
+            }
             userSummary={<TextMobileStepper
-              tutorialSteps={this.makeArray()}
+            tutorialSteps={this.makeArray()}
             />}
           />
         </div >

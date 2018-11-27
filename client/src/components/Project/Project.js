@@ -96,6 +96,8 @@ class Project extends React.Component {
     currentTaskComplexity: '',
     currentTaskStack: '',
 
+    countdown: "",
+
     expanded: null //handles the accordion function for expansion panels
   }
 
@@ -114,7 +116,6 @@ class Project extends React.Component {
       });
 
       //pass project id here
-      this.getMembers(this.state.sprintId);
       this.getCurrentUserId();
     }).catch((err) => {
       window.location.assign("/404");
@@ -264,6 +265,10 @@ class Project extends React.Component {
     let today = new Date();
     let currentDate = new Date();
     let timeProgress = ((currentDate - startDate) / (endDate - startDate) * 100);
+
+    let countdown = `${Math.ceil(((endDate - startDate)*(1-(timeProgress/100)))/(1000*60*60*24))} Days Left`;
+
+
     if (this.state.activeSprintId === sprintId) {
       isActive = true;
     }
@@ -273,11 +278,13 @@ class Project extends React.Component {
 
     if (timeProgress < 0) {
       timeProgress = 0;
+      countdown = "Not yet started.";
     }
     else if (timeProgress > 100) {
       timeProgress = 100;
+      countdown = "Sprint Ended.";
     }
-    this.setState({ sprintId: sprintId, isActive: isActive, SprintTime: timeProgress, futureSprint: futureSprint }, () => {
+    this.setState({ countdown:countdown ,sprintId: sprintId, isActive: isActive, SprintTime: timeProgress, futureSprint: futureSprint }, () => {
       this.getTasks();
       this.getMembers(this.state.sprintId);
     });
@@ -300,6 +307,7 @@ class Project extends React.Component {
         let activeSprint;
         let isActive = false;
         let timeProgress = 0;
+        let countdown = this.state.countdown;
         // check for active sprint
         for (let i = 0; i < sprints.length; i++) {
           let endDate = new Date(`${sprints[i].endDate}T23:59:59`)
@@ -324,6 +332,7 @@ class Project extends React.Component {
               currentSprint = activeSprint
               isActive = true;
               timeProgress = ((currentDate - startDate) / (endDate - startDate) * 100);
+              countdown = `${Math.ceil(((endDate - startDate)*(1-(timeProgress/100)))/(1000*60*60*24))} Days Left`;
             }
           }
           else if (today >= startDate && today <= endDate) {
@@ -331,10 +340,11 @@ class Project extends React.Component {
             currentSprint = activeSprint
             isActive = true;
             timeProgress = ((currentDate - startDate) / (endDate - startDate) * 100);
+            countdown = `${Math.ceil(((endDate - startDate)*(1-(timeProgress/100)))/(1000*60*60*24))} Days Left`;
           }
         }
-        console.log(timeProgress);
         this.setState({
+          countdown: countdown,
           SprintTime: timeProgress,
           chipData: sprintData,
           sprintId: currentSprint,
@@ -351,6 +361,7 @@ class Project extends React.Component {
 
   addSprint = () => {
     let overlap = false;
+    let overlappingSprint;
     let newSprintStart = new Date(`${this.state.sprintStart_date}T00:00:00`);
     console.log(this.state.sprintStart_date)
 
@@ -360,9 +371,9 @@ class Project extends React.Component {
       let end = new Date(`${this.state.sprints[i].endDate}T23:59:59`)
       if (newSprintStart >= start && newSprintStart <= end) {
         overlap = true
+        overlappingSprint = this.state.sprints[i].sprintName
       }
     }
-    console.log(overlap);
     if (overlap === false) {
       axios.post('/api/sprint', {
         name: this.state.sprintName,
@@ -379,6 +390,9 @@ class Project extends React.Component {
             });
           })
       });
+    }
+    else {
+      console.log(`${overlappingSprint} overlaps with this! Fix your dates!`)
     }
   }
 
@@ -567,13 +581,15 @@ class Project extends React.Component {
               futureSprint={this.state.futureSprint}
             />}
 
+            projectName={this.state.projName}
+
             inviteCode={<SimplePopper
               onPoperClick={this.inviteMember}
               message={this.state.inviteCode}
             />}
 
             sprintProgress={<LinearDeterminate completed={this.state.SprintProgress} title1={`Sprint Progress ${this.state.completedTasks.length}/${this.state.unassignedTasks.length + this.state.assignedTasks.length + this.state.completedTasks.length}  ${(this.state.completedTasks.length / (this.state.unassignedTasks.length + this.state.assignedTasks.length + this.state.completedTasks.length) * 100).toFixed(2)}%`} />}
-            sprintTime={<LinearDeterminate whatBar completed={this.state.SprintTime} title2={`Sprint Time`} />}
+            sprintTime={<LinearDeterminate whatBar completed={this.state.SprintTime} title2={`Elapsed Time ${this.state.countdown}`} />}
             completedTab={this.state.completedTasks.map((task) => {
               return (
                 <ul>
