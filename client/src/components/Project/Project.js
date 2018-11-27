@@ -18,6 +18,7 @@ import Tab from './../utils/Tab.js';
 import Add from '@material-ui/icons/Add';
 import { ListItemText } from '@material-ui/core';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
+import AlertSnackbar from './../utils/Snackbar';
 import SimplePopper from './../utils/popovertext';
 
 const styles = {
@@ -68,6 +69,7 @@ class Project extends React.Component {
     taskComplexity: "",
     taskStack: "",
     chipData: [],
+    showsnack: false,
 
     sprintOpen: false,
     sprintName: "",
@@ -219,6 +221,8 @@ class Project extends React.Component {
     axios.post("/api/decrypt", { token: localStorage.getItem("token"), id: sessionStorage.getItem("id") }).then((response) => {
       let user = response.data;
       axios.put("/api/task/by/" + task.id + "/" + user).then((res) => {
+        this.setState({ showsnack: true});
+        setTimeout(() => { this.setState({ showsnack: false }) }, 3000);
         this.getTasks();
       })
     });
@@ -624,6 +628,11 @@ class Project extends React.Component {
       currentUser={this.state.currentUser}
     />
     </div>
+    {this.state.showsnack ? <AlertSnackbar
+              open={this.state.showsnack}
+              variant='success'
+              message='Task has been assigned!'
+            /> : null}
   </div>
   );
   }
