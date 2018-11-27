@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import RegisterLayout from "../utils/RegisterLayout.js"
+import AlertSnackbar from './../utils/Snackbar.js';
 import Grid from '@material-ui/core/Grid';
 
 class Register extends Component {
@@ -9,7 +10,8 @@ class Register extends Component {
     lName: "",
     email: "",
     password: "",
-    message: ""
+    showsnack: false,
+    message: "",
   }
 
   handleChange = name => event => {
@@ -23,7 +25,8 @@ class Register extends Component {
 
     axios.post("/api/register", this.state).then((res) => {
       if (res.data === "User already exists!") {
-        this.setState({ message: res.data });
+        this.setState({ showsnack: true, message: res.data });
+        setTimeout(() => { this.setState({ showsnack: false }) }, 3000);
       }
       else {
         sessionStorage.setItem("id", res.data.id);
@@ -62,10 +65,14 @@ class Register extends Component {
               justifyContent: "center"
             }}
           >
+          {this.state.showsnack ? <AlertSnackbar
+              open={this.state.showsnack}
+              variant='error'
+              message={this.state.message}
+            /> : null}
             <RegisterLayout
               onChange={this.handleChange}
               onSubmit={this.handleSubmit}
-              message={this.state.message}
             />
           </Grid>
         </Grid>
