@@ -13,36 +13,37 @@ import Add from '@material-ui/icons/Add';
 import AlertSnackbar from './../utils/Snackbar.js';
 
 class ProjectList extends Component {
-  state = {
-    name: "",
-    summary: "",
-    projects: [],
-    open: false,
-    direction: "row",
-    justify: "center",
-    alignItems: "center",
-    inviteCode: "",
-    message: "",
-    currentUser: "",
-    showsnack: false
+  constructor(props){
+    super(props);
+
+    this.state = {
+      name: "",
+      summary: "",
+      projects: this.props.projects,
+      open: false,
+      direction: "row",
+      justify: "center",
+      alignItems: "center",
+      inviteCode: "",
+      message: "",
+      currentUser: this.props.currentUser,
+      showsnack: this.props.showsnack
+    }
   }
 
-  componentDidMount = () => {
-    this.fetch();
-  }
-
-  fetch = () => {
-    axios.post("/api/projectOfUser", {
-      id: sessionStorage.getItem("id"),
-      token: localStorage.getItem("token")
-    }).then((response) => {
-      console.log(response.data);
-      this.setState({
-        projects: response.data.projects,
-        currentUser: response.data.currentUser
-      });
-    });
-  }
+  // fetch = () => {
+  //   console.log(this.props);
+  //   axios.post("/api/projectOfUser", {
+  //     id: sessionStorage.getItem("id"),
+  //     token: localStorage.getItem("token")
+  //   }).then((response) => {
+  //     console.log(response.data);
+  //     this.setState({
+  //       projects: response.data.projects,
+  //       currentUser: response.data.currentUser
+  //     });
+  //   });
+  // }
 
   populate = () => {
     if (this.state.projects.length === 0) {
@@ -84,11 +85,11 @@ class ProjectList extends Component {
     });
   };
 
-  handleInviteChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value
-    })
-  }
+  // handleInviteChange = (event) => {
+  //   this.setState({
+  //     [event.target.name]: event.target.value
+  //   })
+  // }
 
   handleSubmit = () => {
     axios.post("/api/project", {
@@ -97,7 +98,7 @@ class ProjectList extends Component {
       id: sessionStorage.getItem("id"),
       token: localStorage.getItem("token")
     }).then((response) => {
-      this.fetch();
+      this.props.fetch();
       this.handleClose();
     });
   }
@@ -112,18 +113,18 @@ class ProjectList extends Component {
     this.setState({ open: false });
   };
 
-  handleInviteSubmit = (event) => {
-    event.preventDefault();
-    axios.post("/api/sprintMembershipWithCode", { sId: this.state.inviteCode, uId: sessionStorage.getItem("id"), token: localStorage.getItem("token") }).then((response) => {
-      if (response.data === "Already part of sprint!") {
-          this.setState({ showsnack: true });
-          setTimeout(() => { this.setState({showsnack: false }) }, 3000);
-      }
-      else {
-        this.fetch();
-      }
-    });
-  }
+  // handleInviteSubmit = (event) => {
+  //   event.preventDefault();
+  //   axios.post("/api/sprintMembershipWithCode", { sId: this.state.inviteCode, uId: sessionStorage.getItem("id"), token: localStorage.getItem("token") }).then((response) => {
+  //     if (response.data === "Already part of sprint!") {
+  //         this.setState({ showsnack: true });
+  //         setTimeout(() => { this.setState({showsnack: false }) }, 3000);
+  //     }
+  //     else {
+  //       this.fetch();
+  //     }
+  //   });
+  // }
 
   render() {
     return (
@@ -149,20 +150,21 @@ class ProjectList extends Component {
               <ListItemText primary='ADD PROJECT' />
             </ListItem>
             {this.populate()}
+            {/*this.state.projects.length === 0 ? */}
           </List>
           <Grid item>
             {/* <Typography variant="h5" gutterBottom>{this.state.message}</Typography> */}
-            
+
             <InputTextField
-              onSubmit={this.handleInviteSubmit}
+              onSubmit={this.props.handleInviteSubmit}
               label="Sprint Invite Code:"
               name="inviteCode"
-              onChange={this.handleInviteChange}
+              onChange={this.props.handleInviteChange}
             />
-            
+
           </Grid>
         </div>
-          
+
         <SimpleModalProjectWrapped
           open={this.state.open}
           onClose={this.handleClose}
