@@ -67,12 +67,12 @@ class SimplePopper extends React.Component {
             anchorEl={anchorEl}
             onClose={this.handleClose}
             anchorOrigin={{
-              vertical: 'buttom',
-              horizontal: 'right',
+              vertical: 'bottom',
+              horizontal: 'left',
             }}
             transformOrigin={{
-              vertical: 'buttom',
-              horizontal: 'left',
+              vertical: 'bottom',
+              horizontal: 'right',
             }}
           >
 

@@ -55,7 +55,7 @@ class SimpleTabs extends React.Component {
           <div style={{paddingTop: 10, position: 'sticky', top: 0, backgroundColor: '#424242', zIndex: 10}}>
                 <ListItem
                     style={{margin: '10px 0 10px 0', display:'flex', flexDirection:'row', justifyContent:'space-between', paddingBottom:20}}>
-                    <Typography variant="h5">{this.props.projectName}</Typography>
+                    <Typography variant="h4" gutterBottom color='inherit'>{this.props.projectName}</Typography>
                     <span>{this.props.inviteCode}</span></ListItem>
                 {this.props.sprintProgress}{this.props.sprintTime}
                 <Tabs
