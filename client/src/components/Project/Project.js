@@ -116,7 +116,6 @@ class Project extends React.Component {
       });
 
       //pass project id here
-      this.getMembers(this.state.sprintId);
       this.getCurrentUserId();
     }).catch((err) => {
       window.location.assign("/404");
