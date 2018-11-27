@@ -52,6 +52,7 @@ class SimpleTabs extends React.Component {
     const { value } = this.state;
    return (
       <Paper className={classes.root}>
+      <div style={{paddingTop: 10, position: 'sticky', top: 0, backgroundColor: '#424242', zIndex: 10}}>
       <ListItem style={{ margin: '10px 0 10px 0' }}>{this.props.inviteCode}</ListItem>
       {this.props.sprintProgress}{this.props.sprintTime}
         <Tabs
@@ -66,6 +67,7 @@ class SimpleTabs extends React.Component {
           <Tab label='Complete'/>
           <Tab label='Summary' />
         </Tabs>
+        </div>
         {value === 0 && <TabContainer>{this.props.taskPool}</TabContainer>}
         {value === 1 && <TabContainer>{this.props.userPool}</TabContainer>}
         {value === 2 && <TabContainer>{this.props.completedTab}</TabContainer>}
