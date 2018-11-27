@@ -58,7 +58,74 @@ class ControlledExpansionPanels extends React.Component {
             <Typography style={{ width: '-webkit-fill-available' }}>
               {this.props.description}
             </Typography>
-            {this.props.homepage ?
+          {this.props.location === 'open tasks' ? 
+            <div>
+              <ContainedButtons
+                size="small"
+                name='Delete'
+                color='primary'
+                onClick={this.props.onClickDelete}
+                hidden={false}
+              />
+              <ContainedButtons
+                size="small"
+                name='Claim'
+                color='primary'
+                onClick={this.props.onClickAdd}
+                hidden={false}
+              /> 
+              <ContainedButtons
+                size="small"
+                name='Edit'
+                color='primary'
+                onClick={this.props.edit}
+                hidden={this.props.isAdmin ? false:true}
+              /> 
+            </div>
+             : null}
+          {this.props.location === 'in progress' ? 
+            <div>
+              <ContainedButtons
+                size="small"
+                name='Complete'
+                color='primary'
+                onClick={this.props.onClickComplete}
+                hidden={false}
+              />
+              <ContainedButtons
+                size="small"
+                name='Unassign'
+                color='primary'
+                onClick={this.props.unAssign}
+                hidden={false}
+              />
+            </div>
+            : null}
+            {this.props.location === 'complete' ? 
+              <div>
+                <ContainedButtons
+                  size="small"
+                  name='Reopen'
+                  color='primary'
+                  onClick={this.props.onClickReopen}
+                  hidden={false}
+                /> 
+              </div>
+            :null}
+            {this.props.homepage ? 
+              <div>
+                <ContainedButtons
+                  size="small"
+                  name='View Project'
+                  color='primary'
+                  onClick={this.props.goToProject}
+                  hidden={false}
+                />
+              </div>
+            : null}
+
+
+            {/* {this.props.homepage ?
               (<ContainedButtons
                 size="small"
                 name='View Project'
@@ -110,7 +177,7 @@ class ControlledExpansionPanels extends React.Component {
                 onClick={this.props.complete ? (this.props.isAdmin ? this.props.onClickReopen : null) : (this.props.assigned ? this.props.unAssign : this.props.onClickAdd)}
                 hidden={(this.props.currentUser === this.props.assignedUser) ? false : (this.props.isAdmin ? false : true)}
               />
-            }
+            } */}
           </ExpansionPanelDetails>
         </ExpansionPanel>
       </div>
@@ -123,3 +190,60 @@ ControlledExpansionPanels.propTypes = {
 };
 
 export default withStyles(styles)(ControlledExpansionPanels);
+
+
+{/* <ContainedButtons
+  size="small"
+  name='View Project'
+  color='primary'
+  onClick={this.props.goToProject}
+  hidden={false}
+/>
+
+<ContainedButtons
+  size="small"
+  name='Claim'
+  color='primary'
+  onClick={this.props.onClickAdd}
+  hidden={false}
+/>
+
+<ContainedButtons
+  size="small"
+  name='Unassign'
+  color='primary'
+  onClick={this.props.unAssign}
+  hidden={false}
+/>
+
+<ContainedButtons
+  size="small"
+  name='Mark Complete'
+  color='primary'
+  onClick={this.props.onClickComplete}
+  hidden={false}
+/>
+
+<ContainedButtons
+  size="small"
+  name='Delete'
+  color='primary'
+  onClick={this.props.onClickDelete}
+  hidden={false}
+/>
+
+<ContainedButtons
+  size="small"
+  name='Edit'
+  color='primary'
+  onClick={this.props.edit}
+  hidden={false}
+/>
+
+<ContainedButtons
+  size="small"
+  name='Reopen'
+  color='primary'
+  onClick={this.props.onClickReopen}
+  hidden={false}
+/> */}
