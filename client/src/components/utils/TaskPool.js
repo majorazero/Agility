@@ -67,28 +67,50 @@ class ControlledExpansionPanels extends React.Component {
                 hidden={this.props.activetasks ? false : true}
               />)
               :
-              (<div style={{ display: 'flex', alignItems: 'flex-end', flexDirection: 'column'}}><ContainedButtons
-                name={this.props.complete ? (this.props.isAdmin ? 'Reopen' : null) : (this.props.assigned ? 'Unassign' : 'Claim')}
-                color="primary"
-                size="small"
-                onClick={this.props.complete ? (this.props.isAdmin ? this.props.onClickReopen : null) : (this.props.assigned ? this.props.unAssign : this.props.onClickAdd)}
-                hidden={(this.props.currentUser === this.props.assignedUser) ? false : (this.props.isAdmin ? false : true)}
-              />
-                <ContainedButtons
-                  name={(this.props.assigned && !this.props.futureSprint) ? 'Mark Complete' : this.props.isAdmin ? 'Delete' : null}
-                  color='secondary'
-                  size="small"
-                  onClick={this.props.assigned ? this.props.onClickComplete : this.props.onClickDelete}
-                  hidden={this.props.complete ? true : (this.props.currentUser === this.props.assignedUser) ? false : (this.props.isAdmin ? false : true)}
-                /></div>)
-            }
-            <ContainedButtons
+              (<div style={{ display: 'flex', alignItems: 'flex-end', flexDirection: 'column'}}>
+               <ContainedButtons
                 size="small"
                 name='Edit'
                 color='primary'
                 onClick={this.props.edit}
                 hidden={this.props.complete ? true : false}
               />
+              {this.props.assigned ?  
+              <ContainedButtons
+                name={this.props.complete ? (this.props.isAdmin ? 'Reopen' : null) : (this.props.assigned ? 'Unassign' : 'Claim')}
+                color="primary"
+                size="small"
+                onClick={this.props.complete ? (this.props.isAdmin ? this.props.onClickReopen : null) : (this.props.assigned ? this.props.unAssign : this.props.onClickAdd)}
+                hidden={(this.props.currentUser === this.props.assignedUser) ? false : (this.props.isAdmin ? false : true)}
+              /> 
+              :  
+              <ContainedButtons
+              name={(this.props.assigned && !this.props.futureSprint) ? 'Mark Complete' : this.props.isAdmin ? 'Delete' : null}
+              color='secondary'
+              size="small"
+              onClick={this.props.assigned ? this.props.onClickComplete : this.props.onClickDelete}
+              hidden={this.props.complete ? true : (this.props.currentUser === this.props.assignedUser) ? false : (this.props.isAdmin ? false : true)}
+            />}
+              </div>
+              )
+            }
+            {this.props.assigned ? 
+              <ContainedButtons
+                  name={(this.props.assigned && !this.props.futureSprint) ? 'Mark Complete' : this.props.isAdmin ? 'Delete' : null}
+                  color='secondary'
+                  size="small"
+                  onClick={this.props.assigned ? this.props.onClickComplete : this.props.onClickDelete}
+                  hidden={this.props.complete ? true : (this.props.currentUser === this.props.assignedUser) ? false : (this.props.isAdmin ? false : true)}
+                /> 
+                : 
+                <ContainedButtons
+                name={this.props.complete ? 'Reopen' : (this.props.assigned ? 'Unassign' : 'Claim')}
+                color="primary"
+                size="small"
+                onClick={this.props.complete ? (this.props.isAdmin ? this.props.onClickReopen : null) : (this.props.assigned ? this.props.unAssign : this.props.onClickAdd)}
+                hidden={(this.props.currentUser === this.props.assignedUser) ? false : (this.props.isAdmin ? false : true)}
+              />
+            }
           </ExpansionPanelDetails>
         </ExpansionPanel>
       </div>
