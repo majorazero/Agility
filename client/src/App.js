@@ -11,10 +11,18 @@ import axios from "axios";
 import notFound from "./components/utils/404/404.js";
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import './App.css';
+import red from '@material-ui/core/colors/red';
+import green from '@material-ui/core/colors/green';
 
 const theme = createMuiTheme({
   palette: {
     type: 'dark',
+    primary: {
+      main: '#998877'
+    },
+    secondary: {
+      main: '#778899'
+    }
   },
   typography: {
     useNextVariants: true,

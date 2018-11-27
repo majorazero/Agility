@@ -467,7 +467,9 @@ class Project extends React.Component {
     const { classes } = this.props;
     return (
       <div>
-        <ButtonAppBar />
+        <ButtonAppBar
+        projectName={this.state.projName}
+        />
         <div
           className="parallax"
           style={{

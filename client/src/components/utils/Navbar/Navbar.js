@@ -35,14 +35,12 @@ function ButtonAppBar(props) {
         <Toolbar>
           <Drawer />
           <Typography
-            style={{ textDecoration: 'none'}}
-            component={Link}
-            to='/homepage'
+            style={{ display: 'flex'}}
             variant="h4"
             color="inherit"
             className={classes.grow}
           >
-            agility.
+            agility.<Typography variant="h4" className={classes.grow} style={{color: '#424242' }}>{props.projectName}</Typography>
           </Typography>
           {sessionStorage.getItem("id") ? null : <Button href="/register" color="inherit">Sign Up</Button>}
           {sessionStorage.getItem("id") ? <Button onClick={() => {
