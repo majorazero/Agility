@@ -28,7 +28,8 @@ class Homepage extends Component {
       inviteCode: "",
       showsnack: false,
       projects: [],
-      currentUser: ""
+      currentUser: "",
+      loaded: false
     }
   }
 
@@ -90,7 +91,6 @@ class Homepage extends Component {
   }
 
   getTasks = (currentUserId) => {
-    console.log('getTasks')
     axios.get(`/api/sprints/tasks/user/${currentUserId}`)
       .then(res => {
         let incomplete = res.data.filter(task => !task.isCompleted)
@@ -114,7 +114,7 @@ class Homepage extends Component {
             }
           }
         })
-        this.setState({ tasks: data })
+        this.setState({ tasks: data, loaded: true })
       }
     )
   }
@@ -241,7 +241,9 @@ class Homepage extends Component {
             <ProfileCard />
           </Grid>
           <Tab
-            activeTasks={<ActiveTasks tasks={this.state.tasks} goToProject={this.goToProject} homepage />}
+            activeTasks={<ActiveTasks
+              loaded={this.state.loaded}
+              tasks={this.state.tasks} goToProject={this.goToProject} homepage />}
             projectList={
               <ProjectList
                 fetch={()=>{this.fetch()}}

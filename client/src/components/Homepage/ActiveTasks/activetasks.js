@@ -47,10 +47,11 @@ class ActiveTasks extends Component {
 
     return (
       <List className={classes.root} subheader={<li />}>
-        {this.props.tasks.length === 0 ?
+        {!this.props.loaded ? "" :
+          (this.props.tasks.length === 0 ?
 
           <h1>No active tasks!</h1>
-          
+
           :  this.props.tasks.map((sprint, i) => (
           <li key={i} className={classes.listSection}>
             <ul className={classes.ul}>
@@ -69,7 +70,7 @@ class ActiveTasks extends Component {
                 </ListItem>
               ))}
             </ul>
-          </li>))
+          </li>)))
         }
       </List>
     );
