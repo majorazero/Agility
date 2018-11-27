@@ -6,15 +6,15 @@ import ContainedButtons from "../utils/Button.js";
 import './landing.css';
 import Typography from '@material-ui/core/Typography';
 import MediaCard from "../utils/MediaCard.js";
-import LandingDrawer from "../utils/LandingDrawer.js";
 import Drawer from '@material-ui/core/Drawer';
 import { MenuItem, Paper } from "@material-ui/core";
+import LandingTab from './../utils/Tab3.js';
 
 const theme = createMuiTheme({
   overrides: {
     MuiButton: {
       root: {
-        background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+        background: 'linear-gradient(45deg, #998877 30%, #778899 90%)',
         borderRadius: 3,
         border: 0,
         height: 48,
@@ -153,12 +153,7 @@ class Landing extends Component {
               }}
             >
               <Grid>
-                <Paper>
-                  {/* <LandingDrawer /> */}
-                  <Drawer variant='temporary'>
-                  BALLS
-                  </Drawer>
-                </Paper>
+                  <LandingTab />
               </Grid>
 
             </Grid>

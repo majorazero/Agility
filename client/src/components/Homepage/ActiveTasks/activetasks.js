@@ -51,7 +51,7 @@ class ActiveTasks extends Component {
         {!this.props.loaded ? "" :
           (this.props.tasks.length === 0 ?
 
-          <Typography gutterBottom variant='h4'>No active tasks!</Typography>
+          <Typography gutterBottom variant='h4' style={{textAlign: 'center', marginTop: 20}}>No active tasks!</Typography>
           :  this.props.tasks.map((sprint, i) => (
           <li key={i} className={classes.listSection}>
             <ul className={classes.ul}>
