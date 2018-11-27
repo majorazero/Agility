@@ -19,40 +19,23 @@ class ProjectList extends Component {
     this.state = {
       name: "",
       summary: "",
-      projects: this.props.projects,
       open: false,
       direction: "row",
       justify: "center",
       alignItems: "center",
       inviteCode: "",
-      message: "",
-      currentUser: this.props.currentUser,
-      showsnack: this.props.showsnack
+      message: ""
     }
   }
 
-  // fetch = () => {
-  //   console.log(this.props);
-  //   axios.post("/api/projectOfUser", {
-  //     id: sessionStorage.getItem("id"),
-  //     token: localStorage.getItem("token")
-  //   }).then((response) => {
-  //     console.log(response.data);
-  //     this.setState({
-  //       projects: response.data.projects,
-  //       currentUser: response.data.currentUser
-  //     });
-  //   });
-  // }
-
   populate = () => {
-    if (this.state.projects.length === 0) {
+    if (this.props.projects.length === 0) {
       return <Typography gutterBottom variant='h4'>Start a new project!</Typography>;
     }
     else {
       return (
         <div>
-          {this.state.projects.map((item) => {
+          {this.props.projects.map((item) => {
             return (
               <SingleLineGridList
                 onClick={this.handleOpen}
@@ -60,8 +43,9 @@ class ProjectList extends Component {
                 key={item.id}
                 name={item.name}
                 summary={item.summary}
-                isAdmin={(item.userId === parseInt(this.state.currentUser)) ? true : false}
-                onProjectPress={() => { this.onProjectPress(item.id) }} />
+                isAdmin={(item.userId === parseInt(this.props.currentUser)) ? true : false}
+                onProjectPress={() => { this.onProjectPress(item.id) }}
+              />
             )
           })}
         </div>
@@ -85,11 +69,6 @@ class ProjectList extends Component {
     });
   };
 
-  // handleInviteChange = (event) => {
-  //   this.setState({
-  //     [event.target.name]: event.target.value
-  //   })
-  // }
 
   handleSubmit = () => {
     axios.post("/api/project", {
@@ -112,19 +91,6 @@ class ProjectList extends Component {
   handleClose = () => {
     this.setState({ open: false });
   };
-
-  // handleInviteSubmit = (event) => {
-  //   event.preventDefault();
-  //   axios.post("/api/sprintMembershipWithCode", { sId: this.state.inviteCode, uId: sessionStorage.getItem("id"), token: localStorage.getItem("token") }).then((response) => {
-  //     if (response.data === "Already part of sprint!") {
-  //         this.setState({ showsnack: true });
-  //         setTimeout(() => { this.setState({showsnack: false }) }, 3000);
-  //     }
-  //     else {
-  //       this.fetch();
-  //     }
-  //   });
-  // }
 
   render() {
     return (
@@ -150,18 +116,14 @@ class ProjectList extends Component {
               <ListItemText primary='ADD PROJECT' />
             </ListItem>
             {this.populate()}
-            {/*this.state.projects.length === 0 ? */}
           </List>
           <Grid item>
-            {/* <Typography variant="h5" gutterBottom>{this.state.message}</Typography> */}
-
             <InputTextField
               onSubmit={this.props.handleInviteSubmit}
               label="Sprint Invite Code:"
               name="inviteCode"
               onChange={this.props.handleInviteChange}
             />
-
           </Grid>
         </div>
 
@@ -175,8 +137,8 @@ class ProjectList extends Component {
           <AddProjectLayout
           />
         </SimpleModalProjectWrapped>
-        {this.state.showsnack ? <AlertSnackbar
-          open={this.state.showsnack}
+        {this.props.showsnack ? <AlertSnackbar
+          open={this.props.showsnack}
           variant='error'
           message='You are already part of this sprint.'
         /> : null}
