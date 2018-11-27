@@ -7,6 +7,7 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Grid from '@material-ui/core/Grid';
 
 const styles = theme => ({
   root: {
@@ -55,74 +56,80 @@ class ControlledExpansionPanels extends React.Component {
             <Typography color='inherit' className={classes.secondaryHeading}>{this.props.stack}</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
-            <Typography style={{ width: '-webkit-fill-available' }}>
-              {this.props.description}
-            </Typography>
-          {this.props.location === 'open tasks' ? 
-            <div>
-              <ContainedButtons
-                size="small"
-                name='Delete'
-                color='primary'
-                onClick={this.props.onClickDelete}
-                hidden={false}
-              />
-              <ContainedButtons
-                size="small"
-                name='Claim'
-                color='primary'
-                onClick={this.props.onClickAdd}
-                hidden={false}
-              /> 
-              <ContainedButtons
-                size="small"
-                name='Edit'
-                color='primary'
-                onClick={this.props.edit}
-                hidden={this.props.isAdmin ? false:true}
-              /> 
-            </div>
-             : null}
-          {this.props.location === 'in progress' ? 
-            <div>
-              <ContainedButtons
-                size="small"
-                name='Complete'
-                color='primary'
-                onClick={this.props.onClickComplete}
-                hidden={false}
-              />
-              <ContainedButtons
-                size="small"
-                name='Unassign'
-                color='primary'
-                onClick={this.props.unAssign}
-                hidden={false}
-              />
-            </div>
-            : null}
-            {this.props.location === 'complete' ? 
-              <div>
-                <ContainedButtons
-                  size="small"
-                  name='Reopen'
-                  color='primary'
-                  onClick={this.props.onClickReopen}
-                  hidden={false}
-                /> 
-              </div>
-            :null}
-            {this.props.homepage ? 
-              <div>
-                <ContainedButtons
-                  size="small"
-                  name='View Project'
-                  color='primary'
-                  onClick={this.props.goToProject}
-                  hidden={false}
-                />
-              </div>
-            : null}
+            <Grid container direction='column'>
+              <Grid>
+                <Typography style={{ width: '-webkit-fill-available' }}>
+                  {this.props.description}
+                </Typography>
+              </Grid>
+              <Grid>
+              {this.props.location === 'open tasks' ? 
+                <Grid container direction='row' justify='flex-end'>
+                  <ContainedButtons
+                    size="small"
+                    name='Edit'
+                    color='secondary'
+                    onClick={this.props.edit}
+                    hidden={this.props.isAdmin ? false:true}
+                  />
+                  <ContainedButtons
+                    size="small"
+                    name='Delete'
+                    color='primary'
+                    onClick={this.props.onClickDelete}
+                    hidden={false}
+                  /> 
+                  <ContainedButtons
+                    size="small"
+                    name='Claim'
+                    color='secondary'
+                    onClick={this.props.onClickAdd}
+                    hidden={false}
+                  /> 
+                </Grid>
+                : null}
+              {this.props.location === 'in progress' ? 
+                <Grid container direction='row' justify='flex-end'>
+                  <ContainedButtons
+                    size="small"
+                    name='Unassign'
+                    color='primary'
+                    onClick={this.props.unAssign}
+                    hidden={false}
+                  />
+                  <ContainedButtons
+                    size="small"
+                    name='Complete'
+                    color='secondary'
+                    onClick={this.props.onClickComplete}
+                    hidden={false}
+                  />
+                </Grid>
+                : null}
+                {this.props.location === 'complete' ? 
+                  <Grid container direction='row' justify='flex-end'>
+                    <ContainedButtons
+                      size="small"
+                      name='Reopen'
+                      color='secondary'
+                      onClick={this.props.onClickReopen}
+                      hidden={false}
+                    /> 
+                  </Grid>
+                :null}
+                {this.props.homepage ? 
+                  <Grid container direction='row' justify='flex-end'>
+                    <ContainedButtons
+                      size="small"
+                      name='View Project'
+                      color='secondary'
+                      onClick={this.props.goToProject}
+                      hidden={false}
+                    />
+                  </Grid>
+                : null}
+              </Grid>
+            </Grid>
           </ExpansionPanelDetails>
         </ExpansionPanel>
       </div>
