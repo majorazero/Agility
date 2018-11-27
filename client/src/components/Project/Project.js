@@ -96,6 +96,8 @@ class Project extends React.Component {
     currentTaskComplexity: '',
     currentTaskStack: '',
 
+    endDate: "",
+
     expanded: null //handles the accordion function for expansion panels
   }
 
@@ -277,7 +279,7 @@ class Project extends React.Component {
     else if (timeProgress > 100) {
       timeProgress = 100;
     }
-    this.setState({ sprintId: sprintId, isActive: isActive, SprintTime: timeProgress, futureSprint: futureSprint }, () => {
+    this.setState({ endDate: endDate, sprintId: sprintId, isActive: isActive, SprintTime: timeProgress, futureSprint: futureSprint }, () => {
       this.getTasks();
       this.getMembers(this.state.sprintId);
     });
@@ -300,6 +302,7 @@ class Project extends React.Component {
         let activeSprint;
         let isActive = false;
         let timeProgress = 0;
+        //let endDate = "";
         // check for active sprint
         for (let i = 0; i < sprints.length; i++) {
           let endDate = new Date(`${sprints[i].endDate}T23:59:59`)
@@ -335,6 +338,7 @@ class Project extends React.Component {
         }
         console.log(timeProgress);
         this.setState({
+          //endDate: endDate,
           SprintTime: timeProgress,
           chipData: sprintData,
           sprintId: currentSprint,
@@ -446,6 +450,11 @@ class Project extends React.Component {
       expanded: expanded ? panel : false,
     });
   };
+
+  timeLeft = () => {
+    let currentTime = new Date();
+    console.log(currentTime,this.state.currentSprint);
+  }
 
   render() {
     const { expanded } = this.state;
@@ -566,7 +575,7 @@ class Project extends React.Component {
               onClickComplete={this.markComplete}
               futureSprint={this.state.futureSprint}
             />}
-            
+
             projectName={this.state.projName}
 
             inviteCode={<SimplePopper
@@ -575,7 +584,7 @@ class Project extends React.Component {
             />}
 
             sprintProgress={<LinearDeterminate completed={this.state.SprintProgress} title1={`Sprint Progress ${this.state.completedTasks.length}/${this.state.unassignedTasks.length + this.state.assignedTasks.length + this.state.completedTasks.length}  ${(this.state.completedTasks.length / (this.state.unassignedTasks.length + this.state.assignedTasks.length + this.state.completedTasks.length) * 100).toFixed(2)}%`} />}
-            sprintTime={<LinearDeterminate whatBar completed={this.state.SprintTime} title2={`Sprint Time`} />}
+            sprintTime={<LinearDeterminate whatBar completed={this.state.SprintTime} title2={`Elapsed Time ${this.timeLeft()}`} />}
             completedTab={this.state.completedTasks.map((task) => {
               return (
                 <ul>
