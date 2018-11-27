@@ -87,7 +87,7 @@ class ControlledExpansionPanels extends React.Component {
                 name='Edit'
                 color='primary'
                 onClick={this.props.edit}
-                // hidden={this.props.activetasks ? false : true}
+                hidden={this.props.complete ? true : false}
               />
           </ExpansionPanelDetails>
         </ExpansionPanel>
