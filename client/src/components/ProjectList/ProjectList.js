@@ -30,7 +30,7 @@ class ProjectList extends Component {
 
   populate = () => {
     if (this.props.projects.length === 0) {
-      return <Typography gutterBottom variant='h4'>Start a new project!</Typography>;
+      return <Typography gutterBottom variant='h4' style={{textAlign: 'center', marginTop: 20}}>Start a new project!</Typography>;
     }
     else {
       return (
@@ -143,7 +143,7 @@ class ProjectList extends Component {
         {this.props.showsnack ? <AlertSnackbar
           open={this.props.showsnack}
           variant='error'
-          message='You are already part of this sprint.'
+          message={this.props.snackmessage}
         /> : null}
       </div>
     );

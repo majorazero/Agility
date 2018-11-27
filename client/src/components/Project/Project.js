@@ -246,6 +246,8 @@ class Project extends React.Component {
 
   unassignTask = (id) => {
     axios.put("/api/task/unassign", { id: id }).then((response) => {
+      this.setState({ showsnack: true, snackType: 'success', errorTaskMess: 'Successfully unassigned task!' });
+      setTimeout(() => { this.setState({ showsnack: false }) }, 3000);
       this.getTasks();
     });
   }
@@ -434,6 +436,8 @@ class Project extends React.Component {
   markComplete = (id) => {
     axios.put(`/api/complete/task/${id}`)
       .then(() => {
+        this.setState({ showsnack: true, snackType: 'success', errorTaskMess: 'Successfully completed task!' });
+        setTimeout(() => { this.setState({ showsnack: false }) }, 3000);
         this.getTasks();
       }
       )
@@ -442,6 +446,8 @@ class Project extends React.Component {
   reopenTask = (id) => {
     axios.put(`/api/reopen/task/${id}`)
       .then(() => {
+        this.setState({ showsnack: true, snackType: 'success', errorTaskMess: 'Reopened task!' });
+        setTimeout(() => { this.setState({ showsnack: false }) }, 3000);
         this.getTasks();
       }
       )
