@@ -35,7 +35,7 @@ module.exports = function(app){
 
     //returns all sprints and tasks by a given userId
     app.get('/api/sprints/tasks/user/:userId', (req, res)=> {
-      db.sequelize.query(`SELECT DISTINCT Tasks.name, Tasks.isCompleted, Tasks.id, Tasks.due_date, Tasks.description, Tasks.complexity, Tasks.stack, Users.id AS user_id, Sprints.name AS sprint, Sprints.id AS sprintId, Sprints.end_date FROM Tasks INNER JOIN Sprints ON Sprints.id = Tasks.sprint_id INNER JOIN Users ON Tasks.assigned_id = Users.id AND Users.id=${req.params.userId}`, { type: sequelize.QueryTypes.SELECT}).then(activetasks => {
+      db.sequelize.query(`SELECT DISTINCT Tasks.name, Tasks.isCompleted, Tasks.id, Tasks.due_date, Tasks.description, Tasks.complexity, Tasks.stack, Users.id AS user_id, Sprints.name AS sprint, Sprints.id AS sprintId, Sprints.end_date, Sprints.start_date FROM Tasks INNER JOIN Sprints ON Sprints.id = Tasks.sprint_id INNER JOIN Users ON Tasks.assigned_id = Users.id AND Users.id=${req.params.userId}`, { type: sequelize.QueryTypes.SELECT}).then(activetasks => {
           res.json(activetasks)
       })
     });

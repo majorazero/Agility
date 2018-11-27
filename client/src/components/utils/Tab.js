@@ -84,6 +84,7 @@ class SimpleTabs extends React.Component {
                         </ListItem>}</div>
                     </Tabs>
                 </div>
+
                 {value === 0 && <TabContainer>{this.props.taskPool}</TabContainer>}
                 {value === 1 && <TabContainer>{this.props.userPool}</TabContainer>}
                 {value === 2 && <TabContainer>{this.props.completedTab}</TabContainer>}
