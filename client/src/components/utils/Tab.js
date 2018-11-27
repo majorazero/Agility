@@ -52,25 +52,38 @@ class SimpleTabs extends React.Component {
         const { value } = this.state;
         return (
             <Paper className={classes.root}>
-          <div style={{paddingTop: 10, position: 'sticky', top: 0, backgroundColor: '#424242', zIndex: 10}}>
-                <ListItem
-                    style={{margin: '10px 0 10px 0', display:'flex', flexDirection:'row', justifyContent:'space-between', paddingBottom:20}}>
-                    <Typography variant="h4" gutterBottom color='primary'>{this.props.projectName}</Typography>
-                    <span>{this.props.inviteCode}</span></ListItem>
-                {this.props.sprintProgress}{this.props.sprintTime}
-                <Tabs
-                    value={this.state.value}
-                    onChange={this.handleChange}
-                    indicatorColor="secondary"
-                    textColor="secondary"
-                    centered
-                >
-                    <Tab label={this.props.isActive ? 'Open Tasks' : 'Incomplete Tasks'} />
-                    <Tab label="In Progress" />
-                    <Tab label='Complete' />
-                    <Tab label='Summary' />
-                </Tabs>
-          </div>
+                <div style={{ paddingTop: 10, position: 'sticky', top: 0, backgroundColor: '#424242', zIndex: 10 }}>
+                    <div
+                        style={{
+                            margin: '10px 0 10px 0',
+                            paddingBottom: 20
+                        }}
+                    >
+                        {this.props.sprintProgress}{this.props.sprintTime}
+                    </div>
+
+                    <Tabs
+                        value={this.state.value}
+                        onChange={this.handleChange}
+                        indicatorColor="primary"
+                        textColor="primary"
+                        centered
+                    >
+                        <Tab label={this.props.isActive ? 'Open Tasks' : 'Incomplete Tasks'} />
+                        <Tab label="In Progress" />
+                        <Tab label='Complete' />
+                        <Tab label='Summary' />
+                        <div>{<ListItem
+                            style={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                justifyContent: 'space-between',
+                            }}
+                        >
+                            {this.props.inviteCode}
+                        </ListItem>}</div>
+                    </Tabs>
+                </div>
                 {value === 0 && <TabContainer>{this.props.taskPool}</TabContainer>}
                 {value === 1 && <TabContainer>{this.props.userPool}</TabContainer>}
                 {value === 2 && <TabContainer>{this.props.completedTab}</TabContainer>}
