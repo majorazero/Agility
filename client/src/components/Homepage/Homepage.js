@@ -99,7 +99,7 @@ class Homepage extends Component {
       .then(res => {
         let incomplete = res.data.filter(task => !task.isCompleted)
         let today = new Date();
-        let active = incomplete.filter(task => new Date(`${task.end_date}T23:59:59`) >= today)
+        let active = incomplete.filter(task => (new Date(`${task.end_date}T23:59:59`) >= today)&&(new Date(`${task.start_date}T00:00:00`) <= today ))
         let data = []
         let sprints = []
 
