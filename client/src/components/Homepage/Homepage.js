@@ -63,6 +63,7 @@ class Homepage extends Component {
       id: sessionStorage.getItem("id"),
       token: localStorage.getItem("token")
     }).then(res => {
+      console.log(res.data)
       this.setState({ userId: res.data }, () => {
         this.getTasks(this.state.userId)
       })
@@ -70,14 +71,16 @@ class Homepage extends Component {
   }
 
   getTasks = (currentUserId) => {
+    console.log('getTasks')
     axios.get(`/api/sprints/tasks/user/${currentUserId}`)
       .then(res => {
         let incomplete = res.data.filter(task => !task.isCompleted)
-
+        let today = new Date();
+        let active = incomplete.filter(task => new Date(`${task.end_date}T23:59:59`) >= today)
         let data = []
         let sprints = []
 
-        incomplete.forEach(task => {
+        active.forEach(task => {
           if (!(sprints.includes(task.sprintId))) {
             sprints.push(task.sprintId)
             data.push({

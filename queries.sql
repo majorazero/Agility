@@ -13,6 +13,10 @@ SELECT * FROM tasks;
 SELECT * FROM sprintmemberships
 WHERE userId=1;
 
+INSERT INTO tasks
+(name, description, due_date, sprint_id, assigned_id, complexity, stack, createdAt)
+VALUES ("Old task", "this task should not appear on active tasks", "2018-11-25", 25, 4, 3, "React", "2018-11-02 07:11:13", "2018-11-02 07:11:13")
+
 #returns tasks for a given user, includes sprint and project
 SELECT DISTINCT tasks.name AS task, tasks.isCompleted AS Complete, users.id AS user_id, sprints.name AS sprint, sprints.id AS sprintId
 FROM tasks
@@ -58,6 +62,6 @@ INNER JOIN sprintmemberships ON sprints.id = sprintmemberships.sprintId
 INNER JOIN users ON users.id = sprintmemberships.userId AND users.id=1
 
 UPDATE tasks
-SET name="name", due_date="due_date", description="description", complexity="complexity", stack="stack"
-WHERE id=23
+SET name="name", due_date="2018-11-26", description="this task was edited", complexity="2", stack="React"
+WHERE id=41
 

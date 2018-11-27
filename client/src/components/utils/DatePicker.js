@@ -22,7 +22,7 @@ function DatePickers(props) {
         label={props.label}
         name={props.name}
         type="date"
-        value={props.edit ? props.due_date:(new Date().getFullYear()) + "-" + (new Date().getMonth() + 1) + "-" + (new Date().getDate())}
+        value={props.edit ? props.due_date:props.defaultDueDate}
         className={classes.textField}
         onChange={props.onChange}
         InputLabelProps={{
