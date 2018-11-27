@@ -181,19 +181,19 @@ class Project extends React.Component {
     }
     else {
       console.log("Task Added!");
-      // axios.post("/api/task", {
-      //   name: this.state.taskName,
-      //   due_date: this.state.taskDue_date,
-      //   description: this.state.taskDescription,
-      //   sprint_id: this.state.sprintId,
-      //   complexity: this.state.taskComplexity,
-      //   stack: this.state.taskStack
-      // }).then(() => {
-      //   this.setState({
-      //     taskOpen: false
-      //   });
-      //   this.getTasks();
-      // });
+      axios.post("/api/task", {
+        name: this.state.taskName,
+        due_date: this.state.taskDue_date,
+        description: this.state.taskDescription,
+        sprint_id: this.state.sprintId,
+        complexity: this.state.taskComplexity,
+        stack: this.state.taskStack
+      }).then(() => {
+        this.setState({
+          taskOpen: false
+        });
+        this.getTasks();
+      });
     }
   }
 

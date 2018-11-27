@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Add from '@material-ui/icons/Add';
+import AlertSnackbar from './../utils/Snackbar.js';
 
 class ProjectList extends Component {
   state = {
@@ -22,7 +23,8 @@ class ProjectList extends Component {
     alignItems: "center",
     inviteCode: "",
     message: "",
-    currentUser: ""
+    currentUser: "",
+    showsnack: false
   }
 
   componentDidMount = () => {
@@ -35,8 +37,10 @@ class ProjectList extends Component {
       token: localStorage.getItem("token")
     }).then((response) => {
       console.log(response.data);
-      this.setState({ projects: response.data.projects,
-                      currentUser: response.data.currentUser});
+      this.setState({
+        projects: response.data.projects,
+        currentUser: response.data.currentUser
+      });
     });
   }
 
@@ -50,13 +54,13 @@ class ProjectList extends Component {
           {this.state.projects.map((item) => {
             return (
               <SingleLineGridList
-              onClick={this.handleOpen}
-              title='ADD PROJECT'
-              key={item.id}
-              name={item.name}
-              summary={item.summary}
-              isAdmin={(item.userId === parseInt(this.state.currentUser)) ? true : false}
-              onProjectPress={() => { this.onProjectPress(item.id) }} />
+                onClick={this.handleOpen}
+                title='ADD PROJECT'
+                key={item.id}
+                name={item.name}
+                summary={item.summary}
+                isAdmin={(item.userId === parseInt(this.state.currentUser)) ? true : false}
+                onProjectPress={() => { this.onProjectPress(item.id) }} />
             )
           })}
         </div>
@@ -112,14 +116,12 @@ class ProjectList extends Component {
     event.preventDefault();
     axios.post("/api/sprintMembershipWithCode", { sId: this.state.inviteCode, uId: sessionStorage.getItem("id"), token: localStorage.getItem("token") }).then((response) => {
       if (response.data === "Already part of sprint!") {
-        this.setState({ message: response.data });
+          this.setState({ showsnack: true });
+          setTimeout(() => { this.setState({showsnack: false }) }, 3000);
       }
       else {
-        this.setState({ message: "You succesfully joined!" });
         this.fetch();
       }
-    }).catch(err => {
-      this.setState({ message: "Invalid invite code!" });
     });
   }
 
@@ -142,23 +144,25 @@ class ProjectList extends Component {
           }}
         >
           <List>
-             <ListItem style={{ width: '50%' }} button onClick={this.handleOpen}>
+            <ListItem style={{ width: '50%' }} button onClick={this.handleOpen}>
               <ListItemIcon><Add /></ListItemIcon>
               <ListItemText primary='ADD PROJECT' />
             </ListItem>
             {this.populate()}
           </List>
           <Grid item>
-            <Typography variant="h5" gutterBottom>{this.state.message}</Typography>
+            {/* <Typography variant="h5" gutterBottom>{this.state.message}</Typography> */}
+            
             <InputTextField
               onSubmit={this.handleInviteSubmit}
-              label="Project Invite Code:"
+              label="Sprint Invite Code:"
               name="inviteCode"
               onChange={this.handleInviteChange}
             />
+            
           </Grid>
         </div>
-
+          
         <SimpleModalProjectWrapped
           open={this.state.open}
           onClose={this.handleClose}
@@ -166,9 +170,14 @@ class ProjectList extends Component {
           onSubmit={this.handleSubmit}
           onChange={this.handleChange}
         >
-        <AddProjectLayout
-        />
+          <AddProjectLayout
+          />
         </SimpleModalProjectWrapped>
+        {this.state.showsnack ? <AlertSnackbar
+          open={this.state.showsnack}
+          variant='error'
+          message='You are already part of this sprint.'
+        /> : null}
       </div>
     );
   }

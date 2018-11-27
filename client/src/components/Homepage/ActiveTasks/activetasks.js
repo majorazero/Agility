@@ -47,7 +47,11 @@ class ActiveTasks extends Component {
 
     return (
       <List className={classes.root} subheader={<li />}>
-        {this.props.tasks.map((sprint, i) => (
+        {this.props.tasks.length === 0 ?
+
+          <h1>No active tasks!</h1>
+          
+          :  this.props.tasks.map((sprint, i) => (
           <li key={i} className={classes.listSection}>
             <ul className={classes.ul}>
               <ListSubheader className={classes.top}>{sprint.sprint}</ListSubheader>
@@ -65,8 +69,8 @@ class ActiveTasks extends Component {
                 </ListItem>
               ))}
             </ul>
-          </li>
-        ))}
+          </li>))
+        }
       </List>
     );
   }
