@@ -13,45 +13,29 @@ import Add from '@material-ui/icons/Add';
 import AlertSnackbar from './../utils/Snackbar.js';
 
 class ProjectList extends Component {
-  state = {
-    name: "",
-    summary: "",
-    projects: [],
-    open: false,
-    direction: "row",
-    justify: "center",
-    alignItems: "center",
-    inviteCode: "",
-    message: "",
-    currentUser: "",
-    showsnack: false
-  }
+  constructor(props){
+    super(props);
 
-  componentDidMount = () => {
-    this.fetch();
-  }
-
-  fetch = () => {
-    axios.post("/api/projectOfUser", {
-      id: sessionStorage.getItem("id"),
-      token: localStorage.getItem("token")
-    }).then((response) => {
-      console.log(response.data);
-      this.setState({
-        projects: response.data.projects,
-        currentUser: response.data.currentUser
-      });
-    });
+    this.state = {
+      name: "",
+      summary: "",
+      open: false,
+      direction: "row",
+      justify: "center",
+      alignItems: "center",
+      inviteCode: "",
+      message: ""
+    }
   }
 
   populate = () => {
-    if (this.state.projects.length === 0) {
+    if (this.props.projects.length === 0) {
       return <Typography gutterBottom variant='h4'>Start a new project!</Typography>;
     }
     else {
       return (
         <div>
-          {this.state.projects.map((item) => {
+          {this.props.projects.map((item) => {
             return (
               <SingleLineGridList
                 onClick={this.handleOpen}
@@ -59,8 +43,9 @@ class ProjectList extends Component {
                 key={item.id}
                 name={item.name}
                 summary={item.summary}
-                isAdmin={(item.userId === parseInt(this.state.currentUser)) ? true : false}
-                onProjectPress={() => { this.onProjectPress(item.id) }} />
+                isAdmin={(item.userId === parseInt(this.props.currentUser)) ? true : false}
+                onProjectPress={() => { this.onProjectPress(item.id) }}
+              />
             )
           })}
         </div>
@@ -84,11 +69,6 @@ class ProjectList extends Component {
     });
   };
 
-  handleInviteChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value
-    })
-  }
 
   handleSubmit = () => {
     axios.post("/api/project", {
@@ -97,7 +77,7 @@ class ProjectList extends Component {
       id: sessionStorage.getItem("id"),
       token: localStorage.getItem("token")
     }).then((response) => {
-      this.fetch();
+      this.props.fetch();
       this.handleClose();
     });
   }
@@ -111,19 +91,6 @@ class ProjectList extends Component {
   handleClose = () => {
     this.setState({ open: false });
   };
-
-  handleInviteSubmit = (event) => {
-    event.preventDefault();
-    axios.post("/api/sprintMembershipWithCode", { sId: this.state.inviteCode, uId: sessionStorage.getItem("id"), token: localStorage.getItem("token") }).then((response) => {
-      if (response.data === "Already part of sprint!") {
-          this.setState({ showsnack: true });
-          setTimeout(() => { this.setState({showsnack: false }) }, 3000);
-      }
-      else {
-        this.fetch();
-      }
-    });
-  }
 
   render() {
     return (
@@ -148,21 +115,18 @@ class ProjectList extends Component {
               <ListItemIcon><Add /></ListItemIcon>
               <ListItemText primary='ADD PROJECT' />
             </ListItem>
+            <ListItem style={{ width: '50%' }} item>
+              <InputTextField
+                onSubmit={this.props.handleInviteSubmit}
+                label="Sprint Invite Code:"
+                name="inviteCode"
+                onChange={this.props.handleInviteChange}
+              />
+          </ListItem>
             {this.populate()}
           </List>
-          <Grid item>
-            {/* <Typography variant="h5" gutterBottom>{this.state.message}</Typography> */}
-            
-            <InputTextField
-              onSubmit={this.handleInviteSubmit}
-              label="Sprint Invite Code:"
-              name="inviteCode"
-              onChange={this.handleInviteChange}
-            />
-            
-          </Grid>
         </div>
-          
+
         <SimpleModalProjectWrapped
           open={this.state.open}
           onClose={this.handleClose}
@@ -173,8 +137,8 @@ class ProjectList extends Component {
           <AddProjectLayout
           />
         </SimpleModalProjectWrapped>
-        {this.state.showsnack ? <AlertSnackbar
-          open={this.state.showsnack}
+        {this.props.showsnack ? <AlertSnackbar
+          open={this.props.showsnack}
           variant='error'
           message='You are already part of this sprint.'
         /> : null}
