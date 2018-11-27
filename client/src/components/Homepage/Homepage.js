@@ -29,7 +29,10 @@ class Homepage extends Component {
       showsnack: false,
       projects: [],
       currentUser: "",
-      loaded: false
+      loaded: false,
+      userFirstName: "",
+      userLastName: "",
+      userEmail: ""
     }
   }
 
@@ -57,7 +60,10 @@ class Homepage extends Component {
               response.data.complexity,
             complexitySemantics:
               response.data.compSemantics,
-            stacks: response.data.stacks
+            stacks: response.data.stacks,
+            userFirstName: response.data.prof.first_name,
+            userLastName: response.data.prof.last_name,
+            userEmail: response.data.prof.email
           }
         );
       }).then(()=>{
@@ -238,7 +244,11 @@ class Homepage extends Component {
           }} >
 
           <Grid item xs={3} style={{ margin: 25 }}>
-            <ProfileCard />
+            <ProfileCard
+              userFirstName= {this.state.userFirstName}
+              userLastName= {this.state.userLastName}
+              userEmail= {this.state.userEmail}
+              />
           </Grid>
           <Tab
             activeTasks={<ActiveTasks
