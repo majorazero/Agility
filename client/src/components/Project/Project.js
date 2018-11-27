@@ -479,6 +479,7 @@ class Project extends React.Component {
             height: "-webkit-fill-available"
           }} >
           <Tab
+            getTasks={this.getTasks}
             isActive={this.state.isActive}
             futureSprint={this.state.futureSprint}
             summaryTab={<Summary

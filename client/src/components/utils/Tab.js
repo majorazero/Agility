@@ -42,7 +42,6 @@ class SimpleTabs extends React.Component {
         };
     }
 
-
     handleChange = (event, value) => {
         this.setState({ value });
     };
@@ -65,10 +64,10 @@ class SimpleTabs extends React.Component {
                     textColor="secondary"
                     centered
                 >
-                    <Tab label={this.props.isActive ? 'Open Tasks' : 'Incomplete Tasks'} />
-                    <Tab label="In Progress" />
-                    <Tab label='Complete' />
-                    <Tab label='Summary' />
+                    <Tab label={this.props.isActive ? 'Open Tasks' : 'Incomplete Tasks'} onClick={()=>{this.props.getTasks()}}/>
+                    <Tab label="In Progress" onClick={()=>{this.props.getTasks()}}/>
+                    <Tab label='Complete' onClick={()=>{this.props.getTasks()}}/>
+                    <Tab label='Summary' onClick={()=>{this.props.getTasks()}}/>
                 </Tabs>
           </div>
                 {value === 0 && <TabContainer>{this.props.taskPool}</TabContainer>}
