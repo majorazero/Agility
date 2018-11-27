@@ -65,8 +65,10 @@ class Project extends React.Component {
     taskName: "",
     taskDue_date: `${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`,
     taskDescription: "",
-    taskComplexity: "",
+    taskComplexity: -1,
     taskStack: "",
+    errorTaskMess: "",
+    errorTaskCode: -1,
     chipData: [],
 
     sprintOpen: false,
@@ -157,23 +159,41 @@ class Project extends React.Component {
   };
 
   addTask = () => {
-    if (this.state.taskComplexity <= 5 && this.state.taskComplexity >= 1) {
-      axios.post("/api/task", {
-        name: this.state.taskName,
-        due_date: this.state.taskDue_date,
-        description: this.state.taskDescription,
-        sprint_id: this.state.sprintId,
-        complexity: this.state.taskComplexity,
-        stack: this.state.taskStack
-      }).then(() => {
-        this.setState({
-          taskOpen: false
-        });
-        this.getTasks();
-      });
+    if (this.state.taskName === ""){
+      console.log("Task needs a name!");
+      this.setState({errorTaskMess: "Task needs a name!", errorTaskCode: 1});
+      setTimeout(()=>this.setState({errorTaskCode: -1}),2000);
+    }
+    else if (this.state.taskDescription === ""){
+      console.log("Task needs a description");
+      this.setState({errorTaskMess: "Task needs a description!", errorTaskCode: 2});
+      setTimeout(()=>this.setState({errorTaskCode: -1}),2000);
+    }
+    else if (this.state.taskComplexity > 5 || this.state.taskComplexity < 1) {
+      console.log("Invalid complexity value!");
+      this.setState({errorTaskMess: "Invalid complexity value!", errorTaskCode: 3});
+      setTimeout(()=>this.setState({errorTaskCode: -1}),2000);
+    }
+    else if (this.state.taskStack === ""){
+      console.log("Input a stack requirement!");
+      this.setState({errorTaskMess: "Input a stack requirement!", errorTaskCode: 4});
+      setTimeout(()=>this.setState({errorTaskCode: -1}),2000);
     }
     else {
-      console.log("Invalid complexity value!");
+      console.log("Task Added!");
+      // axios.post("/api/task", {
+      //   name: this.state.taskName,
+      //   due_date: this.state.taskDue_date,
+      //   description: this.state.taskDescription,
+      //   sprint_id: this.state.sprintId,
+      //   complexity: this.state.taskComplexity,
+      //   stack: this.state.taskStack
+      // }).then(() => {
+      //   this.setState({
+      //     taskOpen: false
+      //   });
+      //   this.getTasks();
+      // });
     }
   }
 
@@ -421,7 +441,7 @@ class Project extends React.Component {
         expanded: expanded ? panel : false,
       });
     };
-    
+
     render() {
       const { expanded } = this.state;
       const { classes } = this.props;
@@ -590,11 +610,10 @@ class Project extends React.Component {
       name="Add a New Task ..."
       onSubmit={this.addTask}
       onChange={this.handleChange}
+      errorTaskMess={this.state.errorTaskMess}
+      errorTaskCode={this.state.errorTaskCode}
       defaultDueDate={this.state.taskDue_date}
       >
-
-    <AddTaskLayout/>
-
     </SimpleModalWrapped>
 
 {/* edit task modal */}
@@ -609,9 +628,11 @@ class Project extends React.Component {
       taskDescription = {this.state.currentTaskDescription}
       taskComplexity = {this.state.currentTaskComplexity}
       taskStack = {this.state.currentTaskStack}
+      errorTaskMess={this.state.errorTaskMess}
+      errorTaskCode={this.state.errorTaskCode}
       edit
       >
-    <AddTaskLayout/>
+
     </SimpleModalWrapped>
 
     <ClippedDrawer

@@ -47,6 +47,7 @@ const styles = theme => ({
 
 function AddTaskLayout(props) {
   const { classes } = props;
+  console.log(props);
   return (
     <div>
       <CssBaseline />
@@ -59,6 +60,7 @@ function AddTaskLayout(props) {
               value={props.name}
             />
           </FormControl>
+            {props.errorTaskCode === 1 ? props.errorTaskMess : ""}
           <FormControl margin="normal" required fullWidth>
             <DatePickers
               label="Due Date"
