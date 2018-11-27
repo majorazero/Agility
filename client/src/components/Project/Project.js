@@ -541,10 +541,13 @@ class Project extends React.Component {
                   onClickDelete={this.deleteTask}
                   onClickComplete={this.markComplete}
                   />}
-
-                inviteCode={<SimplePopper
-                  onPoperClick={this.inviteMember}
-                  message={this.state.inviteCode}
+                
+                projectName={this.state.projName}
+                
+                inviteCode={
+                <SimplePopper 
+                onPoperClick={this.inviteMember}
+                message={this.state.inviteCode}
                   />}
 
                 sprintProgress={<LinearDeterminate completed={this.state.SprintProgress} title1={`Sprint Progress ${this.state.completedTasks.length}/${this.state.unassignedTasks.length + this.state.assignedTasks.length + this.state.completedTasks.length  }  ${(this.state.completedTasks.length/(this.state.unassignedTasks.length + this.state.assignedTasks.length + this.state.completedTasks.length)*100).toFixed(2)}%`} />}
