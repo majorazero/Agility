@@ -8,9 +8,9 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 const theme = createMuiTheme({
   overrides: {
-    MuiPopover: { // Name of the component ⚛️ / style sheet
-      root: { // Name of the rule
-        backgroundColor: 'dimgray', // Some CSS
+    MuiPopover: {
+      root: {
+        backgroundColor: 'dimgray',
         color: 'white'
       },
     },

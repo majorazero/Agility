@@ -97,6 +97,7 @@ class ProjectList extends Component {
       <div
         className="balls"
         style={{
+          top: -24,
           position: "relative"
         }}
       >
@@ -106,24 +107,23 @@ class ProjectList extends Component {
             flexWrap: 'wrap',
             justifyContent: 'space-around',
             overflow: 'hidden',
-            padding: 10,
+            padding: '0 10px 10px 10px',
             width: '100%'
           }}
         >
           <List>
-            <List style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
-              <ListItem style={{ width: '50%' }} button onClick={this.handleOpen}>
+            <List style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+              <ListItem style={{ width: '50%', height: 'min-content' }} button onClick={this.handleOpen}>
                 <ListItemIcon><Add /></ListItemIcon>
                 <ListItemText primary='ADD PROJECT' />
               </ListItem>
-              <ListItem style={{width: '50%' }} item>
+              <ListItem style={{ width: '50%', height: 0 }}>
                 <InputTextField
                   onSubmit={this.props.handleInviteSubmit}
                   label="Sprint Invite Code:"
                   name="inviteCode"
                   onChange={this.props.handleInviteChange}
                 />
-
               </ListItem>
             </List>
             {this.populate()}
