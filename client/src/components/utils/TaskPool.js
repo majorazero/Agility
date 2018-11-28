@@ -63,71 +63,82 @@ class ControlledExpansionPanels extends React.Component {
                 </Typography>
               </Grid>
               <Grid>
-              {this.props.location === 'open tasks' ? 
-                <Grid container direction='row' justify='flex-end'>
-                  <ContainedButtons
-                    size="small"
-                    name='Edit'
-                    color='secondary'
-                    onClick={this.props.edit}
-                    hidden={this.props.isAdmin ? false:true}
-                  />
-                  <ContainedButtons
-                    size="small"
-                    name='Delete'
-                    color='primary'
-                    onClick={this.props.onClickDelete}
-                    hidden={false}
-                  /> 
-                  <ContainedButtons
-                    size="small"
-                    name='Claim'
-                    color='secondary'
-                    onClick={this.props.onClickAdd}
-                    hidden={false}
-                  /> 
-                </Grid>
-                : null}
-              {this.props.location === 'in progress' ? 
-                <Grid container direction='row' justify='flex-end'>
-                  <ContainedButtons
-                    size="small"
-                    name='Unassign'
-                    color='primary'
-                    onClick={this.props.unAssign}
-                    hidden={false}
-                  />
-                  <ContainedButtons
-                    size="small"
-                    name='Complete'
-                    color='secondary'
-                    onClick={this.props.onClickComplete}
-                    hidden={false}
-                  />
-                </Grid>
-                : null}
-                {this.props.location === 'complete' ? 
+              {(this.props.active || this.props.futureSprint) ?  // if sprint is active
+              
+                this.props.location==='open tasks' ? //if rendered in open tasks panel 
                   <Grid container direction='row' justify='flex-end'>
                     <ContainedButtons
                       size="small"
-                      name='Reopen'
+                      name='Edit'
                       color='secondary'
-                      onClick={this.props.onClickReopen}
+                      onClick={this.props.edit}
+                      hidden={this.props.isAdmin ? false:true}
+                    />
+                    <ContainedButtons
+                      size="small"
+                      name='Delete'
+                      color='primary'
+                      onClick={this.props.onClickDelete}
+                      hidden={this.props.isAdmin ? false:true}
+                    /> 
+                    <ContainedButtons
+                      size="small"
+                      name='Claim'
+                      color='secondary'
+                      onClick={this.props.onClickAdd}
                       hidden={false}
                     /> 
                   </Grid>
-                :null}
-                {this.props.homepage ? 
-                  <Grid container direction='row' justify='flex-end'>
-                    <ContainedButtons
-                      size="small"
-                      name='View Project'
-                      color='secondary'
-                      onClick={this.props.goToProject}
-                      hidden={false}
-                    />
-                  </Grid>
-                : null}
+                :
+                  this.props.location==='in progress' ? // else if displayed in 'in progress'
+                    <Grid container direction='row' justify='flex-end'>
+                      <ContainedButtons
+                        size="small"
+                        name='Delete'
+                        color='secondary'
+                        onClick={this.props.onClickDelete}
+                        hidden={this.props.isAdmin ? false:true}
+                      />
+                       <ContainedButtons
+                        size="small"
+                        name='Unassign'
+                        color='primary'
+                        onClick={this.props.unAssign}
+                        hidden={this.props.futureSprint ? true:(this.props.currentUser === this.props.assignedUser) ? false : this.props.isAdmin ? false : true}
+                      />  
+                      <ContainedButtons
+                        size="small"
+                        name='Complete'
+                        color='secondary'
+                        onClick={this.props.onClickComplete}
+                        hidden={this.props.futureSprint ? true: (this.props.currentUser === this.props.assignedUser) ? false : true}
+                      /> 
+                    </Grid>
+                  : 
+                    this.props.location==='complete' ? // else if displayed in complete
+                      <Grid container direction='row' justify='flex-end'>
+                        <ContainedButtons
+                          size="small"
+                          name='Reopen'
+                          color='secondary'
+                          onClick={this.props.onClickReopen}
+                          hidden={this.props.isAdmin ? false : this.props.currentUser === this.props.assignedUser ? false : true}
+                        /> 
+                      </Grid>
+                    :
+                      null // no buttons are displayed if location is not in the above AND if sprint is inactive
+              : 
+              this.props.homepage ? // else if displayed in homepage active tasks
+                <Grid container direction='row' justify='flex-end'>
+                  <ContainedButtons
+                    size="small"
+                    name='View Project'
+                    color='secondary'
+                    onClick={this.props.goToProject}
+                    hidden={false}
+                  />
+                </Grid>
+            : null} 
               </Grid>
             </Grid>
           </ExpansionPanelDetails>

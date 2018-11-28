@@ -82,6 +82,7 @@ class UserPool extends Component {
                         futureSprint={this.props.futureSprint}
                         assigned
                         location='in progress'
+                        active={this.props.active}
                       />
                     </ListItem>
                   </ul>
