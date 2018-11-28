@@ -58,7 +58,8 @@ class SimpleTabs extends React.Component {
                             margin: '10px 0 10px 0',
                         }}
                     >
-                        {this.props.sprintProgress}{this.props.sprintTime}
+                        {this.props.sprintProgress}
+                        {/* {this.props.sprintTime} */}
                     </div>
 
                     <Tabs
