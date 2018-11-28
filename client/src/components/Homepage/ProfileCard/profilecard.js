@@ -18,7 +18,9 @@ const styles = theme => ({
     height: '60%',
     backgroundSize: 'cover',
     backgroundPosition: "center center",
-    margin: 10
+    margin: 10,
+    paddingBottom: 10,
+    boxSizing: 'border-box'
   },
   actions: {
     display: 'flex',

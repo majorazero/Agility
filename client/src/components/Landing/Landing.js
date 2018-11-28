@@ -16,8 +16,9 @@ const theme = createMuiTheme({
       root: {
         background: 'linear-gradient(45deg, #998877 30%, #778899 90%)',
         borderRadius: 3,
-        border: 0,
+        border: '1px solid #778899',
         height: 48,
+        width: '100%',
         padding: '0 30px',
         boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
       },
@@ -49,7 +50,6 @@ class Landing extends Component {
       {
         name: "Michael Reza Sanaiha",
         image: "/assets/images/itsmeinasuit.jpeg",
-
         summary: "With a passion for the visual arts, Michael brings a valuable perspective to the user experience and design.",
         github: "https://github.com/rezamike"
       },
@@ -209,7 +209,6 @@ class Landing extends Component {
                             id={this.key}
                             maker={maker}
                             onClick={() => {
-                              console.log(maker.github);
                               window.open(maker.github);
                             }}
                           />
