@@ -375,7 +375,16 @@ class Project extends React.Component {
         overlappingSprint = this.state.sprints[i].sprintName
       }
     }
-    if (overlap === false) {
+    if (this.state.sprintName === '') {
+      this.setState({ showsnack: true, snackType: 'error', errorTaskMess: `Please include a sprint name.` });
+      setTimeout(() => { this.setState({ showsnack: false }) }, 3000);
+    }
+    else if (overlap === true){
+      this.setState({ showsnack: true, snackType: 'error', errorTaskMess: `${overlappingSprint} overlaps with this! Fix your dates!` });
+      setTimeout(() => { this.setState({ showsnack: false }) }, 3000);
+    // console.log(`${overlappingSprint} overlaps with this! Fix your dates!`)
+    }
+    else {
       axios.post('/api/sprint', {
         name: this.state.sprintName,
         start_date: this.state.sprintStart_date,
@@ -391,11 +400,6 @@ class Project extends React.Component {
             });
           })
       });
-    }
-    else {
-      this.setState({ showsnack: true, snackType: 'error', errorTaskMess: `${overlappingSprint} overlaps with this! Fix your dates!` });
-        setTimeout(() => { this.setState({ showsnack: false }) }, 3000);
-      // console.log(`${overlappingSprint} overlaps with this! Fix your dates!`)
     }
   }
 
