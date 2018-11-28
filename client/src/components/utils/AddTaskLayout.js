@@ -87,7 +87,7 @@ function AddTaskLayout(props) {
               ></TextField>
           </FormControl>
           <FormControl margin="normal" required fullWidth>
-            <InputLabel htmlFor="stack">Stack (Javascript, CSS, HTML, React ...)</InputLabel>
+            <InputLabel htmlFor="stack">Stack (JavaScript, CSS, HTML, React ...)</InputLabel>
             <Input id="stack" name="stack" autoComplete="stack" autoFocus
               onChange={props.edit ? props.onChange('currentTaskStack'):props.onChange("taskStack")}
               value={props.stack}
