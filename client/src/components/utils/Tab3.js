@@ -76,7 +76,7 @@ class LandingTab extends React.Component {
                   </Grid>
                 </TabContainer>}
                 {value === 1 && <TabContainer>
-                  <Typography gutterBottom variant='h4' style={{ textAlign: 'center' }}>Break your work cycle into sprints.</Typography>
+                  <Typography gutterBottom variant='h6' style={{ textAlign: 'center' }}>Great things are not done by impulse, but by a series of small things brought together</Typography>
                   <Grid container spacing={8} style={{ paddingTop: 10}}>
                     <Grid item xs={5}>
                       <img height="300" src="./assets/images/demo1.gif"></img>
@@ -89,18 +89,22 @@ class LandingTab extends React.Component {
                   </Grid>
                 </TabContainer>}
                 {value === 2 && <TabContainer>
-                  <Typography gutterBottom variant='h4' style={{ textAlign: 'center' }}>Task Header</Typography>
+                  <Typography gutterBottom variant='h6' style={{ textAlign: 'center' }}>You don't set out to build a house, you start with laying that brick.</Typography>
                   <Grid container spacing={8} style={{ paddingTop: 10}}>
                     <Grid item xs={5}>
                       <img height="300" src="./assets/images/demo1.gif"></img>
                     </Grid>
                     <Grid item xs={7}>
-                      <Typography variant='body1'>Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah</Typography>
+                      <Typography variant='body1'>Tasks are the building blocks to a sprint. Project managers can create tasks with due dates, stack requirements and complexity scores.</Typography>
+                      <br />
+                      <Typography variant='body1'>Stacks are the technologies required to complete a task such as HTML, CSS, React, etc.</Typography>
+                      <br />
+                      <Typography variant='body1'>Complexity is a numeric value between 1-5 that each task must be designated with by the project manager, with 1 being easy and 5 being difficult. When members of a sprint assign themselves and complete a task, the score will be quantified and reflected in the users performance.</Typography>
                     </Grid>
                   </Grid>
                 </TabContainer>}
                 {value === 3 && <TabContainer>
-                  <Typography gutterBottom variant='h4' style={{ textAlign: 'center' }}>Improving upon your mistakes is the key to any good developer.</Typography>
+                  <Typography gutterBottom variant='h6' style={{ textAlign: 'center' }}>Improving upon your mistakes is the key to any good developer</Typography>
                   <Grid container spacing={8} style={{ paddingTop: 10}}>
                     <Grid item xs={5}>
                       <img height="300" src="./assets/images/demo1.gif"></img>
