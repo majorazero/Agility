@@ -7,7 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import red from '@material-ui/core/colors/red';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-
+import ProfileAvatar from '../../utils/ProfileAvatar'
 
 const styles = theme => ({
   card: {
@@ -28,11 +28,11 @@ const styles = theme => ({
   expand: {
     transform: 'rotate(0deg)',
     transition: theme.transitions.create('transform', {
-        duration: theme.transitions.duration.shortest,
+      duration: theme.transitions.duration.shortest,
     }),
     marginLeft: 'auto',
     [theme.breakpoints.up('sm')]: {
-        marginRight: -8,
+      marginRight: -8,
     }
   },
   expandOpen: {
@@ -68,10 +68,9 @@ class RecipeReviewCard extends Component {
       <Card className={classes.card}>
         <CardMedia
           className={classes.media}
-          image="/assets/images/profileimg.jpg"
-          title=""
-        />
-
+        >
+          <ProfileAvatar />
+        </CardMedia>
         <MuiThemeProvider theme={theme}>
           <CardContent>
             <Typography variant="h6" gutterBottom style={{ textAlign: "left", color: 'whitesmoke' }}>

@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
+import ProfileAvatar from '../utils/ProfileAvatar'
+
 
 const styles = {
   row: {
@@ -20,7 +22,8 @@ const styles = {
 function Avatary(props) {
   const { classes } = props;
   return (
-      <Avatar alt="Pepe Le Peu" src="/assets/images/profileimg.jpg" className={classes.avatar} />
+      // <Avatar alt="Pepe Le Peu" src="/assets/images/profileimg.jpg" className={classes.avatar} />
+      <ProfileAvatar/>
   );
 }
 
