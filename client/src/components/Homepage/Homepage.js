@@ -68,7 +68,7 @@ class Homepage extends Component {
             userFirstName: response.data.prof.first_name,
             userLastName: response.data.prof.last_name,
             userEmail: response.data.prof.email,
-            initial: `${response.data.prof.first_name.charAt(0)} ${response.data.prof.last_name.charAt(0)}`,
+            initial: `${response.data.prof.first_name.charAt(0)}${response.data.prof.last_name.charAt(0)}`,
             summaryLoaded: true
           }
         );
