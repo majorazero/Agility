@@ -71,15 +71,23 @@ class ProjectList extends Component {
 
 
   handleSubmit = () => {
-    axios.post("/api/project", {
-      name: this.state.name,
-      summary: this.state.summary,
-      id: sessionStorage.getItem("id"),
-      token: localStorage.getItem("token")
-    }).then((response) => {
-      this.props.fetch();
-      this.handleClose();
-    });
+    if(this.state.name === ""){
+      console.log("Have to enter a project name!");
+    }
+    else if (this.state.summary === ""){
+      console.log("Have to enter a description!");
+    }
+    else {
+      axios.post("/api/project", {
+        name: this.state.name,
+        summary: this.state.summary,
+        id: sessionStorage.getItem("id"),
+        token: localStorage.getItem("token")
+      }).then((response) => {
+        this.props.fetch();
+        this.handleClose();
+      });
+    }
   }
 
   handleOpen = () => {
