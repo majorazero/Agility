@@ -30,7 +30,7 @@ const styles = theme => ({
     root: {
         flexGrow: 1,
         margin: 25,
-        overflow: 'auto'
+        overflow: 'auto',
     },
 });
 
@@ -65,59 +65,50 @@ class LandingTab extends React.Component {
                   </Tabs>
 
                 {value === 0 && <TabContainer>
-                  <h2>Projects Header</h2>
-                  <Grid container spacing={12}>
-                    <Grid item xs={6}>
+                  <Typography gutterBottom variant='h4' style={{ textAlign: 'center' }}>Projects Header</Typography>
+                  <Grid container spacing={8} style={{  paddingTop: 10}}>
+                    <Grid item xs={5}>
                       <img height="300" src="./assets/images/demo1.gif"></img>
                     </Grid>
-                    <Grid item xs={6}>
-                      Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah
+                    <Grid item xs={7}>
+                      <Typography variant='body1'>Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah</Typography>
                     </Grid>
                   </Grid>
                 </TabContainer>}
                 {value === 1 && <TabContainer>
-                  <h2>Break your work cycle into sprints.</h2>
-                  <Grid container spacing={12}>
-                    <Grid item xs={6}>
+                  <Typography gutterBottom variant='h4' style={{ textAlign: 'center' }}>Break your work cycle into sprints.</Typography>
+                  <Grid container spacing={8} style={{ paddingTop: 10}}>
+                    <Grid item xs={5}>
                       <img height="300" src="./assets/images/demo1.gif"></img>
                     </Grid>
-                    <Grid item xs={6}>
-                      <p>
-                        Projects can be huge endeavors and knowing where to start can be daunting; sprints will help break down development into manageable chunks. Sprints are work cycles within projects with pre-determined start date and end dates with over-arching goals in mind.
-                      </p>
-                      <p>
-                        With progress bar and summary metrics, both project manager and work members can easily determine the health and efficiency of a sprint and its members.
-                      </p>
+                    <Grid item xs={7}>
+                      <Typography variant='body1'>Projects can be huge endeavors and knowing where to start can be daunting; sprints will help break down development into manageable chunks. Sprints are work cycles within projects with pre-determined start date and end dates with over-arching goals in mind.</Typography>
+                      <br />
+                      <Typography variant='body1'>With progress bar and summary metrics, both project manager and work members can easily determine the health and efficiency of a sprint and its members.</Typography>
                     </Grid>
                   </Grid>
                 </TabContainer>}
                 {value === 2 && <TabContainer>
-                  <h2>Task Header</h2>
-                  <Grid container spacing={12}>
-                    <Grid item xs={6}>
+                  <Typography gutterBottom variant='h4' style={{ textAlign: 'center' }}>Task Header</Typography>
+                  <Grid container spacing={8} style={{ paddingTop: 10}}>
+                    <Grid item xs={5}>
                       <img height="300" src="./assets/images/demo1.gif"></img>
                     </Grid>
-                    <Grid item xs={6}>
-                      Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah
+                    <Grid item xs={7}>
+                      <Typography variant='body1'>Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah</Typography>
                     </Grid>
                   </Grid>
                 </TabContainer>}
                 {value === 3 && <TabContainer>
-                  <h2>Learning and improving upon your mistakes is the key to any good developer.</h2>
-                  <Grid container spacing={12}>
-                    <Grid item xs={6}>
+                  <Typography gutterBottom variant='h4' style={{ textAlign: 'center' }}>Improving upon your mistakes is the key to any good developer.</Typography>
+                  <Grid container spacing={8} style={{ paddingTop: 10}}>
+                    <Grid item xs={5}>
                       <img height="300" src="./assets/images/demo1.gif"></img>
                     </Grid>
-                    <Grid item xs={6}>
-                      <p>
-                       Knowing exactly what the limit of your skills is quintissential, but determining what exactly needs to be improved is difficulty. With metrics, we make it easy by quanitifying your performance.
-                     </p>
-                     <p>
-                       Performances between sprints can be shown in the summary tabs of a sprint where it will measure the stacks each member typically work with as well as how many task they complete out of the task they take. High completion rate with low complexity scores could translate to a user having improved and that they should try to challenge themselves by tackling more difficult tasks in their future sprints, while the inverse would imply a user may be taking off more than they can chew and that maybe they should take it easier next time.
-                     </p>
-                     <p>
-                       Poor sprint completion rate can also indicate that a project manager is being too ambitious with their expectations and that perhaps they need to re-evaluate future sprint workloads.
-                     </p>
+                    <Grid item xs={7}>
+                      <Typography variant='body1'>Knowing exactly what the limit of your skills is quintissential, but determining what exactly needs to be improved is difficulty. With metrics, we make it easy by quanitifying your performance.</Typography>
+                      <br />
+                      <Typography variant='body1'>Performances between sprints can be shown in the summary tabs of a sprint where it will measure the stacks each member typically work with as well as how many task they complete out of the task they take. High completion rate with low complexity scores could translate to a user having improved and that they should try to challenge themselves by tackling more difficult tasks in their future sprints, while the inverse would imply a user may be taking off more than they can chew and that maybe they should take it easier next time.</Typography>
                     </Grid>
                   </Grid>
                 </TabContainer>}
