@@ -36,7 +36,10 @@ class Homepage extends Component {
       userFirstName: "",
       userLastName: "",
       userEmail: "",
-      initial: ""
+      initial: "",
+      name: "",
+      summary: "",
+      open: false
     }
   }
 
@@ -220,6 +223,45 @@ class Homepage extends Component {
     })
   }
 
+  handleChange = name => event => {
+    this.setState({
+      [name]: event.target.value
+    });
+  };
+
+  handleOpen = () => {
+    this.setState({
+      open: true
+    })
+  }
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
+
+  handleSubmit = () => {
+    if(this.state.name === ""){
+      this.setState({showsnack: true, snackmessage: "Have to enter a project name!"});
+      setTimeout(() => { this.setState({showsnack: false }) }, 3000);
+    }
+    else if (this.state.summary === ""){
+      this.setState({showsnack: true, snackmessage: "Have to enter a description!"});
+      setTimeout(() => { this.setState({showsnack: false }) }, 3000);
+    }
+    else {
+      axios.post("/api/project", {
+        name: this.state.name,
+        summary: this.state.summary,
+        id: sessionStorage.getItem("id"),
+        token: localStorage.getItem("token")
+      }).then((response) => {
+        this.fetch();
+        this.handleClose();
+      });
+    }
+  }
+
+
   handleInviteSubmit = (event) => {
     event.preventDefault();
     axios.post("/api/sprintMembershipWithCode", { sId: this.state.inviteCode, uId: sessionStorage.getItem("id"), token: localStorage.getItem("token") }).then((response) => {
@@ -230,8 +272,12 @@ class Homepage extends Component {
       else {
         this.fetch();
       }
+<<<<<<< HEAD
     }).catch(() => {
       console.log("Invalid invite code!");
+=======
+    }).catch(()=>{
+>>>>>>> 96e8354973da8eaf5e7c32091bac3fdf9235d4a9
       this.setState({ showsnack: true, snackmessage: 'Invalid invite code!' });
       setTimeout(() => { this.setState({ showsnack: false }) }, 3000);
     });
@@ -266,7 +312,16 @@ class Homepage extends Component {
               tasks={this.state.tasks} goToProject={this.goToProject} homepage />}
             projectList={this.state.projectLoaded ?
               <ProjectList
+<<<<<<< HEAD
                 fetch={() => { this.fetch() }}
+=======
+                fetch={()=>{this.fetch()}}
+                handleSubmit={this.handleSubmit}
+                handleChange={this.handleChange}
+                handleOpen={this.handleOpen}
+                handleClose={this.handleClose}
+                open={this.state.open}
+>>>>>>> 96e8354973da8eaf5e7c32091bac3fdf9235d4a9
                 projects={this.state.projects}
                 currentUser={this.state.currentUser}
                 showsnack={this.state.showsnack}

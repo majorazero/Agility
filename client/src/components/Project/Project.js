@@ -493,6 +493,7 @@ class Project extends React.Component {
           <Tab
             isActive={this.state.isActive}
             futureSprint={this.state.futureSprint}
+            getTasks={this.getTasks}
             summaryTab={<Summary
               members={this.state.members}
               completed={this.state.completedTasks}

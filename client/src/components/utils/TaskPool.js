@@ -44,6 +44,7 @@ class ControlledExpansionPanels extends React.Component {
   render() {
     const { classes } = this.props;
     //const { expanded } = this.state;
+    let today = new Date();
 
     return (
       <div className={classes.root}>
@@ -51,7 +52,7 @@ class ControlledExpansionPanels extends React.Component {
         <ExpansionPanel expanded={this.props.expanded} onChange={this.props.onChange} key={this.props.id}>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
             <Typography className={classes.heading}>{this.props.name}</Typography>
-            <Typography color='secondary' className={classes.secondaryHeading}>{this.props.due}</Typography>
+            <Typography color={new Date(`${this.props.due}T23:59:59`) < today ? 'error':'secondary'} className={classes.secondaryHeading}>{this.props.due}</Typography>
             <Typography color='inherit' className={classes.secondaryHeading}>{this.props.stack}</Typography>
             <Typography color='primary' style={{ textAlign: 'right' }} className={classes.secondaryHeading}>Complexity: {this.props.complexity}/5</Typography>
           </ExpansionPanelSummary>
