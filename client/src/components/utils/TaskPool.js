@@ -8,6 +8,7 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Grid from '@material-ui/core/Grid';
+import CompleteAvatar from '../utils/CompleteAvatar.js'
 
 const styles = theme => ({
   root: {
@@ -50,6 +51,7 @@ class ControlledExpansionPanels extends React.Component {
 
         <ExpansionPanel expanded={this.props.expanded} onChange={this.props.onChange} key={this.props.id}>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+          {/* <CompleteAvatar/> Add User Avatar To Complete Task*/}
             <Typography className={classes.heading}>{this.props.name}</Typography>
             <Typography color='secondary' className={classes.secondaryHeading}>{this.props.due}</Typography>
             <Typography color='inherit' className={classes.secondaryHeading}>{this.props.stack}</Typography>
