@@ -30,7 +30,7 @@ const styles = theme => ({
     root: {
         flexGrow: 1,
         margin: 25,
-        overflow: 'auto'
+        overflow: 'auto',
     },
 });
 
@@ -67,46 +67,48 @@ class LandingTab extends React.Component {
                   </Tabs>
 
                 {value === 0 && <TabContainer>
-                  <h2>Projects Header</h2>
-                  <Grid container spacing={12}>
-                    <Grid item xs={6}>
+                  <Typography gutterBottom variant='h4' style={{ textAlign: 'center' }}>Projects Header</Typography>
+                  <Grid container spacing={8} style={{  paddingTop: 10}}>
+                    <Grid item xs={5}>
                       <img height="300" src="./assets/images/demo1.gif"></img>
                     </Grid>
-                    <Grid item xs={6}>
-                      Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah
+                    <Grid item xs={7}>
+                      <Typography variant='body1'>Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah</Typography>
                     </Grid>
                   </Grid>
                 </TabContainer>}
                 {value === 1 && <TabContainer>
-                  <h2>Sprint Header</h2>
-                  <Grid container spacing={12}>
-                    <Grid item xs={6}>
+                  <Typography gutterBottom variant='h4' style={{ textAlign: 'center' }}>Sprint Header</Typography>
+                  <Grid container spacing={8} style={{ paddingTop: 10}}>
+                    <Grid item xs={5}>
                       <img height="300" src="./assets/images/demo1.gif"></img>
                     </Grid>
-                    <Grid item xs={6}>
-                      Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah
+                    <Grid item xs={7}>
+                      <Typography variant='body1'>Projects can be huge endeavors and knowing where to start can be daunting; sprints will help break down development into manageable chunks. Sprints are work cycles within projects with pre-determined start date and end dates with over-arching goals in mind.</Typography>
+                      <br />
+                      <Typography variant='body1'>With progress bar and summary metrics, both project manager and work members can easily determine the health and efficiency of a sprint and its members.</Typography>
                     </Grid>
                   </Grid>
                 </TabContainer>}
                 {value === 2 && <TabContainer>
-                  <h2>Task Header</h2>
-                  <Grid container spacing={12}>
-                    <Grid item xs={6}>
+                  <Typography gutterBottom variant='h4' style={{ textAlign: 'center' }}>Task Header</Typography>
+                  <Grid container spacing={8} style={{ paddingTop: 10}}>
+                    <Grid item xs={5}>
                       <img height="300" src="./assets/images/demo1.gif"></img>
                     </Grid>
-                    <Grid item xs={6}>
-                      Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah
+                    <Grid item xs={7}>
+                      <Typography variant='body1'>Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah</Typography>
                     </Grid>
                   </Grid>
                 </TabContainer>}
                 {value === 3 && <TabContainer>
-                  <h2>Metrics allow allows users to quantify their performance.</h2>
-                  <Grid container spacing={12}>
-                    <Grid item xs={6}>
+                  <Typography gutterBottom variant='h4' style={{ textAlign: 'center' }}>Metrics allow allows users to quantify their performance.</Typography>
+                  <Grid container spacing={8} style={{ paddingTop: 10}}>
+                    <Grid item xs={5}>
                       <img height="300" src="./assets/images/demo1.gif"></img>
                     </Grid>
-                    <Grid item xs={6}>
-                      Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah
+                    <Grid item xs={7}>
+                      <Typography variant='body1'>Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah</Typography>
                     </Grid>
                   </Grid>
                 </TabContainer>}

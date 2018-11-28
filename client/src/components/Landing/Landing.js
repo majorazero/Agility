@@ -152,7 +152,7 @@ class Landing extends Component {
                 justifyContent: "center",
               }}
             >
-              <Grid>
+              <Grid style={{width: '70%'}}>
                   <LandingTab />
               </Grid>
 
