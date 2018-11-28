@@ -15,12 +15,11 @@ const styles = theme => ({
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
-    flexBasis: '70%',
+    flexBasis: '50%',
     flexShrink: 0,
   },
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
-    // color: theme.palette.text.secondary,
     marginLeft: '5%'
   },
 });
@@ -54,6 +53,7 @@ class ControlledExpansionPanels extends React.Component {
             <Typography className={classes.heading}>{this.props.name}</Typography>
             <Typography color='secondary' className={classes.secondaryHeading}>{this.props.due}</Typography>
             <Typography color='inherit' className={classes.secondaryHeading}>{this.props.stack}</Typography>
+            <Typography color='primary' className={classes.secondaryHeading}>Complexity: {this.props.complexity}/5</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <Grid container direction='column'>
