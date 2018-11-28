@@ -27,6 +27,7 @@ class Homepage extends Component {
       complexitySemantics: "",
       inviteCode: "",
       showsnack: false,
+      snackmessage: '',
       projects: [],
       currentUser: "",
       loaded: false,
@@ -224,7 +225,7 @@ class Homepage extends Component {
     event.preventDefault();
     axios.post("/api/sprintMembershipWithCode", { sId: this.state.inviteCode, uId: sessionStorage.getItem("id"), token: localStorage.getItem("token") }).then((response) => {
       if (response.data === "Already part of sprint!") {
-          this.setState({ showsnack: true });
+          this.setState({ showsnack: true, snackmessage: response.data });
           setTimeout(() => { this.setState({showsnack: false }) }, 3000);
       }
       else {
@@ -232,6 +233,8 @@ class Homepage extends Component {
       }
     }).catch(()=>{
       console.log("Invalid invite code!");
+      this.setState({ showsnack: true, snackmessage: 'Invalid invite code!' });
+          setTimeout(() => { this.setState({showsnack: false }) }, 3000);
     });
   }
 
@@ -267,6 +270,7 @@ class Homepage extends Component {
                 projects={this.state.projects}
                 currentUser={this.state.currentUser}
                 showsnack={this.state.showsnack}
+                snackmessage={this.state.snackmessage}
                 handleInviteSubmit={this.handleInviteSubmit}
                 handleInviteChange={this.handleInviteChange}
               /> : ""

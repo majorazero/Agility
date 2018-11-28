@@ -12,9 +12,8 @@ const styles = theme => ({
     flexGrow: 1,
     width: '100%',
     cursor: 'pointer',
-    color: 'whitesmoke',
     boxShadow: '0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12)',
-    backgroundImage: 'linear-gradient(to bottom right, rgba(0,0,0,0) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0.7) 100%)'
+    backgroundImage: 'linear-gradient(to bottom right, rgba(0,0,0,0) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0.7) 100%)',
   },
   title: {
     color: 'whitesmoke',
@@ -27,7 +26,7 @@ function SingleLineGridList(props) {
   return (
     <div alt={props.name}>
       <List style={{ padding: 0, margin: 5 }}>
-        <ListItem classes={{ root: classes.root }} hover>
+        <ListItem classes={{ root: classes.root }}>
 
           <ListItemText
             focusVisible
