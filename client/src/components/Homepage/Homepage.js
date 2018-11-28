@@ -35,7 +35,8 @@ class Homepage extends Component {
       projectLoaded: false,
       userFirstName: "",
       userLastName: "",
-      userEmail: ""
+      userEmail: "",
+      initial: ""
     }
   }
 
@@ -67,10 +68,12 @@ class Homepage extends Component {
             userFirstName: response.data.prof.first_name,
             userLastName: response.data.prof.last_name,
             userEmail: response.data.prof.email,
+            initial: `${response.data.prof.first_name.charAt(0)}${response.data.prof.last_name.charAt(0)}`,
             summaryLoaded: true
           }
         );
       }).then(()=>{
+        console.log(this.state);
         this.fetch();
       });
   }
@@ -180,10 +183,8 @@ class Homepage extends Component {
           format[`label${i + 2}`] = arr[i].stackName;
           format[`info${i + 2}`] = `${arr[i].stackComplete} ${arr[i].stackComplex}`;
         }
-        console.log(format);
         return format;
       }
-      console.log(format);
       return format;
     }
   }
@@ -256,6 +257,7 @@ class Homepage extends Component {
               userFirstName= {this.state.userFirstName}
               userLastName= {this.state.userLastName}
               userEmail= {this.state.userEmail}
+              initial={this.state.initial}
               />
           </Grid>
           <Tab

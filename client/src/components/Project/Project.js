@@ -375,7 +375,16 @@ class Project extends React.Component {
         overlappingSprint = this.state.sprints[i].sprintName
       }
     }
-    if (overlap === false) {
+    if (this.state.sprintName === '') {
+      this.setState({ showsnack: true, snackType: 'error', errorTaskMess: `Please include a sprint name.` });
+      setTimeout(() => { this.setState({ showsnack: false }) }, 3000);
+    }
+    else if (overlap === true){
+      this.setState({ showsnack: true, snackType: 'error', errorTaskMess: `${overlappingSprint} overlaps with this! Fix your dates!` });
+      setTimeout(() => { this.setState({ showsnack: false }) }, 3000);
+    // console.log(`${overlappingSprint} overlaps with this! Fix your dates!`)
+    }
+    else {
       axios.post('/api/sprint', {
         name: this.state.sprintName,
         start_date: this.state.sprintStart_date,
@@ -397,6 +406,7 @@ class Project extends React.Component {
         setTimeout(() => { this.setState({ showsnack: false }) }, 3000);
       // console.log(`${overlappingSprint} overlaps with this! Fix your dates!`)
     }
+
   }
 
   getMembers = (sprintId) => {
@@ -521,6 +531,8 @@ class Project extends React.Component {
                             onChange={this.handleTaskOpen(`panel${task.id}`)}
                             edit={() => this.handleOpen('editTaskOpen', task.id, task.name, task.description, task.due_date, task.complexity, task.stack)}
                             location='open tasks'
+                            active={this.state.isActive}
+                            futureSprint={this.state.futureSprint}
                           />
                         </ListItem>
                       </ul>
@@ -553,6 +565,8 @@ class Project extends React.Component {
                             onChange={this.handleTaskOpen(`panel${task.id}`)}
                             location='complete'
                             complete
+                            active={this.state.isActive}
+                            futureSprint={this.state.futureSprint}
                           />
                         </ListItem>
                       </ul>
@@ -573,6 +587,8 @@ class Project extends React.Component {
                             onChange={this.handleTaskOpen(`panel${task.id}`)}
                             edit={() => this.handleOpen('editTaskOpen', task.id, task.name, task.description, task.due_date, task.complexity, task.stack)}
                             location='open tasks'
+                            active={this.state.isActive}
+                            futureSprint={this.state.futureSprint}
                           />
                         </ListItem>
                       </ul>
@@ -591,6 +607,7 @@ class Project extends React.Component {
               onClickDelete={this.deleteTask}
               onClickComplete={this.markComplete}
               futureSprint={this.state.futureSprint}
+              active={this.state.isActive}
             />}
 
             projectName={this.state.projName}
@@ -619,6 +636,8 @@ class Project extends React.Component {
                       onChange={this.handleTaskOpen(`panel${task.id}`)}
                       location='complete'
                       complete
+                      active={this.state.isActive}
+                      futureSprint={this.state.futureSprint}
                     />
                   </ListItem>
                 </ul>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -7,7 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import red from '@material-ui/core/colors/red';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-
+import ProfileAvatar from '../../utils/ProfileAvatar'
 
 const styles = theme => ({
   card: {
@@ -28,11 +28,11 @@ const styles = theme => ({
   expand: {
     transform: 'rotate(0deg)',
     transition: theme.transitions.create('transform', {
-        duration: theme.transitions.duration.shortest,
+      duration: theme.transitions.duration.shortest,
     }),
     marginLeft: 'auto',
     [theme.breakpoints.up('sm')]: {
-        marginRight: -8,
+      marginRight: -8,
     }
   },
   expandOpen: {
@@ -53,7 +53,7 @@ const theme = createMuiTheme({
   },
 });
 
-class RecipeReviewCard extends React.Component {
+class RecipeReviewCard extends Component {
   state = {
     expanded: false
   };
@@ -64,15 +64,13 @@ class RecipeReviewCard extends React.Component {
 
   render() {
     const { classes } = this.props;
-
     return (
       <Card className={classes.card}>
         <CardMedia
           className={classes.media}
-          image="/assets/images/profileimg.jpg"
-          title=""
-        />
-
+        >
+          <ProfileAvatar initial={this.props.initial}/>
+        </CardMedia>
         <MuiThemeProvider theme={theme}>
           <CardContent>
             <Typography variant="h6" gutterBottom style={{ textAlign: "left", color: 'whitesmoke' }}>
