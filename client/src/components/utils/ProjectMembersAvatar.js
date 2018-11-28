@@ -29,7 +29,7 @@ function LetterAvatars(props) {
   const { classes } = props;
   return (
     <div className={classes.row}>
-      <Avatar className={classes.avatar}>YJ</Avatar>
+      <Avatar className={classes.avatar}>{props.initial}</Avatar>
       {/* <Avatar className={classes.orangeAvatar}>N</Avatar>
       <Avatar className={classes.purpleAvatar}>OP</Avatar> */}
     </div>

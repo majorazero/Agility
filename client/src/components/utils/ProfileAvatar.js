@@ -7,7 +7,10 @@ import deepPurple from '@material-ui/core/colors/deepPurple';
 
 const styles = {
   avatar: {
-    margin: 10
+    margin: 10,
+    height: 200,
+    width: 200,
+    fontSize: 100
   },
   orangeAvatar: {
     margin: 10,
@@ -29,7 +32,7 @@ function LetterAvatars(props) {
   const { classes } = props;
   return (
     <div className={classes.row}>
-      <Avatar className={classes.avatar}>YJ</Avatar>
+      <Avatar className={classes.avatar}>{props.initial}</Avatar>
       {/* <Avatar className={classes.orangeAvatar}>N</Avatar>
       <Avatar className={classes.purpleAvatar}>OP</Avatar> */}
     </div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -53,7 +53,7 @@ const theme = createMuiTheme({
   },
 });
 
-class RecipeReviewCard extends React.Component {
+class RecipeReviewCard extends Component {
   state = {
     expanded: false
   };
@@ -64,13 +64,12 @@ class RecipeReviewCard extends React.Component {
 
   render() {
     const { classes } = this.props;
-
     return (
       <Card className={classes.card}>
         <CardMedia
           className={classes.media}
         >
-          <ProfileAvatar />
+          <ProfileAvatar initial={this.props.initial}/>
         </CardMedia>
         <MuiThemeProvider theme={theme}>
           <CardContent>

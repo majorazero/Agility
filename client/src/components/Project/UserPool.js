@@ -46,8 +46,9 @@ class UserPool extends Component {
   };
 
   render() {
-    const { classes } = this.props
-    const { expanded } = this.state
+    const { classes } = this.props;
+    const { expanded } = this.state;
+    console.log(this.state.users);
     return (
       <div>
         <List
@@ -62,7 +63,7 @@ class UserPool extends Component {
           {this.props.members.map((member, i) => (
             <li key={i}>
               {/* <Divider /> */}
-              <ListSubheader style={{ height: 50, display: 'flex', alignItems: 'center', margin: 5, background: '#303030' }}><div><ProjectMembersAvatar /></div><div style={{ justifyContent: 'flex-end' }}><Typography variant="h6" gutterBottom>{member.User.first_name} {member.User.last_name}</Typography></div></ListSubheader>
+              <ListSubheader style={{ height: 50, display: 'flex', alignItems: 'center', margin: 5, background: '#303030' }}><div><ProjectMembersAvatar initial={`${member.User.first_name.charAt(0)}${member.User.last_name.charAt(0)}`} /></div><div style={{ justifyContent: 'flex-end' }}><Typography variant="h6" gutterBottom>{member.User.first_name} {member.User.last_name}</Typography></div></ListSubheader>
               {/* <Divider /> */}
               {this.props.tasks.filter(task => task.assigned_id === member.User.id).map(fTask => {
                 return (
