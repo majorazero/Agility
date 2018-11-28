@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 const styles = theme => ({
   button: {
     margin: theme.spacing.unit,
-    width: 125
+    width: 'fit-content'
   },
   input: {
     display: 'none',
