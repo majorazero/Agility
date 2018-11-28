@@ -164,19 +164,19 @@ class Project extends React.Component {
   addTask = () => {
     if (this.state.taskName === "") {
       this.setState({ showsnack: true, snackType: 'error', errorTaskMess: 'Task needs a name!' });
-        setTimeout(() => { this.setState({ showsnack: false }) }, 3000);
+      setTimeout(() => { this.setState({ showsnack: false }) }, 3000);
     }
     else if (this.state.taskDescription === "") {
       this.setState({ showsnack: true, snackType: 'error', errorTaskMess: 'Task needs a description!' });
-        setTimeout(() => { this.setState({ showsnack: false }) }, 3000);
+      setTimeout(() => { this.setState({ showsnack: false }) }, 3000);
     }
     else if (this.state.taskComplexity > 5 || this.state.taskComplexity < 1) {
       this.setState({ showsnack: true, snackType: 'error', errorTaskMess: 'Invalid complexity value!' });
-        setTimeout(() => { this.setState({ showsnack: false }) }, 3000);
+      setTimeout(() => { this.setState({ showsnack: false }) }, 3000);
     }
     else if (this.state.taskStack === "") {
       this.setState({ showsnack: true, snackType: 'error', errorTaskMess: 'Input a stack requirement!' });
-        setTimeout(() => { this.setState({ showsnack: false }) }, 3000);
+      setTimeout(() => { this.setState({ showsnack: false }) }, 3000);
     }
     else {
       console.log("Task Added!");
@@ -267,7 +267,7 @@ class Project extends React.Component {
     let currentDate = new Date();
     let timeProgress = ((currentDate - startDate) / (endDate - startDate) * 100);
 
-    let countdown = `${Math.ceil(((endDate - startDate)*(1-(timeProgress/100)))/(1000*60*60*24))} Days Left`;
+    let countdown = `${Math.ceil(((endDate - startDate) * (1 - (timeProgress / 100))) / (1000 * 60 * 60 * 24))} Days Left`;
 
 
     if (this.state.activeSprintId === sprintId) {
@@ -285,7 +285,7 @@ class Project extends React.Component {
       timeProgress = 100;
       countdown = "(Sprint Ended)";
     }
-    this.setState({ countdown:countdown ,sprintId: sprintId, isActive: isActive, SprintTime: timeProgress, futureSprint: futureSprint }, () => {
+    this.setState({ countdown: countdown, sprintId: sprintId, isActive: isActive, SprintTime: timeProgress, futureSprint: futureSprint }, () => {
       this.getTasks();
       this.getMembers(this.state.sprintId);
     });
@@ -333,7 +333,7 @@ class Project extends React.Component {
               currentSprint = activeSprint
               isActive = true;
               timeProgress = ((currentDate - startDate) / (endDate - startDate) * 100);
-              countdown = `${Math.ceil(((endDate - startDate)*(1-(timeProgress/100)))/(1000*60*60*24))} Days Left`;
+              countdown = `${Math.ceil(((endDate - startDate) * (1 - (timeProgress / 100))) / (1000 * 60 * 60 * 24))} Days Left`;
             }
           }
           else if (today >= startDate && today <= endDate) {
@@ -341,7 +341,7 @@ class Project extends React.Component {
             currentSprint = activeSprint
             isActive = true;
             timeProgress = ((currentDate - startDate) / (endDate - startDate) * 100);
-            countdown = `${Math.ceil(((endDate - startDate)*(1-(timeProgress/100)))/(1000*60*60*24))} Days Left`;
+            countdown = `${Math.ceil(((endDate - startDate) * (1 - (timeProgress / 100))) / (1000 * 60 * 60 * 24))} Days Left`;
           }
         }
         this.setState({
@@ -379,10 +379,10 @@ class Project extends React.Component {
       this.setState({ showsnack: true, snackType: 'error', errorTaskMess: `Please include a sprint name.` });
       setTimeout(() => { this.setState({ showsnack: false }) }, 3000);
     }
-    else if (overlap === true){
+    else if (overlap === true) {
       this.setState({ showsnack: true, snackType: 'error', errorTaskMess: `${overlappingSprint} overlaps with this! Fix your dates!` });
       setTimeout(() => { this.setState({ showsnack: false }) }, 3000);
-    // console.log(`${overlappingSprint} overlaps with this! Fix your dates!`)
+      // console.log(`${overlappingSprint} overlaps with this! Fix your dates!`)
     }
     else {
       axios.post('/api/sprint', {
@@ -401,12 +401,6 @@ class Project extends React.Component {
           })
       });
     }
-    else {
-      this.setState({ showsnack: true, snackType: 'error', errorTaskMess: 'Please put it a Sprint name!' });
-        setTimeout(() => { this.setState({ showsnack: false }) }, 3000);
-      // console.log(`${overlappingSprint} overlaps with this! Fix your dates!`)
-    }
-
   }
 
   getMembers = (sprintId) => {
@@ -484,7 +478,7 @@ class Project extends React.Component {
     return (
       <div>
         <ButtonAppBar
-        projectName={this.state.projName}
+          projectName={this.state.projName}
         />
         <div
           className="parallax"
@@ -617,7 +611,7 @@ class Project extends React.Component {
               message={this.state.inviteCode}
             />}
 
-            sprintProgress={<LinearDeterminate completed={this.state.SprintProgress} title1={`Sprint Progress: ${this.state.completedTasks.length}/${this.state.unassignedTasks.length + this.state.assignedTasks.length + this.state.completedTasks.length}  ${(this.state.unassignedTasks.length + this.state.assignedTasks.length + this.state.completedTasks.length !== 0) ?  (this.state.completedTasks.length / (this.state.unassignedTasks.length + this.state.assignedTasks.length + this.state.completedTasks.length) * 100).toFixed(2)+'%' : ""}`} />}
+            sprintProgress={<LinearDeterminate completed={this.state.SprintProgress} title1={`Sprint Progress: ${this.state.completedTasks.length}/${this.state.unassignedTasks.length + this.state.assignedTasks.length + this.state.completedTasks.length}  ${(this.state.unassignedTasks.length + this.state.assignedTasks.length + this.state.completedTasks.length !== 0) ? (this.state.completedTasks.length / (this.state.unassignedTasks.length + this.state.assignedTasks.length + this.state.completedTasks.length) * 100).toFixed(2) + '%' : ""}`} />}
             sprintTime={<LinearDeterminate whatBar completed={this.state.SprintTime} title2={`Time Remaining: ${this.state.countdown}`} />}
             completedTab={this.state.completedTasks.map((task) => {
               return (
