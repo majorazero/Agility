@@ -307,7 +307,7 @@ class Homepage extends Component {
               tasks={this.state.tasks} goToProject={this.goToProject} homepage />}
             projectList={this.state.projectLoaded ?
               <ProjectList
-                fetch={() => { this.fetch() }}
+                fetch={()=>{this.fetch()}}
                 handleSubmit={this.handleSubmit}
                 handleChange={this.handleChange}
                 handleOpen={this.handleOpen}
