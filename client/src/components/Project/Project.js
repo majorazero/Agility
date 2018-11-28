@@ -611,8 +611,13 @@ class Project extends React.Component {
               message={this.state.inviteCode}
             />}
 
-            sprintProgress={<LinearDeterminate completed={this.state.SprintProgress} title1={`Sprint Progress: ${this.state.completedTasks.length}/${this.state.unassignedTasks.length + this.state.assignedTasks.length + this.state.completedTasks.length}  ${(this.state.unassignedTasks.length + this.state.assignedTasks.length + this.state.completedTasks.length !== 0) ? (this.state.completedTasks.length / (this.state.unassignedTasks.length + this.state.assignedTasks.length + this.state.completedTasks.length) * 100).toFixed(2) + '%' : ""}`} />}
-            sprintTime={<LinearDeterminate whatBar completed={this.state.SprintTime} title2={`Time Remaining: ${this.state.countdown}`} />}
+            sprintProgress={<LinearDeterminate completedTask={this.state.SprintProgress} title1={`Sprint Progress: ${this.state.completedTasks.length}/${this.state.unassignedTasks.length + this.state.assignedTasks.length + this.state.completedTasks.length}  ${(this.state.unassignedTasks.length + this.state.assignedTasks.length + this.state.completedTasks.length !== 0) ?  (this.state.completedTasks.length / (this.state.unassignedTasks.length + this.state.assignedTasks.length + this.state.completedTasks.length) * 100).toFixed(2)+'%' : ""}`} 
+            completedTime={this.state.SprintTime} title2={`Time Remaining: ${this.state.countdown}`}
+            />
+          
+            /* <LinearDeterminate whatBar completedTime={this.state.SprintTime} title2={`Time Remaining: ${this.state.countdown}`} /></div> */
+            }
+            // sprintTime={<LinearDeterminate whatBar completed={this.state.SprintTime} title2={`Time Remaining: ${this.state.countdown}`} />}
             completedTab={this.state.completedTasks.map((task) => {
               return (
                 <ul>

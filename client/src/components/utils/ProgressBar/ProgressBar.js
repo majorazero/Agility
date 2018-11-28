@@ -28,9 +28,10 @@ class LinearDeterminate extends React.Component {
     const { classes } = this.props;
     var whatBar = this.props.whatBar
     return (
-      <div className={classes.root}>
+      <div className={classes.root} style={{borderRadius: '25px'}}>
         <Typography>{this.props.title1}</Typography>
-        <LinearProgress style={{height: 12}} color={(whatBar) ? "primary" : "secondary"} variant="determinate" value={this.props.completed} />
+        <LinearProgress style={{height: 12, borderTopLeftRadius: '5px', borderTopRightRadius: '5px'}} color='primary' variant="determinate" value={this.props.completedTask} />
+        <LinearProgress style={{height: 12, borderBottomLeftRadius: '5px', borderBottomRightRadius: '5px'}} color='secondary' variant="determinate" value={this.props.completedTime} />
         <Typography>{this.props.title2}</Typography>
       </div>
     );
