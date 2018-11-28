@@ -65,13 +65,15 @@ class LandingTab extends React.Component {
                   </Tabs>
 
                 {value === 0 && <TabContainer>
-                  <Typography gutterBottom variant='h4' style={{ textAlign: 'center' }}>Projects Header</Typography>
+                  <Typography gutterBottom variant='h6' style={{ textAlign: 'center' }}>Acting on a good idea is better than just having a good idea.</Typography>
                   <Grid container spacing={8} style={{  paddingTop: 10}}>
                     <Grid item xs={5}>
                       <img height="300" src="./assets/images/demo1.gif"></img>
                     </Grid>
                     <Grid item xs={7}>
-                      <Typography variant='body1'>Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah</Typography>
+                      <Typography variant='body1'>Even the simplest apps aren't developed overnight! Start organizing your ideas into projects and sprints! </Typography>
+                      <br />
+                      <Typography variant='body1'>Each created projects are encrypted for security so no one can stumble upon your work by accident. Contributors are only specific to the work cycles you invite them to so they can't peek into past or future work you don't want them involved in. </Typography>
                     </Grid>
                   </Grid>
                 </TabContainer>}
