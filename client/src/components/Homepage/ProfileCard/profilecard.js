@@ -69,7 +69,7 @@ class RecipeReviewCard extends Component {
         <CardMedia
           className={classes.media}
         >
-          <ProfileAvatar />
+          <ProfileAvatar initial={this.props.initial}/>
         </CardMedia>
         <MuiThemeProvider theme={theme}>
           <CardContent>
