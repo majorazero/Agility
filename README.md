@@ -57,6 +57,17 @@ This app is currently [deployed](https://myagility.herokuapp.com/)!
 # Version
 1.1.0
 
+# Release Notes
+
+<b>11/27/18 - 1.1.0 Release</b>
+
+- Design overhaul, white background changed to dark mode theme.
+- Tasks are now editable.
+- Minor bug fixes.
+- Error messages now appear for invalid entries.
+- Patched up some problems where you can add certain database breaking sprints.
+
+
 # Built With
 [<img alt="react.js" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2000px-React-icon.svg.png" width="160" />](https://reactjs.org/)
 [<img alt="node.js" src="https://seeklogo.com/images/N/nodejs-logo-FBE122E377-seeklogo.com.png" width="80" />](https://nodejs.org/en/)
