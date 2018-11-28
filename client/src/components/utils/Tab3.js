@@ -68,7 +68,7 @@ class LandingTab extends React.Component {
                   <Typography gutterBottom variant='h6' style={{ textAlign: 'center' }}>Acting on a good idea is better than just having a good idea.</Typography>
                   <Grid container spacing={8} style={{  paddingTop: 10}}>
                     <Grid item xs={5}>
-                      <img height="300" src="./assets/images/demo1.gif"></img>
+                      <img width="300" src="./assets/images/newdemo2.gif"></img>
                     </Grid>
                     <Grid item xs={7}>
                       <Typography variant='body1'>Even the simplest apps aren't developed overnight! Start organizing your ideas into projects and sprints! </Typography>
@@ -94,7 +94,8 @@ class LandingTab extends React.Component {
                   <Typography gutterBottom variant='h6' style={{ textAlign: 'center' }}>You don't set out to build a house, you start with laying that brick.</Typography>
                   <Grid container spacing={8} style={{ paddingTop: 10}}>
                     <Grid item xs={5}>
-                      <img height="300" src="./assets/images/demo1.gif"></img>
+                      <img   width="325"
+                       src="./assets/images/newdemo1.gif"></img>
                     </Grid>
                     <Grid item xs={7}>
                       <Typography variant='body1'>Tasks are the building blocks to a sprint. Project managers can create tasks with due dates, stack requirements and complexity scores.</Typography>
