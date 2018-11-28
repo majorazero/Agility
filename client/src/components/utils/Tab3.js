@@ -33,7 +33,7 @@ const styles = theme => ({
     },
 });
 
-class SimpleTabs extends React.Component {
+class LandingTab extends React.Component {
     constructor(props) {
         super(props)
 
@@ -52,15 +52,7 @@ class SimpleTabs extends React.Component {
         const { value } = this.state;
         return (
             <Paper className={classes.root}>
-                <div style={{ paddingTop: 15, position: 'sticky', top: 0, backgroundColor: '#424242', zIndex: 10 }}>
-                    <div
-                        style={{
-                            margin: '10px 0 10px 0',
-                        }}
-                    >
-                        {this.props.sprintProgress}{this.props.sprintTime}
-                    </div>
-
+                      
                     <Tabs
                         value={this.state.value}
                         onChange={this.handleChange}
@@ -68,27 +60,23 @@ class SimpleTabs extends React.Component {
                         textColor="primary"
                         centered
                     >
-                        <Tab label={this.props.isActive ? 'Open Tasks' : 'Incomplete Tasks'} />
-                        <Tab label="In Progress" />
-                        <Tab label='Complete' />
-                        <Tab label='Summary' />
-                        <div>{<ListItem>
-                            {this.props.inviteCode}
-                        </ListItem>}</div>
+                        <Tab label='Metrics' />
+                        <Tab label="Sprints" />
+                        <Tab label='Tasks' />
+                        <Tab label='Projects' />
                     </Tabs>
-                </div>
 
-                {value === 0 && <TabContainer>{this.props.taskPool}</TabContainer>}
-                {value === 1 && <TabContainer>{this.props.userPool}</TabContainer>}
-                {value === 2 && <TabContainer>{this.props.completedTab}</TabContainer>}
-                {value === 3 && <TabContainer>{this.props.summaryTab}</TabContainer>}
+                {value === 0 && <TabContainer>Metrics</TabContainer>}
+                {value === 1 && <TabContainer>Sprints</TabContainer>}
+                {value === 2 && <TabContainer>Tasks</TabContainer>}
+                {value === 3 && <TabContainer>Projects</TabContainer>}
             </Paper>
         );
     }
 }
 
-SimpleTabs.propTypes = {
+LandingTab.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(SimpleTabs);
+export default withStyles(styles)(LandingTab);

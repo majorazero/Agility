@@ -53,8 +53,8 @@ class SimpleTabs2 extends React.Component {
           style={{paddingTop: 10, position: 'sticky', top: 0, backgroundColor: '#424242', zIndex: 10}}
           value={this.state.value}
           onChange={this.handleChange}
-          indicatorColor="secondary"
-          textColor="secondary"
+          indicatorColor="primary"
+          textColor="primary"
           centered
         >
           <Tab label="Active Tasks" />

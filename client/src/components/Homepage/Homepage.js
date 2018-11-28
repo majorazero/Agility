@@ -27,9 +27,12 @@ class Homepage extends Component {
       complexitySemantics: "",
       inviteCode: "",
       showsnack: false,
+      snackmessage: '',
       projects: [],
       currentUser: "",
       loaded: false,
+      summaryLoaded: false,
+      projectLoaded: false,
       userFirstName: "",
       userLastName: "",
       userEmail: ""
@@ -63,7 +66,8 @@ class Homepage extends Component {
             stacks: response.data.stacks,
             userFirstName: response.data.prof.first_name,
             userLastName: response.data.prof.last_name,
-            userEmail: response.data.prof.email
+            userEmail: response.data.prof.email,
+            summaryLoaded: true
           }
         );
       }).then(()=>{
@@ -78,7 +82,8 @@ class Homepage extends Component {
     }).then((response) => {
       this.setState({
         projects: response.data.projects,
-        currentUser: response.data.currentUser
+        currentUser: response.data.currentUser,
+        projectLoaded: true
       });
     });
   }
@@ -218,7 +223,7 @@ class Homepage extends Component {
     event.preventDefault();
     axios.post("/api/sprintMembershipWithCode", { sId: this.state.inviteCode, uId: sessionStorage.getItem("id"), token: localStorage.getItem("token") }).then((response) => {
       if (response.data === "Already part of sprint!") {
-          this.setState({ showsnack: true });
+          this.setState({ showsnack: true, snackmessage: response.data });
           setTimeout(() => { this.setState({showsnack: false }) }, 3000);
       }
       else {
@@ -226,6 +231,8 @@ class Homepage extends Component {
       }
     }).catch(()=>{
       console.log("Invalid invite code!");
+      this.setState({ showsnack: true, snackmessage: 'Invalid invite code!' });
+          setTimeout(() => { this.setState({showsnack: false }) }, 3000);
     });
   }
 
@@ -255,19 +262,20 @@ class Homepage extends Component {
             activeTasks={<ActiveTasks
               loaded={this.state.loaded}
               tasks={this.state.tasks} goToProject={this.goToProject} homepage />}
-            projectList={
+            projectList={ this.state.projectLoaded ?
               <ProjectList
                 fetch={()=>{this.fetch()}}
                 projects={this.state.projects}
                 currentUser={this.state.currentUser}
                 showsnack={this.state.showsnack}
+                snackmessage={this.state.snackmessage}
                 handleInviteSubmit={this.handleInviteSubmit}
                 handleInviteChange={this.handleInviteChange}
-              />
+              /> : ""
             }
-            userSummary={<TextMobileStepper
+            userSummary={this.state.summaryLoaded ? <TextMobileStepper
             tutorialSteps={this.makeArray()}
-            />}
+            /> : ""}
           />
         </div >
       </div >
