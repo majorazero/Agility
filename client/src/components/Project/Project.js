@@ -521,6 +521,8 @@ class Project extends React.Component {
                             onChange={this.handleTaskOpen(`panel${task.id}`)}
                             edit={() => this.handleOpen('editTaskOpen', task.id, task.name, task.description, task.due_date, task.complexity, task.stack)}
                             location='open tasks'
+                            active={this.state.isActive}
+                            futureSprint={this.state.futureSprint}
                           />
                         </ListItem>
                       </ul>
@@ -553,6 +555,8 @@ class Project extends React.Component {
                             onChange={this.handleTaskOpen(`panel${task.id}`)}
                             location='complete'
                             complete
+                            active={this.state.isActive}
+                            futureSprint={this.state.futureSprint}
                           />
                         </ListItem>
                       </ul>
@@ -573,6 +577,8 @@ class Project extends React.Component {
                             onChange={this.handleTaskOpen(`panel${task.id}`)}
                             edit={() => this.handleOpen('editTaskOpen', task.id, task.name, task.description, task.due_date, task.complexity, task.stack)}
                             location='open tasks'
+                            active={this.state.isActive}
+                            futureSprint={this.state.futureSprint}
                           />
                         </ListItem>
                       </ul>
@@ -591,6 +597,7 @@ class Project extends React.Component {
               onClickDelete={this.deleteTask}
               onClickComplete={this.markComplete}
               futureSprint={this.state.futureSprint}
+              active={this.state.isActive}
             />}
 
             projectName={this.state.projName}
@@ -619,6 +626,8 @@ class Project extends React.Component {
                       onChange={this.handleTaskOpen(`panel${task.id}`)}
                       location='complete'
                       complete
+                      active={this.state.isActive}
+                      futureSprint={this.state.futureSprint}
                     />
                   </ListItem>
                 </ul>
