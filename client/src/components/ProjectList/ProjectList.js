@@ -17,9 +17,6 @@ class ProjectList extends Component {
     super(props);
 
     this.state = {
-      name: "",
-      summary: "",
-      open: false,
       direction: "row",
       justify: "center",
       alignItems: "center",
@@ -38,7 +35,7 @@ class ProjectList extends Component {
           {this.props.projects.map((item) => {
             return (
               <SingleLineGridList
-                onClick={this.handleOpen}
+                onClick={this.props.handleOpen}
                 title='ADD PROJECT'
                 key={item.id}
                 name={item.name}
@@ -63,43 +60,6 @@ class ProjectList extends Component {
     });
   }
 
-  handleChange = name => event => {
-    this.setState({
-      [name]: event.target.value
-    });
-  };
-
-
-  handleSubmit = () => {
-    if(this.state.name === ""){
-      console.log("Have to enter a project name!");
-    }
-    else if (this.state.summary === ""){
-      console.log("Have to enter a description!");
-    }
-    else {
-      axios.post("/api/project", {
-        name: this.state.name,
-        summary: this.state.summary,
-        id: sessionStorage.getItem("id"),
-        token: localStorage.getItem("token")
-      }).then((response) => {
-        this.props.fetch();
-        this.handleClose();
-      });
-    }
-  }
-
-  handleOpen = () => {
-    this.setState({
-      open: true
-    })
-  }
-
-  handleClose = () => {
-    this.setState({ open: false });
-  };
-
   render() {
     return (
       <div
@@ -121,7 +81,7 @@ class ProjectList extends Component {
         >
           <List>
             <List style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-              <ListItem style={{ width: '50%', height: 'min-content' }} button onClick={this.handleOpen}>
+              <ListItem style={{ width: '50%', height: 'min-content' }} button onClick={this.props.handleOpen}>
                 <ListItemIcon><Add /></ListItemIcon>
                 <ListItemText primary='ADD PROJECT' />
               </ListItem>
@@ -139,11 +99,11 @@ class ProjectList extends Component {
         </div>
 
         <SimpleModalProjectWrapped
-          open={this.state.open}
-          onClose={this.handleClose}
+          open={this.props.open}
+          onClose={this.props.handleClose}
           name="Add a New Project ..."
-          onSubmit={this.handleSubmit}
-          onChange={this.handleChange}
+          onSubmit={this.props.handleSubmit}
+          onChange={this.props.handleChange}
         >
           <AddProjectLayout
           />
