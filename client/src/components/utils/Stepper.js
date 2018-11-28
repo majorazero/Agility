@@ -23,7 +23,7 @@ const styles = theme => ({
   },
   balls: {
     padding: 15,
-    height: '-webkit-fill-available',
+    height: 475,
     width: '-webkit-fill-available'
   },
 });
@@ -84,9 +84,12 @@ class TextMobileStepper extends React.Component {
             style={{
               width: 'fit-content',
               height: 'fit-content',
+              position: 'absolute',
+              left: 90,
+              top: 67
             }}
           >
-            <DescIcon style={{ fill: 'black' }} />
+            <DescIcon color='secondary' />
             <Typography variant="subtitle1" gutterBottom>{this.props.tutorialSteps[0].label1}</Typography>
             <Typography variant="caption" gutterBottom>{this.props.tutorialSteps[0].info1}</Typography>
             <Typography variant="subtitle1" gutterBottom>{this.props.tutorialSteps[0].label2}</Typography>
@@ -98,9 +101,12 @@ class TextMobileStepper extends React.Component {
             style={{
               width: 'fit-content',
               height: 'fit-content',
+              position: 'absolute',
+              bottom: 45,
+              left: 90
             }}
           >
-            <DescIcon style={{ fill: 'black' }} />
+            <DescIcon color='secondary' />
             <Typography variant="subtitle1" gutterBottom>{this.props.tutorialSteps[1].label1}</Typography>
             <Typography variant="caption" gutterBottom>{this.props.tutorialSteps[1].info1}</Typography>
             <Typography variant="subtitle1" gutterBottom>{this.props.tutorialSteps[1].label2}</Typography>
@@ -113,11 +119,11 @@ class TextMobileStepper extends React.Component {
               width: 'fit-content',
               height: 'fit-content',
               position: 'absolute',
-              justifyContent: 'flex-end',
-              alignItems: 'center',
+              right: 90,
+              top: 67
             }}
           >
-            <DescIcon style={{ fill: 'black' }} />
+            <DescIcon color='secondary' />
             {(this.props.tutorialSteps.length > 2) ? <br /> : null}
             <Typography variant="subtitle1" gutterBottom>{this.props.tutorialSteps[2].label1}</Typography>
             <Typography variant="caption" gutterBottom>{this.props.tutorialSteps[2].info1}</Typography>
