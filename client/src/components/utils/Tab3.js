@@ -68,7 +68,7 @@ class LandingTab extends React.Component {
 
                 {value === 0 && <TabContainer>
                   <Typography gutterBottom variant='h4' style={{ textAlign: 'center' }}>Projects Header</Typography>
-                  <Grid container spacing={8} style={{ paddingTop: 10}}>
+                  <Grid container spacing={8} style={{  paddingTop: 10}}>
                     <Grid item xs={5}>
                       <img height="300" src="./assets/images/demo1.gif"></img>
                     </Grid>
