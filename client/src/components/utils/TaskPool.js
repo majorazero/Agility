@@ -53,7 +53,7 @@ class ControlledExpansionPanels extends React.Component {
             <Typography className={classes.heading}>{this.props.name}</Typography>
             <Typography color='secondary' className={classes.secondaryHeading}>{this.props.due}</Typography>
             <Typography color='inherit' className={classes.secondaryHeading}>{this.props.stack}</Typography>
-            <Typography color='primary' className={classes.secondaryHeading}>Complexity: {this.props.complexity}/5</Typography>
+            <Typography color='primary' style={{ textAlign: 'right' }} className={classes.secondaryHeading}>Complexity: {this.props.complexity}/5</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <Grid container direction='column'>
@@ -77,14 +77,14 @@ class ControlledExpansionPanels extends React.Component {
                     <ContainedButtons
                       size="small"
                       name='Delete'
-                      color='primary'
+                      color='secondary'
                       onClick={this.props.onClickDelete}
                       hidden={this.props.isAdmin ? false:true}
                     /> 
                     <ContainedButtons
                       size="small"
                       name='Claim'
-                      color='secondary'
+                      color='primary'
                       onClick={this.props.onClickAdd}
                       hidden={false}
                     /> 
@@ -102,14 +102,14 @@ class ControlledExpansionPanels extends React.Component {
                        <ContainedButtons
                         size="small"
                         name='Unassign'
-                        color='primary'
+                        color='secondary'
                         onClick={this.props.unAssign}
                         hidden={this.props.futureSprint ? true:(this.props.currentUser === this.props.assignedUser) ? false : this.props.isAdmin ? false : true}
                       />  
                       <ContainedButtons
                         size="small"
                         name='Complete'
-                        color='secondary'
+                        color='primary'
                         onClick={this.props.onClickComplete}
                         hidden={this.props.futureSprint ? true: (this.props.currentUser === this.props.assignedUser) ? false : true}
                       /> 
@@ -133,7 +133,7 @@ class ControlledExpansionPanels extends React.Component {
                   <ContainedButtons
                     size="small"
                     name='View Project'
-                    color='secondary'
+                    color='primary'
                     onClick={this.props.goToProject}
                     hidden={false}
                   />

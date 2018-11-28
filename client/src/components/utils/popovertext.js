@@ -5,6 +5,8 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Popover from '@material-ui/core/Popover';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+import AlertSnackbar from './Snackbar';
 
 const theme = createMuiTheme({
   overrides: {
@@ -30,7 +32,11 @@ class SimplePopper extends React.Component {
 
     this.state = {
       anchorEl: null,
-      open: false
+      open: false,
+      copied: false,
+      showsnack: false,
+      snackType: '',
+      errorTaskMess: "",
     };
   }
 
@@ -76,10 +82,25 @@ class SimplePopper extends React.Component {
             }}
           >
 
-          <Typography className={classes.typography}>{this.props.message}</Typography>
+            {/* <Typography className={classes.typography}>{this.props.message}</Typography> */}
 
-        </Popover>
-</MuiThemeProvider>
+<Typography className={classes.typography}>
+            <CopyToClipboard text={this.props.message}
+              onCopy={() => {
+                this.setState({ copied: true, showsnack: true, snackType: 'info', errorTaskMess: 'Copied to clipboard!' });
+                setTimeout(() => { this.setState({ showsnack: false }) }, 3000);
+              }}>
+              <span>{this.props.message}</span>
+            </CopyToClipboard>
+
+</Typography>
+          </Popover>
+        </MuiThemeProvider>
+        {this.state.copied ? (this.state.showsnack ? <AlertSnackbar
+          open={this.state.showsnack}
+          variant={this.state.snackType}
+          message={this.state.errorTaskMess}
+        /> : null) : null}
       </div>
     );
   }
