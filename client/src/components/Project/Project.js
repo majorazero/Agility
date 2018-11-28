@@ -393,7 +393,7 @@ class Project extends React.Component {
       });
     }
     else {
-      this.setState({ showsnack: true, snackType: 'error', errorTaskMess: `${overlappingSprint} overlaps with this! Fix your dates!` });
+      this.setState({ showsnack: true, snackType: 'error', errorTaskMess: 'Please put it a Sprint name!' });
         setTimeout(() => { this.setState({ showsnack: false }) }, 3000);
       // console.log(`${overlappingSprint} overlaps with this! Fix your dates!`)
     }
