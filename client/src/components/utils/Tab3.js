@@ -81,7 +81,7 @@ class LandingTab extends React.Component {
                   <Typography gutterBottom variant='h6' style={{ textAlign: 'center' }}>Great things are not done by impulse, but by a series of small things brought together</Typography>
                   <Grid container spacing={8} style={{ paddingTop: 10}}>
                     <Grid item xs={5}>
-                      <img height="300" src="./assets/images/demo1.gif"></img>
+                      <img width="300" src="./assets/images/newdemo3.gif"></img>
                     </Grid>
                     <Grid item xs={7}>
                       <Typography variant='body1'>Projects can be huge endeavors and knowing where to start can be daunting; sprints will help break down development into manageable chunks. Sprints are work cycles within projects with pre-determined start date and end dates with over-arching goals in mind.</Typography>
@@ -110,12 +110,12 @@ class LandingTab extends React.Component {
                   <Typography gutterBottom variant='h6' style={{ textAlign: 'center' }}>Improving upon your mistakes is the key to any good developer</Typography>
                   <Grid container spacing={8} style={{ paddingTop: 10}}>
                     <Grid item xs={5}>
-                      <img height="300" src="./assets/images/demo1.gif"></img>
+                      <img width="300" src="./assets/images/newdemo4.gif"></img>
                     </Grid>
                     <Grid item xs={7}>
                       <Typography variant='body1'>Knowing exactly what the limit of your skills is quintissential, but determining what exactly needs to be improved is difficulty. With metrics, we make it easy by quanitifying your performance.</Typography>
                       <br />
-                      <Typography variant='body1'>Performances between sprints can be shown in the summary tabs of a sprint where it will measure the stacks each member typically work with as well as how many task they complete out of the task they take. High completion rate with low complexity scores could translate to a user having improved and that they should try to challenge themselves by tackling more difficult tasks in their future sprints, while the inverse would imply a user may be taking off more than they can chew and that maybe they should take it easier next time.</Typography>
+                      <Typography variant='body1'>Performances between sprints can be shown in the summary of a sprint where it will measure the stacks each member typically work with and how many task they complete out of the task they take. High completion rate with low complexity scores implies to a user that they should try to challenge themselves by tackling more difficult tasks in their future sprints, while the inverse would imply that they may be taking off more than they can chew and that maybe they should take easier tasks in the future.</Typography>
                     </Grid>
                   </Grid>
                 </TabContainer>}
