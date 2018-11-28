@@ -36,11 +36,11 @@ const styles = theme => ({
 
 class LandingTab extends React.Component {
     constructor(props) {
-        super(props)
+      super(props)
 
-        this.state = {
-            value: 0,
-        };
+      this.state = {
+        value: 0,
+      };
     }
 
 
