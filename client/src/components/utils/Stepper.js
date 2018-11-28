@@ -12,8 +12,7 @@ import DescIcon from '@material-ui/icons/Description';
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    padding: 5,
-    display: 'flex',
+    // height: '90%'
   },
   header: {
     display: 'flex',
@@ -23,7 +22,7 @@ const styles = theme => ({
   },
   balls: {
     padding: 15,
-    height: 475,
+    height: 470,
     width: '-webkit-fill-available'
   },
 });

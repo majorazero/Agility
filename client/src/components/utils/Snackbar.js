@@ -26,7 +26,7 @@ const styles1 = theme => ({
         backgroundColor: theme.palette.error.dark,
     },
     info: {
-        backgroundColor: theme.palette.primary.dark,
+        backgroundColor: '#008ECC',
     },
     warning: {
         backgroundColor: amber[700],

@@ -75,7 +75,7 @@ class Homepage extends Component {
             summaryLoaded: true
           }
         );
-      }).then(()=>{
+      }).then(() => {
         console.log(this.state);
         this.fetch();
       });
@@ -110,7 +110,7 @@ class Homepage extends Component {
       .then(res => {
         let incomplete = res.data.filter(task => !task.isCompleted)
         let today = new Date();
-        let active = incomplete.filter(task => (new Date(`${task.end_date}T23:59:59`) >= today)&&(new Date(`${task.start_date}T00:00:00`) <= today ))
+        let active = incomplete.filter(task => (new Date(`${task.end_date}T23:59:59`) >= today) && (new Date(`${task.start_date}T00:00:00`) <= today))
         let data = []
         let sprints = []
 
@@ -131,7 +131,7 @@ class Homepage extends Component {
         })
         this.setState({ tasks: data, loaded: true })
       }
-    )
+      )
   }
 
   goToProject = (sprintId) => {
@@ -144,7 +144,7 @@ class Homepage extends Component {
           window.location.assign(`/project/${data.data}`);
         });
       }
-    )
+      )
   }
 
   stackFormat = () => {
@@ -266,15 +266,20 @@ class Homepage extends Component {
     event.preventDefault();
     axios.post("/api/sprintMembershipWithCode", { sId: this.state.inviteCode, uId: sessionStorage.getItem("id"), token: localStorage.getItem("token") }).then((response) => {
       if (response.data === "Already part of sprint!") {
-          this.setState({ showsnack: true, snackmessage: response.data });
-          setTimeout(() => { this.setState({showsnack: false }) }, 3000);
+        this.setState({ showsnack: true, snackmessage: response.data });
+        setTimeout(() => { this.setState({ showsnack: false }) }, 3000);
       }
       else {
         this.fetch();
       }
+<<<<<<< HEAD
+    }).catch(() => {
+      console.log("Invalid invite code!");
+=======
     }).catch(()=>{
+>>>>>>> 96e8354973da8eaf5e7c32091bac3fdf9235d4a9
       this.setState({ showsnack: true, snackmessage: 'Invalid invite code!' });
-          setTimeout(() => { this.setState({showsnack: false }) }, 3000);
+      setTimeout(() => { this.setState({ showsnack: false }) }, 3000);
     });
   }
 
@@ -295,24 +300,28 @@ class Homepage extends Component {
 
           <Grid item xs={3} style={{ margin: 25 }}>
             <ProfileCard
-              userFirstName= {this.state.userFirstName}
-              userLastName= {this.state.userLastName}
-              userEmail= {this.state.userEmail}
+              userFirstName={this.state.userFirstName}
+              userLastName={this.state.userLastName}
+              userEmail={this.state.userEmail}
               initial={this.state.initial}
-              />
+            />
           </Grid>
           <Tab
             activeTasks={<ActiveTasks
               loaded={this.state.loaded}
               tasks={this.state.tasks} goToProject={this.goToProject} homepage />}
-            projectList={ this.state.projectLoaded ?
+            projectList={this.state.projectLoaded ?
               <ProjectList
+<<<<<<< HEAD
+                fetch={() => { this.fetch() }}
+=======
                 fetch={()=>{this.fetch()}}
                 handleSubmit={this.handleSubmit}
                 handleChange={this.handleChange}
                 handleOpen={this.handleOpen}
                 handleClose={this.handleClose}
                 open={this.state.open}
+>>>>>>> 96e8354973da8eaf5e7c32091bac3fdf9235d4a9
                 projects={this.state.projects}
                 currentUser={this.state.currentUser}
                 showsnack={this.state.showsnack}
@@ -322,7 +331,7 @@ class Homepage extends Component {
               /> : ""
             }
             userSummary={this.state.summaryLoaded ? <TextMobileStepper
-            tutorialSteps={this.makeArray()}
+              tutorialSteps={this.makeArray()}
             /> : ""}
           />
         </div >

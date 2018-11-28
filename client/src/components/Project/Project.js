@@ -15,7 +15,7 @@ import List from '@material-ui/core/List';
 import ClippedDrawer from './../utils/Navbar/SprintDrawer.js';
 import Tab from './../utils/Tab.js';
 import Add from '@material-ui/icons/Add';
-import { ListItemText } from '@material-ui/core';
+import { ListItemText, Typography } from '@material-ui/core';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import AlertSnackbar from './../utils/Snackbar';
 import SimplePopper from './../utils/popovertext';
@@ -612,11 +612,58 @@ class Project extends React.Component {
               message={this.state.inviteCode}
             />}
 
-            sprintProgress={<LinearDeterminate completedTask={this.state.SprintProgress} title1={`Sprint Progress: ${this.state.completedTasks.length}/${this.state.unassignedTasks.length + this.state.assignedTasks.length + this.state.completedTasks.length}  ${(this.state.unassignedTasks.length + this.state.assignedTasks.length + this.state.completedTasks.length !== 0) ?  (this.state.completedTasks.length / (this.state.unassignedTasks.length + this.state.assignedTasks.length + this.state.completedTasks.length) * 100).toFixed(2)+'%' : ""}`} 
-            completedTime={this.state.SprintTime} title2={`Time Remaining: ${this.state.countdown}`}
-            />
-          
-            /* <LinearDeterminate whatBar completedTime={this.state.SprintTime} title2={`Time Remaining: ${this.state.countdown}`} /></div> */
+            sprintProgress={
+              <LinearDeterminate
+                completedTask={this.state.SprintProgress}
+                title1={<div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                  }}
+                ><Typography
+                  variant='subtitle1'
+                  style={{
+                    marginRight: 5
+                  }}
+                >
+                    Sprint Progress:
+              </Typography>
+                  <Typography
+                    variant='subtitle2'
+                    style={{
+                      marginRight: 15
+                    }}
+                  >
+                    {this.state.completedTasks.length}/{this.state.unassignedTasks.length + this.state.assignedTasks.length + this.state.completedTasks.length}
+                  </Typography>
+                  <Typography
+                    variant='subtitle2'
+                  >
+                    {(this.state.unassignedTasks.length + this.state.assignedTasks.length + this.state.completedTasks.length !== 0) ? (this.state.completedTasks.length / (this.state.unassignedTasks.length + this.state.assignedTasks.length + this.state.completedTasks.length) * 100).toFixed(2) + '%' : ""}
+                  </Typography></div>}
+                completedTime={this.state.SprintTime}
+                title2={<div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                  }}
+                ><Typography
+                  variant='subtitle1'
+                  style={{
+                    marginRight: 5
+                  }}
+                >
+                    Time Remaining:
+            </Typography>
+                  <Typography
+                    variant='subtitle2'
+                  >
+                    {this.state.countdown}
+                  </Typography></div>
+                }
+              />
+
+              /* <LinearDeterminate whatBar completedTime={this.state.SprintTime} title2={`Time Remaining: ${this.state.countdown}`} /></div> */
             }
             // sprintTime={<LinearDeterminate whatBar completed={this.state.SprintTime} title2={`Time Remaining: ${this.state.countdown}`} />}
             completedTab={this.state.completedTasks.map((task) => {
