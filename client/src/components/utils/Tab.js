@@ -69,10 +69,10 @@ class SimpleTabs extends React.Component {
                         textColor="primary"
                         centered
                     >
-                        <Tab label={this.props.isActive ? 'Open Tasks' : 'Incomplete Tasks'} />
-                        <Tab label="In Progress" />
-                        <Tab label='Complete' />
-                        <Tab label='Summary' />
+                        <Tab label={!this.props.futureSprint ? (this.props.isActive ? 'Open Tasks' : 'Incomplete Tasks') : "Open Tasks"} />
+                        <Tab label={!this.props.futureSprint ? (this.props.isActive ? "In Progress" : "Unfinished Tasks"):"Members"} />
+                        {this.props.futureSprint ? "":<Tab label='Complete' />}
+                        {this.props.futureSprint ? "":<Tab label='Summary' />}
                         <div>{<ListItem>
                             {this.props.inviteCode}
                         </ListItem>}</div>
