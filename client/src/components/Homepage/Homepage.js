@@ -272,12 +272,7 @@ class Homepage extends Component {
       else {
         this.fetch();
       }
-<<<<<<< HEAD
-    }).catch(() => {
-      console.log("Invalid invite code!");
-=======
     }).catch(()=>{
->>>>>>> 96e8354973da8eaf5e7c32091bac3fdf9235d4a9
       this.setState({ showsnack: true, snackmessage: 'Invalid invite code!' });
       setTimeout(() => { this.setState({ showsnack: false }) }, 3000);
     });
@@ -312,16 +307,12 @@ class Homepage extends Component {
               tasks={this.state.tasks} goToProject={this.goToProject} homepage />}
             projectList={this.state.projectLoaded ?
               <ProjectList
-<<<<<<< HEAD
                 fetch={() => { this.fetch() }}
-=======
-                fetch={()=>{this.fetch()}}
                 handleSubmit={this.handleSubmit}
                 handleChange={this.handleChange}
                 handleOpen={this.handleOpen}
                 handleClose={this.handleClose}
                 open={this.state.open}
->>>>>>> 96e8354973da8eaf5e7c32091bac3fdf9235d4a9
                 projects={this.state.projects}
                 currentUser={this.state.currentUser}
                 showsnack={this.state.showsnack}
