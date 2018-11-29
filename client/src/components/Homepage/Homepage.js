@@ -181,7 +181,8 @@ class Homepage extends Component {
         };
         for (let i = 0; i < 3; i++) {
           format[`label${i + 2}`] = arr[i].stackName;
-          format[`info${i + 2}`] = `${arr[i].stackComplete} \n ${arr[i].stackComplex}`;
+          format[`info${i + 2}`] =
+        <span>{arr[i].stackComplete}<br/>{arr[i].stackComplex}</span>;
         }
         return format;
       }
