@@ -50,6 +50,7 @@ class TextMobileStepper extends React.Component {
   //   }));
   // };
 
+//  this.props.tutorialSteps[0].info3
   render() {
     const { classes, theme } = this.props;
     const { activeStep } = this.state;
@@ -89,11 +90,11 @@ class TextMobileStepper extends React.Component {
             }}
           >
             <DescIcon color='secondary' />
-            <Typography variant="subtitle1" gutterBottom>{this.props.tutorialSteps[0].label1}</Typography>
+            <Typography variant="subtitle1" >{this.props.tutorialSteps[0].label1}</Typography>
             <Typography variant="caption" gutterBottom>{this.props.tutorialSteps[0].info1}</Typography>
-            <Typography variant="subtitle1" gutterBottom>{this.props.tutorialSteps[0].label2}</Typography>
+            <Typography variant="subtitle1" >{this.props.tutorialSteps[0].label2}</Typography>
             <Typography variant="caption" gutterBottom>{this.props.tutorialSteps[0].info2}</Typography>
-            <Typography variant="subtitle1" gutterBottom>{this.props.tutorialSteps[0].label3}</Typography>
+            <Typography variant="subtitle1" >{this.props.tutorialSteps[0].label3}</Typography>
             <Typography variant="caption" gutterBottom>{this.props.tutorialSteps[0].info3}</Typography>
           </div>
           <div
@@ -106,11 +107,11 @@ class TextMobileStepper extends React.Component {
             }}
           >
             <DescIcon color='secondary' />
-            <Typography variant="subtitle1" gutterBottom>{this.props.tutorialSteps[1].label1}</Typography>
+            <Typography variant="subtitle1" >{this.props.tutorialSteps[1].label1}</Typography>
             <Typography variant="caption" gutterBottom>{this.props.tutorialSteps[1].info1}</Typography>
-            <Typography variant="subtitle1" gutterBottom>{this.props.tutorialSteps[1].label2}</Typography>
+            <Typography variant="subtitle1" >{this.props.tutorialSteps[1].label2}</Typography>
             <Typography variant="caption" gutterBottom>{this.props.tutorialSteps[1].info2}</Typography>
-            <Typography variant="subtitle1" gutterBottom>{this.props.tutorialSteps[1].label3}</Typography>
+            <Typography variant="subtitle1" >{this.props.tutorialSteps[1].label3}</Typography>
             <Typography variant="caption" gutterBottom>{this.props.tutorialSteps[1].info3}</Typography>
           </div>
           <div
@@ -124,13 +125,13 @@ class TextMobileStepper extends React.Component {
           >
             <DescIcon color='secondary' />
             {(this.props.tutorialSteps.length > 2) ? <br /> : null}
-            <Typography variant="subtitle1" gutterBottom>{this.props.tutorialSteps[2].label1}</Typography>
+            <Typography variant="subtitle1" >{this.props.tutorialSteps[2].label1}</Typography>
             <Typography variant="caption" gutterBottom>{this.props.tutorialSteps[2].info1}</Typography>
-            <Typography variant="subtitle1" gutterBottom>{this.props.tutorialSteps[2].label2}</Typography>
+            <Typography variant="subtitle1" >{this.props.tutorialSteps[2].label2}</Typography>
             <Typography variant="caption" gutterBottom>{this.props.tutorialSteps[2].info2}</Typography>
-            <Typography variant="subtitle1" gutterBottom>{this.props.tutorialSteps[2].label3}</Typography>
+            <Typography variant="subtitle1" >{this.props.tutorialSteps[2].label3}</Typography>
             <Typography variant="caption" gutterBottom>{this.props.tutorialSteps[2].info3}</Typography>
-            <Typography variant="subtitle1" gutterBottom>{this.props.tutorialSteps[2].label4}</Typography>
+            <Typography variant="subtitle1" >{this.props.tutorialSteps[2].label4}</Typography>
             <Typography variant="caption" gutterBottom>{this.props.tutorialSteps[2].info4}</Typography>
           </div>
         </Paper>

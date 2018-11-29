@@ -68,11 +68,21 @@ const SummaryCard = (props) => {
             spacing={8}
           >
             <Grid item xs={6}>
-              <Typography variant="subtitle1" gutterBottom>Task Completion Rate: </Typography>
-              <Typography variant="subtitle2" gutterBottom>{(props.completed.length / (props.completed.length + props.assigned.length + props.unAssigned.length) * 100).toFixed(2)}% ({props.completed.length}/{props.completed.length + props.assigned.length + props.unAssigned.length})</Typography>
+              <div style={{
+                textAlign: 'center'
+              }}>
+                <Typography variant="subtitle1" gutterBottom>Task Completion Rate: </Typography>
+                <Typography variant="subtitle2" gutterBottom>{(props.completed.length / (props.completed.length + props.assigned.length + props.unAssigned.length) * 100).toFixed(2)}% ({props.completed.length}/{props.completed.length + props.assigned.length + props.unAssigned.length})</Typography>
+              </div>
+              <br />
               <Divider />
-              <Typography variant="subtitle1" gutterBottom>Total Untaken Tasks Across Sprint: </Typography>
-              <Typography variant="subtitle2" gutterBottom>{props.unAssigned.length}</Typography>
+              <br />
+              <div style={{
+                textAlign: 'center'
+              }}>
+                <Typography variant="subtitle1" gutterBottom>Total Untaken Tasks Across Sprint: </Typography>
+                <Typography variant="subtitle2" gutterBottom>{props.unAssigned.length}</Typography>
+              </div>
             </Grid>
             <Grid item xs={6}>
               <Grid

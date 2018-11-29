@@ -168,12 +168,12 @@ class Homepage extends Component {
             }
           }
           Obj[`stackName`] = stackName;
-          Obj[`stackComplete`] = `Average Rate of Completion: ${(topStack.amountComplete / topStack.amountAttempted * 100).toFixed(2)}%`;
+          Obj[`stackComplete`] = `Rate of Completion: ${(topStack.amountComplete / topStack.amountAttempted * 100).toFixed(2)}%`;
           if (topStack.amountComplete > 0) {
-            Obj[`stackComplex`] = `Average Complexity: ${(topStack.complexitySum / topStack.amountComplete).toFixed(2)}`;
+            Obj[`stackComplex`] = `Complexity: ${(topStack.complexitySum / topStack.amountComplete).toFixed(2)}`;
           }
           else {
-            Obj[`stackComplex`] = `Average Complexity: 0`;
+            Obj[`stackComplex`] = <br /> + `Complexity: 0`;
           }
           arr.push(Obj);
           stack[stackName] = "";
@@ -184,7 +184,7 @@ class Homepage extends Component {
         };
         for (let i = 0; i < 3; i++) {
           format[`label${i + 2}`] = arr[i].stackName;
-          format[`info${i + 2}`] = `${arr[i].stackComplete} ${arr[i].stackComplex}`;
+          format[`info${i + 2}`] = `${arr[i].stackComplete} \n ${arr[i].stackComplex}`;
         }
         return format;
       }
@@ -195,19 +195,19 @@ class Homepage extends Component {
   makeArray = () => {
     var tutorialSteps = [
       {
-        label1: 'Total Tasks Completed: ',
+        label1: 'Tasks Completed: ',
         info1: this.state.totalCompletedTask,
-        label2: 'Total Tasks Taken: ',
+        label2: 'Tasks Taken: ',
         info2: this.state.totalTask,
         label3: 'Average Task Complexity: ',
         info3: `${this.state.complexity} (${this.state.complexitySemantics})`
       },
       {
-        label1: 'Total Sprints Participated: ',
+        label1: 'Sprints Participated: ',
         info1: this.state.sprintParticipate,
-        label2: 'Total Projects Contributed: ',
+        label2: 'Projects Contributed: ',
         info2: this.state.projectContributed,
-        label3: 'Total Projects Created: ',
+        label3: 'Projects Created: ',
         info3: this.state.projectCreated
       },
       this.stackFormat()
@@ -270,6 +270,8 @@ class Homepage extends Component {
         setTimeout(() => { this.setState({ showsnack: false }) }, 3000);
       }
       else {
+        this.setState({showsnack: true, snackmessage: "Project successfully"});
+        setTimeout(() => { this.setState({showsnack: false }) }, 3000);
         this.fetch();
       }
     }).catch(()=>{
