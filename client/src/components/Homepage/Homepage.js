@@ -61,12 +61,9 @@ class Homepage extends Component {
             totalCompletedTask: response.data.totalCompletedTask,
             sprintParticipate: response.data.sprintParticipate,
             projectContributed: response.data.projectContributed,
-            projectCreated:
-              response.data.projectCreated,
-            complexity:
-              response.data.complexity,
-            complexitySemantics:
-              response.data.compSemantics,
+            projectCreated: response.data.projectCreated,
+            complexity: response.data.complexity,
+            complexitySemantics: response.data.compSemantics,
             stacks: response.data.stacks,
             userFirstName: response.data.prof.first_name,
             userLastName: response.data.prof.last_name,
