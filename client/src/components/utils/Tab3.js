@@ -67,7 +67,7 @@ class LandingTab extends React.Component {
 
                 {value === 0 && <TabContainer>
                   <Typography gutterBottom variant='h6' style={{ textAlign: 'center' }}>Acting on a good idea is better than just having a good idea.</Typography>
-                  <Grid container spacing={8} style={{  paddingTop: 10}}>
+                  <Grid container spacing={8} style={{ paddingTop: 10, marginTop: 5}}>
                     <Grid item xs={5}>
                       <img width="300" src="./assets/images/newdemo2.gif"></img>
                     </Grid>
@@ -80,7 +80,7 @@ class LandingTab extends React.Component {
                 </TabContainer>}
                 {value === 1 && <TabContainer>
                   <Typography gutterBottom variant='h6' style={{ textAlign: 'center' }}>Great things are not done by impulse, but by a series of small things brought together</Typography>
-                  <Grid container spacing={8} style={{ paddingTop: 10}}>
+                  <Grid container spacing={8} style={{ paddingTop: 10, marginTop: 5}}>
                     <Grid item xs={5}>
                       <img width="300" src="./assets/images/newdemo3.gif"></img>
                     </Grid>
@@ -93,7 +93,7 @@ class LandingTab extends React.Component {
                 </TabContainer>}
                 {value === 2 && <TabContainer>
                   <Typography gutterBottom variant='h6' style={{ textAlign: 'center' }}>You don't set out to build a house, you start with laying that brick.</Typography>
-                  <Grid container spacing={8} style={{ paddingTop: 10}}>
+                  <Grid container spacing={8} style={{ paddingTop: 10, marginTop: 5}}>
                     <Grid item xs={5}>
                       <img   width="325"
                        src="./assets/images/newdemo1.gif"></img>
@@ -109,7 +109,7 @@ class LandingTab extends React.Component {
                 </TabContainer>}
                 {value === 3 && <TabContainer>
                   <Typography gutterBottom variant='h6' style={{ textAlign: 'center' }}>Improving upon your mistakes is the key to any good developer</Typography>
-                  <Grid container spacing={8} style={{ paddingTop: 10}}>
+                  <Grid container spacing={8} style={{ paddingTop: 10, marginTop: 5}}>
                     <Grid item xs={5}>
                       <img width="300" src="./assets/images/newdemo4.gif"></img>
                     </Grid>

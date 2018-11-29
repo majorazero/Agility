@@ -50,11 +50,11 @@ class ControlledExpansionPanels extends React.Component {
     return (
       <div className={classes.root}>
 
-        <ExpansionPanel expanded={this.props.expanded} onChange={this.props.onChange} key={this.props.id}>
+        <ExpansionPanel expanded={this.props.expanded} onChange={this.props.onChange} key={this.props.id} style={ this.props.location === 'open tasks' ? { margin: '5px 0'} : {}}>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
           {/* <CompleteAvatar/> Add User Avatar To Complete Task*/}
             <Typography className={classes.heading}>{this.props.name}</Typography>
-            <Typography color={new Date(`${this.props.due}T23:59:59`) < today ? 'error':'secondary'} className={classes.secondaryHeading}>{this.props.due}</Typography>
+            <Typography color={new Date(`${this.props.due}T23:59:59`) < today ? (this.props.complete ? 'secondary' : 'error'):'secondary'} className={classes.secondaryHeading}>{this.props.due}</Typography>
             <Typography color='inherit' className={classes.secondaryHeading}>{this.props.stack}</Typography>
             <Typography color='primary' style={{ textAlign: 'right' }} className={classes.secondaryHeading}>Complexity: {this.props.complexity}/5</Typography>
           </ExpansionPanelSummary>

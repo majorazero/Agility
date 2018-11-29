@@ -623,7 +623,7 @@ class Project extends React.Component {
                 ><Typography
                   variant='subtitle1'
                   style={{
-                    marginRight: 5
+                    marginRight: 10
                   }}
                 >
                     Sprint Progress:
@@ -631,7 +631,7 @@ class Project extends React.Component {
                   <Typography
                     variant='subtitle2'
                     style={{
-                      marginRight: 15
+                      marginRight: 20
                     }}
                   >
                     {this.state.completedTasks.length}/{this.state.unassignedTasks.length + this.state.assignedTasks.length + this.state.completedTasks.length}
@@ -650,7 +650,7 @@ class Project extends React.Component {
                 ><Typography
                   variant='subtitle1'
                   style={{
-                    marginRight: 5
+                    marginRight: 10
                   }}
                 >
                     Time Remaining:
