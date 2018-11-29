@@ -31,6 +31,7 @@ const styles = theme => ({
         flexGrow: 1,
         margin: 25,
         overflow: 'auto',
+        height: 450
     },
 });
 
