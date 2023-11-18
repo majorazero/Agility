@@ -4,7 +4,7 @@
   "description": "Agile based workflow app.",
   "engines": {
     "node": "8.12.0",
-    "yarn": "1.10.1"
+    "yarn": "1.22.19"
   },
   "main": "server.js",
   "scripts": {
