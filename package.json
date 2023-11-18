@@ -3,7 +3,7 @@
   "version": "1.1.0",
   "description": "Agile based workflow app.",
   "engines": {
-    "node": "8.12.0",
+    "node": "18.12.1",
     "yarn": "1.22.19"
   },
   "main": "server.js",
